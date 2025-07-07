@@ -1,0 +1,403 @@
+[
+  // Aggregation and plaque formation/degradation
+  {
+    "Reaction_name": "Monomer Addition and Dissociation",
+    "Reactants": "[{Abeta}_{O_n0}_{Comp},{Abeta}_O1_{Comp}]",
+    "Products": "[{Abeta}_{O_n1}_{Comp}]",
+    "Rate_type": "RMA",
+    "Rate_eqtn_prototype": "[k_{O_n0}_{O_n1}_{Abeta}_{Comp},k_{O_n1}_{O_n0}_{Abeta}_{Comp}]",
+    "Comp": "[ISF]",
+    "Abeta": "[AB40,AB42]",
+    "O_n0": "[f\"O{i}\" for i in range(1,24)]",
+    "O_n1": "[f\"O{i}\" for i in range(2,25)]",
+    "Paired": "{O_n0,O_n1}"
+  },
+  {
+    "Reaction_name": "Plaque Driven Monomer Addition (PDMA)",
+    "Reactants": "[{Abeta}_{O_n0}_{Comp}, {Abeta}_O1_{Comp}]",
+    "Products": "[{Abeta}_{O_n1}_{Comp}]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "k_{O_n0}_{O_n1}_{Abeta}_{Comp}*{Abeta}_PDMA_Vmax_{Comp}*({Abeta}_O25_{Comp} / ({Abeta}_O25_{Comp} + {Abeta}_PDMA_EC50_{Comp}))",
+    "Comp": "[ISF]",
+    "Abeta": "[AB40,AB42]",
+    "O_n0": "[f\"O{i}\" for i in range(1,24)]",
+    "O_n1": "[f\"O{i}\" for i in range(2,25)]",
+    "Paired": "{O_n0,O_n1}"
+  },
+  {
+    "Reaction_name": "Plaque Formation",
+    "Reactants": "[{Abeta}_{O_n0}_{Comp},{Abeta}_O1_{Comp}]",
+    "Products": "[{Abeta}_O25_{Comp}]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "Baseline_{Abeta}_O_P*k_{O_n0}_{O_n1}_{Abeta}_{Comp}",
+    "Comp": "[ISF]",
+    "Abeta": "[AB40,AB42]",
+    "O_n0": "[f\"O{i}\" for i in range(13,19)]",
+    "O_n1": "[f\"O{i}\" for i in range(14,20)]",
+    "Paired": "{O_n0,O_n1}"
+  },
+  {
+    "Reaction_name": "Microglia Degradation Abeta",
+    "Reactants": "[{Abeta}_{O_n0}_{Comp}]",
+    "Products": "[0]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_{Abeta}/(Microglia_EC50_{Abeta} + {Abeta}_{O_n0}_{Comp}) + (1.0 - Microglia_high_frac)*Microglia_Vmax_{Abeta}/(Microglia_EC50_{Abeta} + {Abeta}_{O_n0}_{Comp}))",
+    "Comp": "[ISF]",
+    "Abeta": "[AB40,AB42]",
+    "O_n0": "[f\"O{i}\" for i in range(2,25)]"
+  },
+  {
+    "Reaction_name": "Microglia Degradation Plaque",
+    "Reactants": "[{Abeta}_O25_{Comp}]",
+    "Products": "[0]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "0.5*Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_{Abeta}/(Microglia_EC50_{Abeta} + {Abeta}_O25_{Comp}) + (1.0 - Microglia_high_frac)*Microglia_Vmax_{Abeta}/(Microglia_EC50_{Abeta} + {Abeta}_O25_{Comp}))",
+    "Comp": "[ISF]",
+    "Abeta": "[AB40,AB42]"
+  },
+  {
+    "Reaction_name": "O24 split",
+    "Reactants": "[{Abeta}_O24_{Comp}]",
+    "Products": "[{Abeta}_O12_{Comp},{Abeta}_O12_{Comp}]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "k_O24_O12_{Abeta}_{Comp}*k_O24_O23_{Abeta}_{Comp}",
+    "Comp": "[ISF]",
+    "Abeta": "[AB40,AB42]"
+  },
+  {
+    "Reaction_name": "IDE Degradation Monomer ISF",
+    "Reactants": "[{Abeta}_O1_{Comp}]",
+    "Products": "[0]",
+    "Rate_type": "custom_conc_per_time",
+    "Rate_eqtn_prototype": "IDE_conc_{Comp} * {Abeta}_IDE_Kcat_lin_{Comp} * (({Abeta}_O1_{Comp})^{Abeta}_IDE_Hill_{Comp} / (({Abeta}_O1_{Comp} )^{Abeta}_IDE_Hill_{Comp} + {Abeta}_IDE_IC50_{Comp}^{Abeta}_IDE_Hill_{Comp}))",
+    "Comp": "[ISF]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Abeta production
+  {
+    "Reaction_name": "Production APP ISF",
+    "Reactants": "[0]",
+    "Products": "[APP_{Comp}]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "k_APP_production",
+    "Comp": "[ISF]"
+  },
+  {
+    "Reaction_name": "Systemic production Abeta",
+    "Reactants": "[0]",
+    "Products": "[{Abeta}_O1_central]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "{Abeta}_systemic_synthesis_rate",
+    "Comp": "[central]",
+    "Abeta": "[AB40,AB42]"
+  },
+  {
+    "Reaction_name": "APP to C99 ISF",
+    "Reactants": "[APP_{Comp}]",
+    "Products": "[C99_{Comp}]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "k_C99",
+    "Comp": "[ISF]"
+  },
+  {
+    "Reaction_name": "Degradation C99 ISF",
+    "Reactants": "[C99_{Comp}]",
+    "Products": "[0]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "v_C99",
+    "Comp": "[ISF]"
+  },
+  {
+    "Reaction_name": "C99 to Abeta ISF",
+    "Reactants": "[C99_{Comp}]",
+    "Products": "[{Abeta}_O1_{Comp}]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "k_in_{Abeta}",
+    "Comp": "[ISF]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Abeta transport ISF to PVS to lymph
+  // ((1 - sigma_ISF_ABeta40_monomer) * Q_PVS * AB40_Monomer / vol_brain_ISF)
+  // ((1 - sigma_ISF_ABeta40_oligomer02) * Q_PVS * AB40_Oligomer02 / vol_brain_ISF)
+  // etc. sigma_ISF_ABeta40_monomer=0.2, sigma_ISF_ABeta40_oligomer02=0.9, 
+  // sigma_ISF_ABeta42_oligomer010 = 0.99, sigma_ISF_ABeta42_oligomer017 = 0.999
+  // No difference between AB40 and AB42
+  {
+    "Reaction_name": "Flow ISF to PVS Abeta",
+    "Reactants": "[{Abeta}_{O_n0}_{Comp1}]",
+    "Products": "{Abeta}_{O_n0}_{Comp2}",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(1.0 - sigma_{Comp}_{O_n0}) * Q_PVS",
+    "Comp": "[ISF,PVS]",
+    "Abeta": "[AB40,AB42]",
+    "O_n0": "[f\"O{i}\" for i in range(1,25)]"
+  },
+  // Flow of Abeta from PVS to lymph
+  // ((1 - sigma_PVS_ABeta42) * Q_PVS * AB42_Monomer_PVS / V_PVS)
+  // ((1 - sigma_PVS_ABeta42) * Q_PVS * AB42_Oligomer2_PVS / V_PVS)
+  {
+    "Reaction_name": "Flow PVS to lymph (central) Abeta",
+    "Reactants": "[{Abeta}_{O_n0}_{Comp1}]",
+    "Products": "[{Abeta}_{O_n0}_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(1.0 - sigma_PVS_Abeta)*Q_PVS",
+    "Comp": "[PVS,central]",
+    "Abeta": "[AB40,AB42]",
+    "O_n0": "[f\"O{i}\" for i in range(1,25)]"
+  },
+  // Monomer flows out of ISF
+  // ((1 - Sigma_ISF_lymph_AB42Mu) * Qbrain_ISF_AB42Mu * AB42_Monomer / Vol_brain_interstitial)
+  // All the Qbrain_ISF are the same
+  // All the sigma_ISF_lymph_Abeta are the same
+  {
+    "Reaction_name": "Flow ISF to lymph (central) Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(1 - sigma_ISF_lymph_Abeta) * Qbrain_ISF",
+    "Comp": "[ISF,central]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Glymphatic flow
+  // (f_LV * Qbrain_ISF_AB42Mu * AB42_Monomer / Vol_brain_interstitial)
+  // All the Qbrain_ISF are the same
+  {
+    "Reaction_name": "Flow ISF to LV Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp}]",
+    "Products": "[{Abeta}_O1_LV]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "f_LV*Qbrain_ISF",
+    "Comp": "[ISF,LV]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // ((1 - f_LV) * Qbrain_ISF_AB42Mu * AB42_Monomer / Vol_brain_interstitial)
+  // All the Qbrain_ISF are the same
+  {
+    "Reaction_name": "Flow ISF to TFV Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(1.0 - f_LV) *Qbrain_ISF",
+    "Comp": "[ISF,TFV]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Clearance ISF to BBB
+  // (CL_up_brain_AB42Mu * fBBB * Vol_brain_ES * AB42_Monomer / Vol_brain_interstitial)
+  // All the CL_up_brain are the same
+  {
+    "Reaction_name": "Clearance ISF to BBB Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "CL_up_brain*fBBB*Vol_brain_ES",
+    "Comp": "[ISF,BBB]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // BBB reactions
+  {
+    "Reaction_name": "BBB Abeta degradation Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp}]",
+    "Products": "[0]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "kdeg_{Abeta}_O1_{Comp}",
+    "Comp": "[BBB]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // BCSFB reactions
+  {
+    "Reaction_name": "BCSFB Abeta degradation Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp}]",
+    "Products": "[0]",
+    "Rate_type": "MA",
+    "Rate_eqtn_prototype": "kdeg_{Abeta}_O1_{Comp}",
+    "Comp": "[BCSFB]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Brain plasma clearance
+  // CL_up_brain_AB42Mu * fBBB * Vol_brain_ES * AB42Mu_Brain_Plasma / Vol_brain_BBB
+  {
+    "Reaction_name": "Clearance BrainPlasma to BBB Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "CL_up_brain*fBBB*Vol_brain_ES",
+    "Comp": "[BrainPlasma,BBB]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // CL_up_brain_AB42Mu * FBcsfB * Vol_brain_ES * AB42Mu_Brain_Plasma / Vol_brain_BCSFB
+  // FBcsfB = (1 - fBBB)
+    {
+    "Reaction_name": "Clearance BrainPlasma to BCSFB Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "CL_up_brain*(1 - fBBB)*Vol_brain_ES",
+    "Comp": "[BrainPlasma,BCSFB]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Ventricle clearance
+  // (1 - f_LV) * CL_up_brain_AB42Mu * (1 - fBBB) * Vol_brain_ES * AB42Mu_CSF_TFV / Vol_brain_BCSFB
+  // f_TFB = (1 - f_LV)
+  {
+    "Reaction_name": "Clearance TFV to BCSFB",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(1 - f_LV)*CL_up_brain*(1 - fBBB)*Vol_brain_ES",
+    "Comp": "[TFV,BCSFB]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // f_LV * CL_up_brain_AB42Mu * (1 - fBBB) * Vol_brain_ES * AB42Mu_CSF_LV / Vol_brain_BCSFB
+  {
+    "Reaction_name": "Clearance LV to BCSFB Monomer",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "f_LV*CL_up_brain*(1 - fBBB)*Vol_brain_ES",
+    "Comp": "[LV,BCSFB]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Flow out of BrainPlasma to ISF
+  //(1 - Sigma_v_isf_AB42Mu) * Qbrain_ISF_AB42Mu * AB42Mu_Brain_Plasma / Vol_brain_interstitial
+  // All the Qbrain_ISF are the same, even though glymphatic flow from SAS should 
+  // be different from this value, but it is not
+  // All the sigma_vascular_ISF_Abeta are the same
+  {
+    "Reaction_name": "Flow Abeta BrainPlasma to ISF",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(1.0 - sigma_vascular_ISF_Abeta)*Qbrain_ISF",
+    "Comp": "[BrainPlasma,ISF]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Flow out of BrainPlasma to ventricles
+  //((1 - Sigma_v_bcsfb_AB42Mu) * Qbrain_CSF_AB42Mu * f_LV * AB42Mu_Brain_Plasma / Vol_brain_plasma)
+  // All the sigma_vascular_BCSFB_Abeta are the same
+  // All the Qbrain_CSF are the same
+  {
+    "Reaction_name": "Flow Abeta BrainPlasma to LV",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "f_LV*(1.0 - sigma_vascular_BCSFB_Abeta)*Qbrain_CSF",
+    "Comp": "[BrainPlasma,LV]",
+    "Abeta": "[AB40,AB42]"
+  },
+  //(1 - Sigma_v_bcsfb_AB42Mu) * Qbrain_CSF_AB42Mu * (1 - f_LV) * AB42Mu_Brain_Plasma / Vol_brain_CSFTFV
+  {
+    "Reaction_name": "Flow Abeta BrainPlasma to TFV",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(1.0 - f_LV)*(1.0 - sigma_vascular_BCSFB_Abeta)*Qbrain_CSF",
+    "Comp": "[BrainPlasma,TFV]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Ventricle CSF flows
+  // (f_LV * (Qbrain_CSF_AB42Mu + Qbrain_ISF_AB42Mu) * AB42Mu_CSF_LV / Vol_brain_CSFLV)
+  {
+    "Reaction_name": "Flow Abeta LV to TFV",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(Qbrain_CSF + Qbrain_ISF)",
+    "Comp": "[LV,TFV]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // ((Qbrain_CSF_AB42Mu + Qbrain_ISF_AB42Mu) * AB42Mu_CSF_TFV / Vol_brain_CSFTFV)
+  {
+    "Reaction_name": "Flow Abeta TFV to CM",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(Qbrain_CSF + Qbrain_ISF)",
+    "Comp": "[TFV,CM]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // ((Qbrain_CSF_AB42Mu + Qbrain_ISF_AB42Mu) * AB42Mu_CSF_CM / Vol_brain_CSFCM)
+  {
+    "Reaction_name": "Flow Abeta CM to SAS",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(Qbrain_CSF + Qbrain_ISF)",
+    "Comp": "[CM,SAS]",
+    "Abeta": "[AB40,AB42]"
+  },
+
+  // Glymphatic flow
+  // Qbrain_ISF_AB42Mu * AB42Mu_CSF_SAS / Vol_brain_interstitial
+  // All the Qbrain_ISF are the same
+  {
+    "Reaction_name": "Flow Abeta SAS to ISF",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "Qbrain_ISF",
+    "Comp": "[SAS,ISF]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // CSF reabsorption to lymph (central)
+  // ((1 - Sigma_SAS_Lymph) * Qbrain_CSF_AB42Mu * AB42Mu_CSF_SAS / Vol_brain_SAS)
+  {
+    "Reaction_name": "Flow Abeta SAS to lymph (central)",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "(1 - sigma_SAS_lymph)*Qbrain_CSF",
+    "Comp": "[SAS,central]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // (AB42Mu_CL / AB42Mu_Vcent * AB42Mu_central_compartment)
+  // AB4XMu_CL same for all Abeta
+  {
+    "Reaction_name": "central clearance 1",
+    "Reactants": "[{Abeta}_O1_{Comp1}]",
+    "Products": "[0]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "AB_O1_CL",
+    "Comp": "[central]",
+    "Abeta": "[AB40,AB42]"
+  },
+  // Flow out of BrainPlasma to central
+  // (Qbrain_plasma - Qlymph_Brain) * AB42Mu_Brain_Plasma
+  {
+    "Reaction_name": "Flow BrainPlasma to central -",
+    "Reactants": "[{Abeta}_O1_BrainPlasma]",
+    "Products": "[{Abeta}_O1_central]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "((Qbrain_plasma - Qlymph_Brain)",
+    "Comp": "[BrainPlasma,central]",
+    "Abeta": "[AB40,AB42]"
+  },
+    // Flow out of central to BrainPlasma
+  // (Qbrain_plasma * AB42Mu_central_compartment / AB42Mu_Vcent) 
+  {
+    "Reaction_name": "Flow central to BrainPlasma",
+    "Reactants": "[{Abeta}_O1_central]",
+    "Products": "[{Abeta}_O1_BrainPlasma]",
+    "Rate_type": "UDF",
+    "Rate_eqtn_prototype": "Qbrain_plasma  ",
+    "Comp": "[central,BrainPlasma]",
+    "Abeta": "[AB40,AB42]"
+  },
+ 
+  // Bidirectional flow between central and peripheral
+  // AB42Mu_CLd2 * AB42Mu_central_compartment / AB42Mu_Vcent
+  // AB42Mu_CLd2 * AB42Mu_peripheral_compartment / AB42Mu_Vper
+  // AB4XMu_CLd2 same for all Abeta
+  {
+    "Reaction_name": "Peripheral to central",
+    "Reactants": "[{Abeta}_O1_peripheral]",
+    "Products": "[{Abeta}_O1_central]",
+    "Rate_type": "BDF",
+    "Rate_eqtn_prototype": "AB_O1_CLd2",
+    "Comp": "[peripheral,central]",
+    "Abeta": "[AB40,AB42]"
+  }
+
+
+ 
+
+]

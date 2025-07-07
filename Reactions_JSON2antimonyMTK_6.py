@@ -489,7 +489,7 @@ if __name__ == "__main__":
     print()
     
     # Generate Antimony script (reactions only, without compartments)
-    reactions_only = generate_antimony_script("Geerts_reactions2.json")
+    reactions_only = generate_antimony_script("Geerts_reactions_microglia.json")
     
     # Extract species and parameters from reactions
     species, parameters = extract_species_and_parameters_from_reactions(reactions_only)
@@ -525,5 +525,5 @@ if __name__ == "__main__":
     print(complete_script)
     
     # Write complete script to file
-    with open("New_reactions.txt", "w") as f:
+    with open("New_reactions_microglia.txt", "w") as f:
         f.write(complete_script) 
