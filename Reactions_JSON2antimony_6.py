@@ -458,5 +458,5 @@ if __name__ == "__main__":
     print(complete_script)
     
     # Write complete script to file
-    with open("generated_reactions3.txt", "w") as f:
+    with open("New_reactions.txt", "w") as f:
         f.write(complete_script) 

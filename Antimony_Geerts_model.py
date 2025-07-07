@@ -1,6 +1,7 @@
 import tellurium as te
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 r = te.loada('''
   model pathway()
@@ -319,18 +320,18 @@ AB42_O20_ISF + AB42_O1_ISF -> AB42_O21_ISF; k_O20_O21_AB42_ISF*AB42_PDMA_Vmax_IS
 AB42_O21_ISF + AB42_O1_ISF -> AB42_O22_ISF; k_O21_O22_AB42_ISF*AB42_PDMA_Vmax_ISF*(AB42_O25_ISF / (AB42_O25_ISF + AB42_PDMA_EC50_ISF)) * AB42_O21_ISF * AB42_O1_ISF * V_ISF
 AB42_O22_ISF + AB42_O1_ISF -> AB42_O23_ISF; k_O22_O23_AB42_ISF*AB42_PDMA_Vmax_ISF*(AB42_O25_ISF / (AB42_O25_ISF + AB42_PDMA_EC50_ISF)) * AB42_O22_ISF * AB42_O1_ISF * V_ISF
 AB42_O23_ISF + AB42_O1_ISF -> AB42_O24_ISF; k_O23_O24_AB42_ISF*AB42_PDMA_Vmax_ISF*(AB42_O25_ISF / (AB42_O25_ISF + AB42_PDMA_EC50_ISF)) * AB42_O23_ISF * AB42_O1_ISF * V_ISF
-AB40_O13_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P * AB40_O13_ISF * AB40_O1_ISF * V_ISF
-AB40_O14_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P * AB40_O14_ISF * AB40_O1_ISF * V_ISF
-AB40_O15_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P * AB40_O15_ISF * AB40_O1_ISF * V_ISF
-AB40_O16_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P * AB40_O16_ISF * AB40_O1_ISF * V_ISF
-AB40_O17_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P * AB40_O17_ISF * AB40_O1_ISF * V_ISF
-AB40_O18_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P * AB40_O18_ISF * AB40_O1_ISF * V_ISF
-AB42_O13_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P * AB42_O13_ISF * AB42_O1_ISF * V_ISF
-AB42_O14_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P * AB42_O14_ISF * AB42_O1_ISF * V_ISF
-AB42_O15_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P * AB42_O15_ISF * AB42_O1_ISF * V_ISF
-AB42_O16_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P * AB42_O16_ISF * AB42_O1_ISF * V_ISF
-AB42_O17_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P * AB42_O17_ISF * AB42_O1_ISF * V_ISF
-AB42_O18_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P * AB42_O18_ISF * AB42_O1_ISF * V_ISF
+AB40_O13_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P*k_O13_O14_AB40_ISF * AB40_O13_ISF * AB40_O1_ISF * V_ISF
+AB40_O14_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P*k_O14_O15_AB40_ISF * AB40_O14_ISF * AB40_O1_ISF * V_ISF
+AB40_O15_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P*k_O15_O16_AB40_ISF * AB40_O15_ISF * AB40_O1_ISF * V_ISF
+AB40_O16_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P*k_O16_O17_AB40_ISF * AB40_O16_ISF * AB40_O1_ISF * V_ISF
+AB40_O17_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P*k_O17_O18_AB40_ISF * AB40_O17_ISF * AB40_O1_ISF * V_ISF
+AB40_O18_ISF + AB40_O1_ISF -> AB40_O25_ISF; Baseline_AB40_O_P*k_O18_O19_AB40_ISF * AB40_O18_ISF * AB40_O1_ISF * V_ISF
+AB42_O13_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O13_O14_AB42_ISF * AB42_O13_ISF * AB42_O1_ISF * V_ISF
+AB42_O14_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O14_O15_AB42_ISF * AB42_O14_ISF * AB42_O1_ISF * V_ISF
+AB42_O15_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O15_O16_AB42_ISF * AB42_O15_ISF * AB42_O1_ISF * V_ISF
+AB42_O16_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O16_O17_AB42_ISF * AB42_O16_ISF * AB42_O1_ISF * V_ISF
+AB42_O17_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O17_O18_AB42_ISF * AB42_O17_ISF * AB42_O1_ISF * V_ISF
+AB42_O18_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O18_O19_AB42_ISF * AB42_O18_ISF * AB42_O1_ISF * V_ISF
 AB40_O2_ISF -> ; Microglia*(Microglia_high_frac*Microglia_high_rate_AB40 + (1.0 - Microglia_high_frac)*Microglia_low_rate_AB40) * AB40_O2_ISF * V_ISF
 AB40_O3_ISF -> ; Microglia*(Microglia_high_frac*Microglia_high_rate_AB40 + (1.0 - Microglia_high_frac)*Microglia_low_rate_AB40) * AB40_O3_ISF * V_ISF
 AB40_O4_ISF -> ; Microglia*(Microglia_high_frac*Microglia_high_rate_AB40 + (1.0 - Microglia_high_frac)*Microglia_low_rate_AB40) * AB40_O4_ISF * V_ISF
@@ -533,181 +534,185 @@ AB40_O1_central -> AB40_O1_peripheral; AB_O1_CLd2 * AB40_O1_central
 AB42_O1_peripheral -> AB42_O1_central; AB_O1_CLd2 * AB42_O1_peripheral
 AB42_O1_central -> AB42_O1_peripheral; AB_O1_CLd2 * AB42_O1_central
 
-AB40_IDE_Hill_ISF = 2 
-AB40_IDE_IC50_ISF = 14.142136 
-AB40_IDE_Kcat_lin_ISF = 1500 
-AB40_PDMA_EC50_ISF = 50 
-AB40_PDMA_Vmax_ISF = 0.05 
-AB40_systemic_synthesis_rate = 1.16 
-AB42_IDE_Hill_ISF = 2 
-AB42_IDE_IC50_ISF = 28.635642 
-AB42_IDE_Kcat_lin_ISF = 50 
-AB42_PDMA_EC50_ISF = 50 
-AB42_PDMA_Vmax_ISF = 0.07 
-AB42_systemic_synthesis_rate = 1.16 
-AB_O1_CL = 12.6 
-AB_O1_CLd2 = 0.01 
-Baseline_AB40_O_P = 1.10180959874115e-10
-Baseline_AB42_O_P = 1.36788257861307e-08
-CL_up_brain = 0.03 
-IDE_conc_ISF = 0.005 
-Microglia = 1 
-Microglia_high_frac = 0 
-Microglia_high_rate_AB40 = 1.60E-05 
-Microglia_high_rate_AB42 = 2.22E-06 
-Microglia_low_rate_AB40 = 8.00E-06 
-Microglia_low_rate_AB42 = 1.11E-06 
-Q_PVS = 0.0021 
-Qbrain_CSF = 0.024 
-Qbrain_ISF = 0.0105 
-Qbrain_plasma = 21.453 
-Qlymph_Brain = 0.0345 
-V_BBB = 0.0065909 
-V_BCSFB = 0.0006591 
-V_BrainPlasma =  0.0319
-V_CM = 0.0075 
-V_ISF = 0.2505 
-V_LV = 0.0225 
-V_PVS = 0.00235 
-V_SAS = 0.09875 
-V_TFV = 0.0225 
-V_central = 3.5 
-V_peripheral = 7.5
-Vol_brain_ES = 0.00725 
-fBBB = 0.9090909 
-f_LV = 0.5 
-k_APP_production = 293 
-k_C99 = 0.666 
-k_O10_O11_AB40_ISF = 2.22085620197585e-05 
-k_O10_O11_AB42_ISF = 0.000273561228790063 
-k_O10_O9_AB40_ISF = 1e-05 
-k_O10_O9_AB42_ISF = 1.9990000002185e-05
-k_O11_O10_AB40_ISF = 1e-05 
-k_O11_O10_AB42_ISF = 1.9992486853633e-05
-k_O11_O12_AB40_ISF = 2.21116751269036e-05
-k_O11_O12_AB42_ISF = 0.000273570139508399
-k_O12_O11_AB40_ISF = 1e-05
-k_O12_O11_AB42_ISF = 1.9994212964228e-05
-k_O12_O13_AB40_ISF = 2.2036191974823e-05 
-k_O12_O13_AB42_ISF = 0.000273576515722613
-k_O13_O12_AB40_ISF = 1e-05 
-k_O13_O12_AB42_ISF = 1.99954483396387e-05 
-k_O13_O14_AB40_ISF = 2.19762470308789e-05
-k_O13_O14_AB42_ISF = 0.00027358119823599
-k_O14_O13_AB40_ISF = 1e-05
-k_O14_O13_AB42_ISF = 1.9996355685928e-05
-k_O14_O15_AB40_ISF = 2.19278533412182e-05 
-k_O14_O15_AB42_ISF = 0.000273584714118453
-k_O15_O14_AB40_ISF = 1e-05
-k_O15_O14_AB42_ISF = 1.99970370376849e-05
-k_O15_O16_AB40_ISF = 2.18882245905901e-05
-k_O15_O16_AB42_ISF = 0.000273587405231008
-k_O16_O15_AB40_ISF = 1e-05 
-k_O16_O15_AB42_ISF = 1.99975585942839e-05 
-k_O16_O17_AB40_ISF = 2.18553661906955e-05
-k_O16_O17_AB42_ISF = 0.000273589499924914
-k_O17_O16_AB40_ISF = 1e-05 
-k_O17_O16_AB42_ISF = 1.99979645842025e-05 
-k_O17_O18_AB40_ISF = 2.18278200123279e-05
-k_O17_O18_AB42_ISF = 0.000273591154691691
-k_O18_O17_AB40_ISF = 1e-05 
-k_O18_O17_AB42_ISF = 1.99982853227344e-05
-k_O18_O19_AB40_ISF = 2.18045001844338e-05
-k_O18_O19_AB42_ISF = 0.00027359247922249
-k_O19_O18_AB40_ISF = 1e-05 
-k_O19_O18_AB42_ISF = 1.99985420618438e-05
-k_O19_O20_AB40_ISF = 2.17845846512402e-05 
-k_O19_O20_AB42_ISF = 0.000273593551956915 
-k_O1_O2_AB40_ISF = 0.00018 
-k_O1_O2_AB42_ISF = 0.0003564 
-k_O20_O19_AB40_ISF = 1e-05
-k_O20_O19_AB42_ISF = 1.99987500002734e-05 
-k_O20_O21_AB40_ISF = 2.17674418604651e-05 
-k_O20_O21_AB42_ISF = 0.000273594429997008
-k_O21_O20_AB40_ISF = 1e-05 
-k_O21_O20_AB42_ISF = 1.9998920203238e-05
-k_O21_O22_AB40_ISF = 2.17525801568735e-05 
-k_O21_O22_AB42_ISF = 0.000273595155583612
-k_O22_O21_AB40_ISF = 1e-05 
-k_O22_O21_AB42_ISF = 1.99990608567043e-05
-k_O22_O23_AB40_ISF = 2.17396121883657e-05
-k_O22_O23_AB42_ISF = 0.000273595760420077
-k_O23_O22_AB40_ISF = 1e-05
-k_O23_O22_AB42_ISF = 1.99991781048892e-05
-k_O23_O24_AB40_ISF = 2.17282294437377e-05
-k_O23_O24_AB42_ISF = 0.000273596268616006
-k_O24_O12_AB40_ISF = 2
-k_O24_O12_AB42_ISF = 1 
-k_O24_O23_AB40_ISF = 1e-05 
-k_O24_O23_AB42_ISF = 1.99992766205286e-05
-k_O2_O1_AB40_ISF = 9.72 
-k_O2_O1_AB42_ISF = 45.72
-k_O2_O3_AB40_ISF = 7.2e-05
-k_O2_O3_AB42_ISF = 0.0001368
-k_O3_O2_AB40_ISF = 1e-05
-k_O3_O2_AB42_ISF = 1e-05 
-k_O3_O4_AB40_ISF = 2.60890688259109e-05 
-k_O3_O4_AB42_ISF = 0.00027278613554061 
-k_O4_O3_AB40_ISF = 1e-05
-k_O4_O3_AB42_ISF = 1.98437500336414e-05
-k_O4_O5_AB40_ISF = 2.45026178010471e-05
-k_O4_O5_AB42_ISF = 0.000273185290628707
-k_O5_O4_AB40_ISF = 1e-05 
-k_O5_O4_AB42_ISF = 1.99200000173578e-05
-k_O5_O6_AB40_ISF = 2.36270566727605e-05
-k_O5_O6_AB42_ISF = 0.000273360511493378
-k_O6_O5_AB40_ISF = 1e-05 
-k_O6_O5_AB42_ISF = 1.99537037137829e-05
-k_O6_O7_AB40_ISF = 2.30943396226415e-05
-k_O6_O7_AB42_ISF = 0.000273449346420876
-k_O7_O6_AB40_ISF = 1e-05
-k_O7_O6_AB42_ISF = 1.99708454874077e-05
-k_O7_O8_AB40_ISF = 2.2746639089969e-05 
-k_O7_O8_AB42_ISF = 0.000273499134448932
-k_O8_O7_AB40_ISF = 1e-05 
-k_O8_O7_AB42_ISF = 1.99804687542636e-05 
-k_O8_O9_AB40_ISF = 2.25073649754501e-05
-k_O8_O9_AB42_ISF = 0.000273529184578335
-k_O9_O10_AB40_ISF = 2.23357664233577e-05
-k_O9_O10_AB42_ISF = 0.000273548387520094
-k_O9_O8_AB40_ISF = 1e-05
-k_O9_O8_AB42_ISF = 1.99862825818714e-05
-k_in_AB40 = 0.238 
-k_in_AB42 = 0.01495 
-kdeg_AB40_O1_BBB = 26.6 
-kdeg_AB40_O1_BCSFB = 26.6 
-kdeg_AB42_O1_BBB = 26.6 
-kdeg_AB42_O1_BCSFB = 26.6 
-sigma_ISF_O1 = 0.2 
-sigma_ISF_O10 = 0.99 
-sigma_ISF_O11 = 0.99 
-sigma_ISF_O12 = 0.99 
-sigma_ISF_O13 = 0.99 
-sigma_ISF_O14 = 0.99 
-sigma_ISF_O15 = 0.99 
-sigma_ISF_O16 = 0.99 
-sigma_ISF_O17 = 0.999 
-sigma_ISF_O18 = 0.999 
-sigma_ISF_O19 = 0.999 
-sigma_ISF_O2 = 0.9 
-sigma_ISF_O20 = 0.999 
-sigma_ISF_O21 = 0.999 
-sigma_ISF_O22 = 0.999 
-sigma_ISF_O23 = 0.999 
-sigma_ISF_O24 = 0.999 
-sigma_ISF_O3 = 0.9 
-sigma_ISF_O4 = 0.9 
-sigma_ISF_O5 = 0.9 
-sigma_ISF_O6 = 0.9 
-sigma_ISF_O7 = 0.9 
-sigma_ISF_O8 = 0.9 
-sigma_ISF_O9 = 0.9 
-sigma_ISF_lymph_Abeta = 0 
-sigma_PVS_Abeta = 0 
-sigma_SAS_lymph = 0
-sigma_vascular_BCSFB_Abeta = 0.9974 
-sigma_vascular_ISF_Abeta = 1 
-v_C99 = 0.333 
+AB40_IDE_Hill_ISF = 2 ; AB40_IDE_Hill_ISF has dimensionless
+AB40_IDE_IC50_ISF = 14.142136 ; AB40_IDE_IC50_ISF has dimensionless
+AB40_IDE_Kcat_lin_ISF = 1500 ; AB40_IDE_Kcat_lin_ISF has 1 / h
+AB40_PDMA_EC50_ISF = 50 ; AB40_PDMA_EC50_ISF has nanomol / L
+AB40_PDMA_Vmax_ISF = 0.05 ; AB40_PDMA_Vmax_ISF has dimensionless
+AB40_systemic_synthesis_rate = 1.16 ; AB40_systemic_synthesis_rate has nanomol / h
+AB42_IDE_Hill_ISF = 2 ; AB42_IDE_Hill_ISF has dimensionless
+AB42_IDE_IC50_ISF = 28.635642 ; AB42_IDE_IC50_ISF has dimensionless
+AB42_IDE_Kcat_lin_ISF = 50 ; AB42_IDE_Kcat_lin_ISF has 1 / h
+AB42_PDMA_EC50_ISF = 50 ; AB42_PDMA_EC50_ISF has nanomol / L
+AB42_PDMA_Vmax_ISF = 0.07 ; AB42_PDMA_Vmax_ISF has dimensionless
+AB42_systemic_synthesis_rate = 1.16 ; AB42_systemic_synthesis_rate has nanomol / h
+AB_O1_CL = 12.6 ; AB_O1_CL has L / h
+AB_O1_CLd2 = 0.01 ; AB_O1_CLd2 has L / h
+Baseline_AB40_O_P = 5.0E-6 ; Baseline_AB40_O_P has L / (nanomol * h)
+Baseline_AB42_O_P = 5.0E-5 ; Baseline_AB42_O_P has L / (nanomol * h)
+CL_up_brain = 0.03 ; CL_up_brain has 1 / h
+IDE_conc_ISF = 0.005 ; IDE_conc_ISF has nanomol / L
+Microglia = 1 ; Microglia has dimensionless
+Microglia_high_frac = 0 ; Microglia_high_frac has dimensionless
+Microglia_high_rate_AB40 = 1.60E-05 ; Microglia_high_rate_AB40 has 1 / h
+Microglia_high_rate_AB42 = 2.22E-06 ; Microglia_high_rate_AB42 has 1 / h
+Microglia_low_rate_AB40 = 8.00E-06 ; Microglia_low_rate_AB40 has 1 / h
+Microglia_low_rate_AB42 = 1.11E-06 ; Microglia_low_rate_AB42 has 1 / h
+Q_PVS = 0.0021 ; Q_PVS has L / h
+Qbrain_CSF = 0.024 ; Qbrain_CSF has L / h
+Qbrain_ISF = 0.0105 ; Qbrain_ISF has L / h
+Qbrain_plasma = 21.453 ; Qbrain_plasma has L / h
+Qlymph_Brain = 0.0345 ; Qlymph_Brain has L / h
+V_BBB = 0.0065909 ; V_BBB has L
+V_BCSFB = 0.0006591 ; V_BCSFB has L
+V_BrainPlasma = 0.0319 ; V_BrainPlasma has L
+V_CM = 0.0075 ; V_CM has L
+V_ISF = 0.2505 ; V_ISF has L
+V_LV = 0.0225 ; V_LV has L
+V_PVS = 0.00235 ; V_PVS has L
+V_SAS = 0.09875 ; V_SAS has L
+V_TFV = 0.0225 ; V_TFV has L
+V_central = 3.5 ; V_central has L
+V_peripheral = 7.5 ; V_peripheral has L
+Vol_brain_ES = 0.00725 ; Vol_brain_ES has L
+fBBB = 0.9090909 ; fBBB has dimensionless
+f_LV = 0.5 ; f_LV has dimensionless
+k_APP_production = 293 ; k_APP_production has nanomol / (L * h)
+k_C99 = 0.666 ; k_C99 has 1 / h
+k_O10_O11_AB40_ISF = 2.22E-05 ; k_O10_O11_AB40_ISF has L / (nano * mol * h)
+k_O10_O11_AB42_ISF = 0.000273561 ; k_O10_O11_AB42_ISF has L / (nano * mol * h)
+k_O10_O9_AB40_ISF = 1.00E-05 ; k_O10_O9_AB40_ISF has 1 / h
+k_O10_O9_AB42_ISF = 2.00E-05 ; k_O10_O9_AB42_ISF has 1 / h
+k_O11_O10_AB40_ISF = 1.00E-05 ; k_O11_O10_AB40_ISF has 1 / h
+k_O11_O10_AB42_ISF = 2.00E-05 ; k_O11_O10_AB42_ISF has 1 / h
+k_O11_O12_AB40_ISF = 2.21E-05 ; k_O11_O12_AB40_ISF has L / (nano * mol * h)
+k_O11_O12_AB42_ISF = 0.00027357 ; k_O11_O12_AB42_ISF has L / (nano * mol * h)
+k_O12_O11_AB40_ISF = 1.00E-05 ; k_O12_O11_AB40_ISF has 1 / h
+k_O12_O11_AB42_ISF = 2.00E-05 ; k_O12_O11_AB42_ISF has 1 / h
+k_O12_O13_AB40_ISF = 2.20E-05 ; k_O12_O13_AB40_ISF has L / (nano * mol * h)
+k_O12_O13_AB42_ISF = 0.000273577 ; k_O12_O13_AB42_ISF has L / (nano * mol * h)
+k_O13_O12_AB40_ISF = 1.00E-05 ; k_O13_O12_AB40_ISF has 1 / h
+k_O13_O12_AB42_ISF = 2.00E-05 ; k_O13_O12_AB42_ISF has 1 / h
+k_O13_O14_AB40_ISF = 2.20E-05 ; k_O13_O14_AB40_ISF has L / (nano * mol * h)
+k_O13_O14_AB42_ISF = 0.000273581 ; k_O13_O14_AB42_ISF has L / (nano * mol * h)
+k_O14_O13_AB40_ISF = 1.00E-05 ; k_O14_O13_AB40_ISF has 1 / h
+k_O14_O13_AB42_ISF = 2.00E-05 ; k_O14_O13_AB42_ISF has 1 / h
+k_O14_O15_AB40_ISF = 2.19E-05 ; k_O14_O15_AB40_ISF has L / (nano * mol * h)
+k_O14_O15_AB42_ISF = 0.000273585 ; k_O14_O15_AB42_ISF has L / (nano * mol * h)
+k_O15_O14_AB40_ISF = 1.00E-05 ; k_O15_O14_AB40_ISF has 1 / h
+k_O15_O14_AB42_ISF = 2.00E-05 ; k_O15_O14_AB42_ISF has 1 / h
+k_O15_O16_AB40_ISF = 2.19E-05 ; k_O15_O16_AB40_ISF has L / (nano * mol * h)
+k_O15_O16_AB42_ISF = 0.000273587 ; k_O15_O16_AB42_ISF has L / (nano * mol * h)
+k_O16_O15_AB40_ISF = 1.00E-05 ; k_O16_O15_AB40_ISF has 1 / h
+k_O16_O15_AB42_ISF = 2.00E-05 ; k_O16_O15_AB42_ISF has 1 / h
+k_O16_O17_AB40_ISF = 2.19E-05 ; k_O16_O17_AB40_ISF has L / (nano * mol * h)
+k_O16_O17_AB42_ISF = 0.000273589 ; k_O16_O17_AB42_ISF has L / (nano * mol * h)
+k_O17_O16_AB40_ISF = 1.00E-05 ; k_O17_O16_AB40_ISF has 1 / h
+k_O17_O16_AB42_ISF = 2.00E-05 ; k_O17_O16_AB42_ISF has 1 / h
+k_O17_O18_AB40_ISF = 2.18E-05 ; k_O17_O18_AB40_ISF has L / (nano * mol * h)
+k_O17_O18_AB42_ISF = 0.000273591 ; k_O17_O18_AB42_ISF has L / (nano * mol * h)
+k_O18_O17_AB40_ISF = 1.00E-05 ; k_O18_O17_AB40_ISF has 1 / h
+k_O18_O17_AB42_ISF = 2.00E-05 ; k_O18_O17_AB42_ISF has 1 / h
+k_O18_O19_AB40_ISF = 2.18E-05 ; k_O18_O19_AB40_ISF has L / (nano * mol * h)
+k_O18_O19_AB42_ISF = 0.000273592 ; k_O18_O19_AB42_ISF has L / (nano * mol * h)
+k_O19_O18_AB40_ISF = 1.00E-05 ; k_O19_O18_AB40_ISF has 1 / h
+k_O19_O18_AB42_ISF = 2.00E-05 ; k_O19_O18_AB42_ISF has 1 / h
+k_O19_O20_AB40_ISF = 2.18E-05 ; k_O19_O20_AB40_ISF has L / (nano * mol * h)
+k_O19_O20_AB42_ISF = 0.000273594 ; k_O19_O20_AB42_ISF has L / (nano * mol * h)
+k_O1_O2_AB40_ISF = 0.00018 ; k_O1_O2_AB40_ISF has L / (nano * mol * h)
+k_O1_O2_AB42_ISF = 0.0003564 ; k_O1_O2_AB42_ISF has L / (nano * mol * h)
+k_O20_O19_AB40_ISF = 1.00E-05 ; k_O20_O19_AB40_ISF has 1 / h
+k_O20_O19_AB42_ISF = 2.00E-05 ; k_O20_O19_AB42_ISF has 1 / h
+k_O20_O21_AB40_ISF = 2.18E-05 ; k_O20_O21_AB40_ISF has L / (nano * mol * h)
+k_O20_O21_AB42_ISF = 0.000273594 ; k_O20_O21_AB42_ISF has L / (nano * mol * h)
+k_O21_O20_AB40_ISF = 1.00E-05 ; k_O21_O20_AB40_ISF has 1 / h
+k_O21_O20_AB42_ISF = 2.00E-05 ; k_O21_O20_AB42_ISF has 1 / h
+k_O21_O22_AB40_ISF = 2.18E-05 ; k_O21_O22_AB40_ISF has L / (nano * mol * h)
+k_O21_O22_AB42_ISF = 0.000273595 ; k_O21_O22_AB42_ISF has L / (nano * mol * h)
+k_O22_O21_AB40_ISF = 1.00E-05 ; k_O22_O21_AB40_ISF has 1 / h
+k_O22_O21_AB42_ISF = 2.00E-05 ; k_O22_O21_AB42_ISF has 1 / h
+k_O22_O23_AB40_ISF = 2.17E-05 ; k_O22_O23_AB40_ISF has L / (nano * mol * h)
+k_O22_O23_AB42_ISF = 0.000273596 ; k_O22_O23_AB42_ISF has L / (nano * mol * h)
+k_O23_O22_AB40_ISF = 1.00E-05 ; k_O23_O22_AB40_ISF has 1 / h
+k_O23_O22_AB42_ISF = 2.00E-05 ; k_O23_O22_AB42_ISF has 1 / h
+k_O23_O24_AB40_ISF = 2.17E-05 ; k_O23_O24_AB40_ISF has L / (nano * mol * h)
+k_O23_O24_AB42_ISF = 0.000273596 ; k_O23_O24_AB42_ISF has L / (nano * mol * h)
+k_O24_O12_AB40_ISF = 2 ; k_O24_O12_AB40_ISF has dimensionless
+k_O24_O12_AB42_ISF = 1 ; k_O24_O12_AB42_ISF has dimensionless
+k_O24_O23_AB40_ISF = 1.00E-05 ; k_O24_O23_AB40_ISF has 1 / h
+k_O24_O23_AB42_ISF = 2.00E-05 ; k_O24_O23_AB42_ISF has 1 / h
+k_O2_O1_AB40_ISF = 9.72 ; k_O2_O1_AB40_ISF has 1 / h
+k_O2_O1_AB42_ISF = 45.72 ; k_O2_O1_AB42_ISF has 1 / h
+k_O2_O3_AB40_ISF = 7.20E-05 ; k_O2_O3_AB40_ISF has L / (nano * mol * h)
+k_O2_O3_AB42_ISF = 0.0001368 ; k_O2_O3_AB42_ISF has L / (nano * mol * h)
+k_O3_O2_AB40_ISF = 1.00E-05 ; k_O3_O2_AB40_ISF has 1 / h
+k_O3_O2_AB42_ISF = 1.00E-05 ; k_O3_O2_AB42_ISF has 1 / h
+k_O3_O4_AB40_ISF = 2.61E-05 ; k_O3_O4_AB40_ISF has L / (nano * mol * h)
+k_O3_O4_AB42_ISF = 0.000272786 ; k_O3_O4_AB42_ISF has L / (nano * mol * h)
+k_O4_O3_AB40_ISF = 1.00E-05 ; k_O4_O3_AB40_ISF has 1 / h
+k_O4_O3_AB42_ISF = 1.98E-05 ; k_O4_O3_AB42_ISF has 1 / h
+k_O4_O5_AB40_ISF = 2.45E-05 ; k_O4_O5_AB40_ISF has L / (nano * mol * h)
+k_O4_O5_AB42_ISF = 0.000273185 ; k_O4_O5_AB42_ISF has L / (nano * mol * h)
+k_O5_O4_AB40_ISF = 1.00E-05 ; k_O5_O4_AB40_ISF has 1 / h
+k_O5_O4_AB42_ISF = 1.99E-05 ; k_O5_O4_AB42_ISF has 1 / h
+k_O5_O6_AB40_ISF = 2.36E-05 ; k_O5_O6_AB40_ISF has L / (nano * mol * h)
+k_O5_O6_AB42_ISF = 0.000273361 ; k_O5_O6_AB42_ISF has L / (nano * mol * h)
+k_O6_O5_AB40_ISF = 1.00E-05 ; k_O6_O5_AB40_ISF has 1 / h
+k_O6_O5_AB42_ISF = 2.00E-05 ; k_O6_O5_AB42_ISF has 1 / h
+k_O6_O7_AB40_ISF = 2.31E-05 ; k_O6_O7_AB40_ISF has L / (nano * mol * h)
+k_O6_O7_AB42_ISF = 0.000273449 ; k_O6_O7_AB42_ISF has L / (nano * mol * h)
+k_O7_O6_AB40_ISF = 1.00E-05 ; k_O7_O6_AB40_ISF has 1 / h
+k_O7_O6_AB42_ISF = 2.00E-05 ; k_O7_O6_AB42_ISF has 1 / h
+k_O7_O8_AB40_ISF = 2.27E-05 ; k_O7_O8_AB40_ISF has L / (nano * mol * h)
+k_O7_O8_AB42_ISF = 0.000273499 ; k_O7_O8_AB42_ISF has L / (nano * mol * h)
+k_O8_O7_AB40_ISF = 1.00E-05 ; k_O8_O7_AB40_ISF has 1 / h
+k_O8_O7_AB42_ISF = 2.00E-05 ; k_O8_O7_AB42_ISF has 1 / h
+k_O8_O9_AB40_ISF = 2.25E-05 ; k_O8_O9_AB40_ISF has L / (nano * mol * h)
+k_O8_O9_AB42_ISF = 0.000273529 ; k_O8_O9_AB42_ISF has L / (nano * mol * h)
+k_O9_O10_AB40_ISF = 2.23E-05 ; k_O9_O10_AB40_ISF has L / (nano * mol * h)
+k_O9_O10_AB42_ISF = 0.000273548 ; k_O9_O10_AB42_ISF has L / (nano * mol * h)
+k_O9_O8_AB40_ISF = 1.00E-05 ; k_O9_O8_AB40_ISF has 1 / h
+k_O9_O8_AB42_ISF = 2.00E-05 ; k_O9_O8_AB42_ISF has 1 / h
+k_in_AB40 = 0.238 ; k_in_AB40 has 1 / h
+k_in_AB42 = 0.015 ; k_in_AB42 has 1 / h
+kdeg_AB40_O1_BBB = 26.6 ; kdeg_AB40_O1_BBB has 1 / h
+kdeg_AB40_O1_BCSFB = 26.6 ; kdeg_AB40_O1_BCSFB has 1 / h
+kdeg_AB42_O1_BBB = 26.6 ; kdeg_AB42_O1_BBB has 1 / h
+kdeg_AB42_O1_BCSFB = 26.6 ; kdeg_AB42_O1_BCSFB has 1 / h
+sigma_ISF_O1 = 0.2 ; sigma_ISF_O1 has dimensionless
+sigma_ISF_O10 = 0.99 ; sigma_ISF_O10 has dimensionless
+sigma_ISF_O11 = 0.99 ; sigma_ISF_O11 has dimensionless
+sigma_ISF_O12 = 0.99 ; sigma_ISF_O12 has dimensionless
+sigma_ISF_O13 = 0.99 ; sigma_ISF_O13 has dimensionless
+sigma_ISF_O14 = 0.99 ; sigma_ISF_O14 has dimensionless
+sigma_ISF_O15 = 0.99 ; sigma_ISF_O15 has dimensionless
+sigma_ISF_O16 = 0.99 ; sigma_ISF_O16 has dimensionless
+sigma_ISF_O17 = 0.999 ; sigma_ISF_O17 has dimensionless
+sigma_ISF_O18 = 0.999 ; sigma_ISF_O18 has dimensionless
+sigma_ISF_O19 = 0.999 ; sigma_ISF_O19 has dimensionless
+sigma_ISF_O2 = 0.9 ; sigma_ISF_O2 has dimensionless
+sigma_ISF_O20 = 0.999 ; sigma_ISF_O20 has dimensionless
+sigma_ISF_O21 = 0.999 ; sigma_ISF_O21 has dimensionless
+sigma_ISF_O22 = 0.999 ; sigma_ISF_O22 has dimensionless
+sigma_ISF_O23 = 0.999 ; sigma_ISF_O23 has dimensionless
+sigma_ISF_O24 = 0.999 ; sigma_ISF_O24 has dimensionless
+sigma_ISF_O3 = 0.9 ; sigma_ISF_O3 has dimensionless
+sigma_ISF_O4 = 0.9 ; sigma_ISF_O4 has dimensionless
+sigma_ISF_O5 = 0.9 ; sigma_ISF_O5 has dimensionless
+sigma_ISF_O6 = 0.9 ; sigma_ISF_O6 has dimensionless
+sigma_ISF_O7 = 0.9 ; sigma_ISF_O7 has dimensionless
+sigma_ISF_O8 = 0.9 ; sigma_ISF_O8 has dimensionless
+sigma_ISF_O9 = 0.9 ; sigma_ISF_O9 has dimensionless
+sigma_ISF_lymph_Abeta = 0 ; sigma_ISF_lymph_Abeta has dimensionless
+sigma_PVS_Abeta = 0.999 ; sigma_PVS_Abeta has dimensionless
+sigma_SAS_lymph = 0 ; sigma_SAS_lymph has dimensionless
+sigma_vascular_BCSFB_Abeta = 0.9974 ; sigma_vascular_BCSFB_Abeta has dimensionless
+sigma_vascular_ISF_Abeta = 1 ; sigma_vascular_ISF_Abeta has dimensionless
+v_C99 = 0.333 ; v_C99 has 1 / h
+
+unit L = 1 litre
+unit h = 3600 second
+unit nanomol = 1e-9 mole
 end
 ''')
 print(r.getReactionIds())
@@ -715,6 +720,38 @@ print(r.getCurrentAntimony())
 print(te.getODEsFromModel(r))
 r.exportToSBML('Antimony_PBPK_model.xml') 
 
-result = r.simulate(0, 100*365*24, 100,['time', '[AB42_O1_ISF]','[AB42_O25_ISF]'])
+result = r.simulate(0, 100*365*24, 100,['time', '[AB42_O1_SAS]', '[AB42_O25_ISF]'])
 print(r['[AB42_O1_ISF]'],r['[AB42_O25_ISF]'])
-r.plot()
+
+# Load the CSV data
+csv_data = pd.read_csv('Tellurium_results.csv')
+
+# Create the plot
+plt.figure(figsize=(12, 8))
+
+# Plot simulation results
+plt.subplot(2, 1, 1)
+plt.plot(result['time']/24/365, result['[AB42_O1_SAS]'], 'b-', label='AB42_O1_SAS (Simulation)', linewidth=2)
+# plt.plot(csv_data['Time']/24/365, csv_data['Ab42_monomer']/0.2505, 'r--', label='AB42_monomer (CSV)', linewidth=2)
+# plt.plot(result['time']/24/365, result['[AB40_O1_PVS]'], 'r--', label='AB40_O1_PVS', linewidth=2)
+plt.xlabel('Time (hours)')
+plt.ylabel('Concentration')
+plt.title('AB42 Monomer Comparison')
+plt.legend()
+plt.grid(True)
+
+plt.subplot(2, 1, 2)
+plt.plot(result['time']/24/365, result['[AB42_O25_ISF]'], 'g-', label='AB42_O25_ISF (Simulation)', linewidth=2)
+plt.plot(csv_data['Time']/24/365, csv_data['Ab42_plaque']/0.2505, 'm--', label='AB42_plaque (CSV)', linewidth=2)
+plt.xlabel('Time (hours)')
+plt.ylabel('Concentration')
+plt.title('AB42 Plaque Comparison')
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+
+plt.savefig('AB42_comparison_plot.png')
+plt.show()
+# Also show the original Tellurium plot
+# r.plot()

@@ -29,7 +29,7 @@
     "Reactants": "[{Abeta}_{O_n0}_{Comp},{Abeta}_O1_{Comp}]",
     "Products": "[{Abeta}_O25_{Comp}]",
     "Rate_type": "MA",
-    "Rate_eqtn_prototype": "[Baseline_{Abeta}_O_P]",
+    "Rate_eqtn_prototype": "Baseline_{Abeta}_O_P*k_{O_n0}_{O_n1}_{Abeta}_{Comp}",
     "Comp": "[ISF]",
     "Abeta": "[AB40,AB42]",
     "O_n0": "[f\"O{i}\" for i in range(13,19)]",
