@@ -1,0 +1,176 @@
+﻿Parameter,Value,Units
+AB40_IDE_Hill_ISF ,2,dimensionless
+AB40_IDE_IC50_ISF ,14.142136,dimensionless
+AB40_IDE_Kcat_lin_ISF ,1500,1 / h
+AB40_PDMA_EC50_ISF ,50,nanomol / L
+AB40_PDMA_Vmax_ISF ,0.05,dimensionless
+AB40_systemic_synthesis_rate ,1.16,nanomol / h
+AB42_IDE_Hill_ISF ,2,dimensionless
+AB42_IDE_IC50_ISF ,28.635642,dimensionless
+AB42_IDE_Kcat_lin_ISF ,50,1 / h
+AB42_PDMA_EC50_ISF ,50,nanomol / L
+AB42_PDMA_Vmax_ISF ,0.07,dimensionless
+AB42_systemic_synthesis_rate ,1.16,nanomol / h
+AB_O1_CL ,12.6,L / h
+AB_O1_CLd2 ,0.01,L / h
+Baseline_AB40_O_P ,5.0E-6,L / (nanomol * h)
+Baseline_AB42_O_P ,5.0E-5,L / (nanomol * h)
+CL_up_brain ,0.03,1 / h
+IDE_conc_ISF ,0.005,nanomol / L
+Microglia ,1,dimensionless
+Microglia_high_frac ,0,dimensionless
+Microglia_high_rate_AB40 ,1.60E-05,1 / h
+Microglia_high_rate_AB42 ,2.22E-06,1 / h
+Microglia_low_rate_AB40 ,8.00E-06,1 / h
+Microglia_low_rate_AB42 ,1.11E-06,1 / h
+Q_PVS ,0.0021,L / h
+Qbrain_CSF ,0.024,L / h
+Qbrain_ISF ,0.0105,L / h
+Qbrain_plasma ,21.453,L / h
+Qlymph_Brain ,0.0345,L / h
+V_BBB ,0.0065909,L
+V_BCSFB ,0.0006591,L
+V_BrainPlasma ,  0.0319,L
+V_CM ,0.0075,L
+V_ISF ,0.2505,L
+V_LV ,0.0225,L
+V_PVS ,0.00235,L
+V_SAS ,0.09875,L
+V_TFV ,0.0225,L
+V_central ,3.5,L
+V_peripheral ,7.5,L
+Vol_brain_ES ,0.00725,L
+fBBB ,0.9090909,dimensionless
+f_LV ,0.5,dimensionless
+k_APP_production ,293,nanomol / (L * h)
+k_C99 ,0.666,1 / h
+k_O10_O11_AB40_ISF ,2.22E-05,L / (nano * mol * h)
+k_O10_O11_AB42_ISF ,0.000273561,L / (nano * mol * h)
+k_O10_O9_AB40_ISF ,1.00E-05,1 / h
+k_O10_O9_AB42_ISF ,2.00E-05,1 / h
+k_O11_O10_AB40_ISF ,1.00E-05,1 / h
+k_O11_O10_AB42_ISF ,2.00E-05,1 / h
+k_O11_O12_AB40_ISF ,2.21E-05,L / (nano * mol * h)
+k_O11_O12_AB42_ISF ,0.00027357,L / (nano * mol * h)
+k_O12_O11_AB40_ISF ,1.00E-05,1 / h
+k_O12_O11_AB42_ISF ,2.00E-05,1 / h
+k_O12_O13_AB40_ISF ,2.20E-05,L / (nano * mol * h)
+k_O12_O13_AB42_ISF ,0.000273577,L / (nano * mol * h)
+k_O13_O12_AB40_ISF ,1.00E-05,1 / h
+k_O13_O12_AB42_ISF ,2.00E-05,1 / h
+k_O13_O14_AB40_ISF ,2.20E-05,L / (nano * mol * h)
+k_O13_O14_AB42_ISF ,0.000273581,L / (nano * mol * h)
+k_O14_O13_AB40_ISF ,1.00E-05,1 / h
+k_O14_O13_AB42_ISF ,2.00E-05,1 / h
+k_O14_O15_AB40_ISF ,2.19E-05,L / (nano * mol * h)
+k_O14_O15_AB42_ISF ,0.000273585,L / (nano * mol * h)
+k_O15_O14_AB40_ISF ,1.00E-05,1 / h
+k_O15_O14_AB42_ISF ,2.00E-05,1 / h
+k_O15_O16_AB40_ISF ,2.19E-05,L / (nano * mol * h)
+k_O15_O16_AB42_ISF ,0.000273587,L / (nano * mol * h)
+k_O16_O15_AB40_ISF ,1.00E-05,1 / h
+k_O16_O15_AB42_ISF ,2.00E-05,1 / h
+k_O16_O17_AB40_ISF ,2.19E-05,L / (nano * mol * h)
+k_O16_O17_AB42_ISF ,0.000273589,L / (nano * mol * h)
+k_O17_O16_AB40_ISF ,1.00E-05,1 / h
+k_O17_O16_AB42_ISF ,2.00E-05,1 / h
+k_O17_O18_AB40_ISF ,2.18E-05,L / (nano * mol * h)
+k_O17_O18_AB42_ISF ,0.000273591,L / (nano * mol * h)
+k_O18_O17_AB40_ISF ,1.00E-05,1 / h
+k_O18_O17_AB42_ISF ,2.00E-05,1 / h
+k_O18_O19_AB40_ISF ,2.18E-05,L / (nano * mol * h)
+k_O18_O19_AB42_ISF ,0.000273592,L / (nano * mol * h)
+k_O19_O18_AB40_ISF ,1.00E-05,1 / h
+k_O19_O18_AB42_ISF ,2.00E-05,1 / h
+k_O19_O20_AB40_ISF ,2.18E-05,L / (nano * mol * h)
+k_O19_O20_AB42_ISF ,0.000273594,L / (nano * mol * h)
+k_O1_O2_AB40_ISF ,0.00018,L / (nano * mol * h)
+k_O1_O2_AB42_ISF ,0.0003564,L / (nano * mol * h)
+k_O20_O19_AB40_ISF ,1.00E-05,1 / h
+k_O20_O19_AB42_ISF ,2.00E-05,1 / h
+k_O20_O21_AB40_ISF ,2.18E-05,L / (nano * mol * h)
+k_O20_O21_AB42_ISF ,0.000273594,L / (nano * mol * h)
+k_O21_O20_AB40_ISF ,1.00E-05,1 / h
+k_O21_O20_AB42_ISF ,2.00E-05,1 / h
+k_O21_O22_AB40_ISF ,2.18E-05,L / (nano * mol * h)
+k_O21_O22_AB42_ISF ,0.000273595,L / (nano * mol * h)
+k_O22_O21_AB40_ISF ,1.00E-05,1 / h
+k_O22_O21_AB42_ISF ,2.00E-05,1 / h
+k_O22_O23_AB40_ISF ,2.17E-05,L / (nano * mol * h)
+k_O22_O23_AB42_ISF ,0.000273596,L / (nano * mol * h)
+k_O23_O22_AB40_ISF ,1.00E-05,1 / h
+k_O23_O22_AB42_ISF ,2.00E-05,1 / h
+k_O23_O24_AB40_ISF ,2.17E-05,L / (nano * mol * h)
+k_O23_O24_AB42_ISF ,0.000273596,L / (nano * mol * h)
+k_O24_O12_AB40_ISF ,2,dimensionless
+k_O24_O12_AB42_ISF ,1,dimensionless
+k_O24_O23_AB40_ISF ,1.00E-05,1 / h
+k_O24_O23_AB42_ISF ,2.00E-05,1 / h
+k_O2_O1_AB40_ISF ,9.72,1 / h
+k_O2_O1_AB42_ISF ,45.72,1 / h
+k_O2_O3_AB40_ISF ,7.20E-05,L / (nano * mol * h)
+k_O2_O3_AB42_ISF ,0.0001368,L / (nano * mol * h)
+k_O3_O2_AB40_ISF ,1.00E-05,1 / h
+k_O3_O2_AB42_ISF ,1.00E-05,1 / h
+k_O3_O4_AB40_ISF ,2.61E-05,L / (nano * mol * h)
+k_O3_O4_AB42_ISF ,0.000272786,L / (nano * mol * h)
+k_O4_O3_AB40_ISF ,1.00E-05,1 / h
+k_O4_O3_AB42_ISF ,1.98E-05,1 / h
+k_O4_O5_AB40_ISF ,2.45E-05,L / (nano * mol * h)
+k_O4_O5_AB42_ISF ,0.000273185,L / (nano * mol * h)
+k_O5_O4_AB40_ISF ,1.00E-05,1 / h
+k_O5_O4_AB42_ISF ,1.99E-05,1 / h
+k_O5_O6_AB40_ISF ,2.36E-05,L / (nano * mol * h)
+k_O5_O6_AB42_ISF ,0.000273361,L / (nano * mol * h)
+k_O6_O5_AB40_ISF ,1.00E-05,1 / h
+k_O6_O5_AB42_ISF ,2.00E-05,1 / h
+k_O6_O7_AB40_ISF ,2.31E-05,L / (nano * mol * h)
+k_O6_O7_AB42_ISF ,0.000273449,L / (nano * mol * h)
+k_O7_O6_AB40_ISF ,1.00E-05,1 / h
+k_O7_O6_AB42_ISF ,2.00E-05,1 / h
+k_O7_O8_AB40_ISF ,2.27E-05,L / (nano * mol * h)
+k_O7_O8_AB42_ISF ,0.000273499,L / (nano * mol * h)
+k_O8_O7_AB40_ISF ,1.00E-05,1 / h
+k_O8_O7_AB42_ISF ,2.00E-05,1 / h
+k_O8_O9_AB40_ISF ,2.25E-05,L / (nano * mol * h)
+k_O8_O9_AB42_ISF ,0.000273529,L / (nano * mol * h)
+k_O9_O10_AB40_ISF ,2.23E-05,L / (nano * mol * h)
+k_O9_O10_AB42_ISF ,0.000273548,L / (nano * mol * h)
+k_O9_O8_AB40_ISF ,1.00E-05,1 / h
+k_O9_O8_AB42_ISF ,2.00E-05,1 / h
+k_in_AB40 ,0.238,1 / h
+k_in_AB42 ,0.05,1 / h
+kdeg_AB40_O1_BBB ,26.6,1 / h
+kdeg_AB40_O1_BCSFB ,26.6,1 / h
+kdeg_AB42_O1_BBB ,26.6,1 / h
+kdeg_AB42_O1_BCSFB ,26.6,1 / h
+sigma_ISF_O1 ,0.2,dimensionless
+sigma_ISF_O10 ,0.99,dimensionless
+sigma_ISF_O11 ,0.99,dimensionless
+sigma_ISF_O12 ,0.99,dimensionless
+sigma_ISF_O13 ,0.99,dimensionless
+sigma_ISF_O14 ,0.99,dimensionless
+sigma_ISF_O15 ,0.99,dimensionless
+sigma_ISF_O16 ,0.99,dimensionless
+sigma_ISF_O17 ,0.999,dimensionless
+sigma_ISF_O18 ,0.999,dimensionless
+sigma_ISF_O19 ,0.999,dimensionless
+sigma_ISF_O2 ,0.9,dimensionless
+sigma_ISF_O20 ,0.999,dimensionless
+sigma_ISF_O21 ,0.999,dimensionless
+sigma_ISF_O22 ,0.999,dimensionless
+sigma_ISF_O23 ,0.999,dimensionless
+sigma_ISF_O24 ,0.999,dimensionless
+sigma_ISF_O3 ,0.9,dimensionless
+sigma_ISF_O4 ,0.9,dimensionless
+sigma_ISF_O5 ,0.9,dimensionless
+sigma_ISF_O6 ,0.9,dimensionless
+sigma_ISF_O7 ,0.9,dimensionless
+sigma_ISF_O8 ,0.9,dimensionless
+sigma_ISF_O9 ,0.9,dimensionless
+sigma_ISF_lymph_Abeta ,0,dimensionless
+sigma_PVS_Abeta ,0.999,dimensionless
+sigma_SAS_lymph ,0,dimensionless
+sigma_vascular_BCSFB_Abeta ,0.9974,dimensionless
+sigma_vascular_ISF_Abeta ,1,dimensionless
+v_C99 ,0.333,1 / h
