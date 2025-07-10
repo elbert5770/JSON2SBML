@@ -22,6 +22,10 @@ Microglia_EC50_AB42
 Microglia_Vmax_AB40
 Microglia_Vmax_AB42
 Microglia_high_frac
+Microglia_high_rate_AB40
+Microglia_high_rate_AB42
+Microglia_low_rate_AB40
+Microglia_low_rate_AB42
 Q_PVS
 Qbrain_CSF
 Qbrain_ISF

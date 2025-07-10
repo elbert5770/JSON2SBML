@@ -51,7 +51,7 @@
     "Reactants": "[{Abeta}_O25_{Comp}]",
     "Products": "[0]",
     "Rate_type": "MA",
-    "Rate_eqtn_prototype": "0.5*Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_{Abeta}/(Microglia_EC50_{Abeta} + {Abeta}_O25_{Comp}) + (1.0 - Microglia_high_frac)*Microglia_Vmax_{Abeta}/(Microglia_EC50_{Abeta} + {Abeta}_O25_{Comp}))",
+    "Rate_eqtn_prototype": "0.5*Microglia*(Microglia_high_frac*Microglia_high_rate_{Abeta} + (1.0 - Microglia_high_frac)*Microglia_low_rate_{Abeta})",
     "Comp": "[ISF]",
     "Abeta": "[AB40,AB42]"
   },

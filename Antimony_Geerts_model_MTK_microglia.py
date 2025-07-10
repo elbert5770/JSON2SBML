@@ -378,8 +378,8 @@ AB42_O21_ISF ->; Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_AB42/(Microg
 AB42_O22_ISF ->; Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_O22_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_O22_ISF/V_ISF))) * (AB42_O22_ISF/V_ISF) * V_ISF
 AB42_O23_ISF ->; Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_O23_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_O23_ISF/V_ISF))) * (AB42_O23_ISF/V_ISF) * V_ISF
 AB42_O24_ISF ->; Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_O24_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_O24_ISF/V_ISF))) * (AB42_O24_ISF/V_ISF) * V_ISF
-AB40_O25_ISF ->; 0.5*Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O25_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O25_ISF/V_ISF))) * (AB40_O25_ISF/V_ISF) * V_ISF
-AB42_O25_ISF ->; 0.5*Microglia*(10.0*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_O25_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_O25_ISF/V_ISF))) * (AB42_O25_ISF/V_ISF) * V_ISF
+AB40_O25_ISF ->; 0.5*Microglia*(Microglia_high_frac*Microglia_high_rate_AB40 + (1.0 - Microglia_high_frac)*Microglia_low_rate_AB40) * (AB40_O25_ISF/V_ISF) * V_ISF
+AB42_O25_ISF ->; 0.5*Microglia*(Microglia_high_frac*Microglia_high_rate_AB42 + (1.0 - Microglia_high_frac)*Microglia_low_rate_AB42) * (AB42_O25_ISF/V_ISF) * V_ISF
 AB40_O24_ISF -> AB40_O12_ISF + AB40_O12_ISF; k_O24_O12_AB40_ISF*k_O24_O23_AB40_ISF * (AB40_O24_ISF/V_ISF) * V_ISF
 AB42_O24_ISF -> AB42_O12_ISF + AB42_O12_ISF; k_O24_O12_AB42_ISF*k_O24_O23_AB42_ISF * (AB42_O24_ISF/V_ISF) * V_ISF
 AB40_O1_ISF ->; IDE_conc_ISF * AB40_IDE_Kcat_lin_ISF * (((AB40_O1_ISF/V_ISF))^AB40_IDE_Hill_ISF / (((AB40_O1_ISF/V_ISF) )^AB40_IDE_Hill_ISF + AB40_IDE_IC50_ISF^AB40_IDE_Hill_ISF)) * V_ISF
@@ -559,6 +559,10 @@ Microglia_EC50_AB42 = 120 ; Microglia_EC50_AB42 has nanomol / L
 Microglia_Vmax_AB40 = 0.00015 ; Microglia_Vmax_AB40 has nanomol / L / h
 Microglia_Vmax_AB42 = 0.00015 ; Microglia_Vmax_AB42 has nanomol / L / h
 Microglia_high_frac = 0 ; Microglia_high_frac has dimensionless 
+Microglia_high_rate_AB40 = 1.60E-05 ; Microglia_high_rate_AB40 has 1 / h
+Microglia_high_rate_AB42 = 2.22E-06 ; Microglia_high_rate_AB42 has 1 / h
+Microglia_low_rate_AB40 = 8.00E-06 ; Microglia_low_rate_AB40 has 1 / h
+Microglia_low_rate_AB42 = 1.11E-06 ; Microglia_low_rate_AB42 has 1 / h
 Q_PVS = 0.0021 ; Q_PVS has L / h
 Qbrain_CSF = 0.024 ; Qbrain_CSF has L / h
 Qbrain_ISF = 0.0105 ; Qbrain_ISF has L / h

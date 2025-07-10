@@ -49,26 +49,31 @@ function main()
 
     @show unknowns(sys)
 
-    # Print the differential equations from sys
-    println("\n=== Differential Equations from sys ===")
-    for (i, eq) in enumerate(equations(sys))
-        println("Equation $i: $eq")
-    end
+    # # Print the differential equations from sys
+    # println("\n=== Differential Equations from sys ===")
+    # for (i, eq) in enumerate(equations(sys))
+    #     println("Equation $i: $eq")
+    # end
 
 
     tspan = (0.0, 100.0*365*24)
     # oprob = ODEProblem(sys, prn.u0, tspan, prn.p)
     # oprob = ODEProblem(sys, prn.u0, tspan, prn.p, jac=true)
+    @show  prn.p
+    @show parameters(prn)
     oprob = ODEProblem(sys, prn.u0, tspan, prn.p, jac=true, sparse=true)
+    # You can access the parameters in an ODEProblem via `oprob.p`, which is typically a NamedTuple or Dict.
+    # For example, to access the value of :k_O1_O2_AB42_ISF:
+    @show oprob.p
     # Print the differential equations from oprob
-    println("\n=== Differential Equations from oprob ===")
-    for (i, eq) in enumerate(equations(oprob.f.sys))
-        println("Equation $i: $eq")
-    end
+    # println("\n=== Differential Equations from oprob ===")
+    # for (i, eq) in enumerate(equations(oprob.f.sys))
+    #     println("Equation $i: $eq")
+    # end
 
     # Alternative way to print equations from oprob
     println("\n=== Alternative: Equations from oprob.f.sys ===")
-    @show equations(oprob.f.sys)
+    # @show equations(oprob.f.sys)
 
     @time sol = solve(oprob, Rodas5P())
 

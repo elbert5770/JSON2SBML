@@ -475,7 +475,7 @@ def convert_species_to_concentrations(reaction_string, species_list):
 
 if __name__ == "__main__":
     # Collect unique compartments
-    unique_compartments = collect_unique_compartments("Geerts_reactions2.json")
+    unique_compartments = collect_unique_compartments("Geerts_reactions_microglia.json")
     
     # Write unique compartments to file
     with open("unique_compartments.txt", "w") as f:
