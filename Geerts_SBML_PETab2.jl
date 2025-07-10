@@ -79,7 +79,7 @@ function main()
     
     res = calibrate(petab_prob, x0, IPNewton())
     @show res.xmin
-    plot(res, petab_prob; linewidth = 2.0)
+    # plot(res, petab_prob; linewidth = 2.0)
     # # # Print the differential equations from sys
     # # println("\n=== Differential Equations from sys ===")
     # # for (i, eq) in enumerate(equations(sys))
