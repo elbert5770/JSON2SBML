@@ -139,7 +139,7 @@ k_O9_O10_AB42_ISF ,0.000273548,L / (nano * mol * h)
 k_O9_O8_AB40_ISF ,1.00E-05,1 / h
 k_O9_O8_AB42_ISF ,2.00E-05,1 / h
 k_in_AB40 ,0.238,1 / h
-k_in_AB42 ,0.05,1 / h
+k_in_AB42 ,0.015,1 / h
 kdeg_AB40_O1_BBB ,26.6,1 / h
 kdeg_AB40_O1_BCSFB ,26.6,1 / h
 kdeg_AB42_O1_BBB ,26.6,1 / h

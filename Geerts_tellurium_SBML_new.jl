@@ -3,6 +3,8 @@ using Catalyst, GraphMakie, NetworkLayout
 using GLMakie
 using ModelingToolkit
 using OrdinaryDiffEq
+using DataFrames
+using CSV
 
 function suvr(oligo, proto, plaque, C1=2.5, C2=400000, C3=1.3, Hill=3.5)
     """
@@ -104,6 +106,8 @@ function main()
     ax2 = Axis(fig[1, 2], xlabel="Time", ylabel="Concentration", title="Proto")
     ax3 = Axis(fig[2, 1], xlabel="Time", ylabel="Concentration", title="SUVR")
     ax4 = Axis(fig[2, 2], xlabel="Time", ylabel="Concentration", title="AB42_O1_ISF and AB42_O25_ISF")
+    ax5 = Axis(fig[3, 1], xlabel="Time", ylabel="Concentration", title="IDE_activity_ISF")
+    ax6 = Axis(fig[3, 2], xlabel="Time", ylabel="Concentration", title="AB40_O1_central")
     # sol_70 = sol(70*24*365)
     # @show typeof(sol_70)
     
@@ -262,6 +266,14 @@ function main()
     df_monomer = DataFrame(CSV.File("Geerts 2023 Figure 3C.csv"))
     plot!(ax4, df_monomer[:, :time]./24/365, df_monomer[:, :measurement], label="Monomer")
     axislegend(ax4, position=:rt)
+    lines!(ax5, sol.t/24/365, sol[:IDE_activity_ISF], label="IDE_activity_ISF")
+    vlines!(ax5, [70.0], color=:black, linestyle=:dash, linewidth=1.5)
+    plot!(ax5, [70], [1.3], color=:blue, markersize=14)
+    axislegend(ax5, position=:rt)
+    lines!(ax6, sol.t/24/365, sol[:AB40_O1_central], label="AB40_O1_central")
+    vlines!(ax6, [70.0], color=:black, linestyle=:dash, linewidth=1.5)
+    plot!(ax6, [70], [1.3], color=:blue, markersize=14)
+    axislegend(ax6, position=:rt)
     fig
 end
 main()
