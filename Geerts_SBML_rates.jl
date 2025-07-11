@@ -1,5 +1,5 @@
 using SBMLImporter
-using Catalyst, GraphMakie, NetworkLayout
+using Catalyst 
 using GLMakie
 using ModelingToolkit
 using OrdinaryDiffEq

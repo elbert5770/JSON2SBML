@@ -69,9 +69,17 @@
     "Reactants": "[{Abeta}_O1_{Comp}]",
     "Products": "[0]",
     "Rate_type": "custom_conc_per_time",
-    "Rate_eqtn_prototype": "IDE_conc_{Comp} * {Abeta}_IDE_Kcat_lin_{Comp} * (({Abeta}_O1_{Comp})^{Abeta}_IDE_Hill_{Comp} / (({Abeta}_O1_{Comp} )^{Abeta}_IDE_Hill_{Comp} + {Abeta}_IDE_IC50_{Comp}^{Abeta}_IDE_Hill_{Comp}))",
+    "Rate_eqtn_prototype": "IDE_conc_{Comp} * IDE_activity_{Comp} * (({Abeta}_O1_{Comp})^{Abeta}_IDE_Hill_{Comp} / (({Abeta}_O1_{Comp} )^{Abeta}_IDE_Hill_{Comp} + {Abeta}_IDE_IC50_{Comp}^{Abeta}_IDE_Hill_{Comp}))",
     "Comp": "[ISF]",
     "Abeta": "[AB40,AB42]"
+  },
+  //IDE rate of change
+  {"Reaction_name": "IDE activity",
+  "Reactants": "IDE_activity_{Comp}",
+  "Products": "[0]",
+  "Rate_type": "MA",
+  "Rate_eqtn_prototype": "k_exp_decline_IDE",
+  "Comp": "[ISF]"
   },
   // Abeta production
   {

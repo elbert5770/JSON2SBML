@@ -1,12 +1,10 @@
 AB40_IDE_Hill_ISF
 AB40_IDE_IC50_ISF
-AB40_IDE_Kcat_lin_ISF
 AB40_PDMA_EC50_ISF
 AB40_PDMA_Vmax_ISF
 AB40_systemic_synthesis_rate
 AB42_IDE_Hill_ISF
 AB42_IDE_IC50_ISF
-AB42_IDE_Kcat_lin_ISF
 AB42_PDMA_EC50_ISF
 AB42_PDMA_Vmax_ISF
 AB42_systemic_synthesis_rate
@@ -134,6 +132,7 @@ k_O9_O10_AB40_ISF
 k_O9_O10_AB42_ISF
 k_O9_O8_AB40_ISF
 k_O9_O8_AB42_ISF
+k_exp_decline_IDE
 k_in_AB40
 k_in_AB42
 kdeg_AB40_O1_BBB

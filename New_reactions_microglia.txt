@@ -174,6 +174,7 @@ substanceOnly species AB42_O9_PVS in PVS
 substanceOnly species AB42_O9_central in central
 substanceOnly species APP_ISF in ISF
 substanceOnly species C99_ISF in ISF
+substanceOnly species IDE_activity_ISF in ISF
 
 AB40_O1_ISF + AB40_O1_ISF -> AB40_O2_ISF; k_O1_O2_AB40_ISF * (AB40_O1_ISF/V_ISF) * (AB40_O1_ISF/V_ISF) * V_ISF
 AB40_O2_ISF -> AB40_O1_ISF + AB40_O1_ISF; k_O2_O1_AB40_ISF * (AB40_O2_ISF/V_ISF) * V_ISF
@@ -375,8 +376,9 @@ AB40_O25_ISF ->; 0.5*Microglia*(Microglia_high_frac*Microglia_high_rate_AB40 + (
 AB42_O25_ISF ->; 0.5*Microglia*(Microglia_high_frac*Microglia_high_rate_AB42 + (1.0 - Microglia_high_frac)*Microglia_low_rate_AB42) * (AB42_O25_ISF/V_ISF) * V_ISF
 AB40_O24_ISF -> AB40_O12_ISF + AB40_O12_ISF; k_O24_O12_AB40_ISF*k_O24_O23_AB40_ISF * (AB40_O24_ISF/V_ISF) * V_ISF
 AB42_O24_ISF -> AB42_O12_ISF + AB42_O12_ISF; k_O24_O12_AB42_ISF*k_O24_O23_AB42_ISF * (AB42_O24_ISF/V_ISF) * V_ISF
-AB40_O1_ISF ->; IDE_conc_ISF * AB40_IDE_Kcat_lin_ISF * (((AB40_O1_ISF/V_ISF))^AB40_IDE_Hill_ISF / (((AB40_O1_ISF/V_ISF) )^AB40_IDE_Hill_ISF + AB40_IDE_IC50_ISF^AB40_IDE_Hill_ISF)) * V_ISF
-AB42_O1_ISF ->; IDE_conc_ISF * AB42_IDE_Kcat_lin_ISF * (((AB42_O1_ISF/V_ISF))^AB42_IDE_Hill_ISF / (((AB42_O1_ISF/V_ISF) )^AB42_IDE_Hill_ISF + AB42_IDE_IC50_ISF^AB42_IDE_Hill_ISF)) * V_ISF
+AB40_O1_ISF ->; IDE_conc_ISF * (IDE_activity_ISF/V_ISF) * (((AB40_O1_ISF/V_ISF))^AB40_IDE_Hill_ISF / (((AB40_O1_ISF/V_ISF) )^AB40_IDE_Hill_ISF + AB40_IDE_IC50_ISF^AB40_IDE_Hill_ISF)) * V_ISF
+AB42_O1_ISF ->; IDE_conc_ISF * (IDE_activity_ISF/V_ISF) * (((AB42_O1_ISF/V_ISF))^AB42_IDE_Hill_ISF / (((AB42_O1_ISF/V_ISF) )^AB42_IDE_Hill_ISF + AB42_IDE_IC50_ISF^AB42_IDE_Hill_ISF)) * V_ISF
+IDE_activity_ISF ->; k_exp_decline_IDE * (IDE_activity_ISF/V_ISF) * V_ISF
 -> APP_ISF; k_APP_production * V_ISF
 -> AB40_O1_central; AB40_systemic_synthesis_rate * V_central
 -> AB42_O1_central; AB42_systemic_synthesis_rate * V_central

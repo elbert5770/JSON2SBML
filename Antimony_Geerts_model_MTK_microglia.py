@@ -181,6 +181,7 @@ substanceOnly species AB42_O9_PVS in PVS
 substanceOnly species AB42_O9_central in central
 substanceOnly species APP_ISF in ISF
 substanceOnly species C99_ISF in ISF
+substanceOnly species IDE_activity_ISF in ISF
 
 AB40_O1_ISF + AB40_O1_ISF -> AB40_O2_ISF; k_O1_O2_AB40_ISF * (AB40_O1_ISF/V_ISF) * (AB40_O1_ISF/V_ISF) * V_ISF
 AB40_O2_ISF -> AB40_O1_ISF + AB40_O1_ISF; k_O2_O1_AB40_ISF * (AB40_O2_ISF/V_ISF) * V_ISF
@@ -382,8 +383,9 @@ AB40_O25_ISF ->; 0.5*Microglia*(Microglia_high_frac*Microglia_high_rate_AB40 + (
 AB42_O25_ISF ->; 0.5*Microglia*(Microglia_high_frac*Microglia_high_rate_AB42 + (1.0 - Microglia_high_frac)*Microglia_low_rate_AB42) * (AB42_O25_ISF/V_ISF) * V_ISF
 AB40_O24_ISF -> AB40_O12_ISF + AB40_O12_ISF; k_O24_O12_AB40_ISF*k_O24_O23_AB40_ISF * (AB40_O24_ISF/V_ISF) * V_ISF
 AB42_O24_ISF -> AB42_O12_ISF + AB42_O12_ISF; k_O24_O12_AB42_ISF*k_O24_O23_AB42_ISF * (AB42_O24_ISF/V_ISF) * V_ISF
-AB40_O1_ISF ->; IDE_conc_ISF * AB40_IDE_Kcat_lin_ISF * (((AB40_O1_ISF/V_ISF))^AB40_IDE_Hill_ISF / (((AB40_O1_ISF/V_ISF) )^AB40_IDE_Hill_ISF + AB40_IDE_IC50_ISF^AB40_IDE_Hill_ISF)) * V_ISF
-AB42_O1_ISF ->; IDE_conc_ISF * AB42_IDE_Kcat_lin_ISF * (((AB42_O1_ISF/V_ISF))^AB42_IDE_Hill_ISF / (((AB42_O1_ISF/V_ISF) )^AB42_IDE_Hill_ISF + AB42_IDE_IC50_ISF^AB42_IDE_Hill_ISF)) * V_ISF
+AB40_O1_ISF ->; IDE_conc_ISF * (IDE_activity_ISF) * (((AB40_O1_ISF/V_ISF))^AB40_IDE_Hill_ISF / (((AB40_O1_ISF/V_ISF) )^AB40_IDE_Hill_ISF + AB40_IDE_IC50_ISF^AB40_IDE_Hill_ISF)) * V_ISF
+AB42_O1_ISF ->; IDE_conc_ISF * (IDE_activity_ISF) * (((AB42_O1_ISF/V_ISF))^AB42_IDE_Hill_ISF / (((AB42_O1_ISF/V_ISF) )^AB42_IDE_Hill_ISF + AB42_IDE_IC50_ISF^AB42_IDE_Hill_ISF)) * V_ISF
+IDE_activity_ISF ->; k_exp_decline_IDE * (IDE_activity_ISF) * V_ISF
 -> APP_ISF; k_APP_production * V_ISF
 -> AB40_O1_central; AB40_systemic_synthesis_rate * V_central
 -> AB42_O1_central; AB42_systemic_synthesis_rate * V_central
@@ -543,7 +545,7 @@ AB40_PDMA_Vmax_ISF = 0.05 ; AB40_PDMA_Vmax_ISF has dimensionless
 AB40_systemic_synthesis_rate = 1.16 ; AB40_systemic_synthesis_rate has nanomol / h
 AB42_IDE_Hill_ISF = 2 ; AB42_IDE_Hill_ISF has dimensionless
 AB42_IDE_IC50_ISF = 28.635642 ; AB42_IDE_IC50_ISF has dimensionless
-AB42_IDE_Kcat_lin_ISF = 50 ; AB42_IDE_Kcat_lin_ISF has 1 / h
+k_exp_decline_IDE = 1.15E-05 ; k_exp_decline_IDE has 1 / h
 AB42_PDMA_EC50_ISF = 50 ; AB42_PDMA_EC50_ISF has nanomol / L
 AB42_PDMA_Vmax_ISF = 0.07 ; AB42_PDMA_Vmax_ISF has dimensionless
 AB42_systemic_synthesis_rate = 1.16 ; AB42_systemic_synthesis_rate has nanomol / h
@@ -552,7 +554,7 @@ AB_O1_CLd2 = 0.01 ; AB_O1_CLd2 has L / h
 Baseline_AB40_O_P = 5.0E-6 ; Baseline_AB40_O_P has L / (nanomol * h)
 Baseline_AB42_O_P = 5.0E-5 ; Baseline_AB42_O_P has L / (nanomol * h)
 CL_up_brain = 0.03 ; CL_up_brain has 1 / h
-IDE_conc_ISF = 0.005 ; IDE_conc_ISF has nanomol / L
+IDE_conc_ISF = 1 ; IDE_conc_ISF has nanomol / L
 Microglia = 1 ; Microglia has dimensionless
 Microglia_EC50_AB40 = 8 ; Microglia_EC50_AB40 has nanomol / L
 Microglia_EC50_AB42 = 120 ; Microglia_EC50_AB42 has nanomol / L
@@ -625,7 +627,7 @@ k_O19_O18_AB42_ISF = 2.00E-05 ; k_O19_O18_AB42_ISF has 1 / h
 k_O19_O20_AB40_ISF = 2.18E-05 ; k_O19_O20_AB40_ISF has L / (nano * mol * h)
 k_O19_O20_AB42_ISF = 0.000273594 ; k_O19_O20_AB42_ISF has L / (nano * mol * h)
 k_O1_O2_AB40_ISF = 0.00018 ; k_O1_O2_AB40_ISF has L / (nano * mol * h)
-k_O1_O2_AB42_ISF = 0.0003564 ; k_O1_O2_AB42_ISF has L / (nano * mol * h)
+k_O1_O2_AB42_ISF = 0.003564 ; k_O1_O2_AB42_ISF has L / (nano * mol * h)
 k_O20_O19_AB40_ISF = 1.00E-05 ; k_O20_O19_AB40_ISF has 1 / h
 k_O20_O19_AB42_ISF = 2.00E-05 ; k_O20_O19_AB42_ISF has 1 / h
 k_O20_O21_AB40_ISF = 2.18E-05 ; k_O20_O21_AB40_ISF has L / (nano * mol * h)
@@ -643,15 +645,15 @@ k_O23_O22_AB42_ISF = 2.00E-05 ; k_O23_O22_AB42_ISF has 1 / h
 k_O23_O24_AB40_ISF = 2.17E-05 ; k_O23_O24_AB40_ISF has L / (nano * mol * h)
 k_O23_O24_AB42_ISF = 0.000273596 ; k_O23_O24_AB42_ISF has L / (nano * mol * h)
 k_O24_O12_AB40_ISF = 2 ; k_O24_O12_AB40_ISF has dimensionless
-k_O24_O12_AB42_ISF = 1 ; k_O24_O12_AB42_ISF has dimensionless
+k_O24_O12_AB42_ISF = 2; k_O24_O12_AB42_ISF has dimensionless
 k_O24_O23_AB40_ISF = 1.00E-05 ; k_O24_O23_AB40_ISF has 1 / h
 k_O24_O23_AB42_ISF = 2.00E-05 ; k_O24_O23_AB42_ISF has 1 / h
 k_O2_O1_AB40_ISF = 9.72 ; k_O2_O1_AB40_ISF has 1 / h
 k_O2_O1_AB42_ISF = 45.72 ; k_O2_O1_AB42_ISF has 1 / h
 k_O2_O3_AB40_ISF = 7.20E-05 ; k_O2_O3_AB40_ISF has L / (nano * mol * h)
-k_O2_O3_AB42_ISF = 0.0001368 ; k_O2_O3_AB42_ISF has L / (nano * mol * h)
+k_O2_O3_AB42_ISF = 0.001368 ; k_O2_O3_AB42_ISF has L / (nano * mol * h)
 k_O3_O2_AB40_ISF = 1.00E-05 ; k_O3_O2_AB40_ISF has 1 / h
-k_O3_O2_AB42_ISF = 1.00E-05 ; k_O3_O2_AB42_ISF has 1 / h
+k_O3_O2_AB42_ISF = 0.0001 ; k_O3_O2_AB42_ISF has 1 / h
 k_O3_O4_AB40_ISF = 2.61E-05 ; k_O3_O4_AB40_ISF has L / (nano * mol * h)
 k_O3_O4_AB42_ISF = 0.000272786 ; k_O3_O4_AB42_ISF has L / (nano * mol * h)
 k_O4_O3_AB40_ISF = 1.00E-05 ; k_O4_O3_AB40_ISF has 1 / h
@@ -714,6 +716,7 @@ sigma_SAS_lymph = 0 ; sigma_SAS_lymph has dimensionless
 sigma_vascular_BCSFB_Abeta = 0.9974 ; sigma_vascular_BCSFB_Abeta has dimensionless
 sigma_vascular_ISF_Abeta = 1 ; sigma_vascular_ISF_Abeta has dimensionless
 v_C99 = 0.333 ; v_C99 has 1 / h
+IDE_activity_ISF = 400
 
 unit L = 1 litre
 unit h = 3600 second
@@ -724,20 +727,20 @@ print(r.getReactionIds())
 print(r.getCurrentAntimony())
 print(te.getODEsFromModel(r))
 r.exportToSBML('Antimony_PBPK_model.xml') 
-
-result = r.simulate(0, 100*365*24, 100,['time', '[AB42_O1_ISF]', '[AB42_O25_ISF]'])
+r.simulate(0, 20*365*24, 100,['time', '[AB42_O1_ISF]', '[IDE_activity_ISF]'])
+result = r.simulate(0, 80*365*24, 100,['time', '[AB42_O1_ISF]', '[IDE_activity_ISF]'])
 print(r['[AB42_O1_ISF]'],r['[AB42_O25_ISF]'])
 
 # Load the CSV data
-csv_data = pd.read_csv('Tellurium_results.csv')
+csv_data = pd.read_csv('Geerts 2023 Figure 3C.csv')
 
 # Create the plot
 plt.figure(figsize=(12, 8))
 
 # Plot simulation results
 plt.subplot(2, 1, 1)
-plt.plot(result['time']/24/365, result['[AB42_O1_ISF]'], 'b-', label='AB42_O1_ISF (Simulation)', linewidth=2)
-plt.plot(csv_data['Time']/24/365, csv_data['Ab42_monomer']/0.2505, 'r--', label='AB42_monomer (CSV)', linewidth=2)
+plt.plot(result['time']/24/365+20, result['[AB42_O1_ISF]'], 'b-', label='AB42_O1_ISF (Simulation)', linewidth=2)
+plt.plot(csv_data['time']/24/365, csv_data['measurement']/0.2505, 'r.', label='AB42_monomer (CSV)', linewidth=2)
 # plt.plot(result['time']/24/365, result['[AB40_O1_PVS]'], 'r--', label='AB40_O1_PVS', linewidth=2)
 plt.xlabel('Time (hours)')
 plt.ylabel('Concentration')
@@ -745,9 +748,17 @@ plt.title('AB42 Monomer Comparison')
 plt.legend()
 plt.grid(True)
 
+# plt.subplot(2, 1, 2)
+# plt.plot(result['time']/24/365, result['[AB42_O25_ISF]'], 'g-', label='AB42_O25_ISF (Simulation)', linewidth=2)
+# plt.plot(csv_data['Time']/24/365, csv_data['Ab42_plaque']/0.2505, 'm--', label='AB42_plaque (CSV)', linewidth=2)
+# plt.xlabel('Time (hours)')
+# plt.ylabel('Concentration')
+# plt.title('AB42 Plaque Comparison')
+# plt.legend()
+# plt.grid(True)
 plt.subplot(2, 1, 2)
-plt.plot(result['time']/24/365, result['[AB42_O25_ISF]'], 'g-', label='AB42_O25_ISF (Simulation)', linewidth=2)
-plt.plot(csv_data['Time']/24/365, csv_data['Ab42_plaque']/0.2505, 'm--', label='AB42_plaque (CSV)', linewidth=2)
+plt.plot(result['time']/24/365, result['[IDE_activity_ISF]'], 'g-', label='AB42_O25_ISF (Simulation)', linewidth=2)
+# plt.plot(csv_data['Time']/24/365, csv_data['Ab42_plaque']/0.2505, 'm--', label='AB42_plaque (CSV)', linewidth=2)
 plt.xlabel('Time (hours)')
 plt.ylabel('Concentration')
 plt.title('AB42 Plaque Comparison')
