@@ -39,6 +39,8 @@ function main()
     @show rs.rxs[1]
         @show rs.species[1]
     @show rs.unknowns[1]
+    @show rs.ps[1]
+    @show typeof(rs.ps[1])
     # lrs = latexify(rs, form = :ode)
     # display(lrs)
 
@@ -59,12 +61,37 @@ function main()
     tspan = (0.0, 100.0*365*24)
     # oprob = ODEProblem(sys, prn.u0, tspan, prn.p)
     # oprob = ODEProblem(sys, prn.u0, tspan, prn.p, jac=true)
-    @show  prn.p
-    @show parameters(prn)
-    oprob = ODEProblem(sys, prn.u0, tspan, prn.p, jac=true, sparse=true)
+    @show  prn.p[1]
+    # Create a new parameter vector with the modified value
+    # Method 1: Try direct modification if it's mutable
+   
+    new_p = copy(prn.p)
+    # new_p[:k_APP_production] = 100.0
+    @show new_p[1]
+    @show typeof(new_p)
+    # @show prn.p
+    # @show prn.u0
+    # @show prn.groupstosyms
+    # @show prn.varstonames
+    # (new_p[1]) = 100.0
+    @show fieldnames(typeof(new_p[1]))
+    # new_p[1] = @set (new_p[1]).second = 100.0
+    @show new_p[1].second
+    @show typeof(:k_APP_production)
+    @show typeof(new_p[1].first)
+    for (i, p) in enumerate(new_p)
+        # @show i, p, typeof(p), p.first, p.second
+        # Convert Num to string and compare with symbol name
+        if string(p.first) == string(:k_APP_production)
+            new_p[i] = Pair(Num(:k_APP_production), 100.0) # This is a Pair object
+            @show new_p[i]
+            @show typeof(new_p[i])
+        end
+    end
+    oprob = ODEProblem(sys, prn.u0, tspan, new_p, jac=true, sparse=true)
     # You can access the parameters in an ODEProblem via `oprob.p`, which is typically a NamedTuple or Dict.
     # For example, to access the value of :k_O1_O2_AB42_ISF:
-    @show oprob.p
+    # @show oprob.p
     # Print the differential equations from oprob
     # println("\n=== Differential Equations from oprob ===")
     # for (i, eq) in enumerate(equations(oprob.f.sys))

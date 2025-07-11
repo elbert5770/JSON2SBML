@@ -55,11 +55,32 @@ function main()
         println("Equation $i: $eq")
     end
 
+    new_p = copy(prn.p)
+    for (i, p) in enumerate(new_p)
+        # @show i, p, typeof(p), p.first, p.second
+        # Convert Num to string and compare with symbol name
+        # if string(p.first) == string(:k_APP_production)
+        #     new_p[i] = Pair(Num(:k_APP_production), 10.0) # This is a Pair object
+            
+        #     @show new_p[i]
+        #     @show typeof(new_p[i])
+        # end
+        if string(p.first) == string(:k_O24_O12_AB42)
+            new_p[i] = Pair(Num(:k_O24_O12_AB42), 5.00E-04)
+            @show new_p[i]
+            @show typeof(new_p[i])
+        end
+        if string(p.first) == string(:k_O2_O3_AB42)
+            new_p[i] = Pair(Num(:k_O2_O3_AB42), 0.001368  )
+            @show new_p[i]
+            @show typeof(new_p[i])
+        end
+    end
 
     tspan = (0.0, 100.0*365*24)
     # oprob = ODEProblem(sys, prn.u0, tspan, prn.p)
     # oprob = ODEProblem(sys, prn.u0, tspan, prn.p, jac=true)
-    oprob = ODEProblem(sys, prn.u0, tspan, prn.p, jac=true, sparse=true)
+    oprob = ODEProblem(sys, prn.u0, tspan, new_p, jac=true, sparse=true)
     # Print the differential equations from oprob
     println("\n=== Differential Equations from oprob ===")
     for (i, eq) in enumerate(equations(oprob.f.sys))
@@ -234,9 +255,12 @@ function main()
     # lines!(ax, sol.t/24/365, sol[:APP], label="APP")
     lines!(ax4, sol.t/24/365, sol[:AB42_O1_ISF]./0.2505, label="AB42_O1_ISF")
     lines!(ax4, sol.t/24/365, sol[:AB42_O25_ISF]./0.2505, label="AB42_O25_ISF")
+    lines!(ax4, sol.t/24/365, sol[:AB42_O1_SAS]./0.2505, label="AB42_O1_CSF")
     vlines!(ax4, [70.0], color=:black, linestyle=:dash, linewidth=1.5)
     plot!(ax4, [70], [1.3], color=:blue, markersize=14)
     # plot!(ax4, [70], [5100], color=:orange, markersize=14)
+    df_monomer = DataFrame(CSV.File("Geerts 2023 Figure 3C.csv"))
+    plot!(ax4, df_monomer[:, :time]./24/365, df_monomer[:, :measurement], label="Monomer")
     axislegend(ax4, position=:rt)
     fig
 end

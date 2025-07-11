@@ -1,7 +1,7 @@
 using SBMLImporter
 using Catalyst, GraphMakie, NetworkLayout
-# using GLMakie
-using Plots
+using GLMakie
+# using Plots
 using ModelingToolkit
 using OrdinaryDiffEq
 using DataFrames
@@ -58,7 +58,7 @@ function main()
     # @show AB42_O1_ISF,obs_monomer
     observables = Dict("AB42_O1_ISF" => obs_monomer)
     @show observables
-    p_IDE_conc_ISF = PEtabParameter(:IDE_conc_ISF; lb=0.0001, ub=0.01)
+    p_IDE_conc_ISF = PEtabParameter(:IDE_conc_ISF; lb=0.0001, ub=1.0)
     @show p_IDE_conc_ISF
     pest = [p_IDE_conc_ISF]
     # Catalyst.plot_network(rs)
@@ -70,13 +70,38 @@ function main()
     model_rn = PEtabModel(rs, observables, measurements, pest;parametermap=prn.p)
     petab_prob = PEtabODEProblem(model_rn)
 
-    petab_prob = PEtabODEProblem(model_rn)
+    # petab_prob = PEtabODEProblem(model_rn)
 
     x0 = get_x(petab_prob)
     @show x0
     res = calibrate(petab_prob, x0, IPNewton())
     @show res.xmin
-    display(plot(res, petab_prob; linewidth = 2.0))
+    @show typeof(res)
+    @show fieldnames(typeof(res))
+    @show fieldnames(typeof(petab_prob))
+    # @show typeof(petab_prob)
+    # @show typeof(petab_prob.model)
+    measurements_df = petab_prob.model_info.model.petab_tables[:measurements]
+    t_observed = measurements_df[:, :time]
+    h_observed = measurements_df[:, :measurement]
+    cids = petab_prob.model_info.model.petab_tables[:conditions][!, :conditionId]
+    @show cids
+    # obsids = petab_prob.model_info.model.petab_tables[:observables][!, :observableId]
+    fig = Figure()
+    ax = Axis(fig[1, 1], xlabel="Time", ylabel="Concentration", title="AB42_O1_ISF")
+    for cid in cids
+        sol = PEtab.get_odesol(res.xmin, petab_prob; cid = cid)
+        @show sol
+        
+        lines!(ax, sol.t, sol[:AB42_O1_ISF])
+        vlines!(ax, [70.0], color=:black, linestyle=:dash, linewidth=1.5)
+        # axislegend(ax, position=:rt)
+        
+    end
+    plot!(ax, t_observed, h_observed)
+   
+    display(fig)
+    # display(plot(res, petab_prob; linewidth = 2.0))
     # xlims!(0.0, 100.0)
     
     # ylims!(0.0, 10)
