@@ -296,15 +296,15 @@
       <parameter id="k_O23_O22_AB40_ISF" value="1e-05" units="_1_inv_h" constant="true"/>
       <parameter id="k_O23_O24_AB40_ISF" value="2.17e-05" units="L_per_nano_mol_h" constant="true"/>
       <parameter id="k_O24_O23_AB40_ISF" value="1e-05" units="_1_inv_h" constant="true"/>
-      <parameter id="k_O1_O2_AB42_ISF" value="0.003564" units="L_per_nano_mol_h" constant="true"/>
+      <parameter id="k_O1_O2_AB42_ISF" value="0.003564" constant="true"/>
       <parameter id="k_O2_O1_AB42_ISF" value="45.72" units="_1_inv_h" constant="true"/>
-      <parameter id="k_O2_O3_AB42_ISF" value="0.01368" units="L_per_nano_mol_h" constant="true"/>
+      <parameter id="k_O2_O3_AB42_ISF" value="0.01368" constant="true"/>
       <parameter id="k_O3_O2_AB42_ISF" value="1e-05" units="_1_inv_h" constant="true"/>
-      <parameter id="k_O3_O4_AB42_ISF" value="0.01" units="L_per_nano_mol_h" constant="true"/>
+      <parameter id="k_O3_O4_AB42_ISF" value="0.01" constant="true"/>
       <parameter id="k_O4_O3_AB42_ISF" value="1.98e-05" units="_1_inv_h" constant="true"/>
-      <parameter id="k_O4_O5_AB42_ISF" value="0.00273185" units="L_per_nano_mol_h" constant="true"/>
+      <parameter id="k_O4_O5_AB42_ISF" value="0.00273185" constant="true"/>
       <parameter id="k_O5_O4_AB42_ISF" value="1.99e-05" units="_1_inv_h" constant="true"/>
-      <parameter id="k_O5_O6_AB42_ISF" value="0.00273361" units="L_per_nano_mol_h" constant="true"/>
+      <parameter id="k_O5_O6_AB42_ISF" value="0.00273361" constant="true"/>
       <parameter id="k_O6_O5_AB42_ISF" value="2e-05" units="_1_inv_h" constant="true"/>
       <parameter id="k_O6_O7_AB42_ISF" value="0.000273449" units="L_per_nano_mol_h" constant="true"/>
       <parameter id="k_O7_O6_AB42_ISF" value="2e-05" units="_1_inv_h" constant="true"/>
@@ -359,14 +359,14 @@
       <parameter id="Microglia_high_rate_AB42" value="2.22e-06" units="_1_inv_h" constant="true"/>
       <parameter id="Microglia_low_rate_AB42" value="1.11e-06" units="_1_inv_h" constant="true"/>
       <parameter id="k_O24_O12_AB40_ISF" value="2" units="dimensionless" constant="true"/>
-      <parameter id="k_O24_O12_AB42_ISF" value="100" units="dimensionless" constant="true"/>
+      <parameter id="k_O24_O12_AB42_ISF" value="100" constant="true"/>
       <parameter id="IDE_conc_ISF" value="3" constant="true"/>
       <parameter id="AB40_IDE_Hill_ISF" value="2" units="dimensionless" constant="true"/>
       <parameter id="AB40_IDE_IC50_ISF" value="14.142136" units="dimensionless" constant="true"/>
       <parameter id="AB42_IDE_Hill_ISF" value="2" units="dimensionless" constant="true"/>
       <parameter id="AB42_IDE_IC50_ISF" value="28.635642" units="dimensionless" constant="true"/>
       <parameter id="k_exp_decline_IDE" value="1.15e-05" units="_1_inv_h" constant="true"/>
-      <parameter id="k_APP_production" value="75" units="nanomol_per_L_per_h" constant="true"/>
+      <parameter id="k_APP_production" value="75" constant="true"/>
       <parameter id="AB40_systemic_synthesis_rate" value="1.16" units="nanomol_per_h" constant="true"/>
       <parameter id="AB42_systemic_synthesis_rate" value="1.16" units="nanomol_per_h" constant="true"/>
       <parameter id="k_C99" value="0.666" units="_1_inv_h" constant="true"/>
