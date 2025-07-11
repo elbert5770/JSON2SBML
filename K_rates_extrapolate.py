@@ -25,11 +25,11 @@ References:
 # Calculation of forward and backward Rates 
 # Note no plaque rates 
 # Note no 24 to 12 breakdown
-import jax
-jax.config.update("jax_enable_x64", True)
-import jax.numpy as np
-import matplotlib.pyplot as plt
-from tabulate import tabulate
+# import jax
+# jax.config.update("jax_enable_x64", True)
+# import jax.numpy as np
+# import matplotlib.pyplot as plt
+# from tabulate import tabulate
 
 # Define the equations for forward (KF) and backward (KB) rate extrapolation
 def extrapolate_kf(kf0, kf1, j, Asymp, HillA):
@@ -65,78 +65,7 @@ def extrapolate_kb(kb0, kb1, j, Asymp, HillB, rate_cutoff=None):
     return kj_b
 
 
-def calculate_plaque_rates(baseline_ab40_rate, baseline_ab42_rate, forward_rates_forty, forward_rates_fortytwo, enable_forward_rate_multiplier=True):
-    """
-    Calculate plaque formation rates for oligomers and fibrils.
-    If enable_forward_rate_multiplier is True, rates are multiplied by the forward rate for that aggregate.
-    
-    Args:
-        baseline_ab40_rate: Baseline plaque formation rate for AB40
-        baseline_ab42_rate: Baseline plaque formation rate for AB42
-        forward_rates_forty: Dictionary of forward rates for AB40 aggregates
-        forward_rates_fortytwo: Dictionary of forward rates for AB42 aggregates
-        enable_forward_rate_multiplier: If True, multiply rates by forward rate for that aggregate
-    
-    Returns:
-        Dictionary containing plaque formation rates
-    """
-    plaque_rates = {}
-    
-    # Generate oligomer sizes from 13 to 16 (oligomers that can form plaques)
-    oligomer_sizes = list(range(13, 17))
-    
-    # Generate fibril sizes from 17 to 20 (fibrils that can form plaques)
-    fibril_sizes = list(range(17, 21))
-    
-    # Calculate plaque rates for oligomers
-    for size in oligomer_sizes:
-        if enable_forward_rate_multiplier:
-            # Get the forward rate for this oligomer size
-            forward_rate_key_40 = f'k_O{size-1}_O{size}_forty'
-            forward_rate_key_42 = f'k_O{size-1}_O{size}_fortytwo'
-            
-            if forward_rate_key_40 in forward_rates_forty and forward_rate_key_42 in forward_rates_fortytwo:
-                # Multiply baseline by forward rate
-                plaque_rates[f'k_O{size}_Plaque_forty'] = baseline_ab40_rate * forward_rates_forty[forward_rate_key_40]
-                plaque_rates[f'k_O{size}_Plaque_fortytwo'] = baseline_ab42_rate * forward_rates_fortytwo[forward_rate_key_42]
-            else:
-                # Fallback to baseline rates if forward rates not found
-                print(f"Warning: Forward rates not found for oligomer size {size}, using baseline rates")
-                plaque_rates[f'k_O{size}_Plaque_forty'] = baseline_ab40_rate
-                plaque_rates[f'k_O{size}_Plaque_fortytwo'] = baseline_ab42_rate
-        else:
-            # Use baseline rates
-            plaque_rates[f'k_O{size}_Plaque_forty'] = baseline_ab40_rate
-            plaque_rates[f'k_O{size}_Plaque_fortytwo'] = baseline_ab42_rate
-    
-    # Calculate plaque rates for fibrils
-    for size in fibril_sizes:
-        if enable_forward_rate_multiplier:
-            # Get the forward rate for this fibril size
-            if size == 17:
-                # Special case: transition from oligomer to fibril
-                forward_rate_key_40 = f'k_O{size-1}_F{size}_forty'
-                forward_rate_key_42 = f'k_O{size-1}_F{size}_fortytwo'
-            else:
-                # Normal fibril growth
-                forward_rate_key_40 = f'k_F{size-1}_F{size}_forty'
-                forward_rate_key_42 = f'k_F{size-1}_F{size}_fortytwo'
-            
-            if forward_rate_key_40 in forward_rates_forty and forward_rate_key_42 in forward_rates_fortytwo:
-                # Multiply baseline by forward rate
-                plaque_rates[f'k_F{size}_Plaque_forty'] = size * baseline_ab40_rate * forward_rates_forty[forward_rate_key_40]
-                plaque_rates[f'k_F{size}_Plaque_fortytwo'] = size * baseline_ab42_rate * forward_rates_fortytwo[forward_rate_key_42]
-            else:
-                # Fallback to baseline rates if forward rates not found
-                print(f"Warning: Forward rates not found for fibril size {size}, using baseline rates")
-                plaque_rates[f'k_F{size}_Plaque_forty'] = baseline_ab40_rate
-                plaque_rates[f'k_F{size}_Plaque_fortytwo'] = baseline_ab42_rate
-        else:
-            # Use baseline rates
-            plaque_rates[f'k_F{size}_Plaque_forty'] = baseline_ab40_rate
-            plaque_rates[f'k_F{size}_Plaque_fortytwo'] = baseline_ab42_rate
-    
-    return plaque_rates
+
 
 def convert_forward_rate(rate_M_s):
     """Convert from M⁻¹s⁻¹ to nM⁻¹h⁻¹"""
@@ -172,10 +101,6 @@ def calculate_k_rates(
     # Rate cutoff
     rate_cutoff=0.00001,
     
-    # Plaque formation parameters
-    baseline_ab40_plaque_rate=0.000005,  # Baseline plaque formation rate for AB40
-    baseline_ab42_plaque_rate=0.00005,   # Baseline plaque formation rate for AB42
-    enable_plaque_forward_rate_multiplier=True   # If True, multiply plaque rates by forward rate for that aggregate
 ):
     """
     Calculate forward and backward rates for both AB40 and AB42 oligomers
@@ -217,13 +142,7 @@ def calculate_k_rates(
         Hill coefficient for AB42 backward rates
     rate_cutoff: float
         Minimum allowed rate for backward reactions
-    baseline_ab40_plaque_rate: float
-        Baseline plaque formation rate for AB40
-    baseline_ab42_plaque_rate: float
-        Baseline plaque formation rate for AB42
-    enable_plaque_forward_rate_multiplier: bool
-        If True, multiply plaque rates by forward rate for that aggregate
-    
+
     Returns:
     --------
     dict
@@ -268,80 +187,13 @@ def calculate_k_rates(
     
     # Store rates with appropriate prefixes (O for oligomers, F for fibrils)
     for i, size in enumerate(oligomer_sizes):
-        if size < 17:
-            # Oligomer rates (size < 17)
-            rates[f'k_O{size-1}_O{size}_forty'] = kf_forty[i]
-            rates[f'k_O{size}_O{size-1}_forty'] = kb_forty[i]
-            rates[f'k_O{size-1}_O{size}_fortytwo'] = kf_fortytwo[i]
-            rates[f'k_O{size}_O{size-1}_fortytwo'] = kb_fortytwo[i]
-        elif size == 17:
-            # Special case: transition between oligomer and fibril
-            rates[f'k_O{size-1}_F{size}_forty'] = kf_forty[i]
-            rates[f'k_F{size}_O{size-1}_forty'] = kb_forty[i]
-            rates[f'k_O{size-1}_F{size}_fortytwo'] = kf_fortytwo[i]
-            rates[f'k_F{size}_O{size-1}_fortytwo'] = kb_fortytwo[i]
-        else:
-            # Fibril rates (size >= 17)
-            rates[f'k_F{size-1}_F{size}_forty'] = kf_forty[i]
-            rates[f'k_F{size}_F{size-1}_forty'] = kb_forty[i]
-            rates[f'k_F{size-1}_F{size}_fortytwo'] = kf_fortytwo[i]
-            rates[f'k_F{size}_F{size-1}_fortytwo'] = kb_fortytwo[i]
-    
-    # Create separate dictionaries for forward rates only (needed for plaque calculation)
-    forward_rates_forty = {}
-    forward_rates_fortytwo = {}
-    
-    for i, size in enumerate(oligomer_sizes):
-        if size < 17:
-            # Oligomer forward rates
-            forward_rates_forty[f'k_O{size-1}_O{size}_forty'] = kf_forty[i]
-            forward_rates_fortytwo[f'k_O{size-1}_O{size}_fortytwo'] = kf_fortytwo[i]
-        elif size == 17:
-            # Transition forward rates
-            forward_rates_forty[f'k_O{size-1}_F{size}_forty'] = kf_forty[i]
-            forward_rates_fortytwo[f'k_O{size-1}_F{size}_fortytwo'] = kf_fortytwo[i]
-        else:
-            # Fibril forward rates
-            forward_rates_forty[f'k_F{size-1}_F{size}_forty'] = kf_forty[i]
-            forward_rates_fortytwo[f'k_F{size-1}_F{size}_fortytwo'] = kf_fortytwo[i]
-    
-    # Calculate and add plaque formation rates
-    plaque_rates = calculate_plaque_rates(
-        baseline_ab40_plaque_rate, 
-        baseline_ab42_plaque_rate, 
-        forward_rates_forty,
-        forward_rates_fortytwo,
-        enable_forward_rate_multiplier=enable_plaque_forward_rate_multiplier
-    )
-    rates.update(plaque_rates)
-    
-    # Print plaque rate information if forward rate multiplier is enabled
-    if enable_plaque_forward_rate_multiplier:
-        #print(f"\nPlaque formation rates with forward rate multiplier enabled:")
-        #print(f"Baseline AB40 rate: {baseline_ab40_plaque_rate:.6f} L/(nM·h)")
-        #print(f"Baseline AB42 rate: {baseline_ab42_plaque_rate:.6f} L/(nM·h)")
-        #print("\nExample plaque rates (rate = baseline × forward_rate):")
-        example_sizes = [13, 16, 17, 20]
-        for size in example_sizes:
-            if size < 17:
-                key_40 = f'k_O{size}_Plaque_forty'
-                key_42 = f'k_O{size}_Plaque_fortytwo'
-                forward_key_40 = f'k_O{size-1}_O{size}_forty'
-                forward_key_42 = f'k_O{size-1}_O{size}_fortytwo'
-            else:
-                key_40 = f'k_F{size}_Plaque_forty'
-                key_42 = f'k_F{size}_Plaque_fortytwo'
-                forward_key_40 = f'k_F{size-1}_F{size}_forty'
-                forward_key_42 = f'k_F{size-1}_F{size}_fortytwo'
-            
-            if key_40 in plaque_rates and key_42 in plaque_rates:
-                forward_rate_40 = forward_rates_forty.get(forward_key_40, 0)
-                forward_rate_42 = forward_rates_fortytwo.get(forward_key_42, 0)
-                #print(f"  Size {size}: AB40 = {plaque_rates[key_40]:.6f} (forward_rate = {forward_rate_40:.6f}), AB42 = {plaque_rates[key_42]:.6f} (forward_rate = {forward_rate_42:.6f})")
-    #else:
-        #print(f"\nPlaque formation rates using baseline values (no forward rate multiplier):")
-        #print(f"AB40 rate: {baseline_ab40_plaque_rate:.6f} L/(nM·h)")
-        #print(f"AB42 rate: {baseline_ab42_plaque_rate:.6f} L/(nM·h)")
+        
+        # Oligomer rates (size < 17)
+        rates[f'k_O{size-1}_O{size}_AB40_ISF'] = kf_forty[i]
+        rates[f'k_O{size}_O{size-1}_AB40_ISF'] = kb_forty[i]
+        rates[f'k_O{size-1}_O{size}_AB42_ISF'] = kf_fortytwo[i]
+        rates[f'k_O{size}_O{size-1}_AB42_ISF'] = kb_fortytwo[i]
+
     
     return rates
 
@@ -359,28 +211,19 @@ def calculate_gain_factors(rates):
     
     # Calculate gain factors for sizes 4 to 24
     for size in range(4, 25):
-        if size < 17:
             # Oligomer gain factors
-            gain_factors[f'gain_O{size}_forty'] = rates[f'k_O{size-1}_O{size}_forty'] / rates[f'k_O{size}_O{size-1}_forty']
-            gain_factors[f'gain_O{size}_fortytwo'] = rates[f'k_O{size-1}_O{size}_fortytwo'] / rates[f'k_O{size}_O{size-1}_fortytwo']
-        elif size == 17:
-            # Transition gain factors
-            gain_factors[f'gain_F{size}_forty'] = rates[f'k_O{size-1}_F{size}_forty'] / rates[f'k_F{size}_O{size-1}_forty']
-            gain_factors[f'gain_F{size}_fortytwo'] = rates[f'k_O{size-1}_F{size}_fortytwo'] / rates[f'k_F{size}_O{size-1}_fortytwo']
-        else:
-            # Fibril gain factors
-            gain_factors[f'gain_F{size}_forty'] = rates[f'k_F{size-1}_F{size}_forty'] / rates[f'k_F{size}_F{size-1}_forty']
-            gain_factors[f'gain_F{size}_fortytwo'] = rates[f'k_F{size-1}_F{size}_fortytwo'] / rates[f'k_F{size}_F{size-1}_fortytwo']
-    
+        gain_factors[f'gain_O{size}_AB40_ISF'] = rates[f'k_O{size-1}_O{size}_AB40_ISF'] / rates[f'k_O{size}_O{size-1}_AB40_ISF']
+        gain_factors[f'gain_O{size}_AB42_ISF'] = rates[f'k_O{size-1}_O{size}_AB42_ISF'] / rates[f'k_O{size}_O{size-1}_AB42_ISF']
+
     return gain_factors
 
 if __name__ == "__main__":
     # Example usage with default parameters
     rates = calculate_k_rates()
-    
+    print(rates)
     # Calculate gain factors
     gain_factors = calculate_gain_factors(rates)
-    
+    print(gain_factors)
     # Print the calculated rates
     #print("\nCalculated rate constants:")
     #for size in range(4, 25):
@@ -411,66 +254,66 @@ if __name__ == "__main__":
             #print(f"AB42 gain factor: {gain_factors[f'gain_F{size}_fortytwo']:.3e}")
         
     
-    # Optional: Plot the rates to visualize the extrapolation
-    sizes = list(range(4, 25))
+    # # Optional: Plot the rates to visualize the extrapolation
+    # sizes = list(range(4, 25))
     
-    # Create a more compact figure
-    plt.figure(figsize=(10, 6))
-    plt.rcParams.update({'font.size': 10})
+    # # Create a more compact figure
+    # plt.figure(figsize=(10, 6))
+    # plt.rcParams.update({'font.size': 10})
     
-    # Plot AB40 rates
-    plt.subplot(2, 1, 1)
+    # # Plot AB40 rates
+    # plt.subplot(2, 1, 1)
     
-    # Plot AB40 rates with appropriate naming
-    forward_rates_40 = []
-    backward_rates_40 = []
-    for size in sizes:
-        if size < 17:
-            forward_rates_40.append(rates[f'k_O{size-1}_O{size}_forty'])
-            backward_rates_40.append(rates[f'k_O{size}_O{size-1}_forty'])
-        elif size == 17:
-            forward_rates_40.append(rates[f'k_O{size-1}_F{size}_forty'])
-            backward_rates_40.append(rates[f'k_F{size}_O{size-1}_forty'])
-        else:
-            forward_rates_40.append(rates[f'k_F{size-1}_F{size}_forty'])
-            backward_rates_40.append(rates[f'k_F{size}_F{size-1}_forty'])
+    # # Plot AB40 rates with appropriate naming
+    # forward_rates_40 = []
+    # backward_rates_40 = []
+    # for size in sizes:
+    #     if size < 17:
+    #         forward_rates_40.append(rates[f'k_O{size-1}_O{size}_forty'])
+    #         backward_rates_40.append(rates[f'k_O{size}_O{size-1}_forty'])
+    #     elif size == 17:
+    #         forward_rates_40.append(rates[f'k_O{size-1}_F{size}_forty'])
+    #         backward_rates_40.append(rates[f'k_F{size}_O{size-1}_forty'])
+    #     else:
+    #         forward_rates_40.append(rates[f'k_F{size-1}_F{size}_forty'])
+    #         backward_rates_40.append(rates[f'k_F{size}_F{size-1}_forty'])
     
-    plt.plot(sizes, forward_rates_40, 'b-', linewidth=2.5, label='Forward')
-    plt.plot(sizes, backward_rates_40, 'b--', linewidth=2.5, label='Backward')
-    plt.axvline(x=17, color='k', linestyle=':', linewidth=1.5, label='Transition')
-    plt.yscale('log')
-    plt.ylabel('Rate (nM⁻¹h⁻¹ or h⁻¹)', fontsize=11)
-    plt.title('AB40 Rate Constants', fontsize=12)
-    plt.legend(fontsize=10, loc='upper right')
-    plt.grid(True, alpha=0.3)
+    # plt.plot(sizes, forward_rates_40, 'b-', linewidth=2.5, label='Forward')
+    # plt.plot(sizes, backward_rates_40, 'b--', linewidth=2.5, label='Backward')
+    # plt.axvline(x=17, color='k', linestyle=':', linewidth=1.5, label='Transition')
+    # plt.yscale('log')
+    # plt.ylabel('Rate (nM⁻¹h⁻¹ or h⁻¹)', fontsize=11)
+    # plt.title('AB40 Rate Constants', fontsize=12)
+    # plt.legend(fontsize=10, loc='upper right')
+    # plt.grid(True, alpha=0.3)
     
-    # Plot AB42 rates
-    plt.subplot(2, 1, 2)
+    # # Plot AB42 rates
+    # plt.subplot(2, 1, 2)
     
-    # Plot AB42 rates with appropriate naming
-    forward_rates_42 = []
-    backward_rates_42 = []
-    for size in sizes:
-        if size < 17:
-            forward_rates_42.append(rates[f'k_O{size-1}_O{size}_fortytwo'])
-            backward_rates_42.append(rates[f'k_O{size}_O{size-1}_fortytwo'])
-        elif size == 17:
-            forward_rates_42.append(rates[f'k_O{size-1}_F{size}_fortytwo'])
-            backward_rates_42.append(rates[f'k_F{size}_O{size-1}_fortytwo'])
-        else:
-            forward_rates_42.append(rates[f'k_F{size-1}_F{size}_fortytwo'])
-            backward_rates_42.append(rates[f'k_F{size}_F{size-1}_fortytwo'])
+    # # Plot AB42 rates with appropriate naming
+    # forward_rates_42 = []
+    # backward_rates_42 = []
+    # for size in sizes:
+    #     if size < 17:
+    #         forward_rates_42.append(rates[f'k_O{size-1}_O{size}_fortytwo'])
+    #         backward_rates_42.append(rates[f'k_O{size}_O{size-1}_fortytwo'])
+    #     elif size == 17:
+    #         forward_rates_42.append(rates[f'k_O{size-1}_F{size}_fortytwo'])
+    #         backward_rates_42.append(rates[f'k_F{size}_O{size-1}_fortytwo'])
+    #     else:
+    #         forward_rates_42.append(rates[f'k_F{size-1}_F{size}_fortytwo'])
+    #         backward_rates_42.append(rates[f'k_F{size}_F{size-1}_fortytwo'])
     
-    plt.plot(sizes, forward_rates_42, 'r-', linewidth=2.5, label='Forward')
-    plt.plot(sizes, backward_rates_42, 'r--', linewidth=2.5, label='Backward')
-    plt.axvline(x=17, color='k', linestyle=':', linewidth=1.5, label='Transition')
-    plt.yscale('log')
-    plt.xlabel('Size', fontsize=11)
-    plt.ylabel('Rate (nM⁻¹h⁻¹ or h⁻¹)', fontsize=11)
-    plt.title('AB42 Rate Constants', fontsize=12)
-    plt.legend(fontsize=10, loc='upper right')
-    plt.grid(True, alpha=0.3)
+    # plt.plot(sizes, forward_rates_42, 'r-', linewidth=2.5, label='Forward')
+    # plt.plot(sizes, backward_rates_42, 'r--', linewidth=2.5, label='Backward')
+    # plt.axvline(x=17, color='k', linestyle=':', linewidth=1.5, label='Transition')
+    # plt.yscale('log')
+    # plt.xlabel('Size', fontsize=11)
+    # plt.ylabel('Rate (nM⁻¹h⁻¹ or h⁻¹)', fontsize=11)
+    # plt.title('AB42 Rate Constants', fontsize=12)
+    # plt.legend(fontsize=10, loc='upper right')
+    # plt.grid(True, alpha=0.3)
     
-    plt.tight_layout(pad=1.5)
-    plt.savefig('rate_extrapolation.png', dpi=300, bbox_inches='tight')
-    plt.show()
+    # plt.tight_layout(pad=1.5)
+    # plt.savefig('rate_extrapolation.png', dpi=300, bbox_inches='tight')
+    # plt.show()
