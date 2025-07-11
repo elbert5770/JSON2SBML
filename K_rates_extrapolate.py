@@ -32,7 +32,7 @@ References:
 # from tabulate import tabulate
 
 # Define the equations for forward (KF) and backward (KB) rate extrapolation
-def extrapolate_kf(kf0, kf1, j, Asymp, HillA):
+def extrapolate_kf(kf0, kf1, j, Asymp, HillA,rate_cutoff=None):
     """
     Extrapolate forward rate constants for higher order oligomers
     kf0: Rate constant for O1->O2 (known)
@@ -43,6 +43,8 @@ def extrapolate_kf(kf0, kf1, j, Asymp, HillA):
     """
     KF = (kf1 - Asymp * kf1) / (kf0 - kf1)
     kj_f = (kf0 - Asymp * kf1) * (KF / (j**HillA + KF)) + Asymp * kf1
+    if rate_cutoff is not None and kj_f < rate_cutoff:
+        kj_f = rate_cutoff
     return kj_f
 
 def extrapolate_kb(kb0, kb1, j, Asymp, HillB, rate_cutoff=None):
@@ -79,27 +81,18 @@ def convert_backward_rate(rate_s):
 
 def calculate_k_rates(
     # Original rates from literature (M⁻¹s⁻¹ for forward, s⁻¹ for backward)
-    original_kf0_forty=0.5 * 10**2,  # AB40 monomer to dimer
-    original_kf0_fortytwo=9.9 * 10**2,  # AB42 monomer to dimer
-    original_kf1_forty=20.0,  # AB40 dimer to trimer
-    original_kf1_fortytwo=38.0,  # AB42 dimer to trimer
-    original_kb0_forty=2.7 * 10**-3,  # AB40 dimer to monomer
-    original_kb0_fortytwo=12.7 * 10**-3,  # AB42 dimer to monomer
-    original_kb1_forty=0.00001 / 3600,  # AB40 trimer to dimer
-    original_kb1_fortytwo=0.00001 / 3600,  # AB42 trimer to dimer
+    # original_kf0_forty=0.5 * 10**2,  # AB40 monomer to dimer
+    k_O1_O2_AB42_ISF=9.9 * 10**2,  # AB42 monomer to dimer
+    # original_kf1_forty=20.0,  # AB40 dimer to trimer
+    k_O2_O3_AB42_ISF=38.0,  # AB42 dimer to trimer
+    # original_kb0_forty=2.7 * 10**-3,  # AB40 dimer to monomer
+    k_O2_O1_AB42_ISF=12.7 * 10**-3,  # AB42 dimer to monomer
+    # original_kb1_forty=0.00001 / 3600,  # AB40 trimer to dimer
+    k_O3_O2_AB42_ISF=0.00001 / 3600,  # AB42 trimer to dimer
     
     # Hill coefficients and asymptotic values
-    forAsymp40=0.3,  # Asymptotic value for AB40 forward rates
-    forAsymp42=2.0,  # Asymptotic value for AB42 forward rates
-    backAsymp40=0.3,  # Asymptotic value for AB40 backward rates
-    backAsymp42=2.0,  # Asymptotic value for AB42 backward rates
-    forHill40=2.0,    # Hill coefficient for AB40 forward rates
-    forHill42=3.0,    # Hill coefficient for AB42 forward rates
-    BackHill40=2.5,   # Hill coefficient for AB40 backward rates
-    BackHill42=3.0,   # Hill coefficient for AB42 backward rates
+    # forAsymp40=0.3,  # Asymptotic value for AB40 forward rates
     
-    # Rate cutoff
-    rate_cutoff=0.00001,
     
 ):
     """
@@ -112,17 +105,17 @@ def calculate_k_rates(
         AB40 monomer to dimer forward rate (M⁻¹s⁻¹)
     original_kf0_fortytwo: float
         AB42 monomer to dimer forward rate (M⁻¹s⁻¹)
-    original_kf1_forty: float
+    k_O1_O2_AB42_ISF: float
         AB40 dimer to trimer forward rate (M⁻¹s⁻¹)
-    original_kf1_fortytwo: float
+    k_O2_O3_AB42_ISF: float
         AB42 dimer to trimer forward rate (M⁻¹s⁻¹)
-    original_kb0_forty: float
+    k_O2_O1_AB42_ISF: float
         AB40 dimer to monomer backward rate (s⁻¹)
-    original_kb0_fortytwo: float
+    k_O3_O2_AB42_ISF: float
         AB42 dimer to monomer backward rate (s⁻¹)
-    original_kb1_forty: float
+    k_O3_O2_AB42_ISF: float
         AB40 trimer to dimer backward rate (s⁻¹)
-    original_kb1_fortytwo: float
+    k_O3_O2_AB42_ISF: float
         AB42 trimer to dimer backward rate (s⁻¹)
     forAsymp40: float
         Asymptotic value for AB40 forward rates
@@ -148,39 +141,49 @@ def calculate_k_rates(
     dict
         Dictionary containing all extrapolated rate constants including plaque rates
     """
-    # Convert rates to appropriate units
-    kf0_forty = convert_forward_rate(original_kf0_forty)  
-    kb0_forty = convert_backward_rate(original_kb0_forty)
-    kf0_fortytwo = convert_forward_rate(original_kf0_fortytwo)
-    kb0_fortytwo = convert_backward_rate(original_kb0_fortytwo)
-    kf1_forty = convert_forward_rate(original_kf1_forty)
-    kb1_forty = convert_backward_rate(original_kb1_forty)
-    kf1_fortytwo = convert_forward_rate(original_kf1_fortytwo)
-    kb1_fortytwo = convert_backward_rate(original_kb1_fortytwo)
+    forAsymp42=2.0  # Asymptotic value for AB42 forward rates
+    # backAsymp40=0.3,  # Asymptotic value for AB40 backward rates
+    backAsymp42=2.0  # Asymptotic value for AB42 backward rates
+    # forHill40=2.0,    # Hill coefficient for AB40 forward rates
+    forHill42=3.0   # Hill coefficient for AB42 forward rates
+    # BackHill40=2.5,   # Hill coefficient for AB40 backward rates
+    BackHill42=3.0   # Hill coefficient for AB42 backward rates
     
-    # Create and print conversion table
-    #print("\nRate Constant Unit Conversion:")
-    table_data = [
-        ["k+12 (Aβ40)", f"{original_kf0_forty:.1f} M⁻¹s⁻¹", f"{kf0_forty:.6f} nM⁻¹h⁻¹"],
-        ["k-12 (Aβ40)", f"{original_kb0_forty:.3f} s⁻¹", f"{kb0_forty:.6f} h⁻¹"],
-        ["k+23 (Aβ40)", f"{original_kf1_forty:.1f} M⁻¹s⁻¹", f"{kf1_forty:.6f} nM⁻¹h⁻¹"],
-        ["k-23 (Aβ40)", f"{original_kb1_forty:.3f} s⁻¹", f"{kb1_forty:.6f} h⁻¹"],
-        ["k+12 (Aβ42)", f"{original_kf0_fortytwo:.1f} M⁻¹s⁻¹", f"{kf0_fortytwo:.6f} nM⁻¹h⁻¹"],
-        ["k-12 (Aβ42)", f"{original_kb0_fortytwo:.3f} s⁻¹", f"{kb0_fortytwo:.6f} h⁻¹"],
-        ["k+23 (Aβ42)", f"{original_kf1_fortytwo:.1f} M⁻¹s⁻¹", f"{kf1_fortytwo:.6f} nM⁻¹h⁻¹"],
-        ["k-23 (Aβ42)", f"{original_kb1_fortytwo:.3f} s⁻¹", f"{kb1_fortytwo:.6f} h⁻¹"]
-    ]
-    headers = ["Rate Constant", "Original Value", "Converted Value"]
+    # Rate cutoff
+    rate_cutoff=0.00001
+    # Convert rates to appropriate units
+    # kf0_forty = convert_forward_rate(original_kf0_forty)  
+    # kb0_forty = convert_backward_rate(original_kb0_forty)
+    # kf0_fortytwo = convert_forward_rate(original_kf0_fortytwo)
+    # kb0_fortytwo = convert_backward_rate(original_kb0_fortytwo)
+    # # kf1_forty = convert_forward_rate(original_kf1_forty)
+    # # kb1_forty = convert_backward_rate(original_kb1_forty)
+    # kf1_fortytwo = convert_forward_rate(original_kf1_fortytwo)
+    # kb1_fortytwo = convert_backward_rate(original_kb1_fortytwo)
+    
+    # # Create and print conversion table
+    # #print("\nRate Constant Unit Conversion:")
+    # table_data = [
+    #     ["k+12 (Aβ40)", f"{original_kf0_forty:.1f} M⁻¹s⁻¹", f"{kf0_forty:.6f} nM⁻¹h⁻¹"],
+    #     ["k-12 (Aβ40)", f"{original_kb0_forty:.3f} s⁻¹", f"{kb0_forty:.6f} h⁻¹"],
+    #     ["k+23 (Aβ40)", f"{original_kf1_forty:.1f} M⁻¹s⁻¹", f"{kf1_forty:.6f} nM⁻¹h⁻¹"],
+    #     ["k-23 (Aβ40)", f"{original_kb1_forty:.3f} s⁻¹", f"{kb1_forty:.6f} h⁻¹"],
+    #     ["k+12 (Aβ42)", f"{original_kf0_fortytwo:.1f} M⁻¹s⁻¹", f"{kf0_fortytwo:.6f} nM⁻¹h⁻¹"],
+    #     ["k-12 (Aβ42)", f"{original_kb0_fortytwo:.3f} s⁻¹", f"{kb0_fortytwo:.6f} h⁻¹"],
+    #     ["k+23 (Aβ42)", f"{original_kf1_fortytwo:.1f} M⁻¹s⁻¹", f"{kf1_fortytwo:.6f} nM⁻¹h⁻¹"],
+    #     ["k-23 (Aβ42)", f"{original_kb1_fortytwo:.3f} s⁻¹", f"{kb1_fortytwo:.6f} h⁻¹"]
+    # ]
+    # headers = ["Rate Constant", "Original Value", "Converted Value"]
     #print(tabulate(table_data, headers, tablefmt="grid"))
     
     # Generate oligomer sizes from 4 to 24
     oligomer_sizes = list(range(4, 25))
 
     # Calculate rates for each oligomer size
-    kf_forty = [extrapolate_kf(kf0_forty, kf1_forty, size, forAsymp40, forHill40) for size in oligomer_sizes]
-    kb_forty = [extrapolate_kb(kb0_forty, kb1_forty, size, backAsymp40, BackHill40, rate_cutoff) for size in oligomer_sizes]
-    kf_fortytwo = [extrapolate_kf(kf0_fortytwo, kf1_fortytwo, size, forAsymp42, forHill42) for size in oligomer_sizes]
-    kb_fortytwo = [extrapolate_kb(kb0_fortytwo, kb1_fortytwo, size, backAsymp42, BackHill42, rate_cutoff) for size in oligomer_sizes]
+    # kf_forty = [extrapolate_kf(kf0_forty, kf1_forty, size, forAsymp40, forHill40) for size in oligomer_sizes]
+    # kb_forty = [extrapolate_kb(kb0_forty, kb1_forty, size, backAsymp40, BackHill40, rate_cutoff) for size in oligomer_sizes]
+    kf_fortytwo = [extrapolate_kf(k_O1_O2_AB42_ISF, k_O2_O3_AB42_ISF, size, forAsymp42, forHill42, rate_cutoff) for size in oligomer_sizes]
+    kb_fortytwo = [extrapolate_kb(k_O2_O1_AB42_ISF, k_O3_O2_AB42_ISF, size, backAsymp42, BackHill42, rate_cutoff) for size in oligomer_sizes]
     
     # Create dictionary to store the rates with proper naming convention
     rates = {}
@@ -189,8 +192,8 @@ def calculate_k_rates(
     for i, size in enumerate(oligomer_sizes):
         
         # Oligomer rates (size < 17)
-        rates[f'k_O{size-1}_O{size}_AB40_ISF'] = kf_forty[i]
-        rates[f'k_O{size}_O{size-1}_AB40_ISF'] = kb_forty[i]
+        # rates[f'k_O{size-1}_O{size}_AB40_ISF'] = kf_forty[i]
+        # rates[f'k_O{size}_O{size-1}_AB40_ISF'] = kb_forty[i]
         rates[f'k_O{size-1}_O{size}_AB42_ISF'] = kf_fortytwo[i]
         rates[f'k_O{size}_O{size-1}_AB42_ISF'] = kb_fortytwo[i]
 
@@ -212,7 +215,7 @@ def calculate_gain_factors(rates):
     # Calculate gain factors for sizes 4 to 24
     for size in range(4, 25):
             # Oligomer gain factors
-        gain_factors[f'gain_O{size}_AB40_ISF'] = rates[f'k_O{size-1}_O{size}_AB40_ISF'] / rates[f'k_O{size}_O{size-1}_AB40_ISF']
+        # gain_factors[f'gain_O{size}_AB40_ISF'] = rates[f'k_O{size-1}_O{size}_AB40_ISF'] / rates[f'k_O{size}_O{size-1}_AB40_ISF']
         gain_factors[f'gain_O{size}_AB42_ISF'] = rates[f'k_O{size-1}_O{size}_AB42_ISF'] / rates[f'k_O{size}_O{size-1}_AB42_ISF']
 
     return gain_factors

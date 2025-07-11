@@ -3,6 +3,86 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.optimize import minimize
+from K_rates_extrapolate import calculate_k_rates
+
+def calculate_suvr_at_70_years(result, suvr_func):
+    """
+    Find the model time points closest to 70*365*24 and interpolate AB42 oligomer values
+    to calculate SUVR at that specific timepoint.
+    
+    Parameters:
+    result: Simulation result containing time series data
+    suvr_func: SUVR calculation function
+    
+    Returns:
+    dict: Dictionary containing interpolated values and calculated SUVR
+    """
+    target_time = 70 * 365 * 24  # 70 years in hours
+    
+    # Find the two closest time points
+    model_times = result['time']
+    time_diffs = np.abs(model_times - target_time)
+    closest_indices = np.argsort(time_diffs)[:2]
+    
+    # Get the two closest time points
+    t1, t2 = model_times[closest_indices[0]], model_times[closest_indices[1]]
+    print(f"Closest time points to 70 years: {t1/24/365:.2f} years and {t2/24/365:.2f} years")
+    
+    # Interpolate values for all AB42 oligomers (O2 through O25)
+    interpolated_values = {}
+    
+    for i in range(2, 26):  # O2 through O25
+        species_name = f'[AB42_O{i}_ISF]'
+        if species_name in result.colnames:
+            v1, v2 = result[species_name][closest_indices[0]], result[species_name][closest_indices[1]]
+            
+            # Linear interpolation
+            if t1 != t2:
+                interpolated_value = v1 + (v2 - v1) * (target_time - t1) / (t2 - t1)
+            else:
+                interpolated_value = v1
+                
+            interpolated_values[species_name] = interpolated_value
+            # print(f"{species_name}: {interpolated_value:.6f}")
+        else:
+            # If species not available, set to 0
+            interpolated_values[species_name] = 0.0
+            print(f"{species_name}: Not available in simulation result")
+    
+    # Calculate oligomer weighted sum (O2-O17)
+    oligomer_weighted_sum = interpolated_values['[AB42_O2_ISF]'] * 1
+    for i in range(3, 18):
+        oligomer_weighted_sum += interpolated_values[f'[AB42_O{i}_ISF]'] * (i-1)
+    
+    # Calculate proto weighted sum (O18-O24)
+    proto_weighted_sum = interpolated_values['[AB42_O18_ISF]'] * 17
+    for i in range(19, 25):
+        proto_weighted_sum += interpolated_values[f'[AB42_O{i}_ISF]'] * (i-1)
+    
+    # Get plaque value (O25)
+    plaque_sum = interpolated_values['[AB42_O25_ISF]']
+    
+    # Calculate SUVR at 70 years
+    suvr_at_70 = suvr_func(oligomer_weighted_sum, proto_weighted_sum, plaque_sum)
+    
+    # Ensure SUVR is a scalar value
+    if hasattr(suvr_at_70, '__len__'):
+        suvr_at_70 = suvr_at_70[0] if len(suvr_at_70) > 0 else 1.0
+    
+    print(f"\nCalculated values at 70 years:")
+    print(f"Oligomer weighted sum: {oligomer_weighted_sum:.6f}")
+    print(f"Proto weighted sum: {proto_weighted_sum:.6f}")
+    print(f"Plaque sum: {plaque_sum:.6f}")
+    print(f"SUVR at 70 years: {suvr_at_70:.6f}")
+    
+    return {
+        'interpolated_values': interpolated_values,
+        'oligomer_weighted_sum': oligomer_weighted_sum,
+        'proto_weighted_sum': proto_weighted_sum,
+        'plaque_sum': plaque_sum,
+        'suvr_at_70': suvr_at_70,
+        'closest_times': [t1, t2]
+    }
 
 def run_optimization_and_simulation():
     """
@@ -17,17 +97,41 @@ def run_optimization_and_simulation():
     # Objective function for optimization
     def create_objective(csv_data, r):
         def objective(params):
-            IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, IDE_conc_ISF_val = params
+            IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, k_O2_O3_AB42_ISF_val, k_O2_O1_AB42_ISF_val, k_O3_O2_AB42_ISF_val, IDE_conc_ISF_val, k_O24_O12_AB42_ISF_val, Baseline_AB42_O_P_val = params
 
             # Reload model and set parameters
             r.reset()
             r['Microglia'] = IDE_activity_ISF_val
             r['k_APP_production'] = k_APP_production_val
             r['k_O1_O2_AB42_ISF'] = k_O1_O2_AB42_ISF_val
+            r['k_O2_O3_AB42_ISF'] = k_O2_O3_AB42_ISF_val
+            r['k_O2_O1_AB42_ISF'] = k_O2_O1_AB42_ISF_val
+            r['k_O3_O2_AB42_ISF'] = k_O3_O2_AB42_ISF_val
             r['IDE_conc_ISF'] = IDE_conc_ISF_val
+            r['k_O24_O12_AB42_ISF'] = k_O24_O12_AB42_ISF_val
+            r['Baseline_AB42_O_P'] = Baseline_AB42_O_P_val
+            rates = calculate_k_rates(k_O1_O2_AB42_ISF_val, k_O2_O3_AB42_ISF_val, k_O2_O1_AB42_ISF_val, k_O3_O2_AB42_ISF_val)
+            # print(rates)
+            oligomer_sizes = list(range(4, 25))
+            for i, size in enumerate(oligomer_sizes):
+        
+                # Oligomer rates (size < 17)
+                # rates[f'k_O{size-1}_O{size}_AB40_ISF'] = kf_forty[i]
+                # rates[f'k_O{size}_O{size-1}_AB40_ISF'] = kb_forty[i]
+                r[f'k_O{size-1}_O{size}_AB42_ISF'] = rates[f'k_O{size-1}_O{size}_AB42_ISF'] 
+                r[f'k_O{size}_O{size-1}_AB42_ISF'] = rates[f'k_O{size}_O{size-1}_AB42_ISF']
+            
             # Simulate
-            result = r.simulate(0, 20*365*24, 1000)
-            result = r.simulate(20*365*24, 100*365*24, 1000, ['time', '[AB42_O1_ISF]'])
+            try:
+                result = r.simulate(0, 20*365*24, 1000)
+            except:
+                print("Error in simulation")
+                return 100
+            try:
+                result = r.simulate(20*365*24, 100*365*24, 1000, ['time', '[AB42_O1_ISF]', '[AB42_O2_ISF]', '[AB42_O3_ISF]', '[AB42_O4_ISF]', '[AB42_O5_ISF]', '[AB42_O6_ISF]', '[AB42_O7_ISF]', '[AB42_O8_ISF]', '[AB42_O9_ISF]', '[AB42_O10_ISF]', '[AB42_O11_ISF]', '[AB42_O12_ISF]', '[AB42_O13_ISF]', '[AB42_O14_ISF]', '[AB42_O15_ISF]', '[AB42_O16_ISF]', '[AB42_O17_ISF]', '[AB42_O18_ISF]', '[AB42_O19_ISF]', '[AB42_O20_ISF]', '[AB42_O21_ISF]', '[AB42_O22_ISF]', '[AB42_O23_ISF]', '[AB42_O24_ISF]', '[AB42_O25_ISF]'])
+            except:
+                print("Error in simulation")
+                return 100
             model_times = result['time']
             model_values = result['[AB42_O1_ISF]']
 
@@ -37,8 +141,13 @@ def run_optimization_and_simulation():
             model_at_data_times = interpolate_model_to_data_times(model_times, model_values, data_times)
             # print(model_at_data_times, data_measurements)
             # Compute mean squared error
-            mse = np.mean((model_at_data_times - data_measurements) ** 2)
-            print(mse, IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, IDE_conc_ISF_val)
+            mse = np.sum((model_at_data_times - data_measurements) ** 2)
+            
+            suvr_70_results = calculate_suvr_at_70_years(result, suvr)
+            suvr_70_mse = suvr_70_results['suvr_at_70']
+            mse = mse + ((suvr_70_mse - 1.4) ** 2)*len(model_at_data_times)
+            print(mse, IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, IDE_conc_ISF_val, k_O2_O3_AB42_ISF_val, k_O2_O1_AB42_ISF_val, k_O3_O2_AB42_ISF_val, k_O24_O12_AB42_ISF_val, Baseline_AB42_O_P_val)
+            
             return mse
         return objective
 
@@ -57,8 +166,16 @@ def run_optimization_and_simulation():
         numerator = oligo + proto + C3 * 24.0 * plaque
         denominator = numerator**Hill + C2**Hill
         
-        if denominator.any() == 0:
-            return 1.0  # Avoid division by zero
+        # Handle scalar values properly
+        if hasattr(denominator, '__len__'):
+            # If it's an array
+            if denominator.any() == 0:
+                return 1.0  # Avoid division by zero
+        else:
+            # If it's a scalar
+            if denominator == 0:
+                return 1.0  # Avoid division by zero
+                
         suvr = 1.0 + C1 * (numerator**Hill) / denominator
         return suvr
 
@@ -76,33 +193,50 @@ def run_optimization_and_simulation():
     objective = create_objective(csv_data, r)
 
     # Initial guess (use current values)
-    initial_guess = [r['Microglia'], r['k_APP_production'],r['k_O1_O2_AB42_ISF'],r['IDE_conc_ISF']]
+    initial_guess = [r['Microglia'], r['k_APP_production'],r['k_O1_O2_AB42_ISF'],r['k_O2_O3_AB42_ISF'],r['k_O2_O1_AB42_ISF'],r['k_O3_O2_AB42_ISF'],r['IDE_conc_ISF'],r['k_O24_O12_AB42_ISF'],r['Baseline_AB42_O_P']]
     print(initial_guess)
+    # [1.0, 75.0, 0.003564, 0.01368, 45.72, 1e-05, 3.0, 100.0, 5e-05]
     # Bounds (set as appropriate)
-    bounds = [(1, 1000), (1, 1000), (1e-6, 1), (1e-3, 100)]  # Adjust as needed
+    bounds = [(1e-3, 1000), (1e-3, 1000), (1e-6, 1), (1e-6, 1), (1e-3, 100), (1e-8, 1), (1e-3, 100), (1, 1000), (1e-8, 1)]  # Adjust as needed
 
     # Run optimization
     opt_result = minimize(objective, initial_guess, bounds=bounds, method='Nelder-Mead')
     print("Optimized Microglia:", opt_result.x[0])
     print("Optimized k_APP_production:", opt_result.x[1])
     print("Optimized k_O1_O2_AB42_ISF:", opt_result.x[2])
-    print("Optimized IDE_conc_ISF:", opt_result.x[3])
+    print("Optimized k_O2_O3_AB42_ISF:", opt_result.x[3])
+    print("Optimized k_O2_O1_AB42_ISF:", opt_result.x[4])
+    print("Optimized k_O3_O2_AB42_ISF:", opt_result.x[5])
+    print("Optimized IDE_conc_ISF:", opt_result.x[6])
+    print("Optimized k_O24_O12_AB42_ISF:", opt_result.x[7])
+    print("Optimized Baseline_AB42_O_P:", opt_result.x[8])
     # Update model with optimized parameters
     r.reset()
+    # rr = te.loada("./Antimony_Geerts_model_opt1.txt")
     r['Microglia'] = opt_result.x[0]
     r['k_APP_production'] = opt_result.x[1]
     r['k_O1_O2_AB42_ISF'] = opt_result.x[2]
-    r['IDE_conc_ISF'] = opt_result.x[3]
-    print(r['Microglia'], r['k_APP_production'], r['k_O1_O2_AB42_ISF'], r['IDE_conc_ISF'], opt_result.x[0], opt_result.x[1], opt_result.x[2], opt_result.x[3])
+    r['k_O2_O3_AB42_ISF'] = opt_result.x[3]
+    r['k_O2_O1_AB42_ISF'] = opt_result.x[4]
+    r['k_O3_O2_AB42_ISF'] = opt_result.x[5]
+    r['IDE_conc_ISF'] = opt_result.x[6]
+    r['k_O24_O12_AB42_ISF'] = opt_result.x[7]
+    r['Baseline_AB42_O_P'] = opt_result.x[8]
+    rates = calculate_k_rates(opt_result.x[2], opt_result.x[3], opt_result.x[4], opt_result.x[5])
+    print(rates)
+    oligomer_sizes = list(range(4, 25))
+    for i, size in enumerate(oligomer_sizes):
+
+        # Oligomer rates (size < 17)
+        # rates[f'k_O{size-1}_O{size}_AB40_ISF'] = kf_forty[i]
+        # rates[f'k_O{size}_O{size-1}_AB40_ISF'] = kb_forty[i]
+        r[f'k_O{size-1}_O{size}_AB42_ISF'] = rates[f'k_O{size-1}_O{size}_AB42_ISF'] 
+        r[f'k_O{size}_O{size-1}_AB42_ISF'] = rates[f'k_O{size}_O{size-1}_AB42_ISF']
+    print(r['Microglia'], r['k_APP_production'], r['k_O1_O2_AB42_ISF'],  r['k_O2_O3_AB42_ISF'], r['k_O2_O1_AB42_ISF'], r['k_O3_O2_AB42_ISF'],r['IDE_conc_ISF'], r['k_O24_O12_AB42_ISF'], r['Baseline_AB42_O_P'], opt_result.x[0], opt_result.x[1], opt_result.x[2], opt_result.x[3], opt_result.x[4], opt_result.x[5], opt_result.x[6], opt_result.x[7], opt_result.x[8])
     # Simulate for 100 years like in Julia file
-    result = r.simulate(0, 20*365*24, 1000, ['time', 
-        '[AB42_O1_ISF]', '[AB42_O25_ISF]', '[AB42_O1_SAS]', '[AB40_O1_central]', '[IDE_activity_ISF]',
-        '[AB42_O2_ISF]', '[AB42_O3_ISF]', '[AB42_O4_ISF]', '[AB42_O5_ISF]', '[AB42_O6_ISF]', '[AB42_O7_ISF]', 
-        '[AB42_O8_ISF]', '[AB42_O9_ISF]', '[AB42_O10_ISF]', '[AB42_O11_ISF]', '[AB42_O12_ISF]', '[AB42_O13_ISF]',
-        '[AB42_O14_ISF]', '[AB42_O15_ISF]', '[AB42_O16_ISF]', '[AB42_O17_ISF]', '[AB42_O18_ISF]', '[AB42_O19_ISF]',
-        '[AB42_O20_ISF]', '[AB42_O21_ISF]', '[AB42_O22_ISF]', '[AB42_O23_ISF]', '[AB42_O24_ISF]'])
+    result = r.simulate(0, 20*365*24, 1000)
     result = r.simulate(20*365*24, 100*365*24, 1000, ['time', 
-        '[AB42_O1_ISF]', '[AB42_O25_ISF]', '[AB42_O1_SAS]', '[AB40_O1_central]', '[IDE_activity_ISF]',
+        '[AB42_O1_ISF]', '[AB42_O25_ISF]', '[AB42_O1_SAS]',  '[IDE_activity_ISF]',
         '[AB42_O2_ISF]', '[AB42_O3_ISF]', '[AB42_O4_ISF]', '[AB42_O5_ISF]', '[AB42_O6_ISF]', '[AB42_O7_ISF]', 
         '[AB42_O8_ISF]', '[AB42_O9_ISF]', '[AB42_O10_ISF]', '[AB42_O11_ISF]', '[AB42_O12_ISF]', '[AB42_O13_ISF]',
         '[AB42_O14_ISF]', '[AB42_O15_ISF]', '[AB42_O16_ISF]', '[AB42_O17_ISF]', '[AB42_O18_ISF]', '[AB42_O19_ISF]',
@@ -184,7 +318,7 @@ def create_plots(r, result, csv_data, suvr):
     ax4.plot(csv_data['time']/24/365, csv_data['measurement'], 'r.', label='Monomer', markersize=4)
     ax4.set_xlabel('Time (years)')
     ax4.set_ylabel('Concentration')
-    ax4.set_title('AB42_O1_ISF and AB42_O25_ISF')
+    ax4.set_title('AB42_O1_ISF and AB42_O1_CSF')
     ax4.legend(loc='upper right')
     ax4.grid(True)
 
@@ -192,7 +326,7 @@ def create_plots(r, result, csv_data, suvr):
     ax5 = axes[2, 0]
     ax5.plot(time_years, result['[IDE_activity_ISF]'], label='IDE_activity_ISF', linewidth=2)
     ax5.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
-    ax5.plot([70], [1.3], 'o', color='blue', markersize=14)
+    # ax5.plot([70], [1.3], 'o', color='blue', markersize=14)
     ax5.set_xlabel('Time (years)')
     ax5.set_ylabel('Concentration')
     ax5.set_title('IDE_activity_ISF')
@@ -203,21 +337,37 @@ def create_plots(r, result, csv_data, suvr):
     ax6 = axes[2, 1]
     ax6.plot(time_years, result['[AB42_O25_ISF]'], label='AB42_O25_ISF', linewidth=2)
     ax6.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
-    ax6.plot([70], [1.3], 'o', color='blue', markersize=14)
+    # ax6.plot([70], [1.3], 'o', color='blue', markersize=14)
     ax6.set_xlabel('Time (years)')
     ax6.set_ylabel('Concentration')
-    ax6.set_title('AB40_O1_central')
+    ax6.set_title('Plaque')
     ax6.legend(loc='upper right')
     ax6.grid(True)
 
     plt.tight_layout()
-    plt.savefig('AB42_comparison_plot.png', dpi=300, bbox_inches='tight')
+    plt.savefig('AB42_comparison_plot3.png', dpi=300, bbox_inches='tight')
     plt.show()
 
 # Main execution
 if __name__ == "__main__":
     # Run optimization and simulation
     r, result, csv_data, suvr = run_optimization_and_simulation()
+    
+    # Calculate SUVR at 70 years and store interpolated values
+    print("\n" + "="*50)
+    print("CALCULATING SUVR AT 70 YEARS")
+    print("="*50)
+    suvr_70_results = calculate_suvr_at_70_years(result, suvr)
+    
+    # Store the results for further use
+    interpolated_values = suvr_70_results['interpolated_values']
+    oligomer_weighted_sum_70 = suvr_70_results['oligomer_weighted_sum']
+    proto_weighted_sum_70 = suvr_70_results['proto_weighted_sum']
+    plaque_sum_70 = suvr_70_results['plaque_sum']
+    suvr_at_70 = suvr_70_results['suvr_at_70']
+    
+    print(f"\nFinal SUVR at 70 years: {suvr_at_70:.6f}")
+    print("="*50)
     
     # Create plots
     create_plots(r, result, csv_data, suvr)

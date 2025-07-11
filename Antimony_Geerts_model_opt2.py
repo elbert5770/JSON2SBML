@@ -37,7 +37,7 @@ def run_optimization_and_simulation():
             model_at_data_times = interpolate_model_to_data_times(model_times, model_values, data_times)
             # print(model_at_data_times, data_measurements)
             # Compute mean squared error
-            mse = np.mean((model_at_data_times - data_measurements) ** 2)
+            mse = np.sum((model_at_data_times - data_measurements) ** 2)
             print(mse, IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, IDE_conc_ISF_val)
             return mse
         return objective
