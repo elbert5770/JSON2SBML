@@ -41,8 +41,11 @@ def extrapolate_kf(kf0, kf1, j, Asymp, HillA,rate_cutoff=None):
     Asymp: Asymptotic value
     HillA: Hill coefficient for forward rates
     """
-    KF = (kf1 - Asymp * kf1) / (kf0 - kf1)
-    kj_f = (kf0 - Asymp * kf1) * (KF / (j**HillA + KF)) + Asymp * kf1
+    if kf0 == kf1:
+        kj_f = rate_cutoff
+    else:
+        KF = (kf1 - Asymp * kf1) / (kf0 - kf1)
+        kj_f = (kf0 - Asymp * kf1) * (KF / (j**HillA + KF)) + Asymp * kf1
     if rate_cutoff is not None and kj_f < rate_cutoff:
         kj_f = rate_cutoff
     return kj_f

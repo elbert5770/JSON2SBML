@@ -144,8 +144,12 @@ def run_optimization_and_simulation():
             mse = np.sum((model_at_data_times - data_measurements) ** 2)
             
             suvr_70_results = calculate_suvr_at_70_years(result, suvr)
-            suvr_70_mse = suvr_70_results['suvr_at_70']
-            mse = mse + ((suvr_70_mse - 1.4) ** 2)*len(model_at_data_times)
+            
+            mse = mse + ((suvr_70_results['suvr_at_70'] - 1.4) ** 2)/1.4
+            mse = mse + (suvr_70_results['plaque_sum']-5000)**2 / 400
+            mse = mse + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000
+            mse = mse + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000
+            print(suvr_70_results['plaque_sum'])
             print(mse, IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, IDE_conc_ISF_val, k_O2_O3_AB42_ISF_val, k_O2_O1_AB42_ISF_val, k_O3_O2_AB42_ISF_val, k_O24_O12_AB42_ISF_val, Baseline_AB42_O_P_val)
             
             return mse
@@ -180,7 +184,7 @@ def run_optimization_and_simulation():
         return suvr
 
     # Load model
-    r = te.loada("./Antimony_Geerts_model_opt1.txt")
+    r = te.loada(__file__.replace('.py', '.txt'))
     print(r.getReactionIds())
     print(r.getCurrentAntimony())
     print(te.getODEsFromModel(r))
@@ -236,7 +240,7 @@ def run_optimization_and_simulation():
     # Simulate for 100 years like in Julia file
     result = r.simulate(0, 20*365*24, 1000)
     result = r.simulate(20*365*24, 100*365*24, 1000, ['time', 
-        '[AB42_O1_ISF]', '[AB42_O25_ISF]', '[AB42_O1_SAS]',  '[IDE_activity_ISF]',
+        '[AB42_O1_ISF]', '[AB42_O25_ISF]',  '[IDE_activity_ISF]',
         '[AB42_O2_ISF]', '[AB42_O3_ISF]', '[AB42_O4_ISF]', '[AB42_O5_ISF]', '[AB42_O6_ISF]', '[AB42_O7_ISF]', 
         '[AB42_O8_ISF]', '[AB42_O9_ISF]', '[AB42_O10_ISF]', '[AB42_O11_ISF]', '[AB42_O12_ISF]', '[AB42_O13_ISF]',
         '[AB42_O14_ISF]', '[AB42_O15_ISF]', '[AB42_O16_ISF]', '[AB42_O17_ISF]', '[AB42_O18_ISF]', '[AB42_O19_ISF]',
@@ -312,7 +316,7 @@ def create_plots(r, result, csv_data, suvr):
     # Plot 4: AB42_O1_ISF and AB42_O25_ISF
     ax4 = axes[1, 1]
     ax4.plot(time_years, result['[AB42_O1_ISF]'], label='AB42_O1_ISF', linewidth=2)
-    ax4.plot(time_years, result['[AB42_O1_SAS]'], label='AB42_O1_CSF', linewidth=2)
+    # ax4.plot(time_years, result['[AB42_O1_SAS]'], label='AB42_O1_CSF', linewidth=2)
     ax4.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
     ax4.plot([70], [1.3], 'o', color='blue', markersize=14)
     ax4.plot(csv_data['time']/24/365, csv_data['measurement'], 'r.', label='Monomer', markersize=4)

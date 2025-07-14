@@ -141,11 +141,13 @@ def run_optimization_and_simulation():
             model_at_data_times = interpolate_model_to_data_times(model_times, model_values, data_times)
             # print(model_at_data_times, data_measurements)
             # Compute mean squared error
-            mse = np.sum((model_at_data_times - data_measurements) ** 2)
+            mse = np.mean((model_at_data_times - data_measurements) ** 2)
             
             suvr_70_results = calculate_suvr_at_70_years(result, suvr)
             suvr_70_mse = suvr_70_results['suvr_at_70']
-            mse = mse + ((suvr_70_mse - 1.4) ** 2)*len(model_at_data_times)
+            mse = mse + ((suvr_70_mse - 1.4) ** 2)*5
+            mse = mse + (suvr_70_results['plaque_sum']-5000)**2 / 50000
+            print(suvr_70_results['plaque_sum'])
             print(mse, IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, IDE_conc_ISF_val, k_O2_O3_AB42_ISF_val, k_O2_O1_AB42_ISF_val, k_O3_O2_AB42_ISF_val, k_O24_O12_AB42_ISF_val, Baseline_AB42_O_P_val)
             
             return mse

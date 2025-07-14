@@ -95,22 +95,16 @@ def run_optimization_and_simulation():
         return np.interp(data_times, model_times, model_values)
 
     # Objective function for optimization
-    def create_objective(csv_data, r):
+    def create_objective(csv_data_3C, csv_data_3A, r, param_names):
         def objective(params):
-            IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, k_O2_O3_AB42_ISF_val, k_O2_O1_AB42_ISF_val, k_O3_O2_AB42_ISF_val, IDE_conc_ISF_val, k_O24_O12_AB42_ISF_val, Baseline_AB42_O_P_val = params
+            param_values = dict(zip(param_names, params))
 
             # Reload model and set parameters
             r.reset()
-            r['Microglia'] = IDE_activity_ISF_val
-            r['k_APP_production'] = k_APP_production_val
-            r['k_O1_O2_AB42_ISF'] = k_O1_O2_AB42_ISF_val
-            r['k_O2_O3_AB42_ISF'] = k_O2_O3_AB42_ISF_val
-            r['k_O2_O1_AB42_ISF'] = k_O2_O1_AB42_ISF_val
-            r['k_O3_O2_AB42_ISF'] = k_O3_O2_AB42_ISF_val
-            r['IDE_conc_ISF'] = IDE_conc_ISF_val
-            r['k_O24_O12_AB42_ISF'] = k_O24_O12_AB42_ISF_val
-            r['Baseline_AB42_O_P'] = Baseline_AB42_O_P_val
-            rates = calculate_k_rates(k_O1_O2_AB42_ISF_val, k_O2_O3_AB42_ISF_val, k_O2_O1_AB42_ISF_val, k_O3_O2_AB42_ISF_val)
+            for name, value in param_values.items():
+                r[name] = value
+
+            rates = calculate_k_rates(r['k_O1_O2_AB42_ISF'], r['k_O2_O3_AB42_ISF'], r['k_O2_O1_AB42_ISF'], r['k_O3_O2_AB42_ISF'])
             # print(rates)
             oligomer_sizes = list(range(4, 25))
             for i, size in enumerate(oligomer_sizes):
@@ -136,17 +130,24 @@ def run_optimization_and_simulation():
             model_values = result['[AB42_O1_ISF]']
 
             # Interpolate model output to data times
-            data_times = csv_data['time'].values
-            data_measurements = csv_data['measurement'].values
+            data_times = csv_data_3C['time'].values
+            data_measurements = csv_data_3C['measurement'].values
             model_at_data_times = interpolate_model_to_data_times(model_times, model_values, data_times)
             # print(model_at_data_times, data_measurements)
             # Compute mean squared error
             mse = np.sum((model_at_data_times - data_measurements) ** 2)
-            
+            suvr_times = csv_data_3A['time'].values * 24 * 365
+            suvr_measurements = csv_data_3A['measurement'].values
+            suvr_model_at_data_times = interpolate_model_to_data_times(model_times, model_values, suvr_times)
+            mse = mse + np.sum((suvr_model_at_data_times - suvr_measurements) ** 2)
             suvr_70_results = calculate_suvr_at_70_years(result, suvr)
-            suvr_70_mse = suvr_70_results['suvr_at_70']
-            mse = mse + ((suvr_70_mse - 1.4) ** 2)*len(model_at_data_times)
-            print(mse, IDE_activity_ISF_val, k_APP_production_val, k_O1_O2_AB42_ISF_val, IDE_conc_ISF_val, k_O2_O3_AB42_ISF_val, k_O2_O1_AB42_ISF_val, k_O3_O2_AB42_ISF_val, k_O24_O12_AB42_ISF_val, Baseline_AB42_O_P_val)
+            
+            # mse = mse + ((suvr_70_results['suvr_at_70'] - 1.4) ** 2)/1.4
+            mse = mse + (suvr_70_results['plaque_sum']-5000)**2 / 5000
+            mse = mse + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000
+            mse = mse + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000
+            # print(suvr_70_results['plaque_sum'])
+            print(f"mse: {mse}, params: {param_values}")
             
             return mse
         return objective
@@ -180,49 +181,50 @@ def run_optimization_and_simulation():
         return suvr
 
     # Load model
-    r = te.loada("./Antimony_Geerts_model_opt1.txt")
+    r = te.loada(__file__.replace('.py', '.txt'))
     print(r.getReactionIds())
     print(r.getCurrentAntimony())
     print(te.getODEsFromModel(r))
     r.exportToSBML('Antimony_PBPK_model.xml') 
 
     # Load the CSV data
-    csv_data = pd.read_csv('Geerts 2023 Figure 3C.csv')
+    csv_data_3C = pd.read_csv('Geerts 2023 Figure 3C.csv')
+    csv_data_3A = pd.read_csv('Geerts 2023 Figure 3A.csv')
+    # Define parameters to be optimized, with their bounds
+    params_to_optimize = {
+        'Microglia': (1e-3, 1000),
+        'k_APP_production': (1e-3, 1000),
+        'k_O1_O2_AB42_ISF': (1e-6, 1),
+        'k_O2_O3_AB42_ISF': (1e-6, 1),
+        'k_O2_O1_AB42_ISF': (1e-3, 100),
+        'k_O3_O2_AB42_ISF': (1e-8, 1),
+        'IDE_conc_ISF': (1e-3, 100),
+        'k_O24_O12_AB42_ISF': (1, 1000),
+        'Baseline_AB42_O_P': (1e-8, 1),
+    }
+    param_names = list(params_to_optimize.keys())
+    bounds = list(params_to_optimize.values())
 
     # Create objective function with data
-    objective = create_objective(csv_data, r)
+    objective = create_objective(csv_data_3C, csv_data_3A, r, param_names)
 
-    # Initial guess (use current values)
-    initial_guess = [r['Microglia'], r['k_APP_production'],r['k_O1_O2_AB42_ISF'],r['k_O2_O3_AB42_ISF'],r['k_O2_O1_AB42_ISF'],r['k_O3_O2_AB42_ISF'],r['IDE_conc_ISF'],r['k_O24_O12_AB42_ISF'],r['Baseline_AB42_O_P']]
-    print(initial_guess)
-    # [1.0, 75.0, 0.003564, 0.01368, 45.72, 1e-05, 3.0, 100.0, 5e-05]
-    # Bounds (set as appropriate)
-    bounds = [(1e-3, 1000), (1e-3, 1000), (1e-6, 1), (1e-6, 1), (1e-3, 100), (1e-8, 1), (1e-3, 100), (1, 1000), (1e-8, 1)]  # Adjust as needed
-
+    # Initial guess (use current values from model)
+    initial_guess = [r[name] for name in param_names]
+    print(f"Initial guess: {initial_guess}")
+    
     # Run optimization
     opt_result = minimize(objective, initial_guess, bounds=bounds, method='Nelder-Mead')
-    print("Optimized Microglia:", opt_result.x[0])
-    print("Optimized k_APP_production:", opt_result.x[1])
-    print("Optimized k_O1_O2_AB42_ISF:", opt_result.x[2])
-    print("Optimized k_O2_O3_AB42_ISF:", opt_result.x[3])
-    print("Optimized k_O2_O1_AB42_ISF:", opt_result.x[4])
-    print("Optimized k_O3_O2_AB42_ISF:", opt_result.x[5])
-    print("Optimized IDE_conc_ISF:", opt_result.x[6])
-    print("Optimized k_O24_O12_AB42_ISF:", opt_result.x[7])
-    print("Optimized Baseline_AB42_O_P:", opt_result.x[8])
+    
+    print("\nOptimized Parameters:")
+    for i, name in enumerate(param_names):
+        print(f"  {name}: {opt_result.x[i]}")
+
     # Update model with optimized parameters
     r.reset()
-    # rr = te.loada("./Antimony_Geerts_model_opt1.txt")
-    r['Microglia'] = opt_result.x[0]
-    r['k_APP_production'] = opt_result.x[1]
-    r['k_O1_O2_AB42_ISF'] = opt_result.x[2]
-    r['k_O2_O3_AB42_ISF'] = opt_result.x[3]
-    r['k_O2_O1_AB42_ISF'] = opt_result.x[4]
-    r['k_O3_O2_AB42_ISF'] = opt_result.x[5]
-    r['IDE_conc_ISF'] = opt_result.x[6]
-    r['k_O24_O12_AB42_ISF'] = opt_result.x[7]
-    r['Baseline_AB42_O_P'] = opt_result.x[8]
-    rates = calculate_k_rates(opt_result.x[2], opt_result.x[3], opt_result.x[4], opt_result.x[5])
+    for i, name in enumerate(param_names):
+        r[name] = opt_result.x[i]
+    
+    rates = calculate_k_rates(r['k_O1_O2_AB42_ISF'], r['k_O2_O3_AB42_ISF'], r['k_O2_O1_AB42_ISF'], r['k_O3_O2_AB42_ISF'])
     print(rates)
     oligomer_sizes = list(range(4, 25))
     for i, size in enumerate(oligomer_sizes):
@@ -232,22 +234,26 @@ def run_optimization_and_simulation():
         # rates[f'k_O{size}_O{size-1}_AB40_ISF'] = kb_forty[i]
         r[f'k_O{size-1}_O{size}_AB42_ISF'] = rates[f'k_O{size-1}_O{size}_AB42_ISF'] 
         r[f'k_O{size}_O{size-1}_AB42_ISF'] = rates[f'k_O{size}_O{size-1}_AB42_ISF']
-    print(r['Microglia'], r['k_APP_production'], r['k_O1_O2_AB42_ISF'],  r['k_O2_O3_AB42_ISF'], r['k_O2_O1_AB42_ISF'], r['k_O3_O2_AB42_ISF'],r['IDE_conc_ISF'], r['k_O24_O12_AB42_ISF'], r['Baseline_AB42_O_P'], opt_result.x[0], opt_result.x[1], opt_result.x[2], opt_result.x[3], opt_result.x[4], opt_result.x[5], opt_result.x[6], opt_result.x[7], opt_result.x[8])
+    
+    print("\nFinal parameter values in model:")
+    for name in param_names:
+        print(f"  {name}: {r[name]}")
+
     # Simulate for 100 years like in Julia file
     result = r.simulate(0, 20*365*24, 1000)
     result = r.simulate(20*365*24, 100*365*24, 1000, ['time', 
-        '[AB42_O1_ISF]', '[AB42_O25_ISF]', '[AB42_O1_SAS]',  '[IDE_activity_ISF]',
+        '[AB42_O1_ISF]', '[AB42_O25_ISF]',  '[IDE_activity_ISF]',
         '[AB42_O2_ISF]', '[AB42_O3_ISF]', '[AB42_O4_ISF]', '[AB42_O5_ISF]', '[AB42_O6_ISF]', '[AB42_O7_ISF]', 
         '[AB42_O8_ISF]', '[AB42_O9_ISF]', '[AB42_O10_ISF]', '[AB42_O11_ISF]', '[AB42_O12_ISF]', '[AB42_O13_ISF]',
         '[AB42_O14_ISF]', '[AB42_O15_ISF]', '[AB42_O16_ISF]', '[AB42_O17_ISF]', '[AB42_O18_ISF]', '[AB42_O19_ISF]',
         '[AB42_O20_ISF]', '[AB42_O21_ISF]', '[AB42_O22_ISF]', '[AB42_O23_ISF]', '[AB42_O24_ISF]'])
     print(r['[AB42_O1_ISF]'],r['[AB42_O25_ISF]'])
 
-    return r, result, csv_data, suvr
+    return r, result, csv_data_3C, csv_data_3A, suvr
 
 
 
-def create_plots(r, result, csv_data, suvr):
+def create_plots(r, result, csv_data_3C, csv_data_3A, suvr):
     """
     Create plots using the simulation results.
     """
@@ -303,6 +309,7 @@ def create_plots(r, result, csv_data, suvr):
     ax3.plot(time_years, suvr_values, label='SUVR', linewidth=2)
     ax3.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
     ax3.plot([70], [1.4], 'o', color='blue', markersize=14)
+    ax3.plot(csv_data_3A['time'], csv_data_3A['measurement'], 'r.', label='Monomer', markersize=4)
     ax3.set_xlabel('Time (years)')
     ax3.set_ylabel('Concentration')
     ax3.set_title('SUVR')
@@ -312,10 +319,10 @@ def create_plots(r, result, csv_data, suvr):
     # Plot 4: AB42_O1_ISF and AB42_O25_ISF
     ax4 = axes[1, 1]
     ax4.plot(time_years, result['[AB42_O1_ISF]'], label='AB42_O1_ISF', linewidth=2)
-    ax4.plot(time_years, result['[AB42_O1_SAS]'], label='AB42_O1_CSF', linewidth=2)
+    # ax4.plot(time_years, result['[AB42_O1_SAS]'], label='AB42_O1_CSF', linewidth=2)
     ax4.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
     ax4.plot([70], [1.3], 'o', color='blue', markersize=14)
-    ax4.plot(csv_data['time']/24/365, csv_data['measurement'], 'r.', label='Monomer', markersize=4)
+    ax4.plot(csv_data_3C['time']/24/365, csv_data_3C['measurement'], 'r.', label='Monomer', markersize=4)
     ax4.set_xlabel('Time (years)')
     ax4.set_ylabel('Concentration')
     ax4.set_title('AB42_O1_ISF and AB42_O1_CSF')
@@ -351,7 +358,7 @@ def create_plots(r, result, csv_data, suvr):
 # Main execution
 if __name__ == "__main__":
     # Run optimization and simulation
-    r, result, csv_data, suvr = run_optimization_and_simulation()
+    r, result, csv_data_3C, csv_data_3A, suvr = run_optimization_and_simulation()
     
     # Calculate SUVR at 70 years and store interpolated values
     print("\n" + "="*50)
@@ -370,7 +377,4 @@ if __name__ == "__main__":
     print("="*50)
     
     # Create plots
-    create_plots(r, result, csv_data, suvr)
-
-
-
+    create_plots(r, result, csv_data_3C, csv_data_3A, suvr) 
