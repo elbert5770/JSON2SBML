@@ -233,13 +233,11 @@ def run_optimization_and_simulation():
 
     # Define parameters to be optimized, with their bounds
     params_to_optimize = {
-        'Microglia': (1e-3, 1000),
         'k_APP_production': (1e-3, 1000),
-        'k_O1_O2_AB42_ISF': (1e-6, 1),
         'k_O2_O3_AB42_ISF': (1e-6, 1),
         'k_O2_O1_AB42_ISF': (1e-3, 100),
         'k_O3_O2_AB42_ISF': (1e-12, 1),
-        'IDE_conc_ISF': (1e-3, 100),
+        'IDE_activity_ISF': (1e-3, 5000),
         'k_O24_O12_AB42_ISF': (1, 1000),
         'Baseline_AB42_O_P': (1e-8, 1),
     }

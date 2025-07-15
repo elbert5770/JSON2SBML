@@ -5,19 +5,20 @@ import pandas as pd
 from scipy.optimize import minimize
 from K_rates_extrapolate import calculate_k_rates
 
-def calculate_suvr_at_70_years(result, suvr_func):
+def calculate_suvr_at_year(result, suvr_func, year):
     """
-    Find the model time points closest to 70*365*24 and interpolate AB42 oligomer values
+    Find the model time points closest to year*365*24 and interpolate AB42 oligomer values
     to calculate SUVR at that specific timepoint.
     
     Parameters:
     result: Simulation result containing time series data
     suvr_func: SUVR calculation function
+    year: The target year to calculate SUVR for.
     
     Returns:
     dict: Dictionary containing interpolated values and calculated SUVR
     """
-    target_time = 70 * 365 * 24  # 70 years in hours
+    target_time = year * 365 * 24  # target years in hours
     
     # Find the two closest time points
     model_times = result['time']
@@ -26,7 +27,7 @@ def calculate_suvr_at_70_years(result, suvr_func):
     
     # Get the two closest time points
     t1, t2 = model_times[closest_indices[0]], model_times[closest_indices[1]]
-    print(f"Closest time points to 70 years: {t1/24/365:.2f} years and {t2/24/365:.2f} years")
+    # print(f"Closest time points to {year} years: {t1/24/365:.2f} years and {t2/24/365:.2f} years")
     
     # Interpolate values for all AB42 oligomers (O2 through O25)
     interpolated_values = {}
@@ -62,25 +63,25 @@ def calculate_suvr_at_70_years(result, suvr_func):
     # Get plaque value (O25)
     plaque_sum = interpolated_values['[AB42_O25_ISF]']
     
-    # Calculate SUVR at 70 years
-    suvr_at_70 = suvr_func(oligomer_weighted_sum, proto_weighted_sum, plaque_sum)
+    # Calculate SUVR at specified year
+    suvr_at_year = suvr_func(oligomer_weighted_sum, proto_weighted_sum, plaque_sum)
     
     # Ensure SUVR is a scalar value
-    if hasattr(suvr_at_70, '__len__'):
-        suvr_at_70 = suvr_at_70[0] if len(suvr_at_70) > 0 else 1.0
+    if hasattr(suvr_at_year, '__len__'):
+        suvr_at_year = suvr_at_year[0] if len(suvr_at_year) > 0 else 1.0
     
-    print(f"\nCalculated values at 70 years:")
-    print(f"Oligomer weighted sum: {oligomer_weighted_sum:.6f}")
-    print(f"Proto weighted sum: {proto_weighted_sum:.6f}")
-    print(f"Plaque sum: {plaque_sum:.6f}")
-    print(f"SUVR at 70 years: {suvr_at_70:.6f}")
+    # print(f"\nCalculated values at {year} years:")
+    # print(f"Oligomer weighted sum: {oligomer_weighted_sum:.6f}")
+    # print(f"Proto weighted sum: {proto_weighted_sum:.6f}")
+    # print(f"Plaque sum: {plaque_sum:.6f}")
+    # print(f"SUVR at {year} years: {suvr_at_year:.6f}")
     
     return {
         'interpolated_values': interpolated_values,
         'oligomer_weighted_sum': oligomer_weighted_sum,
         'proto_weighted_sum': proto_weighted_sum,
         'plaque_sum': plaque_sum,
-        'suvr_at_70': suvr_at_70,
+        'suvr_at_year': suvr_at_year,
         'closest_times': [t1, t2]
     }
 
@@ -155,11 +156,18 @@ def run_optimization_and_simulation():
             if result1 is None:
                 return 0
             
-            suvr_70_results = calculate_suvr_at_70_years(result1, suvr)
-            mse1 = mse1 + ((suvr_70_results['suvr_at_70'] - 1.4) ** 2)/1.4
-            mse1 = mse1 + (suvr_70_results['plaque_sum']-5000)**2 / 5000 
-            mse1 = mse1 + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000 /10
-            mse1 = mse1 + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000 /10
+            time = 70
+            suvr_results = calculate_suvr_at_year(result1, suvr, time)
+            mse1 = mse1 + (suvr_results['suvr_at_year']-1.394)**2 / 1.394
+            mse1 = mse1 + (suvr_results['plaque_sum']-5102)**2 / 5102 /10
+            mse1 = mse1 + (suvr_results['oligomer_weighted_sum']-12211)**2 / 12211 / 10
+            mse1 = mse1 + (suvr_results['proto_weighted_sum']-70000)**2 / 70000 / 10
+            
+            # suvr_70_results = calculate_suvr_at_year(result1, suvr, 70)
+            # mse1 = mse1 + ((suvr_70_results['suvr_at_year'] - 1.4) ** 2)/1.4
+            # mse1 = mse1 + (suvr_70_results['plaque_sum']-5000)**2 / 5000 
+            # mse1 = mse1 + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000 /10
+            # mse1 = mse1 + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000 /10
 
 
             # print(suvr_70_results['plaque_sum'])
@@ -170,14 +178,21 @@ def run_optimization_and_simulation():
             if result2 is None:
                 return 0
             
-            suvr_70_results = calculate_suvr_at_70_years(result2, suvr)
+            time = 74
+            suvr_results = calculate_suvr_at_year(result2, suvr, time)
+            mse2 = mse2 + (suvr_results['suvr_at_year']-1.623)**2 / 1.623
+            mse2 = mse2 + (suvr_results['plaque_sum']-6028)**2 / 6028 /10
+            mse2 = mse2 + (suvr_results['oligomer_weighted_sum']-12307)**2 / 12307 /10
+            mse2 = mse2 + (suvr_results['proto_weighted_sum']-70168)**2 / 70168 / 10
+
+            # suvr_70_results = calculate_suvr_at_year(result2, suvr, 70)
             # mse2 = mse2 + (suvr_70_results['plaque_sum']-5000)**2 / 5000 
             # mse2 = mse2 + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000 /10
             # mse2 = mse2 + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000 /10
 
             mse = mse1 + mse2
             # print(suvr_70_results['plaque_sum'])
-            print(f"mse2: {mse2}, params: {param_values}")
+            print(f"mse: {mse}, params: {param_values}")
             return mse
         return objective
 
@@ -233,18 +248,30 @@ def run_optimization_and_simulation():
 
     # Define parameters to be optimized, with their bounds
     params_to_optimize = {
-        'Microglia': (1e-3, 1000),
         'k_APP_production': (1e-3, 1000),
         'k_O1_O2_AB42_ISF': (1e-6, 1),
         'k_O2_O3_AB42_ISF': (1e-6, 1),
-        'k_O2_O1_AB42_ISF': (1e-3, 100),
-        'k_O3_O2_AB42_ISF': (1e-12, 1),
+        'k_O2_O1_AB42_ISF': (1e-3, 200),
+        'k_O3_O2_AB42_ISF': (1e-15, 1),
         'IDE_conc_ISF': (1e-3, 100),
         'k_O24_O12_AB42_ISF': (1, 1000),
-        'Baseline_AB42_O_P': (1e-8, 1),
+        'Baseline_AB42_O_P': (1e-8, 1)
     }
     param_names = list(params_to_optimize.keys())
     bounds = list(params_to_optimize.values())
+    # Read 'Geerts 2023 Figure 7.csv'
+    # csv_data_7 = pd.read_csv('Geerts 2023 Figure 7.csv')
+
+    # csv_data_7_proto = csv_data_7[csv_data_7['observation'].str.lower() == 'proto'].copy()
+    # csv_data_7_plaque = csv_data_7[csv_data_7['observation'].str.lower() == 'plaque'].copy()
+    # csv_data_7_suvr = csv_data_7[csv_data_7['observation'].str.lower() == 'suvr'].copy()
+    # csv_data_7_oligomer = csv_data_7[csv_data_7['observation'].str.lower() == 'oligomer'].copy()
+    # csv_data_7_proto_placebo = csv_data_7_proto[csv_data_7_proto['series'].str.lower() == 'placebo'].copy()
+    # csv_data_7_plaque_placebo = csv_data_7_plaque[csv_data_7_plaque['series'].str.lower() == 'placebo'].copy()
+    # csv_data_7_suvr_placebo = csv_data_7_suvr[csv_data_7_suvr['series'].str.lower() == 'placebo'].copy()
+    # csv_data_7_oligomer_placebo = csv_data_7_oligomer[csv_data_7_oligomer['series'].str.lower() == 'placebo'].copy()
+ 
+
 
     # Create objective function with data
     objective = create_objective(csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, r, param_names)
@@ -343,7 +370,7 @@ def create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv
     oligomer_sum1 = result1['[AB42_O2_ISF]']
     for i in range(3, 18):
         oligomer_sum1 += result1[f'[AB42_O{i}_ISF]']
-    # ax1.plot(time_years1, oligomer_sum1, label='Oligomers ApoE', linewidth=2,linestyle='--',color='red')
+    ax1.plot(time_years1, oligomer_sum1, label='Oligomers ApoE', linewidth=2,linestyle='--',color='red')
 
     oligomer_weighted_sum1 = result1['[AB42_O2_ISF]'] * 1
     for i in range(3, 18):
@@ -352,7 +379,7 @@ def create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv
     oligomer_sum2 = result2['[AB42_O2_ISF]']
     for i in range(3, 18):
         oligomer_sum2 += result2[f'[AB42_O{i}_ISF]']
-    # ax1.plot(time_years2, oligomer_sum2, label='Oligomers non-ApoE', linewidth=2,linestyle='--',color='blue')
+    ax1.plot(time_years2, oligomer_sum2, label='Oligomers non-ApoE', linewidth=2,linestyle='--',color='blue')
 
     oligomer_weighted_sum2 = result2['[AB42_O2_ISF]'] * 1
     for i in range(3, 18):
@@ -374,7 +401,7 @@ def create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv
     proto_sum1 = result1['[AB42_O18_ISF]']
     for i in range(19, 25):
         proto_sum1 += result1[f'[AB42_O{i}_ISF]']
-    # ax2.plot(time_years1, proto_sum1, label='Proto ApoE', linewidth=2,linestyle='--',color='red')
+    ax2.plot(time_years1, proto_sum1, label='Proto ApoE', linewidth=2,linestyle='--',color='red')
 
     proto_weighted_sum1 = result1['[AB42_O18_ISF]'] * 17
     for i in range(19, 25):
@@ -384,7 +411,7 @@ def create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv
     proto_sum2 = result2['[AB42_O18_ISF]']
     for i in range(19, 25):
         proto_sum2 += result2[f'[AB42_O{i}_ISF]']
-    # ax2.plot(time_years2, proto_sum2, label='Proto non-ApoE', linewidth=2,linestyle='--',color='blue')
+    ax2.plot(time_years2, proto_sum2, label='Proto non-ApoE', linewidth=2,linestyle='--',color='blue')
 
     proto_weighted_sum2 = result2['[AB42_O18_ISF]'] * 17
     for i in range(19, 25):
@@ -428,7 +455,6 @@ def create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv
     ax4.plot(time_years1, result1['[AB42_O1_ISF]'], label='AB42_O1_ISF ApoE', linewidth=2,color='red')
     ax4.plot(time_years2, result2['[AB42_O1_ISF]'], label='AB42_O1_ISF non-ApoE', linewidth=2,color='blue')
     ax4.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
-   
     ax4.plot(csv_data_3C_ApoE['time']/24/365, csv_data_3C_ApoE['measurement'], 'r.', label='ApoE published', markersize=4)
     ax4.plot(csv_data_3C_nonApoE['time']/24/365, csv_data_3C_nonApoE['measurement'], 'b.', label='non-ApoE published', markersize=4)
     ax4.set_xlabel('Time (years)')
@@ -476,14 +502,14 @@ if __name__ == "__main__":
     print("\n" + "="*50)
     print("CALCULATING SUVR AT 70 YEARS")
     print("="*50)
-    suvr_70_results = calculate_suvr_at_70_years(result1, suvr)
+    suvr_70_results = calculate_suvr_at_year(result1, suvr, 70)
     
     # Store the results for further use
     interpolated_values = suvr_70_results['interpolated_values']
     oligomer_weighted_sum_70 = suvr_70_results['oligomer_weighted_sum']
     proto_weighted_sum_70 = suvr_70_results['proto_weighted_sum']
     plaque_sum_70 = suvr_70_results['plaque_sum']
-    suvr_at_70 = suvr_70_results['suvr_at_70']
+    suvr_at_70 = suvr_70_results['suvr_at_year']
     
     print(f"\nFinal SUVR at 70 years: {suvr_at_70:.6f}")
     print("="*50)
