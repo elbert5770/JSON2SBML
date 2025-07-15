@@ -347,8 +347,9 @@
       <parameter id="AB42_PDMA_Vmax_ISF" value="0.07" units="dimensionless" constant="true"/>
       <parameter id="AB42_PDMA_EC50_ISF" value="50" units="nanomol_per_L" constant="true"/>
       <parameter id="Baseline_AB40_O_P" value="5e-06" units="L_per_nanomol_h" constant="true"/>
-      <parameter id="Baseline_AB42_O_P" value="5e-05" units="L_per_nanomol_h" constant="true"/>
+      <parameter id="Baseline_AB42_O_P" value="0.06" constant="true"/>
       <parameter id="Microglia" value="1" units="dimensionless" constant="true"/>
+      <parameter id="Hi_lo_ratio" value="10" constant="true"/>
       <parameter id="Microglia_high_frac" value="0" units="dimensionless" constant="true"/>
       <parameter id="Microglia_Vmax_AB40" value="0.00015" units="nanomol_per_L_per_h" constant="true"/>
       <parameter id="Microglia_EC50_AB40" value="8" units="nanomol_per_L" constant="true"/>
@@ -365,7 +366,7 @@
       <parameter id="AB40_IDE_IC50_ISF" value="14.142136" units="dimensionless" constant="true"/>
       <parameter id="AB42_IDE_Hill_ISF" value="2" units="dimensionless" constant="true"/>
       <parameter id="AB42_IDE_IC50_ISF" value="28.635642" units="dimensionless" constant="true"/>
-      <parameter id="k_exp_decline_IDE" value="1.15e-05" units="_1_inv_h" constant="true"/>
+      <parameter id="k_exp_decline_IDE" value="2.90375e-06" units="_1_inv_h" constant="true"/>
       <parameter id="k_APP_production" value="75" constant="true"/>
       <parameter id="AB40_systemic_synthesis_rate" value="1.16" units="nanomol_per_h" constant="true"/>
       <parameter id="AB42_systemic_synthesis_rate" value="1.16" units="nanomol_per_h" constant="true"/>
@@ -5384,7 +5385,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5445,7 +5446,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5506,7 +5507,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5567,7 +5568,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5628,7 +5629,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5689,7 +5690,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5750,7 +5751,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5811,7 +5812,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5872,7 +5873,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5933,7 +5934,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -5994,7 +5995,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6055,7 +6056,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6116,7 +6117,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6177,7 +6178,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6238,7 +6239,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6299,7 +6300,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6360,7 +6361,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6421,7 +6422,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6482,7 +6483,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6543,7 +6544,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6604,7 +6605,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6665,7 +6666,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6726,7 +6727,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB40 </ci>
                   </apply>
@@ -6787,7 +6788,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -6848,7 +6849,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -6909,7 +6910,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -6970,7 +6971,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7031,7 +7032,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7092,7 +7093,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7153,7 +7154,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7214,7 +7215,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7275,7 +7276,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7336,7 +7337,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7397,7 +7398,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7458,7 +7459,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7519,7 +7520,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7580,7 +7581,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7641,7 +7642,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7702,7 +7703,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7763,7 +7764,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7824,7 +7825,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7885,7 +7886,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -7946,7 +7947,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -8007,7 +8008,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -8068,7 +8069,7 @@
                   <divide/>
                   <apply>
                     <times/>
-                    <cn type="integer"> 10 </cn>
+                    <ci> Hi_lo_ratio </ci>
                     <ci> Microglia_high_frac </ci>
                     <ci> Microglia_Vmax_AB42 </ci>
                   </apply>
@@ -8340,7 +8341,6 @@
               <times/>
               <ci> k_exp_decline_IDE </ci>
               <ci> IDE_activity_ISF </ci>
-              <ci> V_ISF </ci>
             </apply>
           </math>
         </kineticLaw>

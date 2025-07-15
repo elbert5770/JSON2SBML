@@ -46,14 +46,16 @@ weighted_avg = 0.7 * interp_vals_APOE4 + 0.3 * interp_vals_nonAPOE4
 plt.figure(figsize=(10, 6))
 
 # Plot Figure 7 data
-plt.plot(fig7_suvr_placebo['time'], fig7_suvr_placebo['measurement'], marker='o', linestyle='-', label='Figure 7 SUVR Placebo')
+plt.plot(fig7_suvr_placebo['time'], fig7_suvr_placebo['measurement'], linestyle='-', label='Figure 7 SUVR Placebo',color='black')
 
 # Plot original Figure 3 data
-plt.plot(fig3_suvr_APOE4['time'], fig3_suvr_APOE4['measurement'], 'x', label='Figure 3 SUVR APOE4 (original)')
-plt.plot(fig3_suvr_nonAPOE4['time'], fig3_suvr_nonAPOE4['measurement'], '+', label='Figure 3 SUVR non-APOE4 (original)')
+plt.plot(fig3_suvr_APOE4['time'], fig3_suvr_APOE4['measurement'], 'x', label='Figure 3 SUVR APOE4 (original)', color='red')
+plt.plot(fig3_suvr_nonAPOE4['time'], fig3_suvr_nonAPOE4['measurement'], '+', label='Figure 3 SUVR non-APOE4 (original)', color='blue')
+plt.axvline(x=70, color='black', linestyle='--', linewidth=1)
+plt.axvline(x=74, color='black', linestyle='--', linewidth=1)
 
 # Plot the weighted average
-plt.plot(common_time, weighted_avg, linestyle='-', color='purple', label='Weighted Average (0.7*APOE4 + 0.3*non-APOE4)')
+plt.plot(common_time, weighted_avg, linestyle='-', color='green', label='Weighted Average (0.7*APOE4 + 0.3*non-APOE4)')
 
 # Add labels and title
 plt.xlabel('Time (years)')
@@ -62,8 +64,10 @@ plt.title('SUVR Measurement vs. Time')
 plt.legend()
 plt.grid(True)
 plt.xlim(65, 85)
-# Show the plot
-plt.show()
+
 
 # To save the plot, uncomment the following line
 plt.savefig('SUVR_fig3_fig7.png')
+
+# Show the plot
+plt.show()

@@ -54,7 +54,7 @@ plt.figure(figsize=(10, 6))
 # Plot Figure 5 data
 plt.plot(fig5_SUVR_placebo['time']+0.3, fig5_SUVR_placebo['measurement'], 'k-', label='Figure 5 SUVR Placebo')
 plt.plot(fig5_SUVR_placebo_data['time']+0.3, fig5_SUVR_placebo_data['measurement'], 'ko', label='Figure 5 SUVR Placebo Data')
-# plt.plot(fig7_SUVR_placebo['time'], fig7_SUVR_placebo['measurement'], marker='o', linestyle='-', label='Figure 7 SUVR Placebo')
+plt.plot(fig7_SUVR_placebo['time'], fig7_SUVR_placebo['measurement'], 'k--', linewidth=1, label='Figure 7 SUVR Placebo')
 
 # Plot original Figure 3 data
 plt.plot(fig3_SUVR_APOE4['time'], fig3_SUVR_APOE4['measurement'], 'rx', label='Figure 3 SUVR APOE4 (original)')
@@ -70,7 +70,7 @@ plt.title('SUVR Measurement vs. Time')
 plt.legend()
 plt.grid(True)
 plt.xlim(65, 85)
-plt.savefig('SUVR_fig3_fig5.png')
+plt.savefig('SUVR_fig3_fig5_fig7.png')
 # Show the plot
 plt.show()
 

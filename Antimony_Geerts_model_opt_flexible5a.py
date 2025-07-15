@@ -171,9 +171,9 @@ def run_optimization_and_simulation():
                 return 0
             
             suvr_70_results = calculate_suvr_at_70_years(result2, suvr)
-            # mse2 = mse2 + (suvr_70_results['plaque_sum']-5000)**2 / 5000 
-            # mse2 = mse2 + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000 /10
-            # mse2 = mse2 + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000 /10
+            mse2 = mse2 + (suvr_70_results['plaque_sum']-5000)**2 / 5000 
+            mse2 = mse2 + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000 /10
+            mse2 = mse2 + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000 /10
 
             mse = mse1 + mse2
             # print(suvr_70_results['plaque_sum'])
@@ -428,7 +428,6 @@ def create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv
     ax4.plot(time_years1, result1['[AB42_O1_ISF]'], label='AB42_O1_ISF ApoE', linewidth=2,color='red')
     ax4.plot(time_years2, result2['[AB42_O1_ISF]'], label='AB42_O1_ISF non-ApoE', linewidth=2,color='blue')
     ax4.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
-   
     ax4.plot(csv_data_3C_ApoE['time']/24/365, csv_data_3C_ApoE['measurement'], 'r.', label='ApoE published', markersize=4)
     ax4.plot(csv_data_3C_nonApoE['time']/24/365, csv_data_3C_nonApoE['measurement'], 'b.', label='non-ApoE published', markersize=4)
     ax4.set_xlabel('Time (years)')

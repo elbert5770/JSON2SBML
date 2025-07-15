@@ -156,7 +156,7 @@ def run_optimization_and_simulation():
                 return 0
             
             suvr_70_results = calculate_suvr_at_70_years(result1, suvr)
-            mse1 = mse1 + ((suvr_70_results['suvr_at_70'] - 1.4) ** 2)/1.4
+            # mse1 = mse1 + ((suvr_70_results['suvr_at_70'] - 1.4) ** 2)/1.4
             mse1 = mse1 + (suvr_70_results['plaque_sum']-5000)**2 / 5000 
             mse1 = mse1 + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000 /10
             mse1 = mse1 + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000 /10
@@ -170,7 +170,7 @@ def run_optimization_and_simulation():
             if result2 is None:
                 return 0
             
-            suvr_70_results = calculate_suvr_at_70_years(result2, suvr)
+            # suvr_70_results = calculate_suvr_at_70_years(result2, suvr)
             # mse2 = mse2 + (suvr_70_results['plaque_sum']-5000)**2 / 5000 
             # mse2 = mse2 + (suvr_70_results['oligomer_weighted_sum']-12000)**2 / 12000 /10
             # mse2 = mse2 + (suvr_70_results['proto_weighted_sum']-70000)**2 / 70000 /10
@@ -239,9 +239,9 @@ def run_optimization_and_simulation():
         'k_O2_O3_AB42_ISF': (1e-6, 1),
         'k_O2_O1_AB42_ISF': (1e-3, 100),
         'k_O3_O2_AB42_ISF': (1e-12, 1),
-        'IDE_conc_ISF': (1e-3, 100),
         'k_O24_O12_AB42_ISF': (1, 1000),
         'Baseline_AB42_O_P': (1e-8, 1),
+        'IDE_activity_ISF_0': (1e-3, 5000),
     }
     param_names = list(params_to_optimize.keys())
     bounds = list(params_to_optimize.values())
@@ -285,7 +285,7 @@ def run_optimization_and_simulation():
     # Simulate for 100 years like in Julia file
     result1 = r.simulate(0, 20*365*24, 1000)
     result1 = r.simulate(20*365*24, 100*365*24, 1000, ['time', 
-        '[AB42_O1_ISF]', '[AB42_O25_ISF]',  '[IDE_activity_ISF]',
+        '[AB42_O1_ISF]', '[AB42_O25_ISF]', 
         '[AB42_O2_ISF]', '[AB42_O3_ISF]', '[AB42_O4_ISF]', '[AB42_O5_ISF]', '[AB42_O6_ISF]', '[AB42_O7_ISF]', 
         '[AB42_O8_ISF]', '[AB42_O9_ISF]', '[AB42_O10_ISF]', '[AB42_O11_ISF]', '[AB42_O12_ISF]', '[AB42_O13_ISF]',
         '[AB42_O14_ISF]', '[AB42_O15_ISF]', '[AB42_O16_ISF]', '[AB42_O17_ISF]', '[AB42_O18_ISF]', '[AB42_O19_ISF]',
@@ -316,7 +316,7 @@ def run_optimization_and_simulation():
     # Simulate for 100 years like in Julia file
     result2 = r.simulate(0, 20*365*24, 1000)
     result2 = r.simulate(20*365*24, 100*365*24, 1000, ['time', 
-        '[AB42_O1_ISF]', '[AB42_O25_ISF]',  '[IDE_activity_ISF]',
+        '[AB42_O1_ISF]', '[AB42_O25_ISF]',
         '[AB42_O2_ISF]', '[AB42_O3_ISF]', '[AB42_O4_ISF]', '[AB42_O5_ISF]', '[AB42_O6_ISF]', '[AB42_O7_ISF]', 
         '[AB42_O8_ISF]', '[AB42_O9_ISF]', '[AB42_O10_ISF]', '[AB42_O11_ISF]', '[AB42_O12_ISF]', '[AB42_O13_ISF]',
         '[AB42_O14_ISF]', '[AB42_O15_ISF]', '[AB42_O16_ISF]', '[AB42_O17_ISF]', '[AB42_O18_ISF]', '[AB42_O19_ISF]',
@@ -438,16 +438,16 @@ def create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv
     ax4.grid(True)
 
     # Plot 5: IDE_activity_ISF
-    ax5 = axes[2, 0]
-    ax5.plot(time_years1, result1['[IDE_activity_ISF]'], label='IDE_activity_ISF ApoE', linewidth=2,color='red')
-    ax5.plot(time_years2, result2['[IDE_activity_ISF]'], label='IDE_activity_ISF non-ApoE', linewidth=2,color='blue')
-    ax5.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
-    # ax5.plot([70], [1.3], 'o', color='blue', markersize=14)
-    ax5.set_xlabel('Time (years)')
-    ax5.set_ylabel('Concentration')
-    ax5.set_title('IDE_activity_ISF')
-    ax5.legend(loc='upper right')
-    ax5.grid(True)
+    # ax5 = axes[2, 0]
+    # ax5.plot(time_years1, result1['[IDE_activity_ISF]'], label='IDE_activity_ISF ApoE', linewidth=2,color='red')
+    # ax5.plot(time_years2, result2['[IDE_activity_ISF]'], label='IDE_activity_ISF non-ApoE', linewidth=2,color='blue')
+    # ax5.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
+    # # ax5.plot([70], [1.3], 'o', color='blue', markersize=14)
+    # ax5.set_xlabel('Time (years)')
+    # ax5.set_ylabel('Concentration')
+    # ax5.set_title('IDE_activity_ISF')
+    # ax5.legend(loc='upper right')
+    # ax5.grid(True)
 
     # Plot 6: AB40_O1_central
     ax6 = axes[2, 1]
