@@ -327,7 +327,7 @@ AB42_O15_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O15_O16_AB42_ISF
 AB42_O16_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O16_O17_AB42_ISF * (AB42_O16_ISF/V_ISF) * (AB42_O1_ISF/V_ISF) * V_ISF
 AB42_O17_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O17_O18_AB42_ISF * (AB42_O17_ISF/V_ISF) * (AB42_O1_ISF/V_ISF) * V_ISF
 AB42_O18_ISF + AB42_O1_ISF -> AB42_O25_ISF; Baseline_AB42_O_P*k_O18_O19_AB42_ISF * (AB42_O18_ISF/V_ISF) * (AB42_O1_ISF/V_ISF) * V_ISF
-AB40_O2_ISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O2_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O2_ISF/V_ISF))) * (AB40_O2_ISF/V_ISF) * V_ISF
+#AB40_O2_ISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O2_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O2_ISF/V_ISF))) * (AB40_O2_ISF/V_ISF) * V_ISF
 AB40_O3_ISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O3_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O3_ISF/V_ISF))) * (AB40_O3_ISF/V_ISF) * V_ISF
 AB40_O4_ISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O4_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O4_ISF/V_ISF))) * (AB40_O4_ISF/V_ISF) * V_ISF
 AB40_O5_ISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O5_ISF/V_ISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB40/(Microglia_EC50_AB40 + (AB40_O5_ISF/V_ISF))) * (AB40_O5_ISF/V_ISF) * V_ISF
@@ -540,7 +540,7 @@ AB40_PDMA_Vmax_ISF = 0.05 ; AB40_PDMA_Vmax_ISF has dimensionless
 AB40_systemic_synthesis_rate = 1.16 ; AB40_systemic_synthesis_rate has nanomol / h
 AB42_IDE_Hill_ISF = 2 ; AB42_IDE_Hill_ISF has dimensionless
 AB42_IDE_IC50_ISF = 28.635642 ; AB42_IDE_IC50_ISF has dimensionless
-k_exp_decline_IDE = 1.15E-05*0.2525 ; k_exp_decline_IDE has 1 / h
+k_exp_decline_IDE = 1.15E-06 ; k_exp_decline_IDE has 1 / h
 AB42_PDMA_EC50_ISF = 50 ; AB42_PDMA_EC50_ISF has nanomol / L
 AB42_PDMA_Vmax_ISF = 0.07 ; AB42_PDMA_Vmax_ISF has dimensionless
 AB42_systemic_synthesis_rate = 1.16 ; AB42_systemic_synthesis_rate has nanomol / h
@@ -549,7 +549,7 @@ AB_O1_CLd2 = 0.01 ; AB_O1_CLd2 has L / h
 Baseline_AB40_O_P = 5.0E-6 ; Baseline_AB40_O_P has L / (nanomol * h)
 Baseline_AB42_O_P = 0.06#5.0E-5 ; Baseline_AB42_O_P has L / (nanomol * h)
 CL_up_brain = 0.03 ; CL_up_brain has 1 / h
-IDE_conc_ISF = 3#0.005; IDE_conc_ISF has nanomol / L
+IDE_conc_ISF = 1#0.005; IDE_conc_ISF has nanomol / L
 Microglia = 1 ; Microglia has dimensionless
 Microglia_EC50_AB40 = 8 ; Microglia_EC50_AB40 has nanomol / L
 Microglia_EC50_AB42 = 120 #Not APOE4; Microglia_EC50_AB42 has nanomol / L
@@ -579,7 +579,7 @@ V_peripheral = 7.5 ; V_peripheral has L
 Vol_brain_ES = 0.00725 ; Vol_brain_ES has L
 fBBB = 0.9090909 ; fBBB has dimensionless
 f_LV = 0.5 ; f_LV has dimensionless
-k_APP_production = 75#1173; k_APP_production has nanomol / (L * h)
+k_APP_production = 293; k_APP_production has nanomol / (L * h)
 k_C99 = 0.666 ; k_C99 has 1 / h
 k_O10_O11_AB40_ISF = 2.22E-05 ; k_O10_O11_AB40_ISF has L / (nano * mol * h)
 k_O10_O11_AB42_ISF = 0.000273561 ; k_O10_O11_AB42_ISF has L / (nano * mol * h)
@@ -622,7 +622,7 @@ k_O19_O18_AB42_ISF = 2.00E-05 ; k_O19_O18_AB42_ISF has 1 / h
 k_O19_O20_AB40_ISF = 2.18E-05 ; k_O19_O20_AB40_ISF has L / (nano * mol * h)
 k_O19_O20_AB42_ISF = 0.000273594 ; k_O19_O20_AB42_ISF has L / (nano * mol * h)
 k_O1_O2_AB40_ISF = 0.00018 ; k_O1_O2_AB40_ISF has L / (nano * mol * h)
-k_O1_O2_AB42_ISF = 0.0003564 #0.0003564; k_O1_O2_AB42_ISF has L / (nano * mol * h)
+k_O1_O2_AB42_ISF = 0.003564 #0.0003564; k_O1_O2_AB42_ISF has L / (nano * mol * h)
 k_O20_O19_AB40_ISF = 1.00E-05 ; k_O20_O19_AB40_ISF has 1 / h
 k_O20_O19_AB42_ISF = 2.00E-05 ; k_O20_O19_AB42_ISF has 1 / h
 k_O20_O21_AB40_ISF = 2.18E-05 ; k_O20_O21_AB40_ISF has L / (nano * mol * h)
@@ -646,7 +646,7 @@ k_O24_O23_AB42_ISF = 2.00E-05 ; k_O24_O23_AB42_ISF has 1 / h
 k_O2_O1_AB40_ISF = 9.72 ; k_O2_O1_AB40_ISF has 1 / h
 k_O2_O1_AB42_ISF = 45.72 ; k_O2_O1_AB42_ISF has 1 / h
 k_O2_O3_AB40_ISF = 7.20E-05 ; k_O2_O3_AB40_ISF has L / (nano * mol * h)
-k_O2_O3_AB42_ISF = 0.01368 #0.0001368; k_O2_O3_AB42_ISF has L / (nano * mol * h)
+k_O2_O3_AB42_ISF = 0.0001368 #0.0001368; k_O2_O3_AB42_ISF has L / (nano * mol * h)
 k_O3_O2_AB40_ISF = 1.00E-05 ; k_O3_O2_AB40_ISF has 1 / h
 k_O3_O2_AB42_ISF = 0.00001 ; k_O3_O2_AB42_ISF has 1 / h
 k_O3_O4_AB40_ISF = 2.61E-05 ; k_O3_O4_AB40_ISF has L / (nano * mol * h)

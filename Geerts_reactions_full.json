@@ -38,7 +38,7 @@
     "Reactants": "[{Abeta}_{O_n0}_{Comp},Antibody_{Comp}]",
     "Products": "[{Abeta}_{O_n0}__Antibody_{Comp}]",
     "Rate_type": "MA",
-    "Rate_eqtn_prototype": "[k1_Antibody]",
+    "Rate_eqtn_prototype": "k1_Antibody",
     "Comp": "[ISF]",
     "Abeta": "[AB40,AB42]",
     "O_n0": "[f\"O{i}\" for i in range(2,18)]"
@@ -48,7 +48,7 @@
     "Reactants": "[{Abeta}_{O_n0}_{Comp},Antibody_{Comp}]",
     "Products": "[{Abeta}_{O_n0}__Antibody_{Comp}]",
     "Rate_type": "MA",
-    "Rate_eqtn_prototype": "[k2_Antibody]",
+    "Rate_eqtn_prototype": "k2_Antibody",
     "Comp": "[ISF]",
     "Abeta": "[AB40,AB42]",
     "O_n0": "[f\"O{i}\" for i in range(18,25)]"
@@ -92,7 +92,7 @@
     "Rate_eqtn_prototype": "Microglia*(Microglia_high_frac*Microglia_high_rate_{Abeta} + (1.0 - Microglia_high_frac)*Microglia_low_rate_{Abeta})",
     "Comp": "[ISF]",
     "Abeta": "[AB40,AB42]",
-    "O_n0": "[f\"O{i}\" for i in range(2,25)]"
+    "O_n0": "[f\"O{i}\" for i in range(1,25)]"
   },
   {
     "Reaction_name": "Microglia Degradation Plaque",
@@ -199,24 +199,24 @@
   // All the sigma_ISF_lymph_Abeta are the same
   {
     "Reaction_name": "Flow ISF to lymph (central) Monomer",
-    "Reactants": "[{Abeta}_O1_{Comp1}]",
-    "Products": "[{Abeta}_O1_{Comp2}]",
+    "Reactants": "[{Abeta}_{Comp1}]",
+    "Products": "[{Abeta}_{Comp2}]",
     "Rate_type": "UDF",
     "Rate_eqtn_prototype": "(1 - sigma_ISF_lymph_Abeta) * Qbrain_ISF",
     "Comp": "[ISF,central]",
-    "Abeta": "[AB40,AB42]"
+    "Abeta": "[AB40_O1,AB42_O1,Antibody,AB40_O1__Antibody,AB42_O1__Antibody]"
   },
   // Glymphatic flow
   // (f_LV * Qbrain_ISF_AB42Mu * AB42_Monomer / Vol_brain_interstitial)
   // All the Qbrain_ISF are the same
   {
     "Reaction_name": "Flow ISF to LV Monomer",
-    "Reactants": "[{Abeta}_O1_{Comp}]",
-    "Products": "[{Abeta}_O1_LV]",
+    "Reactants": "[{Abeta}_{Comp}]",
+    "Products": "[{Abeta}_LV]",
     "Rate_type": "UDF",
     "Rate_eqtn_prototype": "f_LV*Qbrain_ISF",
     "Comp": "[ISF,LV]",
-    "Abeta": "[AB40,AB42]"
+    "Abeta": "[AB40_O1,AB42_O1,Antibody,AB40_O1__Antibody,AB42_O1__Antibody]"
   },
   // ((1 - f_LV) * Qbrain_ISF_AB42Mu * AB42_Monomer / Vol_brain_interstitial)
   // All the Qbrain_ISF are the same
