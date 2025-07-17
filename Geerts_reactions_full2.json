@@ -473,7 +473,7 @@
     "Reactants": "[{Abeta}_O1_BrainPlasma]",
     "Products": "[{Abeta}_O1_central]",
     "Rate_type": "UDF",
-    "Rate_eqtn_prototype": "((Qbrain_plasma - Qlymph_Brain)",
+    "Rate_eqtn_prototype": "(Qbrain_plasma - Qlymph_Brain)",
     "Comp": "[BrainPlasma,central]",
     "Abeta": "[AB40,AB42]"
   },
