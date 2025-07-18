@@ -1,0 +1,516 @@
+d AB40Mb_BBB_Bound/dt = -CLup_brain*f_BBB*VES_brain*FR*AB40Mb_BBB_Bound +kon_FcRn*AB40Mb_BBB_Unbound*FcRn_free_BBB*VBBB_brain -koff_FcRn*AB40Mb_BBB_Bound*VBBB_brain -CLup_brain*f_BBB*VES_brain*(1 - FR)*AB40Mb_BBB_Bound
+
+d AB40Mb_BBB_Unbound/dt = +fta0*AB40Mu_BBB*PK_BBB_unbound_brain*VBBB_brain +CLup_brain*f_BBB*VES_brain*AB40Mb_Brain_Plasma +CLup_brain*f_BBB*VES_brain*AB40_monomer_antibody_bound -kdeg*AB40Mb_BBB_Unbound*VBBB_brain -kon_FcRn*AB40Mb_BBB_Unbound*FcRn_free_BBB*VBBB_brain +koff_FcRn*AB40Mb_BBB_Bound*VBBB_brain
+
+d AB40Mb_BCSFB_Bound/dt = -CLup_brain*(1 - f_BBB)*VES_brain*FR*AB40Mb_BCSFB_Bound +kon_FcRn*AB40Mb_BCSFB_Unbound*FcRn_free_BCSFB*V_BCSFB_brain -koff_FcRn*AB40Mb_BCSFB_Bound*V_BCSFB_brain -f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB40Mb_BCSFB_Bound -(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB40Mb_BCSFB_Bound
+
+d AB40Mb_BCSFB_Unbound/dt = +fta0*AB40Mu_BCSFB*PK_BCSFB_unbound_brain*V_BCSFB_brain +CLup_brain*f_BCSFB*VES_brain*AB40Mb_Brain_Plasma +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*AB40Mb_TFV +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*AB40Mb_LV -kdeg*AB40Mb_BCSFB_Unbound*V_BCSFB_brain -kon_FcRn*AB40Mb_BCSFB_Unbound*FcRn_free_BCSFB*V_BCSFB_brain +koff_FcRn*AB40Mb_BCSFB_Bound*V_BCSFB_brain
+
+d AB40Mb_Brain_Plasma/dt = +fta0*AB40Mu_Brain_Plasma*PK_p_brain*Vp_brain +Q_p_brain*AB40Mb_Central -(Q_p_brain - L_brain)*AB40Mb_Brain_Plasma -f_LV*(1 - sigma_V_BCSFB)*Q_CSF_brain*AB40Mb_Brain_Plasma -(1 - f_LV)*(1 - sigma_V_BCSFB)*Q_CSF_brain*AB40Mb_Brain_Plasma -(1 - sigma_V_brain_ISF)*Q_ISF_brain*AB40Mb_Brain_Plasma -CLup_brain*f_BCSFB*VES_brain*AB40Mb_Brain_Plasma -CLup_brain*f_BBB*VES_brain*AB40Mb_Brain_Plasma +CLup_brain*f_BBB*VES_brain*FR*AB40Mb_BBB_Bound +CLup_brain*(1 - f_BBB)*VES_brain*FR*AB40Mb_BCSFB_Bound
+
+d AB40Mb_CM/dt = +fta0*AB40Mu_CM*PK_CM_brain*V_CM_brain +(Q_CSF_brain + Q_ISF_brain)*AB40Mb_TFV -(Q_CSF_brain + Q_ISF_brain)*AB40Mb_CM
+
+d AB40Mb_Central/dt = +fta0*AB40Mu_Central*PK_central -PK_CL*AB40Mb_Central -PK_CLd2*AB40Mb_Central +PK_CLd2*AB40Mb_Peripheral -Q_p_brain*AB40Mb_Central +(Q_p_brain - L_brain)*AB40Mb_Brain_Plasma +(1 - sigma_L_SAS)*Q_CSF_brain*AB40Mb_SAS +(1 - sigma_L_brain_ISF)*Q_ISF_brain*AB40_monomer_antibody_bound +(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Monomer_PVS_bound
+
+d AB40Mb_LV/dt = +fta0*AB40Mu_LV*PK_LV_brain*V_LV_brain +f_LV*(1 - sigma_V_BCSFB)*Q_CSF_brain*AB40Mb_Brain_Plasma -f_LV*CLup_brain*(1 - f_BBB)*VES_brain*AB40Mb_LV +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB40Mb_BCSFB_Bound +f_LV*Q_ISF_brain*AB40_monomer_antibody_bound -f_LV*(Q_CSF_brain + Q_ISF_brain)*AB40Mb_LV
+
+d AB40Mb_Peripheral/dt = +PK_CLd2*AB40Mb_Central -PK_CLd2*AB40Mb_Peripheral
+
+d AB40Mb_SAS/dt = +fta0*AB40Mu_SAS*PK_SAS_brain*V_SAS_brain -(1 - sigma_L_SAS)*Q_CSF_brain*AB40Mb_SAS -Q_ISF_brain*AB40Mb_SAS +(Q_CSF_brain + Q_ISF_brain)*AB40Mb_CM
+
+d AB40Mb_TFV/dt = +fta0*AB40Mu_TFV*PK_TFV_brain*V_TFV_brain +(1 - f_LV)*(1 - sigma_V_BCSFB)*Q_CSF_brain*AB40Mb_Brain_Plasma -(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*AB40Mb_TFV +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB40Mb_BCSFB_Bound +(1 - f_LV)*Q_ISF_brain*AB40_monomer_antibody_bound +f_LV*(Q_CSF_brain + Q_ISF_brain)*AB40Mb_LV -(Q_CSF_brain + Q_ISF_brain)*AB40Mb_TFV
+
+d AB40Mu_BBB/dt = -fta0*AB40Mu_BBB*PK_BBB_unbound_brain*VBBB_brain +CLup_brain_AB40Mu*f_BBB*VES_brain*AB40Mu_Brain_Plasma +CLup_brain_AB40Mu*f_BBB*VES_brain*AB40_Monomer -kdeg_AB40Mu*AB40Mu_BBB*VBBB_brain
+
+d AB40Mu_BCSFB/dt = -fta0*AB40Mu_BCSFB*PK_BCSFB_unbound_brain*V_BCSFB_brain +CLup_brain_AB40Mu*f_BCSFB*VES_brain*AB40Mu_Brain_Plasma +(1 - f_LV)*CLup_brain_AB40Mu*(1 - f_BBB)*VES_brain*AB40Mu_TFV +f_LV*CLup_brain_AB40Mu*(1 - f_BBB)*VES_brain*AB40Mu_LV -kdeg_AB40Mu*AB40Mu_BCSFB*V_BCSFB_brain
+
+d AB40Mu_Brain_Plasma/dt = -fta0*AB40Mu_Brain_Plasma*PK_p_brain*Vp_brain +Q_p_brain*AB40Mu_Central -(Q_p_brain - L_brain)*AB40Mu_Brain_Plasma -f_LV*(1 - sigma_V_BCSFB_AB40Mu)*Q_CSF_brain*AB40Mu_Brain_Plasma -(1 - f_LV)*(1 - sigma_V_BCSFB_AB40Mu)*Q_CSF_brain*AB40Mu_Brain_Plasma -(1 - sigma_V_ISF_AB40Mu)*Q_ISF_brain*AB40Mu_Brain_Plasma -CLup_brain_AB40Mu*f_BBB*VES_brain*AB40Mu_Brain_Plasma -CLup_brain_AB40Mu*f_BCSFB*VES_brain*AB40Mu_Brain_Plasma
+
+d AB40Mu_CM/dt = -fta0*AB40Mu_CM*PK_CM_brain*V_CM_brain +(Q_CSF_brain + Q_ISF_brain)*AB40Mu_TFV -(Q_CSF_brain + Q_ISF_brain)*AB40Mu_CM
+
+d AB40Mu_Central/dt = -fta0*AB40Mu_Central*PK_central +AB40Mu_systemic_synthesis_rate -AB40MuCL*AB40Mu_Central -AB40MuCLd2*AB40Mu_Central +AB40MuCLd2*AB40Mu_Peripheral -Q_p_brain*AB40Mu_Central +(Q_p_brain - L_brain)*AB40Mu_Brain_Plasma +(1 - sigma_L_SAS_AB40Mu)*Q_CSF_brain*AB40Mu_SAS +(1 - sigma_L_ISF_central_AB40Mu)*Q_ISF_brain*AB40_Monomer +(1 - sigma_PVS_AB40)*Q_PVS*AB40_Monomer_PVS
+
+d AB40Mu_LV/dt = -fta0*AB40Mu_LV*PK_LV_brain*V_LV_brain +f_LV*(1 - sigma_V_BCSFB_AB40Mu)*Q_CSF_brain*AB40Mu_Brain_Plasma -f_LV*CLup_brain_AB40Mu*(1 - f_BBB)*VES_brain*AB40Mu_LV -f_LV*(Q_CSF_brain + Q_ISF_brain)*AB40Mu_LV +f_LV*Q_ISF_brain*AB40_Monomer
+
+d AB40Mu_Peripheral/dt = +AB40MuCLd2*AB40Mu_Central -AB40MuCLd2*AB40Mu_Peripheral
+
+d AB40Mu_SAS/dt = -fta0*AB40Mu_SAS*PK_SAS_brain*V_SAS_brain -(1 - sigma_L_SAS_AB40Mu)*Q_CSF_brain*AB40Mu_SAS +(Q_CSF_brain + Q_ISF_brain)*AB40Mu_CM -Q_ISF_brain*AB40Mu_SAS
+
+d AB40Mu_TFV/dt = -fta0*AB40Mu_TFV*PK_TFV_brain*V_TFV_brain +(1 - f_LV)*(1 - sigma_V_BCSFB_AB40Mu)*Q_CSF_brain*AB40Mu_Brain_Plasma -(1 - f_LV)*CLup_brain_AB40Mu*(1 - f_BBB)*VES_brain*AB40Mu_TFV +f_LV*(Q_CSF_brain + Q_ISF_brain)*AB40Mu_LV -(Q_CSF_brain + Q_ISF_brain)*AB40Mu_TFV +(1 - f_LV)*Q_ISF_brain*AB40_Monomer
+
+d AB40_Fibril17/dt = +k_O16_F17_forty*AB40_Oligomer16*AB40_Monomer*VIS_brain -k_F17_O16_forty*AB40_Fibril17*VIS_brain -k_F17_Plaque_forty*AB40_Fibril17*AB40_Monomer*VIS_brain +k_O16_F17_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Monomer*AB40_Oligomer16*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*Ab_t*AB40_Fibril17*VIS_brain -Microglia_Vmax_forty*AB40_Fibril17*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_F17_F18_forty*AB40_Fibril17*AB40_Monomer*VIS_brain +k_F18_F17_forty*AB40_Fibril18*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer17)*Q_PVS*AB40_Fibril17
+
+d AB40_Fibril17_Antibody_bound/dt = +fta1*Ab_t*AB40_Fibril17*VIS_brain -Microglia_Vmax_forty*AB40_Fibril17_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Fibril17_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer17)*Q_PVS*AB40_Fibril17 -fta2*AB40_Fibril17_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Fibril17_PVS
+
+d AB40_Fibril17_PVS_bound/dt = +fta2*AB40_Fibril17_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Fibril17_PVS_bound
+
+d AB40_Fibril18/dt = +k_F17_F18_forty*AB40_Fibril17*AB40_Monomer*VIS_brain -k_F18_F17_forty*AB40_Fibril18*VIS_brain -k_F18_Plaque_forty*AB40_Fibril18*AB40_Monomer*VIS_brain -fta2*Ab_t*AB40_Fibril18*VIS_brain -Microglia_Vmax_forty*AB40_Fibril18*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_F18_F19_forty*AB40_Fibril18*AB40_Monomer*VIS_brain +k_F19_F18_forty*AB40_Fibril19*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer18)*Q_PVS*AB40_Fibril18
+
+d AB40_Fibril18_Antibody_bound/dt = +fta2*Ab_t*AB40_Fibril18*VIS_brain -Microglia_Vmax_forty*AB40_Fibril18_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Fibril18_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer18)*Q_PVS*AB40_Fibril18 -fta2*AB40_Fibril18_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Fibril18_PVS
+
+d AB40_Fibril18_PVS_bound/dt = +fta2*AB40_Fibril18_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Fibril18_PVS_bound
+
+d AB40_Fibril19/dt = +k_F18_F19_forty*AB40_Fibril18*AB40_Monomer*VIS_brain -k_F19_F18_forty*AB40_Fibril19*VIS_brain -fta2*AB40_Fibril19*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril19*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_F19_F20_forty*AB40_Fibril19*AB40_Monomer*VIS_brain +k_F20_F19_forty*AB40_Fibril20*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer19)*Q_PVS*AB40_Fibril19
+
+d AB40_Fibril19_Antibody_bound/dt = +fta2*AB40_Fibril19*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril19_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Fibril19_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer19)*Q_PVS*AB40_Fibril19 -fta2*AB40_Fibril19_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Fibril19_PVS
+
+d AB40_Fibril19_PVS_bound/dt = +fta2*AB40_Fibril19_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Fibril19_PVS_bound
+
+d AB40_Fibril20/dt = +k_F19_F20_forty*AB40_Fibril19*AB40_Monomer*VIS_brain -k_F20_F19_forty*AB40_Fibril20*VIS_brain -fta2*AB40_Fibril20*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril20*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_F20_F21_forty*AB40_Fibril20*AB40_Monomer*VIS_brain +k_F21_F20_forty*AB40_Fibril21*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer20)*Q_PVS*AB40_Fibril20
+
+d AB40_Fibril20_Antibody_bound/dt = +fta2*AB40_Fibril20*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril20_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Fibril20_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer20)*Q_PVS*AB40_Fibril20 -fta2*AB40_Fibril20_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Fibril20_PVS
+
+d AB40_Fibril20_PVS_bound/dt = +fta2*AB40_Fibril20_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Fibril20_PVS_bound
+
+d AB40_Fibril21/dt = +k_F20_F21_forty*AB40_Fibril20*AB40_Monomer*VIS_brain -k_F21_F20_forty*AB40_Fibril21*VIS_brain -fta2*AB40_Fibril21*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril21*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_F21_F22_forty*AB40_Fibril21*AB40_Monomer*VIS_brain +k_F22_F21_forty*AB40_Fibril22*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer21)*Q_PVS*AB40_Fibril21
+
+d AB40_Fibril21_Antibody_bound/dt = +fta2*AB40_Fibril21*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril21_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Fibril21_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer21)*Q_PVS*AB40_Fibril21 -fta2*AB40_Fibril21_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Fibril21_PVS
+
+d AB40_Fibril21_PVS_bound/dt = +fta2*AB40_Fibril21_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Fibril21_PVS_bound
+
+d AB40_Fibril22/dt = +k_F21_F22_forty*AB40_Fibril21*AB40_Monomer*VIS_brain -k_F22_F21_forty*AB40_Fibril22*VIS_brain -fta2*AB40_Fibril22*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril22*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_F22_F23_forty*AB40_Fibril22*AB40_Monomer*VIS_brain +k_F23_F22_forty*AB40_Fibril23*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer22)*Q_PVS*AB40_Fibril22
+
+d AB40_Fibril22_Antibody_bound/dt = +fta2*AB40_Fibril22*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril22_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Fibril22_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer22)*Q_PVS*AB40_Fibril22 -fta2*AB40_Fibril22_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Fibril22_PVS
+
+d AB40_Fibril22_PVS_bound/dt = +fta2*AB40_Fibril22_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Fibril22_PVS_bound
+
+d AB40_Fibril23/dt = +k_F22_F23_forty*AB40_Fibril22*AB40_Monomer*VIS_brain -k_F23_F22_forty*AB40_Fibril23*VIS_brain -fta2*AB40_Fibril23*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril23*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_F23_F24_forty*AB40_Fibril23*AB40_Monomer*VIS_brain +k_F24_F23_forty*AB40_Fibril24*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer23)*Q_PVS*AB40_Fibril23
+
+d AB40_Fibril23_Antibody_bound/dt = +fta2*AB40_Fibril23*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril23_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Fibril23_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer23)*Q_PVS*AB40_Fibril23 -fta2*AB40_Fibril23_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Fibril23_PVS
+
+d AB40_Fibril23_PVS_bound/dt = +fta2*AB40_Fibril23_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Fibril23_PVS_bound
+
+d AB40_Fibril24/dt = +k_F23_F24_forty*AB40_Fibril23*AB40_Monomer*VIS_brain -k_F24_F23_forty*AB40_Fibril24*VIS_brain -k_F24_O12_forty*k_F24_F23_forty*AB40_Fibril24*VIS_brain -fta2*AB40_Fibril24*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril24*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer24)*Q_PVS*AB40_Fibril24
+
+d AB40_Fibril24_Antibody_bound/dt = +fta2*AB40_Fibril24*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Fibril24_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Fibril24_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer24)*Q_PVS*AB40_Fibril24 -fta2*AB40_Fibril24_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Fibril24_PVS
+
+d AB40_Fibril24_PVS_bound/dt = +fta2*AB40_Fibril24_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Fibril24_PVS_bound
+
+d AB40_Monomer/dt = +k_in_AB40*C99*VIS_brain -IDE_conc*CL_AB40_IDE*((AB40_Monomer*Unit_removal_1)^AB40_IDE_Hill/((AB40_Monomer*Unit_removal_1)^AB40_IDE_Hill + AB40_IDE_IC50^AB40_IDE_Hill))*VIS_brain -2*k_M_O2_forty*AB40_Monomer*AB40_Monomer*VIS_brain +2*k_O2_M_forty*AB40_Oligomer02*VIS_brain -2*k_M_O2_forty*AB40_Plaque_Vmax*AB40_Monomer*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_EC50))*VIS_brain -k_O2_O3_forty*AB40_Oligomer02*AB40_Monomer*VIS_brain +k_O3_O2_forty*AB40_Oligomer03*VIS_brain -k_O2_O3_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer02*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O3_O4_forty*AB40_Oligomer03*AB40_Monomer*VIS_brain +k_O4_O3_forty*AB40_Oligomer04*VIS_brain -k_O3_O4_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer03*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O4_O5_forty*AB40_Oligomer04*AB40_Monomer*VIS_brain +k_O5_O4_forty*AB40_Oligomer05*VIS_brain -k_O4_O5_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer04*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O5_O6_forty*AB40_Oligomer05*AB40_Monomer*VIS_brain +k_O6_O5_forty*AB40_Oligomer06*VIS_brain -k_O5_O6_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer05*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O6_O7_forty*AB40_Oligomer06*AB40_Monomer*VIS_brain +k_O7_O6_forty*AB40_Oligomer07*VIS_brain -k_O6_O7_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer06*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O7_O8_forty*AB40_Oligomer07*AB40_Monomer*VIS_brain +k_O8_O7_forty*AB40_Oligomer08*VIS_brain -k_O7_O8_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer07*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O8_O9_forty*AB40_Oligomer08*AB40_Monomer*VIS_brain +k_O9_O8_forty*AB40_Oligomer09*VIS_brain -k_O8_O9_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer08*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O9_O10_forty*AB40_Oligomer09*AB40_Monomer*VIS_brain +k_O10_O9_forty*AB40_Oligomer10*VIS_brain -k_O9_O10_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer09*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O10_O11_forty*AB40_Oligomer10*AB40_Monomer*VIS_brain +k_O11_O10_forty*AB40_Oligomer11*VIS_brain -k_O10_O11_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer10*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O11_O12_forty*AB40_Oligomer11*AB40_Monomer*VIS_brain +k_O12_O11_forty*AB40_Oligomer12*VIS_brain -k_O11_O12_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer11*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O12_O13_forty*AB40_Oligomer12*AB40_Monomer*VIS_brain +k_O13_O12_forty*AB40_Oligomer13*VIS_brain -k_O12_O13_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer12*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O13_Plaque_forty*AB40_Oligomer13*AB40_Monomer*VIS_brain -k_O13_O14_forty*AB40_Oligomer13*AB40_Monomer*VIS_brain +k_O14_O13_forty*AB40_Oligomer14*VIS_brain -k_O13_O14_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer13*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O14_Plaque_forty*AB40_Oligomer14*AB40_Monomer*VIS_brain -k_O14_O15_forty*AB40_Oligomer14*AB40_Monomer*VIS_brain +k_O15_O14_forty*AB40_Oligomer15*VIS_brain -k_O14_O15_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer14*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O15_Plaque_forty*AB40_Oligomer15*AB40_Monomer*VIS_brain -k_O15_O16_forty*AB40_Oligomer15*AB40_Monomer*VIS_brain +k_O16_O15_forty*AB40_Oligomer16*VIS_brain -k_O15_O16_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer15*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O16_Plaque_forty*AB40_Oligomer16*AB40_Monomer*VIS_brain -k_O16_F17_forty*AB40_Oligomer16*AB40_Monomer*VIS_brain +k_F17_O16_forty*AB40_Fibril17*VIS_brain -k_F17_Plaque_forty*AB40_Fibril17*AB40_Monomer*VIS_brain -k_O16_F17_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Monomer*AB40_Oligomer16*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_F17_F18_forty*AB40_Fibril17*AB40_Monomer*VIS_brain +k_F18_F17_forty*AB40_Fibril18*VIS_brain -k_F18_Plaque_forty*AB40_Fibril18*AB40_Monomer*VIS_brain -k_F18_F19_forty*AB40_Fibril18*AB40_Monomer*VIS_brain +k_F19_F18_forty*AB40_Fibril19*VIS_brain -k_F19_F20_forty*AB40_Fibril19*AB40_Monomer*VIS_brain +k_F20_F19_forty*AB40_Fibril20*VIS_brain -k_F20_F21_forty*AB40_Fibril20*AB40_Monomer*VIS_brain +k_F21_F20_forty*AB40_Fibril21*VIS_brain -k_F21_F22_forty*AB40_Fibril21*AB40_Monomer*VIS_brain +k_F22_F21_forty*AB40_Fibril22*VIS_brain -k_F22_F23_forty*AB40_Fibril22*AB40_Monomer*VIS_brain +k_F23_F22_forty*AB40_Fibril23*VIS_brain -k_F23_F24_forty*AB40_Fibril23*AB40_Monomer*VIS_brain +k_F24_F23_forty*AB40_Fibril24*VIS_brain -fta0*Ab_t*AB40_Monomer*VIS_brain -(1 - sigma_L_ISF_central_AB40Mu)*Q_ISF_brain*AB40_Monomer +(1 - sigma_V_ISF_AB40Mu)*Q_ISF_brain*AB40Mu_Brain_Plasma -CLup_brain_AB40Mu*f_BBB*VES_brain*AB40_Monomer -f_LV*Q_ISF_brain*AB40_Monomer -(1 - f_LV)*Q_ISF_brain*AB40_Monomer +Q_ISF_brain*AB40Mu_SAS -(1 - sigma_ISF_ABeta40_monomer)*Q_PVS*AB40_Monomer
+
+d AB40_Monomer_PVS/dt = +(1 - sigma_ISF_ABeta40_monomer)*Q_PVS*AB40_Monomer -fta0*AB40_Monomer_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Monomer_PVS
+
+d AB40_Monomer_PVS_bound/dt = +fta0*AB40_Monomer_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Monomer_PVS_bound
+
+d AB40_Oligomer02/dt = +k_M_O2_forty*AB40_Monomer*AB40_Monomer*VIS_brain -k_O2_M_forty*AB40_Oligomer02*VIS_brain +k_M_O2_forty*AB40_Plaque_Vmax*AB40_Monomer*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_EC50))*VIS_brain -fta1*AB40_Oligomer02*Ab_t*VIS_brain -k_O2_O3_forty*AB40_Oligomer02*AB40_Monomer*VIS_brain +k_O3_O2_forty*AB40_Oligomer03*VIS_brain -k_O2_O3_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer02*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer02)*Q_PVS*AB40_Oligomer02
+
+d AB40_Oligomer02_Antibody_bound/dt = +fta1*AB40_Oligomer02*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer02_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer02_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer02)*Q_PVS*AB40_Oligomer02 -fta1*AB40_Oligomer02_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer02_PVS
+
+d AB40_Oligomer02_PVS_bound/dt = +fta1*AB40_Oligomer02_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer02_PVS_bound
+
+d AB40_Oligomer03/dt = +k_O2_O3_forty*AB40_Oligomer02*AB40_Monomer*VIS_brain -k_O3_O2_forty*AB40_Oligomer03*VIS_brain +k_O2_O3_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer02*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer03*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer03*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O3_O4_forty*AB40_Oligomer03*AB40_Monomer*VIS_brain +k_O4_O3_forty*AB40_Oligomer04*VIS_brain -k_O3_O4_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer03*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer03)*Q_PVS*AB40_Oligomer03
+
+d AB40_Oligomer03_Antibody_bound/dt = +fta1*AB40_Oligomer03*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer03_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer03_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer03)*Q_PVS*AB40_Oligomer03 -fta1*AB40_Oligomer03_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer03_PVS
+
+d AB40_Oligomer03_PVS_bound/dt = +fta1*AB40_Oligomer03_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer03_PVS_bound
+
+d AB40_Oligomer04/dt = +k_O3_O4_forty*AB40_Oligomer03*AB40_Monomer*VIS_brain -k_O4_O3_forty*AB40_Oligomer04*VIS_brain +k_O3_O4_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer03*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer04*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer04*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O4_O5_forty*AB40_Oligomer04*AB40_Monomer*VIS_brain +k_O5_O4_forty*AB40_Oligomer05*VIS_brain -k_O4_O5_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer04*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer04)*Q_PVS*AB40_Oligomer04
+
+d AB40_Oligomer04_Antibody_bound/dt = +fta1*AB40_Oligomer04*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer04_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer04_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer04)*Q_PVS*AB40_Oligomer04 -fta1*AB40_Oligomer04_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer04_PVS
+
+d AB40_Oligomer04_PVS_bound/dt = +fta1*AB40_Oligomer04_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer04_PVS_bound
+
+d AB40_Oligomer05/dt = +k_O4_O5_forty*AB40_Oligomer04*AB40_Monomer*VIS_brain -k_O5_O4_forty*AB40_Oligomer05*VIS_brain +k_O4_O5_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer04*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer05*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer05*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O5_O6_forty*AB40_Oligomer05*AB40_Monomer*VIS_brain +k_O6_O5_forty*AB40_Oligomer06*VIS_brain -k_O5_O6_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer05*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer05)*Q_PVS*AB40_Oligomer05
+
+d AB40_Oligomer05_Antibody_bound/dt = +fta1*AB40_Oligomer05*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer05_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer05_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer05)*Q_PVS*AB40_Oligomer05 -fta1*AB40_Oligomer05_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer05_PVS
+
+d AB40_Oligomer05_PVS_bound/dt = +fta1*AB40_Oligomer05_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer05_PVS_bound
+
+d AB40_Oligomer06/dt = +k_O5_O6_forty*AB40_Oligomer05*AB40_Monomer*VIS_brain -k_O6_O5_forty*AB40_Oligomer06*VIS_brain +k_O5_O6_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer05*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer06*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer06*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O6_O7_forty*AB40_Oligomer06*AB40_Monomer*VIS_brain +k_O7_O6_forty*AB40_Oligomer07*VIS_brain -k_O6_O7_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer06*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer06)*Q_PVS*AB40_Oligomer06
+
+d AB40_Oligomer06_Antibody_bound/dt = +fta1*AB40_Oligomer06*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer06_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer06_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer06)*Q_PVS*AB40_Oligomer06 -fta1*AB40_Oligomer06_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer06_PVS
+
+d AB40_Oligomer06_PVS_bound/dt = +fta1*AB40_Oligomer06_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer06_PVS_bound
+
+d AB40_Oligomer07/dt = +k_O6_O7_forty*AB40_Oligomer06*AB40_Monomer*VIS_brain -k_O7_O6_forty*AB40_Oligomer07*VIS_brain +k_O6_O7_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer06*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer07*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer07*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O7_O8_forty*AB40_Oligomer07*AB40_Monomer*VIS_brain +k_O8_O7_forty*AB40_Oligomer08*VIS_brain -k_O7_O8_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer07*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer07)*Q_PVS*AB40_Oligomer07
+
+d AB40_Oligomer07_Antibody_bound/dt = +fta1*AB40_Oligomer07*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer07_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer07_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer07)*Q_PVS*AB40_Oligomer07 -fta1*AB40_Oligomer07_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer07_PVS
+
+d AB40_Oligomer07_PVS_bound/dt = +fta1*AB40_Oligomer07_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer07_PVS_bound
+
+d AB40_Oligomer08/dt = +k_O7_O8_forty*AB40_Oligomer07*AB40_Monomer*VIS_brain -k_O8_O7_forty*AB40_Oligomer08*VIS_brain +k_O7_O8_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer07*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer08*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer08*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O8_O9_forty*AB40_Oligomer08*AB40_Monomer*VIS_brain +k_O9_O8_forty*AB40_Oligomer09*VIS_brain -k_O8_O9_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer08*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer08)*Q_PVS*AB40_Oligomer08
+
+d AB40_Oligomer08_Antibody_bound/dt = +fta1*AB40_Oligomer08*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer08_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer08_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer08)*Q_PVS*AB40_Oligomer08 -fta1*AB40_Oligomer08_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer08_PVS
+
+d AB40_Oligomer08_PVS_bound/dt = +fta1*AB40_Oligomer08_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer08_PVS_bound
+
+d AB40_Oligomer09/dt = +k_O8_O9_forty*AB40_Oligomer08*AB40_Monomer*VIS_brain -k_O9_O8_forty*AB40_Oligomer09*VIS_brain +k_O8_O9_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer08*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer09*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer09*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O9_O10_forty*AB40_Oligomer09*AB40_Monomer*VIS_brain +k_O10_O9_forty*AB40_Oligomer10*VIS_brain -k_O9_O10_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer09*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer09)*Q_PVS*AB40_Oligomer09
+
+d AB40_Oligomer09_Antibody_bound/dt = +fta1*AB40_Oligomer09*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer09_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer09_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer09)*Q_PVS*AB40_Oligomer09 -fta1*AB40_Oligomer09_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer09_PVS
+
+d AB40_Oligomer09_PVS_bound/dt = +fta1*AB40_Oligomer09_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer09_PVS_bound
+
+d AB40_Oligomer10/dt = +k_O9_O10_forty*AB40_Oligomer09*AB40_Monomer*VIS_brain -k_O10_O9_forty*AB40_Oligomer10*VIS_brain +k_O9_O10_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer09*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer10*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer10*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O10_O11_forty*AB40_Oligomer10*AB40_Monomer*VIS_brain +k_O11_O10_forty*AB40_Oligomer11*VIS_brain -k_O10_O11_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer10*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer10)*Q_PVS*AB40_Oligomer10
+
+d AB40_Oligomer10_Antibody_bound/dt = +fta1*AB40_Oligomer10*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer10_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer10_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer10)*Q_PVS*AB40_Oligomer10 -fta1*AB40_Oligomer10_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer10_PVS
+
+d AB40_Oligomer10_PVS_bound/dt = +fta1*AB40_Oligomer10_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer10_PVS_bound
+
+d AB40_Oligomer11/dt = +k_O10_O11_forty*AB40_Oligomer10*AB40_Monomer*VIS_brain -k_O11_O10_forty*AB40_Oligomer11*VIS_brain +k_O10_O11_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer10*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer11*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer11*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O11_O12_forty*AB40_Oligomer11*AB40_Monomer*VIS_brain +k_O12_O11_forty*AB40_Oligomer12*VIS_brain -k_O11_O12_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer11*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer11)*Q_PVS*AB40_Oligomer11
+
+d AB40_Oligomer11_Antibody_bound/dt = +fta1*AB40_Oligomer11*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer11_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer11_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer11)*Q_PVS*AB40_Oligomer11 -fta1*AB40_Oligomer11_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer11_PVS
+
+d AB40_Oligomer11_PVS_bound/dt = +fta1*AB40_Oligomer11_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer11_PVS_bound
+
+d AB40_Oligomer12/dt = +k_O11_O12_forty*AB40_Oligomer11*AB40_Monomer*VIS_brain -k_O12_O11_forty*AB40_Oligomer12*VIS_brain +k_O11_O12_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer11*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB40_Oligomer12*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer12*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O12_O13_forty*AB40_Oligomer12*AB40_Monomer*VIS_brain +k_O13_O12_forty*AB40_Oligomer13*VIS_brain -k_O12_O13_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer12*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain +2*k_F24_O12_forty*k_F24_F23_forty*AB40_Fibril24*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer12)*Q_PVS*AB40_Oligomer12
+
+d AB40_Oligomer12_Antibody_bound/dt = +fta1*AB40_Oligomer12*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer12_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer12_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer12)*Q_PVS*AB40_Oligomer12 -fta1*AB40_Oligomer12_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer12_PVS
+
+d AB40_Oligomer12_PVS_bound/dt = +fta1*AB40_Oligomer12_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer12_PVS_bound
+
+d AB40_Oligomer13/dt = +k_O12_O13_forty*AB40_Oligomer12*AB40_Monomer*VIS_brain -k_O13_O12_forty*AB40_Oligomer13*VIS_brain +k_O12_O13_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer12*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O13_Plaque_forty*AB40_Oligomer13*AB40_Monomer*VIS_brain -fta1*AB40_Oligomer13*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer13*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O13_O14_forty*AB40_Oligomer13*AB40_Monomer*VIS_brain +k_O14_O13_forty*AB40_Oligomer14*VIS_brain -k_O13_O14_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer13*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer13)*Q_PVS*AB40_Oligomer13
+
+d AB40_Oligomer13_Antibody_bound/dt = +fta1*AB40_Oligomer13*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer13_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer13_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer13)*Q_PVS*AB40_Oligomer13 -fta1*AB40_Oligomer13_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer13_PVS
+
+d AB40_Oligomer13_PVS_bound/dt = +fta1*AB40_Oligomer13_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer13_PVS_bound
+
+d AB40_Oligomer14/dt = +k_O13_O14_forty*AB40_Oligomer13*AB40_Monomer*VIS_brain -k_O14_O13_forty*AB40_Oligomer14*VIS_brain +k_O13_O14_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer13*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O14_Plaque_forty*AB40_Oligomer14*AB40_Monomer*VIS_brain -fta1*AB40_Oligomer14*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer14*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O14_O15_forty*AB40_Oligomer14*AB40_Monomer*VIS_brain +k_O15_O14_forty*AB40_Oligomer15*VIS_brain -k_O14_O15_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer14*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer14)*Q_PVS*AB40_Oligomer14
+
+d AB40_Oligomer14_Antibody_bound/dt = +fta1*AB40_Oligomer14*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer14_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer14_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer14)*Q_PVS*AB40_Oligomer14 -fta1*AB40_Oligomer14_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer14_PVS
+
+d AB40_Oligomer14_PVS_bound/dt = +fta1*AB40_Oligomer14_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer14_PVS_bound
+
+d AB40_Oligomer15/dt = +k_O14_O15_forty*AB40_Oligomer14*AB40_Monomer*VIS_brain -k_O15_O14_forty*AB40_Oligomer15*VIS_brain +k_O14_O15_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer14*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O15_Plaque_forty*AB40_Oligomer15*AB40_Monomer*VIS_brain -fta1*AB40_Oligomer15*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer15*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O15_O16_forty*AB40_Oligomer15*AB40_Monomer*VIS_brain +k_O16_O15_forty*AB40_Oligomer16*VIS_brain -k_O15_O16_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer15*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer15)*Q_PVS*AB40_Oligomer15
+
+d AB40_Oligomer15_Antibody_bound/dt = +fta1*AB40_Oligomer15*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer15_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer15_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer15)*Q_PVS*AB40_Oligomer15 -fta1*AB40_Oligomer15_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer15_PVS
+
+d AB40_Oligomer15_PVS_bound/dt = +fta1*AB40_Oligomer15_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer15_PVS_bound
+
+d AB40_Oligomer16/dt = +k_O15_O16_forty*AB40_Oligomer15*AB40_Monomer*VIS_brain -k_O16_O15_forty*AB40_Oligomer16*VIS_brain +k_O15_O16_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Oligomer15*AB40_Monomer*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O16_Plaque_forty*AB40_Oligomer16*AB40_Monomer*VIS_brain -fta1*AB40_Oligomer16*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer16*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain -k_O16_F17_forty*AB40_Oligomer16*AB40_Monomer*VIS_brain +k_F17_O16_forty*AB40_Fibril17*VIS_brain -k_O16_F17_forty*AB40_Plaque_Driven_Monomer_Addition_Vmax*AB40_Monomer*AB40_Oligomer16*(AB40_Plaque_unbound/(AB40_Plaque_unbound + AB40_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta40_oligomer16)*Q_PVS*AB40_Oligomer16
+
+d AB40_Oligomer16_Antibody_bound/dt = +fta1*AB40_Oligomer16*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Oligomer16_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Oligomer16_PVS/dt = +(1 - sigma_ISF_ABeta40_oligomer16)*Q_PVS*AB40_Oligomer16 -fta1*AB40_Oligomer16_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40)*Q_PVS*AB40_Oligomer16_PVS
+
+d AB40_Oligomer16_PVS_bound/dt = +fta1*AB40_Oligomer16_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB40_bound)*Q_PVS*AB40_Oligomer16_PVS_bound
+
+d AB40_Plaque_Antibody_bound/dt = +fta3*AB40_Plaque_unbound*Ab_t*VIS_brain -Microglia_Vmax_forty*AB40_Plaque_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB40_Plaque_bound_PVS/dt = +fta3*AB40_Plaque_unbound_PVS*C_Antibody_unbound_PVS*V_PVS -CL_AB40_plaque_bound_PVS*AB40_Plaque_bound_PVS
+
+d AB40_Plaque_unbound/dt = +k_O13_Plaque_forty*AB40_Oligomer13*AB40_Monomer*VIS_brain +k_O14_Plaque_forty*AB40_Oligomer14*AB40_Monomer*VIS_brain +k_O15_Plaque_forty*AB40_Oligomer15*AB40_Monomer*VIS_brain +k_O16_Plaque_forty*AB40_Oligomer16*AB40_Monomer*VIS_brain +k_F17_Plaque_forty*AB40_Fibril17*AB40_Monomer*VIS_brain +k_F18_Plaque_forty*AB40_Fibril18*AB40_Monomer*VIS_brain -fta3*AB40_Plaque_unbound*Ab_t*VIS_brain -0.5*Microglia_Vmax_forty*AB40_Plaque_unbound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40)*VIS_brain
+
+d AB40_Plaque_unbound_PVS/dt = -fta3*AB40_Plaque_unbound_PVS*C_Antibody_unbound_PVS*V_PVS -CL_AB40_plaque_free_PVS*AB40_Plaque_unbound_PVS
+
+d AB40_monomer_antibody_bound/dt = +fta0*Ab_t*AB40_Monomer*VIS_brain -(1 - sigma_L_brain_ISF)*Q_ISF_brain*AB40_monomer_antibody_bound +(1 - sigma_V_brain_ISF)*Q_ISF_brain*AB40Mb_Brain_Plasma -CLup_brain*f_BBB*VES_brain*AB40_monomer_antibody_bound +CLup_brain*f_BBB*VES_brain*(1 - FR)*AB40Mb_BBB_Bound -AB40_monomer_antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB40 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB40) +Q_ISF_brain*AB40Mb_SAS -f_LV*Q_ISF_brain*AB40_monomer_antibody_bound -(1 - f_LV)*Q_ISF_brain*AB40_monomer_antibody_bound
+
+d AB42Mb_BBB_Bound/dt = -CLup_brain*f_BBB*VES_brain*FR*AB42Mb_BBB_Bound +kon_FcRn*AB42Mb_BBB_Unbound*FcRn_free_BBB*VBBB_brain -koff_FcRn*AB42Mb_BBB_Bound*VBBB_brain -CLup_brain*f_BBB*VES_brain*(1 - FR)*AB42Mb_BBB_Bound
+
+d AB42Mb_BBB_Unbound/dt = +fta0*AB42Mu_BBB*PK_BBB_unbound_brain*VBBB_brain +CLup_brain*f_BBB*VES_brain*AB42Mb_Brain_Plasma +CLup_brain*f_BBB*VES_brain*AB42_monomer_antibody_bound -kdeg*AB42Mb_BBB_Unbound*VBBB_brain -kon_FcRn*AB42Mb_BBB_Unbound*FcRn_free_BBB*VBBB_brain +koff_FcRn*AB42Mb_BBB_Bound*VBBB_brain
+
+d AB42Mb_BCSFB_Bound/dt = -CLup_brain*(1 - f_BBB)*VES_brain*FR*AB42Mb_BCSFB_Bound +kon_FcRn*AB42Mb_BCSFB_Unbound*FcRn_free_BCSFB*V_BCSFB_brain -koff_FcRn*AB42Mb_BCSFB_Bound*V_BCSFB_brain -f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB42Mb_BCSFB_Bound -(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB42Mb_BCSFB_Bound
+
+d AB42Mb_BCSFB_Unbound/dt = +fta0*AB42Mu_BCSFB*PK_BCSFB_unbound_brain*V_BCSFB_brain +CLup_brain*f_BCSFB*VES_brain*AB42Mb_Brain_Plasma +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*AB42Mb_TFV +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*AB42Mb_LV -kdeg*AB42Mb_BCSFB_Unbound*V_BCSFB_brain -kon_FcRn*AB42Mb_BCSFB_Unbound*FcRn_free_BCSFB*V_BCSFB_brain +koff_FcRn*AB42Mb_BCSFB_Bound*V_BCSFB_brain
+
+d AB42Mb_Brain_Plasma/dt = +fta0*AB42Mu_Brain_Plasma*PK_p_brain*Vp_brain +Q_p_brain*AB42Mb_Central -(Q_p_brain - L_brain)*AB42Mb_Brain_Plasma -f_LV*(1 - sigma_V_BCSFB)*Q_CSF_brain*AB42Mb_Brain_Plasma -(1 - f_LV)*(1 - sigma_V_BCSFB)*Q_CSF_brain*AB42Mb_Brain_Plasma -(1 - sigma_V_brain_ISF)*Q_ISF_brain*AB42Mb_Brain_Plasma -CLup_brain*f_BCSFB*VES_brain*AB42Mb_Brain_Plasma -CLup_brain*f_BBB*VES_brain*AB42Mb_Brain_Plasma +CLup_brain*f_BBB*VES_brain*FR*AB42Mb_BBB_Bound +CLup_brain*(1 - f_BBB)*VES_brain*FR*AB42Mb_BCSFB_Bound
+
+d AB42Mb_CM/dt = +fta0*AB42Mu_CM*PK_CM_brain*V_CM_brain +(Q_CSF_brain + Q_ISF_brain)*AB42Mb_TFV -(Q_CSF_brain + Q_ISF_brain)*AB42Mb_CM
+
+d AB42Mb_Central/dt = +fta0*AB42Mu_Central*PK_central -PK_CL*AB42Mb_Central -PK_CLd2*AB42Mb_Central +PK_CLd2*AB42Mb_Peripheral -Q_p_brain*AB42Mb_Central +(Q_p_brain - L_brain)*AB42Mb_Brain_Plasma +(1 - sigma_L_SAS)*Q_CSF_brain*AB42Mb_SAS +(1 - sigma_L_brain_ISF)*Q_ISF_brain*AB42_monomer_antibody_bound +(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Monomer_PVS_bound
+
+d AB42Mb_LV/dt = +fta0*AB42Mu_LV*PK_LV_brain*V_LV_brain +f_LV*(1 - sigma_V_BCSFB)*Q_CSF_brain*AB42Mb_Brain_Plasma -f_LV*CLup_brain*(1 - f_BBB)*VES_brain*AB42Mb_LV +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB42Mb_BCSFB_Bound +f_LV*Q_ISF_brain*AB42_monomer_antibody_bound -f_LV*(Q_CSF_brain + Q_ISF_brain)*AB42Mb_LV
+
+d AB42Mb_Peripheral/dt = +PK_CLd2*AB42Mb_Central -PK_CLd2*AB42Mb_Peripheral
+
+d AB42Mb_SAS/dt = +fta0*AB42Mu_SAS*PK_SAS_brain*V_SAS_brain -(1 - sigma_L_SAS)*Q_CSF_brain*AB42Mb_SAS -Q_ISF_brain*AB42Mb_SAS +(Q_CSF_brain + Q_ISF_brain)*AB42Mb_CM
+
+d AB42Mb_TFV/dt = +fta0*AB42Mu_TFV*PK_TFV_brain*V_TFV_brain +(1 - f_LV)*(1 - sigma_V_BCSFB)*Q_CSF_brain*AB42Mb_Brain_Plasma -(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*AB42Mb_TFV +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB42Mb_BCSFB_Bound +(1 - f_LV)*Q_ISF_brain*AB42_monomer_antibody_bound +f_LV*(Q_CSF_brain + Q_ISF_brain)*AB42Mb_LV -(Q_CSF_brain + Q_ISF_brain)*AB42Mb_TFV
+
+d AB42Mu_BBB/dt = -fta0*AB42Mu_BBB*PK_BBB_unbound_brain*VBBB_brain +CLup_brain_AB42Mu*f_BBB*VES_brain*AB42Mu_Brain_Plasma +CLup_brain_AB42Mu*f_BBB*VES_brain*AB42_Monomer -kdeg_AB42Mu*AB42Mu_BBB*VBBB_brain
+
+d AB42Mu_BCSFB/dt = -fta0*AB42Mu_BCSFB*PK_BCSFB_unbound_brain*V_BCSFB_brain +CLup_brain_AB42Mu*f_BCSFB*VES_brain*AB42Mu_Brain_Plasma +(1 - f_LV)*CLup_brain_AB42Mu*(1 - f_BBB)*VES_brain*AB42Mu_TFV +f_LV*CLup_brain_AB42Mu*(1 - f_BBB)*VES_brain*AB42Mu_LV -kdeg_AB42Mu*AB42Mu_BCSFB*V_BCSFB_brain
+
+d AB42Mu_Brain_Plasma/dt = -fta0*AB42Mu_Brain_Plasma*PK_p_brain*Vp_brain +Q_p_brain*AB42Mu_Central -(Q_p_brain - L_brain)*AB42Mu_Brain_Plasma -f_LV*(1 - sigma_V_BCSFB_AB42Mu)*Q_CSF_brain*AB42Mu_Brain_Plasma -(1 - f_LV)*(1 - sigma_V_BCSFB_AB42Mu)*Q_CSF_brain*AB42Mu_Brain_Plasma -(1 - sigma_V_ISF_AB42Mu)*Q_ISF_brain*AB42Mu_Brain_Plasma -CLup_brain_AB42Mu*f_BBB*VES_brain*AB42Mu_Brain_Plasma -CLup_brain_AB42Mu*f_BCSFB*VES_brain*AB42Mu_Brain_Plasma
+
+d AB42Mu_CM/dt = -fta0*AB42Mu_CM*PK_CM_brain*V_CM_brain +(Q_CSF_brain + Q_ISF_brain)*AB42Mu_TFV -(Q_CSF_brain + Q_ISF_brain)*AB42Mu_CM
+
+d AB42Mu_Central/dt = -fta0*AB42Mu_Central*PK_central +AB42Mu_systemic_synthesis_rate -AB42MuCL*AB42Mu_Central -AB42MuCLd2*AB42Mu_Central +AB42MuCLd2*AB42Mu_Peripheral -Q_p_brain*AB42Mu_Central +(Q_p_brain - L_brain)*AB42Mu_Brain_Plasma +(1 - sigma_L_SAS_AB42Mu)*Q_CSF_brain*AB42Mu_SAS +(1 - sigma_L_ISF_central_AB42Mu)*Q_ISF_brain*AB42_Monomer +(1 - sigma_PVS_AB42)*Q_PVS*AB42_Monomer_PVS
+
+d AB42Mu_LV/dt = -fta0*AB42Mu_LV*PK_LV_brain*V_LV_brain +f_LV*(1 - sigma_V_BCSFB_AB42Mu)*Q_CSF_brain*AB42Mu_Brain_Plasma -f_LV*CLup_brain_AB42Mu*(1 - f_BBB)*VES_brain*AB42Mu_LV -f_LV*(Q_CSF_brain + Q_ISF_brain)*AB42Mu_LV +f_LV*Q_ISF_brain*AB42_Monomer
+
+d AB42Mu_Peripheral/dt = +AB42MuCLd2*AB42Mu_Central -AB42MuCLd2*AB42Mu_Peripheral
+
+d AB42Mu_SAS/dt = -fta0*AB42Mu_SAS*PK_SAS_brain*V_SAS_brain -(1 - sigma_L_SAS_AB42Mu)*Q_CSF_brain*AB42Mu_SAS +(Q_CSF_brain + Q_ISF_brain)*AB42Mu_CM -Q_ISF_brain*AB42Mu_SAS
+
+d AB42Mu_TFV/dt = -fta0*AB42Mu_TFV*PK_TFV_brain*V_TFV_brain +(1 - f_LV)*(1 - sigma_V_BCSFB_AB42Mu)*Q_CSF_brain*AB42Mu_Brain_Plasma -(1 - f_LV)*CLup_brain_AB42Mu*(1 - f_BBB)*VES_brain*AB42Mu_TFV +f_LV*(Q_CSF_brain + Q_ISF_brain)*AB42Mu_LV -(Q_CSF_brain + Q_ISF_brain)*AB42Mu_TFV +(1 - f_LV)*Q_ISF_brain*AB42_Monomer
+
+d AB42_Fibril17/dt = +k_O16_F17_fortytwo*AB42_Oligomer16*AB42_Monomer*VIS_brain -k_F17_O16_fortytwo*AB42_Fibril17*VIS_brain -k_F17_Plaque_fortytwo*AB42_Fibril17*AB42_Monomer*VIS_brain +k_O16_F17_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Monomer*AB42_Oligomer16*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*Ab_t*AB42_Fibril17*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril17*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_F17_F18_fortytwo*AB42_Fibril17*AB42_Monomer*VIS_brain +k_F18_F17_fortytwo*AB42_Fibril18*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer17)*Q_PVS*AB42_Fibril17
+
+d AB42_Fibril17_Antibody_bound/dt = +fta1*Ab_t*AB42_Fibril17*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril17_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Fibril17_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer17)*Q_PVS*AB42_Fibril17 -fta2*AB42_Fibril17_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Fibril17_PVS
+
+d AB42_Fibril17_PVS_bound/dt = +fta2*AB42_Fibril17_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Fibril17_PVS_bound
+
+d AB42_Fibril18/dt = +k_F17_F18_fortytwo*AB42_Fibril17*AB42_Monomer*VIS_brain -k_F18_F17_fortytwo*AB42_Fibril18*VIS_brain -k_F18_Plaque_fortytwo*AB42_Fibril18*AB42_Monomer*VIS_brain -fta2*Ab_t*AB42_Fibril18*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril18*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_F18_F19_fortytwo*AB42_Fibril18*AB42_Monomer*VIS_brain +k_F19_F18_fortytwo*AB42_Fibril19*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer18)*Q_PVS*AB42_Fibril18
+
+d AB42_Fibril18_Antibody_bound/dt = +fta2*Ab_t*AB42_Fibril18*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril18_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Fibril18_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer18)*Q_PVS*AB42_Fibril18 -fta2*AB42_Fibril18_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Fibril18_PVS
+
+d AB42_Fibril18_PVS_bound/dt = +fta2*AB42_Fibril18_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Fibril18_PVS_bound
+
+d AB42_Fibril19/dt = +k_F18_F19_fortytwo*AB42_Fibril18*AB42_Monomer*VIS_brain -k_F19_F18_fortytwo*AB42_Fibril19*VIS_brain -fta2*AB42_Fibril19*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril19*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_F19_F20_fortytwo*AB42_Fibril19*AB42_Monomer*VIS_brain +k_F20_F19_fortytwo*AB42_Fibril20*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer19)*Q_PVS*AB42_Fibril19
+
+d AB42_Fibril19_Antibody_bound/dt = +fta2*AB42_Fibril19*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril19_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Fibril19_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer19)*Q_PVS*AB42_Fibril19 -fta2*AB42_Fibril19_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Fibril19_PVS
+
+d AB42_Fibril19_PVS_bound/dt = +fta2*AB42_Fibril19_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Fibril19_PVS_bound
+
+d AB42_Fibril20/dt = +k_F19_F20_fortytwo*AB42_Fibril19*AB42_Monomer*VIS_brain -k_F20_F19_fortytwo*AB42_Fibril20*VIS_brain -fta2*AB42_Fibril20*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril20*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_F20_F21_fortytwo*AB42_Fibril20*AB42_Monomer*VIS_brain +k_F21_F20_fortytwo*AB42_Fibril21*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer20)*Q_PVS*AB42_Fibril20
+
+d AB42_Fibril20_Antibody_bound/dt = +fta2*AB42_Fibril20*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril20_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Fibril20_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer20)*Q_PVS*AB42_Fibril20 -fta2*AB42_Fibril20_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Fibril20_PVS
+
+d AB42_Fibril20_PVS_bound/dt = +fta2*AB42_Fibril20_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Fibril20_PVS_bound
+
+d AB42_Fibril21/dt = +k_F20_F21_fortytwo*AB42_Fibril20*AB42_Monomer*VIS_brain -k_F21_F20_fortytwo*AB42_Fibril21*VIS_brain -fta2*AB42_Fibril21*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril21*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_F21_F22_fortytwo*AB42_Fibril21*AB42_Monomer*VIS_brain +k_F22_F21_fortytwo*AB42_Fibril22*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer21)*Q_PVS*AB42_Fibril21
+
+d AB42_Fibril21_Antibody_bound/dt = +fta2*AB42_Fibril21*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril21_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Fibril21_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer21)*Q_PVS*AB42_Fibril21 -fta2*AB42_Fibril21_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Fibril21_PVS
+
+d AB42_Fibril21_PVS_bound/dt = +fta2*AB42_Fibril21_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Fibril21_PVS_bound
+
+d AB42_Fibril22/dt = +k_F21_F22_fortytwo*AB42_Fibril21*AB42_Monomer*VIS_brain -k_F22_F21_fortytwo*AB42_Fibril22*VIS_brain -fta2*AB42_Fibril22*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril22*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_F22_F23_fortytwo*AB42_Fibril22*AB42_Monomer*VIS_brain +k_F23_F22_fortytwo*AB42_Fibril23*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer22)*Q_PVS*AB42_Fibril22
+
+d AB42_Fibril22_Antibody_bound/dt = +fta2*AB42_Fibril22*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril22_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Fibril22_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer22)*Q_PVS*AB42_Fibril22 -fta2*AB42_Fibril22_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Fibril22_PVS
+
+d AB42_Fibril22_PVS_bound/dt = +fta2*AB42_Fibril22_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Fibril22_PVS_bound
+
+d AB42_Fibril23/dt = +k_F22_F23_fortytwo*AB42_Fibril22*AB42_Monomer*VIS_brain -k_F23_F22_fortytwo*AB42_Fibril23*VIS_brain -fta2*AB42_Fibril23*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril23*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_F23_F24_fortytwo*AB42_Fibril23*AB42_Monomer*VIS_brain +k_F24_F23_fortytwo*AB42_Fibril24*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer23)*Q_PVS*AB42_Fibril23
+
+d AB42_Fibril23_Antibody_bound/dt = +fta2*AB42_Fibril23*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril23_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Fibril23_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer23)*Q_PVS*AB42_Fibril23 -fta2*AB42_Fibril23_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Fibril23_PVS
+
+d AB42_Fibril23_PVS_bound/dt = +fta2*AB42_Fibril23_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Fibril23_PVS_bound
+
+d AB42_Fibril24/dt = +k_F23_F24_fortytwo*AB42_Fibril23*AB42_Monomer*VIS_brain -k_F24_F23_fortytwo*AB42_Fibril24*VIS_brain -k_F24_O12_fortytwo*k_F24_F23_fortytwo*AB42_Fibril24*VIS_brain -fta2*AB42_Fibril24*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril24*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer24)*Q_PVS*AB42_Fibril24
+
+d AB42_Fibril24_Antibody_bound/dt = +fta2*AB42_Fibril24*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Fibril24_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Fibril24_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer24)*Q_PVS*AB42_Fibril24 -fta2*AB42_Fibril24_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Fibril24_PVS
+
+d AB42_Fibril24_PVS_bound/dt = +fta2*AB42_Fibril24_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Fibril24_PVS_bound
+
+d AB42_Monomer/dt = +k_in_AB42*C99*VIS_brain -IDE_conc*CL_AB42_IDE*((AB42_Monomer*Unit_removal_1)^AB42_IDE_Hill/((AB42_Monomer*Unit_removal_1)^AB42_IDE_Hill + AB42_IDE_IC50^AB42_IDE_Hill))*VIS_brain -2*k_M_O2_fortytwo*AB42_Monomer*AB42_Monomer*VIS_brain +2*k_O2_M_fortytwo*AB42_Oligomer02*VIS_brain -2*k_M_O2_fortytwo*AB42_Plaque_Vmax*AB42_Monomer*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_EC50))*VIS_brain -k_O2_O3_fortytwo*AB42_Oligomer02*AB42_Monomer*VIS_brain +k_O3_O2_fortytwo*AB42_Oligomer03*VIS_brain -k_O2_O3_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer02*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O3_O4_fortytwo*AB42_Oligomer03*AB42_Monomer*VIS_brain +k_O4_O3_fortytwo*AB42_Oligomer04*VIS_brain -k_O3_O4_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer03*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O4_O5_fortytwo*AB42_Oligomer04*AB42_Monomer*VIS_brain +k_O5_O4_fortytwo*AB42_Oligomer05*VIS_brain -k_O4_O5_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer04*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O5_O6_fortytwo*AB42_Oligomer05*AB42_Monomer*VIS_brain +k_O6_O5_fortytwo*AB42_Oligomer06*VIS_brain -k_O5_O6_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer05*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O6_O7_fortytwo*AB42_Oligomer06*AB42_Monomer*VIS_brain +k_O7_O6_fortytwo*AB42_Oligomer07*VIS_brain -k_O6_O7_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer06*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O7_O8_fortytwo*AB42_Oligomer07*AB42_Monomer*VIS_brain +k_O8_O7_fortytwo*AB42_Oligomer08*VIS_brain -k_O7_O8_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer07*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O8_O9_fortytwo*AB42_Oligomer08*AB42_Monomer*VIS_brain +k_O9_O8_fortytwo*AB42_Oligomer09*VIS_brain -k_O8_O9_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer08*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O9_O10_fortytwo*AB42_Oligomer09*AB42_Monomer*VIS_brain +k_O10_O9_fortytwo*AB42_Oligomer10*VIS_brain -k_O9_O10_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer09*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O10_O11_fortytwo*AB42_Oligomer10*AB42_Monomer*VIS_brain +k_O11_O10_fortytwo*AB42_Oligomer11*VIS_brain -k_O10_O11_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer10*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O11_O12_fortytwo*AB42_Oligomer11*AB42_Monomer*VIS_brain +k_O12_O11_fortytwo*AB42_Oligomer12*VIS_brain -k_O11_O12_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer11*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O12_O13_fortytwo*AB42_Oligomer12*AB42_Monomer*VIS_brain +k_O13_O12_fortytwo*AB42_Oligomer13*VIS_brain -k_O12_O13_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer12*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O13_Plaque_fortytwo*AB42_Oligomer13*AB42_Monomer*VIS_brain -k_O13_O14_fortytwo*AB42_Oligomer13*AB42_Monomer*VIS_brain +k_O14_O13_fortytwo*AB42_Oligomer14*VIS_brain -k_O13_O14_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer13*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O14_Plaque_fortytwo*AB42_Oligomer14*AB42_Monomer*VIS_brain -k_O14_O15_fortytwo*AB42_Oligomer14*AB42_Monomer*VIS_brain +k_O15_O14_fortytwo*AB42_Oligomer15*VIS_brain -k_O14_O15_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer14*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O15_Plaque_fortytwo*AB42_Oligomer15*AB42_Monomer*VIS_brain -k_O15_O16_fortytwo*AB42_Oligomer15*AB42_Monomer*VIS_brain +k_O16_O15_fortytwo*AB42_Oligomer16*VIS_brain -k_O15_O16_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer15*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O16_Plaque_fortytwo*AB42_Oligomer16*AB42_Monomer*VIS_brain -k_O16_F17_fortytwo*AB42_Oligomer16*AB42_Monomer*VIS_brain +k_F17_O16_fortytwo*AB42_Fibril17*VIS_brain -k_F17_Plaque_fortytwo*AB42_Fibril17*AB42_Monomer*VIS_brain -k_O16_F17_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Monomer*AB42_Oligomer16*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_F17_F18_fortytwo*AB42_Fibril17*AB42_Monomer*VIS_brain +k_F18_F17_fortytwo*AB42_Fibril18*VIS_brain -k_F18_Plaque_fortytwo*AB42_Fibril18*AB42_Monomer*VIS_brain -k_F18_F19_fortytwo*AB42_Fibril18*AB42_Monomer*VIS_brain +k_F19_F18_fortytwo*AB42_Fibril19*VIS_brain -k_F19_F20_fortytwo*AB42_Fibril19*AB42_Monomer*VIS_brain +k_F20_F19_fortytwo*AB42_Fibril20*VIS_brain -k_F20_F21_fortytwo*AB42_Fibril20*AB42_Monomer*VIS_brain +k_F21_F20_fortytwo*AB42_Fibril21*VIS_brain -k_F21_F22_fortytwo*AB42_Fibril21*AB42_Monomer*VIS_brain +k_F22_F21_fortytwo*AB42_Fibril22*VIS_brain -k_F22_F23_fortytwo*AB42_Fibril22*AB42_Monomer*VIS_brain +k_F23_F22_fortytwo*AB42_Fibril23*VIS_brain -k_F23_F24_fortytwo*AB42_Fibril23*AB42_Monomer*VIS_brain +k_F24_F23_fortytwo*AB42_Fibril24*VIS_brain -fta0*Ab_t*AB42_Monomer*VIS_brain -(1 - sigma_L_ISF_central_AB42Mu)*Q_ISF_brain*AB42_Monomer +(1 - sigma_V_ISF_AB42Mu)*Q_ISF_brain*AB42Mu_Brain_Plasma -CLup_brain_AB42Mu*f_BBB*VES_brain*AB42_Monomer -f_LV*Q_ISF_brain*AB42_Monomer -(1 - f_LV)*Q_ISF_brain*AB42_Monomer +Q_ISF_brain*AB42Mu_SAS -(1 - sigma_ISF_ABeta42_monomer)*Q_PVS*AB42_Monomer
+
+d AB42_Monomer_PVS/dt = +(1 - sigma_ISF_ABeta42_monomer)*Q_PVS*AB42_Monomer -fta0*AB42_Monomer_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Monomer_PVS
+
+d AB42_Monomer_PVS_bound/dt = +fta0*AB42_Monomer_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Monomer_PVS_bound
+
+d AB42_Oligomer02/dt = +k_M_O2_fortytwo*AB42_Monomer*AB42_Monomer*VIS_brain -k_O2_M_fortytwo*AB42_Oligomer02*VIS_brain +k_M_O2_fortytwo*AB42_Plaque_Vmax*AB42_Monomer*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_EC50))*VIS_brain -fta1*AB42_Oligomer02*Ab_t*VIS_brain -k_O2_O3_fortytwo*AB42_Oligomer02*AB42_Monomer*VIS_brain +k_O3_O2_fortytwo*AB42_Oligomer03*VIS_brain -k_O2_O3_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer02*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer02)*Q_PVS*AB42_Oligomer02
+
+d AB42_Oligomer02_Antibody_bound/dt = +fta1*AB42_Oligomer02*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer02_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer02_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer02)*Q_PVS*AB42_Oligomer02 -fta1*AB42_Oligomer02_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer02_PVS
+
+d AB42_Oligomer02_PVS_bound/dt = +fta1*AB42_Oligomer02_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer02_PVS_bound
+
+d AB42_Oligomer03/dt = +k_O2_O3_fortytwo*AB42_Oligomer02*AB42_Monomer*VIS_brain -k_O3_O2_fortytwo*AB42_Oligomer03*VIS_brain +k_O2_O3_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer02*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer03*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer03*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O3_O4_fortytwo*AB42_Oligomer03*AB42_Monomer*VIS_brain +k_O4_O3_fortytwo*AB42_Oligomer04*VIS_brain -k_O3_O4_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer03*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer03)*Q_PVS*AB42_Oligomer03
+
+d AB42_Oligomer03_Antibody_bound/dt = +fta1*AB42_Oligomer03*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer03_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer03_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer03)*Q_PVS*AB42_Oligomer03 -fta1*AB42_Oligomer03_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer03_PVS
+
+d AB42_Oligomer03_PVS_bound/dt = +fta1*AB42_Oligomer03_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer03_PVS_bound
+
+d AB42_Oligomer04/dt = +k_O3_O4_fortytwo*AB42_Oligomer03*AB42_Monomer*VIS_brain -k_O4_O3_fortytwo*AB42_Oligomer04*VIS_brain +k_O3_O4_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer03*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer04*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer04*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O4_O5_fortytwo*AB42_Oligomer04*AB42_Monomer*VIS_brain +k_O5_O4_fortytwo*AB42_Oligomer05*VIS_brain -k_O4_O5_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer04*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer04)*Q_PVS*AB42_Oligomer04
+
+d AB42_Oligomer04_Antibody_bound/dt = +fta1*AB42_Oligomer04*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer04_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer04_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer04)*Q_PVS*AB42_Oligomer04 -fta1*AB42_Oligomer04_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer04_PVS
+
+d AB42_Oligomer04_PVS_bound/dt = +fta1*AB42_Oligomer04_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer04_PVS_bound
+
+d AB42_Oligomer05/dt = +k_O4_O5_fortytwo*AB42_Oligomer04*AB42_Monomer*VIS_brain -k_O5_O4_fortytwo*AB42_Oligomer05*VIS_brain +k_O4_O5_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer04*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer05*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer05*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O5_O6_fortytwo*AB42_Oligomer05*AB42_Monomer*VIS_brain +k_O6_O5_fortytwo*AB42_Oligomer06*VIS_brain -k_O5_O6_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer05*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer05)*Q_PVS*AB42_Oligomer05
+
+d AB42_Oligomer05_Antibody_bound/dt = +fta1*AB42_Oligomer05*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer05_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer05_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer05)*Q_PVS*AB42_Oligomer05 -fta1*AB42_Oligomer05_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer05_PVS
+
+d AB42_Oligomer05_PVS_bound/dt = +fta1*AB42_Oligomer05_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer05_PVS_bound
+
+d AB42_Oligomer06/dt = +k_O5_O6_fortytwo*AB42_Oligomer05*AB42_Monomer*VIS_brain -k_O6_O5_fortytwo*AB42_Oligomer06*VIS_brain +k_O5_O6_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer05*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer06*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer06*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O6_O7_fortytwo*AB42_Oligomer06*AB42_Monomer*VIS_brain +k_O7_O6_fortytwo*AB42_Oligomer07*VIS_brain -k_O6_O7_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer06*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer06)*Q_PVS*AB42_Oligomer06
+
+d AB42_Oligomer06_Antibody_bound/dt = +fta1*AB42_Oligomer06*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer06_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer06_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer06)*Q_PVS*AB42_Oligomer06 -fta1*AB42_Oligomer06_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer06_PVS
+
+d AB42_Oligomer06_PVS_bound/dt = +fta1*AB42_Oligomer06_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer06_PVS_bound
+
+d AB42_Oligomer07/dt = +k_O6_O7_fortytwo*AB42_Oligomer06*AB42_Monomer*VIS_brain -k_O7_O6_fortytwo*AB42_Oligomer07*VIS_brain +k_O6_O7_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer06*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer07*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer07*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O7_O8_fortytwo*AB42_Oligomer07*AB42_Monomer*VIS_brain +k_O8_O7_fortytwo*AB42_Oligomer08*VIS_brain -k_O7_O8_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer07*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer07)*Q_PVS*AB42_Oligomer07
+
+d AB42_Oligomer07_Antibody_bound/dt = +fta1*AB42_Oligomer07*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer07_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer07_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer07)*Q_PVS*AB42_Oligomer07 -fta1*AB42_Oligomer07_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer07_PVS
+
+d AB42_Oligomer07_PVS_bound/dt = +fta1*AB42_Oligomer07_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer07_PVS_bound
+
+d AB42_Oligomer08/dt = +k_O7_O8_fortytwo*AB42_Oligomer07*AB42_Monomer*VIS_brain -k_O8_O7_fortytwo*AB42_Oligomer08*VIS_brain +k_O7_O8_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer07*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer08*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer08*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O8_O9_fortytwo*AB42_Oligomer08*AB42_Monomer*VIS_brain +k_O9_O8_fortytwo*AB42_Oligomer09*VIS_brain -k_O8_O9_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer08*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer08)*Q_PVS*AB42_Oligomer08
+
+d AB42_Oligomer08_Antibody_bound/dt = +fta1*AB42_Oligomer08*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer08_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer08_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer08)*Q_PVS*AB42_Oligomer08 -fta1*AB42_Oligomer08_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer08_PVS
+
+d AB42_Oligomer08_PVS_bound/dt = +fta1*AB42_Oligomer08_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer08_PVS_bound
+
+d AB42_Oligomer09/dt = +k_O8_O9_fortytwo*AB42_Oligomer08*AB42_Monomer*VIS_brain -k_O9_O8_fortytwo*AB42_Oligomer09*VIS_brain +k_O8_O9_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer08*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer09*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer09*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O9_O10_fortytwo*AB42_Oligomer09*AB42_Monomer*VIS_brain +k_O10_O9_fortytwo*AB42_Oligomer10*VIS_brain -k_O9_O10_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer09*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer09)*Q_PVS*AB42_Oligomer09
+
+d AB42_Oligomer09_Antibody_bound/dt = +fta1*AB42_Oligomer09*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer09_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer09_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer09)*Q_PVS*AB42_Oligomer09 -fta1*AB42_Oligomer09_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer09_PVS
+
+d AB42_Oligomer09_PVS_bound/dt = +fta1*AB42_Oligomer09_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer09_PVS_bound
+
+d AB42_Oligomer10/dt = +k_O9_O10_fortytwo*AB42_Oligomer09*AB42_Monomer*VIS_brain -k_O10_O9_fortytwo*AB42_Oligomer10*VIS_brain +k_O9_O10_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer09*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer10*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer10*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O10_O11_fortytwo*AB42_Oligomer10*AB42_Monomer*VIS_brain +k_O11_O10_fortytwo*AB42_Oligomer11*VIS_brain -k_O10_O11_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer10*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer10)*Q_PVS*AB42_Oligomer10
+
+d AB42_Oligomer10_Antibody_bound/dt = +fta1*AB42_Oligomer10*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer10_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer10_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer10)*Q_PVS*AB42_Oligomer10 -fta1*AB42_Oligomer10_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer10_PVS
+
+d AB42_Oligomer10_PVS_bound/dt = +fta1*AB42_Oligomer10_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer10_PVS_bound
+
+d AB42_Oligomer11/dt = +k_O10_O11_fortytwo*AB42_Oligomer10*AB42_Monomer*VIS_brain -k_O11_O10_fortytwo*AB42_Oligomer11*VIS_brain +k_O10_O11_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer10*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer11*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer11*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O11_O12_fortytwo*AB42_Oligomer11*AB42_Monomer*VIS_brain +k_O12_O11_fortytwo*AB42_Oligomer12*VIS_brain -k_O11_O12_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer11*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer11)*Q_PVS*AB42_Oligomer11
+
+d AB42_Oligomer11_Antibody_bound/dt = +fta1*AB42_Oligomer11*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer11_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer11_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer11)*Q_PVS*AB42_Oligomer11 -fta1*AB42_Oligomer11_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer11_PVS
+
+d AB42_Oligomer11_PVS_bound/dt = +fta1*AB42_Oligomer11_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer11_PVS_bound
+
+d AB42_Oligomer12/dt = +k_O11_O12_fortytwo*AB42_Oligomer11*AB42_Monomer*VIS_brain -k_O12_O11_fortytwo*AB42_Oligomer12*VIS_brain +k_O11_O12_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer11*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -fta1*AB42_Oligomer12*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer12*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O12_O13_fortytwo*AB42_Oligomer12*AB42_Monomer*VIS_brain +k_O13_O12_fortytwo*AB42_Oligomer13*VIS_brain -k_O12_O13_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer12*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain +2*k_F24_O12_fortytwo*k_F24_F23_fortytwo*AB42_Fibril24*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer12)*Q_PVS*AB42_Oligomer12
+
+d AB42_Oligomer12_Antibody_bound/dt = +fta1*AB42_Oligomer12*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer12_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer12_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer12)*Q_PVS*AB42_Oligomer12 -fta1*AB42_Oligomer12_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer12_PVS
+
+d AB42_Oligomer12_PVS_bound/dt = +fta1*AB42_Oligomer12_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer12_PVS_bound
+
+d AB42_Oligomer13/dt = +k_O12_O13_fortytwo*AB42_Oligomer12*AB42_Monomer*VIS_brain -k_O13_O12_fortytwo*AB42_Oligomer13*VIS_brain +k_O12_O13_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer12*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O13_Plaque_fortytwo*AB42_Oligomer13*AB42_Monomer*VIS_brain -fta1*AB42_Oligomer13*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer13*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O13_O14_fortytwo*AB42_Oligomer13*AB42_Monomer*VIS_brain +k_O14_O13_fortytwo*AB42_Oligomer14*VIS_brain -k_O13_O14_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer13*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer13)*Q_PVS*AB42_Oligomer13
+
+d AB42_Oligomer13_Antibody_bound/dt = +fta1*AB42_Oligomer13*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer13_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer13_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer13)*Q_PVS*AB42_Oligomer13 -fta1*AB42_Oligomer13_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer13_PVS
+
+d AB42_Oligomer13_PVS_bound/dt = +fta1*AB42_Oligomer13_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer13_PVS_bound
+
+d AB42_Oligomer14/dt = +k_O13_O14_fortytwo*AB42_Oligomer13*AB42_Monomer*VIS_brain -k_O14_O13_fortytwo*AB42_Oligomer14*VIS_brain +k_O13_O14_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer13*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O14_Plaque_fortytwo*AB42_Oligomer14*AB42_Monomer*VIS_brain -fta1*AB42_Oligomer14*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer14*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O14_O15_fortytwo*AB42_Oligomer14*AB42_Monomer*VIS_brain +k_O15_O14_fortytwo*AB42_Oligomer15*VIS_brain -k_O14_O15_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer14*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer14)*Q_PVS*AB42_Oligomer14
+
+d AB42_Oligomer14_Antibody_bound/dt = +fta1*AB42_Oligomer14*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer14_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer14_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer14)*Q_PVS*AB42_Oligomer14 -fta1*AB42_Oligomer14_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer14_PVS
+
+d AB42_Oligomer14_PVS_bound/dt = +fta1*AB42_Oligomer14_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer14_PVS_bound
+
+d AB42_Oligomer15/dt = +k_O14_O15_fortytwo*AB42_Oligomer14*AB42_Monomer*VIS_brain -k_O15_O14_fortytwo*AB42_Oligomer15*VIS_brain +k_O14_O15_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer14*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O15_Plaque_fortytwo*AB42_Oligomer15*AB42_Monomer*VIS_brain -fta1*AB42_Oligomer15*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer15*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O15_O16_fortytwo*AB42_Oligomer15*AB42_Monomer*VIS_brain +k_O16_O15_fortytwo*AB42_Oligomer16*VIS_brain -k_O15_O16_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer15*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer15)*Q_PVS*AB42_Oligomer15
+
+d AB42_Oligomer15_Antibody_bound/dt = +fta1*AB42_Oligomer15*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer15_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer15_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer15)*Q_PVS*AB42_Oligomer15 -fta1*AB42_Oligomer15_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer15_PVS
+
+d AB42_Oligomer15_PVS_bound/dt = +fta1*AB42_Oligomer15_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer15_PVS_bound
+
+d AB42_Oligomer16/dt = +k_O15_O16_fortytwo*AB42_Oligomer15*AB42_Monomer*VIS_brain -k_O16_O15_fortytwo*AB42_Oligomer16*VIS_brain +k_O15_O16_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Oligomer15*AB42_Monomer*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -k_O16_Plaque_fortytwo*AB42_Oligomer16*AB42_Monomer*VIS_brain -fta1*AB42_Oligomer16*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer16*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain -k_O16_F17_fortytwo*AB42_Oligomer16*AB42_Monomer*VIS_brain +k_F17_O16_fortytwo*AB42_Fibril17*VIS_brain -k_O16_F17_fortytwo*AB42_Plaque_Driven_Monomer_Addition_Vmax*AB42_Monomer*AB42_Oligomer16*(AB42_Plaque_unbound/(AB42_Plaque_unbound + AB42_Plaque_Driven_Monomer_Addition_EC50))*VIS_brain -(1 - sigma_ISF_ABeta42_oligomer16)*Q_PVS*AB42_Oligomer16
+
+d AB42_Oligomer16_Antibody_bound/dt = +fta1*AB42_Oligomer16*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Oligomer16_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Oligomer16_PVS/dt = +(1 - sigma_ISF_ABeta42_oligomer16)*Q_PVS*AB42_Oligomer16 -fta1*AB42_Oligomer16_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42)*Q_PVS*AB42_Oligomer16_PVS
+
+d AB42_Oligomer16_PVS_bound/dt = +fta1*AB42_Oligomer16_PVS*C_Antibody_unbound_PVS*V_PVS -(1 - sigma_PVS_AB42_bound)*Q_PVS*AB42_Oligomer16_PVS_bound
+
+d AB42_Plaque_Antibody_bound/dt = +fta3*AB42_Plaque_unbound*Ab_t*VIS_brain -Microglia_Vmax_fortytwo*AB42_Plaque_Antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_mAb + (1 - Microglia_Hi_Fract)*Microglia_CL_low_mAb)*VIS_brain
+
+d AB42_Plaque_bound_PVS/dt = +fta3*AB42_Plaque_unbound_PVS*C_Antibody_unbound_PVS*V_PVS -CL_AB42_plaque_bound_PVS*AB42_Plaque_bound_PVS
+
+d AB42_Plaque_unbound/dt = +k_O13_Plaque_fortytwo*AB42_Oligomer13*AB42_Monomer*VIS_brain +k_O14_Plaque_fortytwo*AB42_Oligomer14*AB42_Monomer*VIS_brain +k_O15_Plaque_fortytwo*AB42_Oligomer15*AB42_Monomer*VIS_brain +k_O16_Plaque_fortytwo*AB42_Oligomer16*AB42_Monomer*VIS_brain +k_F17_Plaque_fortytwo*AB42_Fibril17*AB42_Monomer*VIS_brain +k_F18_Plaque_fortytwo*AB42_Fibril18*AB42_Monomer*VIS_brain -fta3*AB42_Plaque_unbound*Ab_t*VIS_brain -0.5*Microglia_Vmax_fortytwo*AB42_Plaque_unbound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42)*VIS_brain
+
+d AB42_Plaque_unbound_PVS/dt = -fta3*AB42_Plaque_unbound_PVS*C_Antibody_unbound_PVS*V_PVS -CL_AB42_plaque_free_PVS*AB42_Plaque_unbound_PVS
+
+d AB42_monomer_antibody_bound/dt = +fta0*Ab_t*AB42_Monomer*VIS_brain -(1 - sigma_L_brain_ISF)*Q_ISF_brain*AB42_monomer_antibody_bound +(1 - sigma_V_brain_ISF)*Q_ISF_brain*AB42Mb_Brain_Plasma -CLup_brain*f_BBB*VES_brain*AB42_monomer_antibody_bound +CLup_brain*f_BBB*VES_brain*(1 - FR)*AB42Mb_BBB_Bound -AB42_monomer_antibody_bound*Microglia_cell_count*(Microglia_Hi_Fract*Microglia_CL_high_AB42 + (1 - Microglia_Hi_Fract)*Microglia_CL_low_AB42) +Q_ISF_brain*AB42Mb_SAS -f_LV*Q_ISF_brain*AB42_monomer_antibody_bound -(1 - f_LV)*Q_ISF_brain*AB42_monomer_antibody_bound
+
+d APP/dt = -k_C99*APP*VIS_brain +k_APP_production*VIS_brain
+
+d Ab_t/dt = -fta1*AB40_Oligomer02*Ab_t*VIS_brain -fta1*AB42_Oligomer02*Ab_t*VIS_brain -fta1*AB40_Oligomer03*Ab_t*VIS_brain -fta1*AB40_Oligomer04*Ab_t*VIS_brain -fta1*AB40_Oligomer05*Ab_t*VIS_brain -fta1*AB40_Oligomer06*Ab_t*VIS_brain -fta1*AB40_Oligomer07*Ab_t*VIS_brain -fta1*AB40_Oligomer08*Ab_t*VIS_brain -fta1*AB40_Oligomer09*Ab_t*VIS_brain -fta1*AB40_Oligomer10*Ab_t*VIS_brain -fta1*AB40_Oligomer11*Ab_t*VIS_brain -fta1*AB40_Oligomer12*Ab_t*VIS_brain -fta1*AB42_Oligomer03*Ab_t*VIS_brain -fta1*AB42_Oligomer04*Ab_t*VIS_brain -fta1*AB42_Oligomer05*Ab_t*VIS_brain -fta1*AB42_Oligomer06*Ab_t*VIS_brain -fta1*AB42_Oligomer07*Ab_t*VIS_brain -fta1*AB42_Oligomer08*Ab_t*VIS_brain -fta1*AB42_Oligomer09*Ab_t*VIS_brain -fta1*AB42_Oligomer10*Ab_t*VIS_brain -fta1*AB42_Oligomer11*Ab_t*VIS_brain -fta1*AB42_Oligomer12*Ab_t*VIS_brain -fta1*AB40_Oligomer13*Ab_t*VIS_brain -fta1*AB40_Oligomer14*Ab_t*VIS_brain -fta1*AB40_Oligomer15*Ab_t*VIS_brain -fta1*AB40_Oligomer16*Ab_t*VIS_brain -fta1*AB42_Oligomer13*Ab_t*VIS_brain -fta1*AB42_Oligomer14*Ab_t*VIS_brain -fta1*AB42_Oligomer15*Ab_t*VIS_brain -fta1*AB42_Oligomer16*Ab_t*VIS_brain -fta1*Ab_t*AB40_Fibril17*VIS_brain -fta2*Ab_t*AB40_Fibril18*VIS_brain -fta1*Ab_t*AB42_Fibril17*VIS_brain -fta2*Ab_t*AB42_Fibril18*VIS_brain -fta2*AB40_Fibril19*Ab_t*VIS_brain -fta2*AB40_Fibril20*Ab_t*VIS_brain -fta2*AB40_Fibril21*Ab_t*VIS_brain -fta2*AB40_Fibril22*Ab_t*VIS_brain -fta2*AB40_Fibril23*Ab_t*VIS_brain -fta2*AB40_Fibril24*Ab_t*VIS_brain -fta3*AB40_Plaque_unbound*Ab_t*VIS_brain -fta2*AB42_Fibril19*Ab_t*VIS_brain -fta2*AB42_Fibril20*Ab_t*VIS_brain -fta2*AB42_Fibril21*Ab_t*VIS_brain -fta2*AB42_Fibril22*Ab_t*VIS_brain -fta2*AB42_Fibril23*Ab_t*VIS_brain -fta2*AB42_Fibril24*Ab_t*VIS_brain -fta3*AB42_Plaque_unbound*Ab_t*VIS_brain -CLup_brain*f_BBB*VES_brain*Ab_t +CLup_brain*f_BBB*VES_brain*(1 - FR)*PK_BBB_bound_brain -f_LV*Q_ISF_brain*Ab_t +Q_ISF_brain*PK_SAS_brain -(1 - f_LV)*Q_ISF_brain*Ab_t -(1 - sigma_L_brain_ISF)*(Q_ISF_brain - Q_PVS)*Ab_t +(1 - sigma_V_brain_ISF)*Q_ISF_brain*PK_p_brain -fta0*Ab_t*AB40_Monomer*VIS_brain -fta0*Ab_t*AB42_Monomer*VIS_brain -(1 - sigma_ISF)*Q_PVS*Ab_t -PS_Ab_ISF_PVS*Ab_t*Pe/(exp(Pe) - 1) +PS_Ab_ISF_PVS*C_Antibody_unbound_PVS*Pe/(exp(Pe) - 1)
+
+d C99/dt = +k_C99*APP*VIS_brain -k_in_AB40*C99*VIS_brain -k_in_AB42*C99*VIS_brain -v_C99_clearance*C99*VIS_brain
+
+d C_Antibody_unbound_PVS/dt = -fta0*AB40_Monomer_PVS*C_Antibody_unbound_PVS*V_PVS -fta3*AB40_Plaque_unbound_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer02_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer03_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer04_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer05_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer06_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer07_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer08_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer09_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer10_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer11_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer12_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer13_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer14_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer15_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB40_Oligomer16_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB40_Fibril17_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB40_Fibril18_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB40_Fibril19_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB40_Fibril20_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB40_Fibril21_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB40_Fibril22_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB40_Fibril23_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB40_Fibril24_PVS*C_Antibody_unbound_PVS*V_PVS -fta0*AB42_Monomer_PVS*C_Antibody_unbound_PVS*V_PVS -fta3*AB42_Plaque_unbound_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer02_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer03_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer04_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer05_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer06_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer07_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer08_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer09_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer10_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer11_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer12_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer13_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer14_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer15_PVS*C_Antibody_unbound_PVS*V_PVS -fta1*AB42_Oligomer16_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB42_Fibril17_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB42_Fibril18_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB42_Fibril19_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB42_Fibril20_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB42_Fibril21_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB42_Fibril22_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB42_Fibril23_PVS*C_Antibody_unbound_PVS*V_PVS -fta2*AB42_Fibril24_PVS*C_Antibody_unbound_PVS*V_PVS +(1 - sigma_ISF)*Q_PVS*Ab_t -(1 - sigma_PVS)*(Q_PVS + CSF_fraction*Qbrain_ISFpsv)*C_Antibody_unbound_PVS +PS_Ab_ISF_PVS*Ab_t*Pe/(exp(Pe) - 1) -PS_Ab_ISF_PVS*C_Antibody_unbound_PVS*Pe/(exp(Pe) - 1)
+
+d FcRn_free_BBB/dt = -kon_FcRn*PK_BBB_unbound_brain*FcRn_free_BBB*VBBB_brain +koff_FcRn*PK_BBB_bound_brain*VBBB_brain +CLup_brain*f_BBB*VES_brain*FR*PK_BBB_bound_brain +CLup_brain*f_BBB*VES_brain*(1 - FR)*PK_BBB_bound_brain +CLup_brain*f_BBB*VES_brain*FR*AB40Mb_BBB_Bound -kon_FcRn*AB40Mb_BBB_Unbound*FcRn_free_BBB*VBBB_brain +koff_FcRn*AB40Mb_BBB_Bound*VBBB_brain +CLup_brain*f_BBB*VES_brain*(1 - FR)*AB40Mb_BBB_Bound +CLup_brain*f_BBB*VES_brain*FR*AB42Mb_BBB_Bound -kon_FcRn*AB42Mb_BBB_Unbound*FcRn_free_BBB*VBBB_brain +koff_FcRn*AB42Mb_BBB_Bound*VBBB_brain +CLup_brain*f_BBB*VES_brain*(1 - FR)*AB42Mb_BBB_Bound
+
+d FcRn_free_BCSFB/dt = -kon_FcRn*PK_BCSFB_unbound_brain*FcRn_free_BCSFB*V_BCSFB_brain +koff_FcRn*PK_BCSFB_bound_brain*V_BCSFB_brain +CLup_brain*(1 - f_BBB)*VES_brain*FR*PK_BCSFB_bound_brain +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*PK_BCSFB_bound_brain +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*PK_BCSFB_bound_brain +CLup_brain*(1 - f_BBB)*VES_brain*FR*AB40Mb_BCSFB_Bound -kon_FcRn*AB40Mb_BCSFB_Unbound*FcRn_free_BCSFB*V_BCSFB_brain +koff_FcRn*AB40Mb_BCSFB_Bound*V_BCSFB_brain +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB40Mb_BCSFB_Bound +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB40Mb_BCSFB_Bound +CLup_brain*(1 - f_BBB)*VES_brain*FR*AB42Mb_BCSFB_Bound -kon_FcRn*AB42Mb_BCSFB_Unbound*FcRn_free_BCSFB*V_BCSFB_brain +koff_FcRn*AB42Mb_BCSFB_Bound*V_BCSFB_brain +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB42Mb_BCSFB_Bound +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*AB42Mb_BCSFB_Bound
+
+d PK_BBB_bound_brain/dt = +kon_FcRn*PK_BBB_unbound_brain*FcRn_free_BBB*VBBB_brain -koff_FcRn*PK_BBB_bound_brain*VBBB_brain -CLup_brain*f_BBB*VES_brain*FR*PK_BBB_bound_brain -CLup_brain*f_BBB*VES_brain*(1 - FR)*PK_BBB_bound_brain
+
+d PK_BBB_unbound_brain/dt = +CLup_brain*f_BBB*VES_brain*Ab_t +CLup_brain*f_BBB*VES_brain*PK_p_brain -kdeg*PK_BBB_unbound_brain*VBBB_brain -kon_FcRn*PK_BBB_unbound_brain*FcRn_free_BBB*VBBB_brain +koff_FcRn*PK_BBB_bound_brain*VBBB_brain -fta0*AB40Mu_BBB*PK_BBB_unbound_brain*VBBB_brain -fta0*AB42Mu_BBB*PK_BBB_unbound_brain*VBBB_brain
+
+d PK_BCSFB_bound_brain/dt = +kon_FcRn*PK_BCSFB_unbound_brain*FcRn_free_BCSFB*V_BCSFB_brain -koff_FcRn*PK_BCSFB_bound_brain*V_BCSFB_brain -CLup_brain*(1 - f_BBB)*VES_brain*FR*PK_BCSFB_bound_brain -f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*PK_BCSFB_bound_brain -(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*PK_BCSFB_bound_brain
+
+d PK_BCSFB_unbound_brain/dt = +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*PK_TFV_brain +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*PK_LV_brain +CLup_brain*f_BCSFB*VES_brain*PK_p_brain -kdeg*PK_BCSFB_unbound_brain*V_BCSFB_brain -kon_FcRn*PK_BCSFB_unbound_brain*FcRn_free_BCSFB*V_BCSFB_brain +koff_FcRn*PK_BCSFB_bound_brain*V_BCSFB_brain -fta0*AB40Mu_BCSFB*PK_BCSFB_unbound_brain*V_BCSFB_brain -fta0*AB42Mu_BCSFB*PK_BCSFB_unbound_brain*V_BCSFB_brain
+
+d PK_CM_brain/dt = +(Q_CSF_brain + Q_ISF_brain)*PK_TFV_brain -(Q_CSF_brain + Q_ISF_brain)*PK_CM_brain -fta0*AB40Mu_CM*PK_CM_brain*V_CM_brain -fta0*AB42Mu_CM*PK_CM_brain*V_CM_brain
+
+d PK_LV_brain/dt = -f_LV*CLup_brain*(1 - f_BBB)*VES_brain*PK_LV_brain +f_LV*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*PK_BCSFB_bound_brain -f_LV*(Q_CSF_brain + Q_ISF_brain)*PK_LV_brain +f_LV*Q_ISF_brain*Ab_t +(1 - sigma_V_BCSFB)*f_LV*Q_CSF_brain*PK_p_brain -fta0*AB40Mu_LV*PK_LV_brain*V_LV_brain -fta0*AB42Mu_LV*PK_LV_brain*V_LV_brain
+
+d PK_SAS_brain/dt = -(1 - sigma_L_SAS)*Q_CSF_brain*PK_SAS_brain +(Q_CSF_brain + Q_ISF_brain)*PK_CM_brain -Q_ISF_brain*PK_SAS_brain -fta0*AB40Mu_SAS*PK_SAS_brain*V_SAS_brain -fta0*AB42Mu_SAS*PK_SAS_brain*V_SAS_brain
+
+d PK_TFV_brain/dt = -(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*PK_TFV_brain +(1 - f_LV)*CLup_brain*(1 - f_BBB)*VES_brain*(1 - FR)*PK_BCSFB_bound_brain +f_LV*(Q_CSF_brain + Q_ISF_brain)*PK_LV_brain -(Q_CSF_brain + Q_ISF_brain)*PK_TFV_brain +(1 - sigma_V_brain_ISF)*(1 - f_LV)*Q_ISF_brain*PK_p_brain +(1 - f_LV)*Q_ISF_brain*Ab_t -fta0*AB40Mu_TFV*PK_TFV_brain*V_TFV_brain -fta0*AB42Mu_TFV*PK_TFV_brain*V_TFV_brain
+
+d PK_central/dt = +PK_SC_ka*PK_SC_bio*SubCut_absorption +InputCent -PK_CLd2*PK_central +PK_CLd2*PK_per -PK_CL*PK_central -Q_p_brain*PK_central +(1 - sigma_L_SAS)*Q_CSF_brain*PK_SAS_brain +(Q_p_brain - L_brain)*PK_p_brain +(1 - sigma_L_brain_ISF)*(Q_ISF_brain - Q_PVS)*Ab_t -fta0*AB40Mu_Central*PK_central -fta0*AB42Mu_Central*PK_central +(1 - sigma_PVS)*(Q_PVS + CSF_fraction*Qbrain_ISFpsv)*C_Antibody_unbound_PVS
+
+d PK_p_brain/dt = +Q_p_brain*PK_central -(Q_p_brain - L_brain)*PK_p_brain -CLup_brain*f_BBB*VES_brain*PK_p_brain +CLup_brain*f_BBB*VES_brain*FR*PK_BBB_bound_brain -CLup_brain*f_BCSFB*VES_brain*PK_p_brain +CLup_brain*(1 - f_BBB)*VES_brain*FR*PK_BCSFB_bound_brain -(1 - sigma_V_BCSFB)*f_LV*Q_CSF_brain*PK_p_brain -(1 - sigma_V_brain_ISF)*(1 - f_LV)*Q_ISF_brain*PK_p_brain -(1 - sigma_V_brain_ISF)*Q_ISF_brain*PK_p_brain -fta0*AB40Mu_Brain_Plasma*PK_p_brain*Vp_brain -fta0*AB42Mu_Brain_Plasma*PK_p_brain*Vp_brain
+
+d PK_per/dt = +PK_CLd2*PK_central -PK_CLd2*PK_per
+
+d SubCut_absorption/dt = +InputSC -PK_SC_ka*PK_SC_bio*SubCut_absorption -PK_SC_ka*(1 - PK_SC_bio)*SubCut_absorption
+

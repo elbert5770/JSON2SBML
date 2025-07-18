@@ -20,8 +20,8 @@
     "Rate_eqtn_prototype": "k_{O_n0}_{O_n1}_{Abeta}_{Comp}*{Abeta}_PDMA_Vmax_{Comp}*({Abeta}_O25_{Comp} / ({Abeta}_O25_{Comp} + {Abeta}_PDMA_EC50_{Comp}))",
     "Comp": "[ISF]",
     "Abeta": "[AB40,AB42]",
-    "O_n0": "[f\"O{i}\" for i in range(1,24)]",
-    "O_n1": "[f\"O{i}\" for i in range(2,25)]",
+    "O_n0": "[f\"O{i}\" for i in range(1,16)]",
+    "O_n1": "[f\"O{i}\" for i in range(2,17)]",
     "Paired": "{O_n0,O_n1}"
   },
   {
