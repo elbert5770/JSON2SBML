@@ -17,7 +17,7 @@ def build_reactions():
                 all_reactions.append(Reaction_dict)
 
     for Species in ['AB40', 'AB42']:
-        for n in range(2, 17):
+        for n in range(1, 17):
             for Comp in ['ISF']:
                 counter += 1
                 Reaction_name = f"Plaque Driven Monomer Addition (PDMA)"
@@ -116,7 +116,7 @@ def build_reactions():
             all_reactions.append(Reaction_dict)
     
     for Species in ['AB40', 'AB42']:
-        for n in range(2, 26):
+        for n in range(1, 26):
             for Comp in ['ISF']:
                 counter += 1
                 Reaction_name = f"Microglia Degradation Abeta-Antibody"
@@ -145,7 +145,7 @@ def build_reactions():
             Reactants = f"[{Species}_O1_{Comp}]"
             Products = f"[0]"
             Rate_type = "custom_conc_per_time"  
-            Rate_eqtn_prototype = f"IDE_conc_{Comp} * {Species}_IDE_Kcat_lin_{Comp} * (({Species}_O1_{Comp})^{Species}_IDE_Hill_{Comp} / (({Species}_O1_{Comp})^{Species}_IDE_Hill_{Comp} + {Species}_IDE_IC50_{Comp}^{Species}_IDE_Hill_{Comp}))"            
+            Rate_eqtn_prototype = f"IDE_conc_{Comp} * {Species}_IDE_Kcat_{Comp} * (({Species}_O1_{Comp})^{Species}_IDE_Hill_{Comp} / (({Species}_O1_{Comp})^{Species}_IDE_Hill_{Comp} + {Species}_IDE_IC50_{Comp}^{Species}_IDE_Hill_{Comp}))"            
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
 
@@ -228,9 +228,9 @@ def build_reactions():
                 counter += 1
                 Comp1 = Comp[0]
                 Comp2 = Comp[1]
-                Reaction_name = f"Flow PVS to centraloligomer/proto"
+                Reaction_name = f"Flow PVS to central oligomer/proto"
                 Reactants = f"[{Species}_O{n}_{Comp1}]"
-                Products = f"[{Species}_O{n}_{Comp2}]"
+                Products = f"[0]"
                 Rate_type = "UDF"
                 Rate_eqtn_prototype = f"(1.0 - sigma_{Comp1}_{Comp2}_Abeta) * Q_PVS"
                 Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
@@ -243,15 +243,15 @@ def build_reactions():
                 Comp1 = Comp[0]
                 Comp2 = Comp[1]
                 Reaction_name = f"Flow PVS to central oligomer/proto-Antibody"
-                Reactants = f"[{Species}_O{n}__Antibody{Comp1}]"
-                Products = f"[{Species}_O{n}__Antibody{Comp2}]"
+                Reactants = f"[{Species}_O{n}__Antibody_{Comp1}]"
+                Products = f"[0]"
                 Rate_type = "UDF"
                 Rate_eqtn_prototype = f"(1.0 - sigma_{Comp1}_{Comp2}_Antibody) * Q_PVS"
                 Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
                 all_reactions.append(Reaction_dict)
 
     for Species in ['AB40_O1', 'AB42_O1', 'AB40_O1__Antibody', 'AB42_O1__Antibody','Antibody']:
-        for Comp in [['ISF','PVS'],['PVS','central'],['ISF','central'],['ISF','LV'],['ISF','TFV'],['BrainPlasma','ISF'],['BrainPlasma','LV'],['BrainPlasma','TFV'],['LV','TFV'],['TFV','CM'],['CM','SAS'],['SAS','ISF'],['SAS','central'],['BrainPlasma','central'],['central','BrainPlasma']]:
+        for Comp in [['PVS','central'],['ISF','central'],['ISF','LV'],['ISF','TFV'],['BrainPlasma','ISF'],['BrainPlasma','LV'],['BrainPlasma','TFV'],['LV','TFV'],['TFV','CM'],['CM','SAS'],['SAS','ISF'],['SAS','central'],['BrainPlasma','central'],['central','BrainPlasma']]:
             counter += 1
             Comp1 = Comp[0]
             Comp2 = Comp[1]
@@ -259,19 +259,11 @@ def build_reactions():
             Reactants = f"[{Species}_{Comp1}]"
             Products = f"[{Species}_{Comp2}]"
             Rate_type = "UDF"
-            #['ISF','PVS'],['PVS','central'],['ISF','central'],
+            #['PVS','central'],['ISF','central'],
             # ['ISF','LV'],['ISF','TFV'],['BrainPlasma','ISF'],['BrainPlasma','LV'],
             # ['BrainPlasma','TFV'],['LV','TFV'],['TFV','CM'],['CM','SAS'],['SAS','ISF'],
             # ['SAS','central'],['BrainPlasma','central'],['central','BrainPlasma']
             match Comp:
-                case ['ISF','PVS']:
-                    Reaction_name = f"Flow ISF to PVS "
-                    if Species == 'AB40_O1' or Species == 'AB42_O1' :
-                        Rate_eqtn_prototype = f"(1.0 - sigma_{Comp1}_{Comp2}_O1) * Q_PVS"
-                    elif Species == 'Antibody':
-                        Rate_eqtn_prototype = f"(1.0 - sigma_{Comp1}_{Comp2}_Antibody) * Q_PVS"
-                    else:
-                        Rate_eqtn_prototype = f"0"
                 case ['PVS','central']:
                     Reaction_name = f"Flow PVS to central "
                     if Species == 'Antibody':
@@ -298,7 +290,7 @@ def build_reactions():
                     Rate_eqtn_prototype = f"f_LV*(1.0 - sigma_BCSFB)*Q_CSF"
                 case ['BrainPlasma','TFV']: 
                     Reaction_name = f"Flow BrainPlasma to TFV Abeta"
-                    Rate_eqtn_prototype = f"(1.0 - f_LV)*(1.0 - sigma_vascular_BCSFB)*Q_CSF"
+                    Rate_eqtn_prototype = f"(1.0 - f_LV)*(1.0 - sigma_BCSFB)*Q_CSF"
                 case ['LV','TFV']: 
                     Reaction_name = f"Flow LV to TFV Abeta"
                     Rate_eqtn_prototype = f"f_LV*(Q_CSF + Qglymph)"
@@ -319,13 +311,29 @@ def build_reactions():
                         Rate_eqtn_prototype = f"(1 - sigma_{Comp1}_{Comp2}_Antibody)*Q_CSF"
                 case ['BrainPlasma','central']:
                     Reaction_name = f"Flow BrainPlasma to central Abeta"
-                    Rate_eqtn_prototype = f"(Qbrain_plasma - Q_ CSF - Qbrain_ISF)"
+                    Rate_eqtn_prototype = f"(Qbrain_plasma - Q_CSF - Qbrain_ISF)"
                 case ['central','BrainPlasma']:
                     Reaction_name = f"Flow central to BrainPlasma Abeta"
                     Rate_eqtn_prototype = f"Qbrain_plasma"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict) 
     
+    for Species in ['AB40_O1', 'AB42_O1','Antibody']:
+        for Comp in [['ISF','PVS']]:
+            counter += 1
+            Comp1 = Comp[0]
+            Comp2 = Comp[1]
+            Reactants = f"[{Species}_{Comp1}]"
+            Products = f"[{Species}_{Comp2}]"
+            Rate_type = "UDF" 
+            Reaction_name = f"Flow ISF to PVS "
+            if Species == 'AB40_O1' or Species == 'AB42_O1' :
+                Rate_eqtn_prototype = f"(1.0 - sigma_{Comp1}_{Comp2}_O1) * Q_PVS"
+            elif Species == 'Antibody':
+                Rate_eqtn_prototype = f"(1.0 - sigma_{Comp1}_{Comp2}_Antibody) * Q_PVS"         
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict) 
+
     for Species in ['AB40_O1', 'AB42_O1', 'AB40_O1__Antibody', 'AB42_O1__Antibody','Antibody']:
         for Comp in ['BBB','BCSFB']:
             counter += 1
@@ -402,7 +410,7 @@ def build_reactions():
             Products = f"[0]"
             Rate_type = "UDF"
             if Species == 'AB40_O1' or Species == 'AB42_O1':
-                Rate_eqtn_prototype = f"Abeta_O1_CL"
+                Rate_eqtn_prototype = f"AB_O1_CL"
             else:
                 Rate_eqtn_prototype = f"Antibody_CL"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
@@ -418,7 +426,7 @@ def build_reactions():
             Products = f"[{Species}_{Comp2}]"
             Rate_type = "UDF"
             if Species == 'AB40_O1' or Species == 'AB42_O1':
-                Rate_eqtn_prototype = f"Abeta_O1_CLd2"
+                Rate_eqtn_prototype = f"AB_O1_CLd2"
             else:
                 Rate_eqtn_prototype = f"Antibody_CLd2"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}

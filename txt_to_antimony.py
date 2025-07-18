@@ -412,6 +412,13 @@ def generate_antimony_from_txt(txt_file_path):
     # Extract species and parameters from reactions
     species, parameters, species_errors = extract_species_and_parameters_from_reactions(reaction_string)
     
+    # Add compartment volume parameters to the parameters list
+    for compartment in unique_compartments:
+        parameters.append(f"V_{compartment}")
+    
+    # Make parameters unique by converting to set and back to sorted list
+    parameters = sorted(list(set(parameters)))
+    
     # Convert species in rate equations to concentrations for MTK solver
     reactions_mtk = convert_species_to_concentrations(reaction_string, species)
     

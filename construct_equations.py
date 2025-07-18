@@ -173,6 +173,19 @@ class DifferentialEquationBuilder:
                 
             print(f"Saved reaction details to '{output_filename}'")
             
+            # Save reactions per species data to separate CSV
+            reactions_per_species_filename = 'reactions_per_species.csv'
+            with open(reactions_per_species_filename, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow(['Species', 'Number_of_Terms'])
+                
+                for species in sorted(self.unique_species):
+                    terms = self.species_equations[species]
+                    num_terms = len(terms)
+                    writer.writerow([species, num_terms])
+                
+            print(f"Saved reactions per species data to '{reactions_per_species_filename}'")
+            
         except Exception as e:
             print(f"Error saving CSV: {e}")
     
