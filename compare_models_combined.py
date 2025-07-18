@@ -251,7 +251,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Load Dylan_LibSBML model (combined master model)
-    sbml_path_dylan = Path("../generated/sbml/combined_master_model.xml")
+    sbml_path_dylan = Path("combined_master_model.xml")
     with open(sbml_path_dylan, "r") as f:
         sbml_str_dylan = f.read()
         #antimony_str_dylan = f.read()
