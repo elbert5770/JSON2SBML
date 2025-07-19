@@ -430,6 +430,7 @@ def run_optimization_and_simulation():
         'backHill4x': 2.0
     }
     
+    # Run simulations with drug (current behavior)
     result1 = setup_model_and_simulate(r, param_names, param_values, apoe4_microglia_params, ab42_params, ab40_params)
 
     # Update model with optimized parameters for non-APOE4
@@ -442,7 +443,23 @@ def run_optimization_and_simulation():
     
     result2 = setup_model_and_simulate(r, param_names, param_values, nonapoe4_microglia_params, ab42_params, ab40_params)
 
-    return r, result1,result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE
+    # Run simulations without drug (set Antibody_SubCutComp_Dose to 0.0)
+    # First, save the original value
+    original_dose = r['Antibody_SubCutComp_Dose']
+    
+    # Set dose to 0 for no-drug simulations
+    r['Antibody_SubCutComp_Dose'] = 0.0
+    
+    # Run ApoE4 simulation without drug
+    result3 = setup_model_and_simulate(r, param_names, param_values, apoe4_microglia_params, ab42_params, ab40_params)
+    
+    # Run nonApoE4 simulation without drug
+    result4 = setup_model_and_simulate(r, param_names, param_values, nonapoe4_microglia_params, ab42_params, ab40_params)
+    
+    # Restore original dose value
+    r['Antibody_SubCutComp_Dose'] = original_dose
+
+    return r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE
 
 def calculate_oligomer_sums(result, ab_type):
     """
@@ -486,36 +503,62 @@ def calculate_proto_sums(result, ab_type):
     
     return proto_sum, proto_weighted_sum
 
-def plot_oligomers(ax, result1, result2, time_years1, time_years2, ab_type):
+def plot_oligomers(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot oligomers panel."""
     oligomer_sum1, oligomer_weighted_sum1 = calculate_oligomer_sums(result1, ab_type)
     oligomer_sum2, oligomer_weighted_sum2 = calculate_oligomer_sums(result2, ab_type)
+    oligomer_sum3, oligomer_weighted_sum3 = calculate_oligomer_sums(result3, ab_type)
+    oligomer_sum4, oligomer_weighted_sum4 = calculate_oligomer_sums(result4, ab_type)
     
-    ax.plot(time_years1, oligomer_sum1, label=f'Oligomers ApoE', linewidth=2, linestyle='--', color='red')
-    ax.plot(time_years2, oligomer_sum2, label=f'Oligomers non-ApoE', linewidth=2, linestyle='--', color='blue')
-    ax.plot(time_years1, oligomer_weighted_sum1, label=f'Oligomers weighted ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, oligomer_weighted_sum2, label=f'Oligomers weighted non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    # ax.plot(time_years1, oligomer_sum1, label=f'Oligomers ApoE + drug', linewidth=2, linestyle='--', color='red')
+    ax.plot(time_years1, oligomer_weighted_sum1, label=f'Oligomers weighted ApoE + drug', linewidth=2, color='red')
     
-    ax.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
-    ax.axvline(x=74, color='black', linestyle='--', linewidth=1.5)
+    # non-ApoE with drug (blue)
+    # ax.plot(time_years2, oligomer_sum2, label=f'Oligomers non-ApoE + drug', linewidth=2, linestyle='--', color='blue')
+    ax.plot(time_years2, oligomer_weighted_sum2, label=f'Oligomers weighted non-ApoE + drug', linewidth=2, linestyle='--', color='blue')
+    
+    # ApoE without drug (green)
+    # ax.plot(time_years3, oligomer_sum3, label=f'Oligomers ApoE - drug', linewidth=2, linestyle='--', color='red')
+    ax.plot(time_years3, oligomer_weighted_sum3, label=f'Oligomers weighted ApoE - drug', linewidth=2, color='red')
+    
+    # non-ApoE without drug (teal)
+    # ax.plot(time_years4, oligomer_sum4, label=f'Oligomers non-ApoE - drug', linewidth=2, linestyle='--', color='teal')
+    ax.plot(time_years4, oligomer_weighted_sum4, label=f'Oligomers weighted non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
+    ax.axvline(x=70, color='green', linestyle='--', linewidth=1.5)
+    ax.axvline(x=74, color='green', linestyle='--', linewidth=1.5)
     ax.plot([70], [12211], 'o', color='green', markersize=6)
     ax.plot([74], [12307], 'o', color='green', markersize=6)
     
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Oligomers')
-    ax.legend(loc='upper left')
+    ax.legend(loc='upper left', fontsize=8)
     ax.grid(True)
 
-def plot_proto(ax, result1, result2, time_years1, time_years2, ab_type):
+def plot_proto(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot proto panel."""
     proto_sum1, proto_weighted_sum1 = calculate_proto_sums(result1, ab_type)
     proto_sum2, proto_weighted_sum2 = calculate_proto_sums(result2, ab_type)
+    proto_sum3, proto_weighted_sum3 = calculate_proto_sums(result3, ab_type)
+    proto_sum4, proto_weighted_sum4 = calculate_proto_sums(result4, ab_type)
     
-    ax.plot(time_years1, proto_sum1, label=f'Proto ApoE', linewidth=2, linestyle='--', color='red')
-    ax.plot(time_years1, proto_weighted_sum1, label=f'Proto weighted ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, proto_sum2, label=f'Proto non-ApoE', linewidth=2, linestyle='--', color='blue')
-    ax.plot(time_years2, proto_weighted_sum2, label=f'Proto weighted non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    # ax.plot(time_years1, proto_sum1, label=f'Proto ApoE + drug', linewidth=2, linestyle='--', color='red')
+    ax.plot(time_years1, proto_weighted_sum1, label=f'Proto weighted ApoE + drug', linewidth=2, color='red')
+    
+    # non-ApoE with drug (blue)
+    # ax.plot(time_years2, proto_sum2, label=f'Proto non-ApoE + drug', linewidth=2, linestyle='--', color='blue')
+    ax.plot(time_years2, proto_weighted_sum2, label=f'Proto weighted non-ApoE + drug', linewidth=2, color='blue')
+    
+    # ApoE without drug (green)
+    # ax.plot(time_years3, proto_sum3, label=f'Proto ApoE - drug', linewidth=2, linestyle='--', color='green')
+    ax.plot(time_years3, proto_weighted_sum3, label=f'Proto weighted ApoE - drug', linewidth=2, linestyle='--', color='red')
+    
+    # non-ApoE without drug (teal)
+    # ax.plot(time_years4, proto_sum4, label=f'Proto non-ApoE - drug', linewidth=2, linestyle='--', color='teal')
+    ax.plot(time_years4, proto_weighted_sum4, label=f'Proto weighted non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
     
     ax.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
     ax.axvline(x=74, color='black', linestyle='--', linewidth=1.5)
@@ -528,24 +571,38 @@ def plot_proto(ax, result1, result2, time_years1, time_years2, ab_type):
     ax.legend(loc='upper left', fontsize=7)
     ax.grid(True)
 
-def plot_suvr(ax, result1, result2, time_years1, time_years2, ab_type, suvr, csv_data_3A_ApoE, csv_data_3A_nonApoE):
+def plot_suvr(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type, suvr, csv_data_3A_ApoE, csv_data_3A_nonApoE):
     """Plot SUVR panel."""
     _, oligomer_weighted_sum1 = calculate_oligomer_sums(result1, ab_type)
     _, proto_weighted_sum1 = calculate_proto_sums(result1, ab_type)
     _, oligomer_weighted_sum2 = calculate_oligomer_sums(result2, ab_type)
     _, proto_weighted_sum2 = calculate_proto_sums(result2, ab_type)
+    _, oligomer_weighted_sum3 = calculate_oligomer_sums(result3, ab_type)
+    _, proto_weighted_sum3 = calculate_proto_sums(result3, ab_type)
+    _, oligomer_weighted_sum4 = calculate_oligomer_sums(result4, ab_type)
+    _, proto_weighted_sum4 = calculate_proto_sums(result4, ab_type)
     
     plaque_sum1 = result1[f'[{ab_type}_O25_ISF]']
     plaque_sum2 = result2[f'[{ab_type}_O25_ISF]']
+    plaque_sum3 = result3[f'[{ab_type}_O25_ISF]']
+    plaque_sum4 = result4[f'[{ab_type}_O25_ISF]']
     
     suvr_values1 = suvr(oligomer_weighted_sum1, proto_weighted_sum1, plaque_sum1)
     suvr_values2 = suvr(oligomer_weighted_sum2, proto_weighted_sum2, plaque_sum2)
+    suvr_values3 = suvr(oligomer_weighted_sum3, proto_weighted_sum3, plaque_sum3)
+    suvr_values4 = suvr(oligomer_weighted_sum4, proto_weighted_sum4, plaque_sum4)
     
-    ax.plot(time_years1, suvr_values1, label='SUVR ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, suvr_values2, label='SUVR non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, suvr_values1, label='SUVR ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, suvr_values2, label='SUVR non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, suvr_values3, label='SUVR ApoE - drug', linestyle='--',color='red',linewidth=2)
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, suvr_values4, label='SUVR non-ApoE - drug', linewidth=2, linestyle='--',color='blue')
     
-    ax.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
-    ax.axvline(x=74, color='black', linestyle='--', linewidth=1.5)
+    ax.axvline(x=70, color='green', linestyle='--', linewidth=1.5)
+    ax.axvline(x=74, color='green', linestyle='--', linewidth=1.5)
     ax.plot([70], [1.394], 'o', color='green', markersize=6)
     ax.plot([74], [1.623], 'o', color='green', markersize=6)
     ax.plot(csv_data_3A_ApoE['time']/24/365, csv_data_3A_ApoE['measurement'], 'r.', label='ApoE published', markersize=4)
@@ -554,11 +611,11 @@ def plot_suvr(ax, result1, result2, time_years1, time_years2, ab_type, suvr, csv
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('SUVR')
-    ax.legend(loc='upper left')
+    ax.legend(loc='upper left', fontsize=8)
     ax.grid(True)
-    # ax.set_xlim(70, 73)
+    ax.set_xlim(70, 80)
 
-def plot_antibody_central(ax, result1, result2, time_years1, time_years2, ab_type):
+def plot_antibody_central(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot antibody central panel."""
     # Check if the column exists in the results
     column_name = f'[Antibody_central]'
@@ -573,17 +630,24 @@ def plot_antibody_central(ax, result1, result2, time_years1, time_years2, ab_typ
         ax.set_title('Antibody Central (Not Available)')
         return
     
-    ax.plot(time_years1, result1[column_name], label=f'{ab_type}_central ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, result2[column_name], label=f'{ab_type}_central non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, result1[column_name], label=f'{ab_type}_central ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, result2[column_name], label=f'{ab_type}_central non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3[column_name], label=f'{ab_type}_central ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4[column_name], label=f'{ab_type}_central non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Antibody Central')
-    ax.legend(loc='upper left')
+    ax.legend(loc='upper left', fontsize=8)
     ax.set_xlim(70, 73)
     ax.grid(True)
 
-def plot_antibody_SAS(ax, result1, result2, time_years1, time_years2, ab_type):
-    """Plot antibody central panel."""
+def plot_antibody_SAS(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
+    """Plot antibody SAS panel."""
     # Check if the column exists in the results
     column_name = f'[Antibody_SAS]'
     if column_name not in result1.colnames:
@@ -597,16 +661,23 @@ def plot_antibody_SAS(ax, result1, result2, time_years1, time_years2, ab_type):
         ax.set_title('Antibody SAS (Not Available)')
         return
     
-    ax.plot(time_years1, result1[column_name], label=f'{ab_type}_SAS ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, result2[column_name], label=f'{ab_type}_SAS non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, result1[column_name], label=f'{ab_type}_SAS ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, result2[column_name], label=f'{ab_type}_SAS non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3[column_name], label=f'{ab_type}_SAS ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4[column_name], label=f'{ab_type}_SAS non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Antibody SAS')
-    ax.legend(loc='upper left')
+    ax.legend(loc='upper left', fontsize=8)
     ax.set_xlim(70, 73)
     ax.grid(True)
 
-def plot_antibody_ISF(ax, result1, result2, time_years1, time_years2, ab_type):
+def plot_antibody_ISF(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot antibody ISF panel."""
     column_name = f'Anti_ABeta_ISF_sum'
     if column_name not in result1.colnames:
@@ -619,16 +690,23 @@ def plot_antibody_ISF(ax, result1, result2, time_years1, time_years2, ab_type):
         ax.set_ylabel('Concentration (nM)')
         ax.set_title('Antibody ISF (Not Available)')
         return
-    ax.plot(time_years1, result1[column_name]+result1[f'[AB42_O1__Antibody_ISF]'], label=f'{ab_type}_ISF ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, result2[column_name]+result2[f'[AB42_O1__Antibody_ISF]'], label=f'{ab_type}_ISF non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, result1[column_name]+result1[f'[AB42_O1__Antibody_ISF]'], label=f'{ab_type}_ISF ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, result2[column_name]+result2[f'[AB42_O1__Antibody_ISF]'], label=f'{ab_type}_ISF non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3[column_name]+result3[f'[AB42_O1__Antibody_ISF]'], label=f'{ab_type}_ISF ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4[column_name]+result4[f'[AB42_O1__Antibody_ISF]'], label=f'{ab_type}_ISF non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Antibody total ISF')
-    ax.legend(loc='upper left')
+    ax.legend(loc='upper left', fontsize=8)
     ax.set_xlim(70, 73)
     ax.grid(True)
 
-def plot_antibody_BBB(ax, result1, result2, time_years1, time_years2, ab_type):
+def plot_antibody_BBB(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot antibody BBB panel."""
     column_name = f'[Antibody__FCRn_BBB]'
     if column_name not in result1.colnames:
@@ -641,16 +719,23 @@ def plot_antibody_BBB(ax, result1, result2, time_years1, time_years2, ab_type):
         ax.set_ylabel('Concentration (nM)')
         ax.set_title('Antibody__FCRn_BBB (Not Available)')
         return
-    ax.plot(time_years1, result1[column_name], label=f'Antibody__FCRn_BBB ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, result2[column_name], label=f'Antibody__FCRn_BBB non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, result1[column_name], label=f'Antibody__FCRn_BBB ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, result2[column_name], label=f'Antibody__FCRn_BBB non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3[column_name], label=f'Antibody__FCRn_BBB ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4[column_name], label=f'Antibody__FCRn_BBB non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Antibody__FCRn_BBB')
-    ax.legend(loc='upper right')
+    ax.legend(loc='upper right', fontsize=8)
     ax.set_xlim(70, 73)
     ax.grid(True)
 
-def plot_antibody_BCSFB(ax, result1, result2, time_years1, time_years2, ab_type):
+def plot_antibody_BCSFB(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot antibody BCSFB panel."""
     column_name = f'[Antibody__FCRn_BCSFB]'
     if column_name not in result1.colnames:
@@ -663,16 +748,23 @@ def plot_antibody_BCSFB(ax, result1, result2, time_years1, time_years2, ab_type)
         ax.set_ylabel('Concentration (nM)')
         ax.set_title('Antibody__FCRn_BCSFB (Not Available)')
         return
-    ax.plot(time_years1, result1[column_name], label=f'Antibody__FCRn_BCSFB ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, result2[column_name], label=f'Antibody__FCRn_BCSFB non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, result1[column_name], label=f'Antibody__FCRn_BCSFB ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, result2[column_name], label=f'Antibody__FCRn_BCSFB non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3[column_name], label=f'Antibody__FCRn_BCSFB ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4[column_name], label=f'Antibody__FCRn_BCSFB non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Antibody__FCRn_BCSFB')
-    ax.legend(loc='upper right')
+    ax.legend(loc='upper right', fontsize=8)
     ax.grid(True)
     ax.set_xlim(70, 73)
 
-def plot_antibody_LV(ax, result1, result2, time_years1, time_years2, ab_type):
+def plot_antibody_LV(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot antibody LV panel."""
     column_name = f'[Antibody_LV]'
     if column_name not in result1.colnames:
@@ -685,19 +777,33 @@ def plot_antibody_LV(ax, result1, result2, time_years1, time_years2, ab_type):
         ax.set_ylabel('Concentration (nM)')
         ax.set_title('Antibody LV (Not Available)')
         return
-    ax.plot(time_years1, result1[column_name], label=f'Antibody_LV ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, result2[column_name], label=f'Antibody_LV non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, result1[column_name], label=f'Antibody_LV ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, result2[column_name], label=f'Antibody_LV non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3[column_name], label=f'Antibody_LV ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4[column_name], label=f'Antibody_LV non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Antibody LV')
-    ax.legend(loc='upper right')
+    ax.legend(loc='upper right', fontsize=8)
     ax.grid(True)
     ax.set_xlim(70, 73)
 
-def plot_o1_isf(ax, result1, result2, time_years1, time_years2, ab_type, csv_data_3C_ApoE, csv_data_3C_nonApoE):
+def plot_o1_isf(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type, csv_data_3C_ApoE, csv_data_3C_nonApoE):
     """Plot O1_ISF panel."""
-    ax.plot(time_years1, result1[f'[{ab_type}_O1_ISF]'], label=f'{ab_type}_O1_ISF ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, result2[f'[{ab_type}_O1_ISF]'], label=f'{ab_type}_O1_ISF non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, result1[f'[{ab_type}_O1_ISF]'], label=f'{ab_type}_O1_ISF ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, result2[f'[{ab_type}_O1_ISF]'], label=f'{ab_type}_O1_ISF non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3[f'[{ab_type}_O1_ISF]'], label=f'{ab_type}_O1_ISF ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4[f'[{ab_type}_O1_ISF]'], label=f'{ab_type}_O1_ISF non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
     ax.plot(csv_data_3C_ApoE['time']/24/365, csv_data_3C_ApoE['measurement'], 'r.', label='ApoE published', markersize=4)
     ax.plot(csv_data_3C_nonApoE['time']/24/365, csv_data_3C_nonApoE['measurement'], 'b.', label='non-ApoE published', markersize=4)
@@ -705,13 +811,20 @@ def plot_o1_isf(ax, result1, result2, time_years1, time_years2, ab_type, csv_dat
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title(f'{ab_type}_O1_ISF and {ab_type}_O1_CSF')
-    ax.legend(loc='upper right')
+    ax.legend(loc='upper right', fontsize=8)
     ax.grid(True)
 
-def plot_plaque(ax, result1, result2, time_years1, time_years2, ab_type):
+def plot_plaque(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot plaque panel."""
-    ax.plot(time_years1, result1[f'[{ab_type}_O25_ISF]'], label=f'{ab_type}_O25_ISF ApoE', linewidth=2, color='red')
-    ax.plot(time_years2, result2[f'[{ab_type}_O25_ISF]'], label=f'{ab_type}_O25_ISF non-ApoE', linewidth=2, color='blue')
+    # ApoE with drug (red)
+    ax.plot(time_years1, result1[f'[{ab_type}_O25_ISF]'], label=f'{ab_type}_O25_ISF ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
+    ax.plot(time_years2, result2[f'[{ab_type}_O25_ISF]'], label=f'{ab_type}_O25_ISF non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3[f'[{ab_type}_O25_ISF]'], label=f'{ab_type}_O25_ISF ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4[f'[{ab_type}_O25_ISF]'], label=f'{ab_type}_O25_ISF non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.axvline(x=70, color='black', linestyle='--', linewidth=1.5)
     ax.axvline(x=74, color='black', linestyle='--', linewidth=1.5)
     ax.plot([70], [5102], 'o', color='green', markersize=6)
@@ -720,16 +833,25 @@ def plot_plaque(ax, result1, result2, time_years1, time_years2, ab_type):
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Plaque')
-    ax.legend(loc='upper right')
+    ax.legend(loc='upper right', fontsize=8)
     ax.grid(True)
     # ax.set_xlim(70, 73)
 
-def plot_ratio(ax, result1, result2, time_years1, time_years2, csv_data_3B_ApoE, csv_data_3B_nonApoE):
+def plot_ratio(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, csv_data_3B_ApoE, csv_data_3B_nonApoE):
     """Plot AB42/AB40 ratio panel."""
+    # ApoE with drug (red)
     ax.plot(time_years1, result1['[AB42_O1_SAS]']/result1['[AB40_O1_SAS]'], 
-            label='AB42_O1_SAS/AB40_O1_SAS ApoE', linewidth=2, color='red')
+            label='AB42_O1_SAS/AB40_O1_SAS ApoE + drug', linewidth=2, color='red')
+    # non-ApoE with drug (blue)
     ax.plot(time_years2, result2['[AB42_O1_SAS]']/result2['[AB40_O1_SAS]'], 
-            label='AB42_O1_SAS/AB40_O1_SAS non-ApoE', linewidth=2, color='blue')
+            label='AB42_O1_SAS/AB40_O1_SAS non-ApoE + drug', linewidth=2, color='blue')
+    # ApoE without drug (green)
+    ax.plot(time_years3, result3['[AB42_O1_SAS]']/result3['[AB40_O1_SAS]'], 
+            label='AB42_O1_SAS/AB40_O1_SAS ApoE - drug', linewidth=2, linestyle='--', color='red')
+    # non-ApoE without drug (teal)
+    ax.plot(time_years4, result4['[AB42_O1_SAS]']/result4['[AB40_O1_SAS]'], 
+            label='AB42_O1_SAS/AB40_O1_SAS non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
+    
     ax.plot(csv_data_3B_ApoE['time']/24/365, csv_data_3B_ApoE['measurement'], 'r.', 
             label='ApoE published', markersize=4)
     ax.plot(csv_data_3B_nonApoE['time']/24/365, csv_data_3B_nonApoE['measurement'], 'b.', 
@@ -751,13 +873,13 @@ def plot_kcat(ax, result1, result2, time_years1, time_years2, ab_type):
     ax.grid(True)
     # ax.set_xlim(70, 73)
 
-def create_standard_plots(result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
+def create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
                          csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, ab_type, filename_suffix):
     """
     Create standard 6-panel plots for a given AB type.
     
     Parameters:
-    result1, result2: Simulation results for ApoE and non-ApoE
+    result1, result2, result3, result4: Simulation results for ApoE with drug, non-ApoE with drug, ApoE without drug, non-ApoE without drug
     csv_data_*: CSV data for plotting
     suvr: SUVR calculation function
     ab_type: 'AB42' or 'AB40'
@@ -768,65 +890,67 @@ def create_standard_plots(result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApo
     
     time_years1 = result1['time']/24/365
     time_years2 = result2['time']/24/365
+    time_years3 = result3['time']/24/365
+    time_years4 = result4['time']/24/365
     
     # Plot 1: Oligomers
     if ab_type != 'Antibody':
-        plot_oligomers(axes[0, 0], result1, result2, time_years1, time_years2, ab_type)
+        plot_oligomers(axes[0, 0], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     else:
-        plot_antibody_ISF(axes[0, 0], result1, result2, time_years1, time_years2, ab_type)
+        plot_antibody_ISF(axes[0, 0], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     
     # Plot 2: Proto
     if ab_type != 'Antibody':
-        plot_proto(axes[0, 1], result1, result2, time_years1, time_years2, ab_type)
+        plot_proto(axes[0, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     else:
-        plot_antibody_central(axes[0, 1], result1, result2, time_years1, time_years2, ab_type)
+        plot_antibody_central(axes[0, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     
     # Plot 3: SUVR
     if ab_type != 'Antibody':
-        plot_suvr(axes[1, 0], result1, result2, time_years1, time_years2, ab_type, suvr, 
+        plot_suvr(axes[1, 0], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type, suvr, 
                 csv_data_3A_ApoE, csv_data_3A_nonApoE)
     else:
-        plot_antibody_SAS(axes[1, 0], result1, result2, time_years1, time_years2, ab_type)
+        plot_antibody_SAS(axes[1, 0], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     
     # Plot 4: O1_ISF
     if ab_type != 'Antibody':
-        plot_o1_isf(axes[1, 1], result1, result2, time_years1, time_years2, ab_type, 
+        plot_o1_isf(axes[1, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type, 
                 csv_data_3C_ApoE, csv_data_3C_nonApoE)
     else:
-        plot_antibody_BBB(axes[1, 1], result1, result2, time_years1, time_years2, ab_type)
+        plot_antibody_BBB(axes[1, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     
     # Plot 5: Ratio (only for AB40 figure)
     if ab_type == 'AB40':
-        plot_ratio(axes[2, 0], result1, result2, time_years1, time_years2, 
+        plot_ratio(axes[2, 0], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, 
                    csv_data_3B_ApoE, csv_data_3B_nonApoE)
     elif ab_type == 'AB42':
         plot_kcat(axes[2, 0], result1, result2, time_years1, time_years2, ab_type)
     elif ab_type == 'Antibody':
-        plot_antibody_BCSFB(axes[2, 0], result1, result2, time_years1, time_years2, ab_type)
+        plot_antibody_BCSFB(axes[2, 0], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     
     # Plot 6: Plaque
     if ab_type != 'Antibody':
-        plot_plaque(axes[2, 1], result1, result2, time_years1, time_years2, ab_type)
+        plot_plaque(axes[2, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     else:
-        plot_antibody_LV(axes[2, 1], result1, result2, time_years1, time_years2, ab_type)
+        plot_antibody_LV(axes[2, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     
     plt.tight_layout()
     plt.savefig(__file__.replace('.py', f'_{filename_suffix}.png'), dpi=300, bbox_inches='tight')
     plt.show()
 
-def create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE):
+def create_plots(r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE):
     """
     Create plots using the simulation results.
     """
     # Create AB42 plots
-    create_standard_plots(result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
+    create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
                          csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, 'AB42', 'AB42')
     
     # Create AB40 plots
-    create_standard_plots(result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
+    create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
                          csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, 'AB40', 'AB40')
     
-    create_standard_plots(result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
+    create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
                          csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, 'Antibody', 'Antibody')
 
 # Main execution
@@ -835,23 +959,23 @@ if __name__ == "__main__":
     results = run_optimization_and_simulation()
     
     # Check if we got valid results
-    if results is None or len(results) != 10:
+    if results is None or len(results) != 12:
         print("Error: run_optimization_and_simulation() returned invalid results")
         exit(1)
     
-    r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE = results
+    r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE = results
     
     # Check if simulation results are valid
-    if result1 is None or result2 is None:
-        print("Error: Simulation failed - one or both results are None")
+    if result1 is None or result2 is None or result3 is None or result4 is None:
+        print("Error: Simulation failed - one or more results are None")
         exit(1)
     
     # Check if results have the expected structure
-    if not hasattr(result1, 'colnames') or not hasattr(result2, 'colnames'):
-        print(f"Error: Simulation results are not valid. result1 type: {type(result1)}, result2 type: {type(result2)}")
+    if not hasattr(result1, 'colnames') or not hasattr(result2, 'colnames') or not hasattr(result3, 'colnames') or not hasattr(result4, 'colnames'):
+        print(f"Error: Simulation results are not valid. result1 type: {type(result1)}, result2 type: {type(result2)}, result3 type: {type(result3)}, result4 type: {type(result4)}")
         exit(1)
     
-    print(f"Simulation successful! result1 has {len(result1.colnames)} columns, result2 has {len(result2.colnames)} columns")
+    print(f"Simulation successful! result1 has {len(result1.colnames)} columns, result2 has {len(result2.colnames)} columns, result3 has {len(result3.colnames)} columns, result4 has {len(result4.colnames)} columns")
     
     # Debug: Print available columns
     print("\nAvailable columns in result1:")
@@ -860,6 +984,14 @@ if __name__ == "__main__":
     
     print("\nAvailable columns in result2:")
     for i, col in enumerate(result2.colnames):
+        print(f"  {i}: {col}")
+    
+    print("\nAvailable columns in result3:")
+    for i, col in enumerate(result3.colnames):
+        print(f"  {i}: {col}")
+    
+    print("\nAvailable columns in result4:")
+    for i, col in enumerate(result4.colnames):
         print(f"  {i}: {col}")
     
     # Calculate SUVR at 70 years and store interpolated values
@@ -879,4 +1011,4 @@ if __name__ == "__main__":
     print("="*50)
     
     # Create plots
-    create_plots(r, result1, result2, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE) 
+    create_plots(r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE) 
