@@ -83,18 +83,18 @@ def convert_backward_rate(rate_s):
     return rate_s * 3600
 
 def calculate_k_rates(
-    # Original rates from literature (M⁻¹s⁻¹ for forward, s⁻¹ for backward)
-    # original_kf0_forty=0.5 * 10**2,  # AB40 monomer to dimer
-    k_O1_O2_AB42_ISF=9.9 * 10**2,  # AB42 monomer to dimer
-    # original_kf1_forty=20.0,  # AB40 dimer to trimer
-    k_O2_O3_AB42_ISF=38.0,  # AB42 dimer to trimer
-    # original_kb0_forty=2.7 * 10**-3,  # AB40 dimer to monomer
-    k_O2_O1_AB42_ISF=12.7 * 10**-3,  # AB42 dimer to monomer
-    # original_kb1_forty=0.00001 / 3600,  # AB40 trimer to dimer
-    k_O3_O2_AB42_ISF=0.00001 / 3600,  # AB42 trimer to dimer
+
+    k_O1_O2_AB4x_ISF,  # AB4x monomer to dimer
     
-    # Hill coefficients and asymptotic values
-    # forAsymp40=0.3,  # Asymptotic value for AB40 forward rates
+    k_O2_O3_AB4x_ISF,  # AB4x dimer to trimer
+    
+    k_O2_O1_AB4x_ISF,  # AB4x dimer to monomer
+   
+    k_O3_O2_AB4x_ISF, # AB4x trimer to dimer
+    forAsymp4x,
+    forHill4x,
+    backAsymp4x,
+    backHill4x
     
     
 ):
@@ -144,13 +144,13 @@ def calculate_k_rates(
     dict
         Dictionary containing all extrapolated rate constants including plaque rates
     """
-    forAsymp42=2.0  # Asymptotic value for AB42 forward rates
-    # backAsymp40=0.3,  # Asymptotic value for AB40 backward rates
-    backAsymp42=2.0  # Asymptotic value for AB42 backward rates
-    # forHill40=2.0,    # Hill coefficient for AB40 forward rates
-    forHill42=3.0   # Hill coefficient for AB42 forward rates
-    # BackHill40=2.5,   # Hill coefficient for AB40 backward rates
-    BackHill42=3.0   # Hill coefficient for AB42 backward rates
+    # forAsymp42=2.0  # Asymptotic value for AB42 forward rates
+    # # backAsymp40=0.3,  # Asymptotic value for AB40 backward rates
+    # backAsymp42=2.0  # Asymptotic value for AB42 backward rates
+    # # forHill40=2.0,    # Hill coefficient for AB40 forward rates
+    # forHill42=3.0   # Hill coefficient for AB42 forward rates
+    # # BackHill40=2.5,   # Hill coefficient for AB40 backward rates
+    # BackHill42=3.0   # Hill coefficient for AB42 backward rates
     
     # Rate cutoff
     rate_cutoff=0.00001
@@ -185,8 +185,8 @@ def calculate_k_rates(
     # Calculate rates for each oligomer size
     # kf_forty = [extrapolate_kf(kf0_forty, kf1_forty, size, forAsymp40, forHill40) for size in oligomer_sizes]
     # kb_forty = [extrapolate_kb(kb0_forty, kb1_forty, size, backAsymp40, BackHill40, rate_cutoff) for size in oligomer_sizes]
-    kf_fortytwo = [extrapolate_kf(k_O1_O2_AB42_ISF, k_O2_O3_AB42_ISF, size, forAsymp42, forHill42, rate_cutoff) for size in oligomer_sizes]
-    kb_fortytwo = [extrapolate_kb(k_O2_O1_AB42_ISF, k_O3_O2_AB42_ISF, size, backAsymp42, BackHill42, rate_cutoff) for size in oligomer_sizes]
+    kf_4x = [extrapolate_kf(k_O1_O2_AB4x_ISF, k_O2_O3_AB4x_ISF, size, forAsymp4x, forHill4x, rate_cutoff) for size in oligomer_sizes]
+    kb_4x = [extrapolate_kb(k_O2_O1_AB4x_ISF, k_O3_O2_AB4x_ISF, size, backAsymp4x, backHill4x, rate_cutoff) for size in oligomer_sizes]
     
     # Create dictionary to store the rates with proper naming convention
     rates = {}
@@ -197,8 +197,8 @@ def calculate_k_rates(
         # Oligomer rates (size < 17)
         # rates[f'k_O{size-1}_O{size}_AB40_ISF'] = kf_forty[i]
         # rates[f'k_O{size}_O{size-1}_AB40_ISF'] = kb_forty[i]
-        rates[f'k_O{size-1}_O{size}_AB42_ISF'] = kf_fortytwo[i]
-        rates[f'k_O{size}_O{size-1}_AB42_ISF'] = kb_fortytwo[i]
+        rates[f'k_O{size-1}_O{size}_AB4x_ISF'] = kf_4x[i]
+        rates[f'k_O{size}_O{size-1}_AB4x_ISF'] = kb_4x[i]
 
     
     return rates
