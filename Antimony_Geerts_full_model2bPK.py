@@ -144,7 +144,7 @@ def setup_model_and_simulate(r, param_names, param_values, microglia_params, ab4
         result = r.simulate(0, 20*365*24, 1000)
         print(f"First simulation completed, result type: {type(result)}")
         
-        result = r.simulate(20*365*24, 100*365*24, 7000, ['time', 
+        result = r.simulate(20*365*24, 100*365*24, 20000, ['time', 
             '[AB42_O1_ISF]', '[AB42_O25_ISF]', 
             '[AB42_O2_ISF]', '[AB42_O3_ISF]', '[AB42_O4_ISF]', '[AB42_O5_ISF]', '[AB42_O6_ISF]', '[AB42_O7_ISF]', 
             '[AB42_O8_ISF]', '[AB42_O9_ISF]', '[AB42_O10_ISF]', '[AB42_O11_ISF]', '[AB42_O12_ISF]', '[AB42_O13_ISF]',
@@ -346,6 +346,10 @@ def run_optimization_and_simulation():
     
     csv_data_3B_ApoE = csv_data_3B[csv_data_3B['series'].str.lower() == 'apoe4'].copy()
     csv_data_3B_nonApoE = csv_data_3B[csv_data_3B['series'].str.lower() == 'nonapoe4'].copy()
+
+    csv_data_4A = pd.read_csv('Geerts 2023 Figure 4A.csv')
+    csv_data_4A_model = csv_data_4A[csv_data_4A['series'].str.lower() == 'model'].copy()
+    csv_data_4A_data = csv_data_4A[csv_data_4A['series'].str.lower() == 'data'].copy()
     # Define parameters to be optimized, with their bounds
     # params_to_optimize = {
     #     'k_APP_production': (1e-3, 1000),
@@ -357,14 +361,14 @@ def run_optimization_and_simulation():
     #     'k_O24_O12_AB42_ISF': (1, 1000),
     #     'Baseline_AB42_O_P': (1e-8, 1)
     # }
-#     k_APP_production: 125.10049970483409
-#   k_O1_O2_AB42_ISF: 0.0005820512011157351
-#   k_O2_O3_AB42_ISF: 0.002118868608085168
-#   k_O2_O1_AB42_ISF: 199.8688403233312
-#   k_O3_O2_AB42_ISF: 7.483910060463423e-06
-#   IDE_conc_ISF: 3.75275623096658
-#   k_O24_O12_AB42_ISF: 5.324997581404023
-#   Baseline_AB42_O_P: 0.0422077048633233
+    #     k_APP_production: 125.10049970483409
+    #   k_O1_O2_AB42_ISF: 0.0005820512011157351
+    #   k_O2_O3_AB42_ISF: 0.002118868608085168
+    #   k_O2_O1_AB42_ISF: 199.8688403233312
+    #   k_O3_O2_AB42_ISF: 7.483910060463423e-06
+    #   IDE_conc_ISF: 3.75275623096658
+    #   k_O24_O12_AB42_ISF: 5.324997581404023
+    #   Baseline_AB42_O_P: 0.0422077048633233
     optimized_params = {
         'k_APP_production': 125.10049970483409,
         'k_O1_O2_AB42_ISF': 0.0005820512011157351,
@@ -459,7 +463,7 @@ def run_optimization_and_simulation():
     # Restore original dose value
     r['Antibody_SubCutComp_Dose'] = original_dose
 
-    return r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE
+    return r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE, csv_data_4A_model, csv_data_4A_data
 
 def calculate_oligomer_sums(result, ab_type):
     """
@@ -615,7 +619,7 @@ def plot_suvr(ax, result1, result2, result3, result4, time_years1, time_years2, 
     ax.grid(True)
     ax.set_xlim(70, 74)
 
-def plot_antibody_central(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
+def plot_antibody_central(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type, csv_data_4A_model, csv_data_4A_data):
     """Plot antibody central panel."""
     # Check if the column exists in the results
     column_name = f'[Antibody_central]'
@@ -638,13 +642,16 @@ def plot_antibody_central(ax, result1, result2, result3, result4, time_years1, t
     ax.plot(time_years3, result3[column_name], label=f'{ab_type}_central ApoE - drug', linewidth=2, linestyle='--', color='red')
     # non-ApoE without drug (teal)
     ax.plot(time_years4, result4[column_name], label=f'{ab_type}_central non-ApoE - drug', linewidth=2, linestyle='--', color='blue')
-    
+    ax.plot(csv_data_4A_data['time'], csv_data_4A_data['measurement'], 'r.', label='Gant data', markersize=4)
+    ax.plot(csv_data_4A_model['time'], csv_data_4A_model['measurement'], 'r-', label='Gant model', markersize=4)
     ax.set_xlabel('Time (years)')
     ax.set_ylabel('Concentration (nM)')
     ax.set_title('Antibody Central')
-    ax.legend(loc='upper left', fontsize=8)
-    ax.set_xlim(70, 73)
+    ax.legend(loc='upper right', fontsize=8)
+    ax.set_xlim(70, 70.3)
     ax.grid(True)
+    ax.set_yscale('log')
+    ax.set_ylim(1, 1e3)
 
 def plot_antibody_SAS(ax, result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type):
     """Plot antibody SAS panel."""
@@ -874,7 +881,7 @@ def plot_kcat(ax, result1, result2, time_years1, time_years2, ab_type):
     # ax.set_xlim(70, 73)
 
 def create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
-                         csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, ab_type, filename_suffix):
+                         csv_data_3A_ApoE, csv_data_3A_nonApoE, csv_data_4A_model, csv_data_4A_data, suvr, ab_type, filename_suffix):
     """
     Create standard 6-panel plots for a given AB type.
     
@@ -903,7 +910,7 @@ def create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, 
     if ab_type != 'Antibody':
         plot_proto(axes[0, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
     else:
-        plot_antibody_central(axes[0, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type)
+        plot_antibody_central(axes[0, 1], result1, result2, result3, result4, time_years1, time_years2, time_years3, time_years4, ab_type, csv_data_4A_model, csv_data_4A_data)
     
     # Plot 3: SUVR
     if ab_type != 'Antibody':
@@ -938,20 +945,20 @@ def create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, 
     plt.savefig(__file__.replace('.py', f'_{filename_suffix}.png'), dpi=300, bbox_inches='tight')
     plt.show()
 
-def create_plots(r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE):
+def create_plots(r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE, csv_data_4A_model, csv_data_4A_data):
     """
     Create plots using the simulation results.
     """
     # Create AB42 plots
     create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
-                         csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, 'AB42', 'AB42')
+                         csv_data_3A_ApoE, csv_data_3A_nonApoE, csv_data_4A_model, csv_data_4A_data, suvr, 'AB42', 'AB42')
     
     # Create AB40 plots
     create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
-                         csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, 'AB40', 'AB40')
+                         csv_data_3A_ApoE, csv_data_3A_nonApoE, csv_data_4A_model, csv_data_4A_data, suvr, 'AB40', 'AB40')
     
     create_standard_plots(result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, 
-                         csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, 'Antibody', 'Antibody')
+                         csv_data_3A_ApoE, csv_data_3A_nonApoE, csv_data_4A_model, csv_data_4A_data, suvr, 'Antibody', 'Antibody')
 
 # Main execution
 if __name__ == "__main__":
@@ -959,11 +966,11 @@ if __name__ == "__main__":
     results = run_optimization_and_simulation()
     
     # Check if we got valid results
-    if results is None or len(results) != 12:
+    if results is None :
         print("Error: run_optimization_and_simulation() returned invalid results")
         exit(1)
     
-    r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE = results
+    r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE, csv_data_4A_model, csv_data_4A_data = results
     
     # Check if simulation results are valid
     if result1 is None or result2 is None or result3 is None or result4 is None:
@@ -1011,4 +1018,4 @@ if __name__ == "__main__":
     print("="*50)
     
     # Create plots
-    create_plots(r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE) 
+    create_plots(r, result1, result2, result3, result4, csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, suvr, csv_data_3B_ApoE, csv_data_3B_nonApoE, csv_data_4A_model, csv_data_4A_data) 
