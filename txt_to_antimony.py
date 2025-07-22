@@ -292,6 +292,19 @@ def generate_single_reaction_from_dict(reaction_dict):
         # No multiplication for custom_amt_per_time
         
         reaction_string += f"{reactants_side} -> {products_side}; {rate_eqtn}\n"
+        
+    elif rate_type == "custom":
+        reactants_side = " + ".join(reactants)
+        products_side = " + ".join(products) if products else ""
+        
+        rate_eqtn = rate_proto_str
+        # if it was a list-like string, take the content.
+        if rate_eqtn.startswith('[') and rate_eqtn.endswith(']'):
+            rate_eqtn = rate_eqtn.strip('[]')
+        
+        # Use rate expression as-is, no multiplication by species or volume
+        
+        reaction_string += f"{reactants_side} -> {products_side}; {rate_eqtn}\n"
     
     return reaction_string
 

@@ -81,7 +81,6 @@
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB40_O1_BBB,Antibody_BBB]', 'Products': '[AB40_O1__Antibody_BBB]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB40_O1_BCSFB,Antibody_BCSFB]', 'Products': '[AB40_O1__Antibody_BCSFB]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB40_O1_BrainPlasma,Antibody_BrainPlasma]', 'Products': '[AB40_O1__Antibody_BrainPlasma]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
-{'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB40_O1_central,Antibody_central]', 'Products': '[AB40_O1__Antibody_central]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB40_O1_CM,Antibody_CM]', 'Products': '[AB40_O1__Antibody_CM]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB40_O1_LV,Antibody_LV]', 'Products': '[AB40_O1__Antibody_LV]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB40_O1_TFV,Antibody_TFV]', 'Products': '[AB40_O1__Antibody_TFV]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
@@ -91,7 +90,6 @@
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB42_O1_BBB,Antibody_BBB]', 'Products': '[AB42_O1__Antibody_BBB]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB42_O1_BCSFB,Antibody_BCSFB]', 'Products': '[AB42_O1__Antibody_BCSFB]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB42_O1_BrainPlasma,Antibody_BrainPlasma]', 'Products': '[AB42_O1__Antibody_BrainPlasma]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
-{'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB42_O1_central,Antibody_central]', 'Products': '[AB42_O1__Antibody_central]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB42_O1_CM,Antibody_CM]', 'Products': '[AB42_O1__Antibody_CM]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB42_O1_LV,Antibody_LV]', 'Products': '[AB42_O1__Antibody_LV]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
 {'Reaction_name': 'Monomer binding antibody', 'Reactants': '[AB42_O1_TFV,Antibody_TFV]', 'Products': '[AB42_O1__Antibody_TFV]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k0_Antibody'}
@@ -405,52 +403,52 @@
 {'Reaction_name': 'Flow PVS to central oligomer/proto', 'Reactants': '[AB42_O22_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Abeta) * Q_PVS'}
 {'Reaction_name': 'Flow PVS to central oligomer/proto', 'Reactants': '[AB42_O23_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Abeta) * Q_PVS'}
 {'Reaction_name': 'Flow PVS to central oligomer/proto', 'Reactants': '[AB42_O24_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Abeta) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O2__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O3__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O4__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O5__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O6__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O7__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O8__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O9__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O10__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O11__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O12__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O13__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O14__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O15__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O16__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O17__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O18__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O19__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O20__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O21__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O22__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O23__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O24__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O2__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O3__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O4__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O5__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O6__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O7__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O8__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O9__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O10__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O11__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O12__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O13__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O14__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O15__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O16__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O17__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O18__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O19__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O20__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O21__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O22__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O23__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O24__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O2__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O3__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O4__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O5__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O6__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O7__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O8__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O9__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O10__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O11__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O12__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O13__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O14__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O15__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O16__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O17__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O18__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O19__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O20__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O21__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O22__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O23__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB40_O24__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O2__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O3__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O4__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O5__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O6__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O7__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O8__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O9__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O10__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O11__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O12__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O13__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O14__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O15__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O16__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O17__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O18__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O19__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O20__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O21__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O22__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O23__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow PVS to central oligomer/proto-Antibody', 'Reactants': '[AB42_O24__Antibody_PVS]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
 {'Reaction_name': 'Flow PVS to central ', 'Reactants': '[AB40_O1_PVS]', 'Products': '[AB40_O1_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Abeta) * Q_PVS'}
 {'Reaction_name': 'Flow ISF to central ', 'Reactants': '[AB40_O1_ISF]', 'Products': '[AB40_O1_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_central_Abeta) * (Qbrain_ISF - Q_PVS)'}
 {'Reaction_name': 'Flow ISF to LV ', 'Reactants': '[AB40_O1_ISF]', 'Products': '[AB40_O1_LV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV*Qglymph'}
@@ -479,8 +477,8 @@
 {'Reaction_name': 'Flow SAS to central Abeta', 'Reactants': '[AB42_O1_SAS]', 'Products': '[AB42_O1_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - sigma_SAS_central_Abeta)*Q_CSF'}
 {'Reaction_name': 'Flow BrainPlasma to central Abeta', 'Reactants': '[AB42_O1_BrainPlasma]', 'Products': '[AB42_O1_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Qbrain_plasma - Q_CSF - Qbrain_ISF)'}
 {'Reaction_name': 'Flow central to BrainPlasma Abeta', 'Reactants': '[AB42_O1_central]', 'Products': '[AB42_O1_BrainPlasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qbrain_plasma'}
-{'Reaction_name': 'Flow PVS to central ', 'Reactants': '[AB40_O1__Antibody_PVS]', 'Products': '[AB40_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Abeta) * Q_PVS'}
-{'Reaction_name': 'Flow ISF to central ', 'Reactants': '[AB40_O1__Antibody_ISF]', 'Products': '[AB40_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_central_Antibody) * (Qbrain_ISF - Q_PVS)'}
+{'Reaction_name': 'Flow PVS to central ', 'Reactants': '[AB40_O1__Antibody_PVS]', 'Products': '[AB40_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow ISF to central ', 'Reactants': '[AB40_O1__Antibody_ISF]', 'Products': '[AB40_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_centralAntibody_Antibody) * (Qbrain_ISF - Q_PVS)'}
 {'Reaction_name': 'Flow ISF to LV ', 'Reactants': '[AB40_O1__Antibody_ISF]', 'Products': '[AB40_O1__Antibody_LV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV*Qglymph'}
 {'Reaction_name': 'Flow ISF to TFV Abeta', 'Reactants': '[AB40_O1__Antibody_ISF]', 'Products': '[AB40_O1__Antibody_TFV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - f_LV) * Qglymph'}
 {'Reaction_name': 'Flow BrainPlasma to ISF Abeta', 'Reactants': '[AB40_O1__Antibody_BrainPlasma]', 'Products': '[AB40_O1__Antibody_ISF]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_BBB)*Qbrain_ISF'}
@@ -490,11 +488,11 @@
 {'Reaction_name': 'Flow TFV to CM Abeta', 'Reactants': '[AB40_O1__Antibody_TFV]', 'Products': '[AB40_O1__Antibody_CM]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Qglymph)'}
 {'Reaction_name': 'Flow CM to SAS Abeta', 'Reactants': '[AB40_O1__Antibody_CM]', 'Products': '[AB40_O1__Antibody_SAS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Qglymph)'}
 {'Reaction_name': 'Flow SAS to ISF Abeta', 'Reactants': '[AB40_O1__Antibody_SAS]', 'Products': '[AB40_O1__Antibody_ISF]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qglymph'}
-{'Reaction_name': 'Flow SAS to central Abeta', 'Reactants': '[AB40_O1__Antibody_SAS]', 'Products': '[AB40_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - sigma_SAS_central_Antibody)*Q_CSF'}
-{'Reaction_name': 'Flow BrainPlasma to central Abeta', 'Reactants': '[AB40_O1__Antibody_BrainPlasma]', 'Products': '[AB40_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Qbrain_plasma - Q_CSF - Qbrain_ISF)'}
-{'Reaction_name': 'Flow central to BrainPlasma Abeta', 'Reactants': '[AB40_O1__Antibody_central]', 'Products': '[AB40_O1__Antibody_BrainPlasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qbrain_plasma'}
-{'Reaction_name': 'Flow PVS to central ', 'Reactants': '[AB42_O1__Antibody_PVS]', 'Products': '[AB42_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Abeta) * Q_PVS'}
-{'Reaction_name': 'Flow ISF to central ', 'Reactants': '[AB42_O1__Antibody_ISF]', 'Products': '[AB42_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_central_Antibody) * (Qbrain_ISF - Q_PVS)'}
+{'Reaction_name': 'Flow SAS to central Abeta', 'Reactants': '[AB40_O1__Antibody_SAS]', 'Products': '[AB40_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - sigma_SAS_centralAntibody_Antibody)*Q_CSF'}
+{'Reaction_name': 'Flow BrainPlasma to central Abeta', 'Reactants': '[AB40_O1__Antibody_BrainPlasma]', 'Products': '[AB40_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Qbrain_plasma - Q_CSF - Qbrain_ISF)'}
+{'Reaction_name': 'Flow central to BrainPlasma Abeta', 'Reactants': '[AB40_O1__Antibody_centralAntibody]', 'Products': '[AB40_O1__Antibody_BrainPlasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qbrain_plasma'}
+{'Reaction_name': 'Flow PVS to central ', 'Reactants': '[AB42_O1__Antibody_PVS]', 'Products': '[AB42_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow ISF to central ', 'Reactants': '[AB42_O1__Antibody_ISF]', 'Products': '[AB42_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_centralAntibody_Antibody) * (Qbrain_ISF - Q_PVS)'}
 {'Reaction_name': 'Flow ISF to LV ', 'Reactants': '[AB42_O1__Antibody_ISF]', 'Products': '[AB42_O1__Antibody_LV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV*Qglymph'}
 {'Reaction_name': 'Flow ISF to TFV Abeta', 'Reactants': '[AB42_O1__Antibody_ISF]', 'Products': '[AB42_O1__Antibody_TFV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - f_LV) * Qglymph'}
 {'Reaction_name': 'Flow BrainPlasma to ISF Abeta', 'Reactants': '[AB42_O1__Antibody_BrainPlasma]', 'Products': '[AB42_O1__Antibody_ISF]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_BBB)*Qbrain_ISF'}
@@ -504,11 +502,11 @@
 {'Reaction_name': 'Flow TFV to CM Abeta', 'Reactants': '[AB42_O1__Antibody_TFV]', 'Products': '[AB42_O1__Antibody_CM]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Qglymph)'}
 {'Reaction_name': 'Flow CM to SAS Abeta', 'Reactants': '[AB42_O1__Antibody_CM]', 'Products': '[AB42_O1__Antibody_SAS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Qglymph)'}
 {'Reaction_name': 'Flow SAS to ISF Abeta', 'Reactants': '[AB42_O1__Antibody_SAS]', 'Products': '[AB42_O1__Antibody_ISF]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qglymph'}
-{'Reaction_name': 'Flow SAS to central Abeta', 'Reactants': '[AB42_O1__Antibody_SAS]', 'Products': '[AB42_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - sigma_SAS_central_Antibody)*Q_CSF'}
-{'Reaction_name': 'Flow BrainPlasma to central Abeta', 'Reactants': '[AB42_O1__Antibody_BrainPlasma]', 'Products': '[AB42_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Qbrain_plasma - Q_CSF - Qbrain_ISF)'}
-{'Reaction_name': 'Flow central to BrainPlasma Abeta', 'Reactants': '[AB42_O1__Antibody_central]', 'Products': '[AB42_O1__Antibody_BrainPlasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qbrain_plasma'}
-{'Reaction_name': 'Flow PVS to central ', 'Reactants': '[Antibody_PVS]', 'Products': '[Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_central_Antibody) * Q_PVS'}
-{'Reaction_name': 'Flow ISF to central ', 'Reactants': '[Antibody_ISF]', 'Products': '[Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_central_Antibody) * (Qbrain_ISF - Q_PVS)'}
+{'Reaction_name': 'Flow SAS to central Abeta', 'Reactants': '[AB42_O1__Antibody_SAS]', 'Products': '[AB42_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - sigma_SAS_centralAntibody_Antibody)*Q_CSF'}
+{'Reaction_name': 'Flow BrainPlasma to central Abeta', 'Reactants': '[AB42_O1__Antibody_BrainPlasma]', 'Products': '[AB42_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Qbrain_plasma - Q_CSF - Qbrain_ISF)'}
+{'Reaction_name': 'Flow central to BrainPlasma Abeta', 'Reactants': '[AB42_O1__Antibody_centralAntibody]', 'Products': '[AB42_O1__Antibody_BrainPlasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qbrain_plasma'}
+{'Reaction_name': 'Flow PVS to central ', 'Reactants': '[Antibody_PVS]', 'Products': '[Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_PVS_centralAntibody_Antibody) * Q_PVS'}
+{'Reaction_name': 'Flow ISF to central ', 'Reactants': '[Antibody_ISF]', 'Products': '[Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_centralAntibody_Antibody) * (Qbrain_ISF - Q_PVS)'}
 {'Reaction_name': 'Flow ISF to LV ', 'Reactants': '[Antibody_ISF]', 'Products': '[Antibody_LV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV*Qglymph'}
 {'Reaction_name': 'Flow ISF to TFV Abeta', 'Reactants': '[Antibody_ISF]', 'Products': '[Antibody_TFV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - f_LV) * Qglymph'}
 {'Reaction_name': 'Flow BrainPlasma to ISF Abeta', 'Reactants': '[Antibody_BrainPlasma]', 'Products': '[Antibody_ISF]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_BBB)*Qbrain_ISF'}
@@ -518,9 +516,9 @@
 {'Reaction_name': 'Flow TFV to CM Abeta', 'Reactants': '[Antibody_TFV]', 'Products': '[Antibody_CM]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Qglymph)'}
 {'Reaction_name': 'Flow CM to SAS Abeta', 'Reactants': '[Antibody_CM]', 'Products': '[Antibody_SAS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Qglymph)'}
 {'Reaction_name': 'Flow SAS to ISF Abeta', 'Reactants': '[Antibody_SAS]', 'Products': '[Antibody_ISF]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qglymph'}
-{'Reaction_name': 'Flow SAS to central Abeta', 'Reactants': '[Antibody_SAS]', 'Products': '[Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - sigma_SAS_central_Antibody)*Q_CSF'}
-{'Reaction_name': 'Flow BrainPlasma to central Abeta', 'Reactants': '[Antibody_BrainPlasma]', 'Products': '[Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Qbrain_plasma - Q_CSF - Qbrain_ISF)'}
-{'Reaction_name': 'Flow central to BrainPlasma Abeta', 'Reactants': '[Antibody_central]', 'Products': '[Antibody_BrainPlasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qbrain_plasma'}
+{'Reaction_name': 'Flow SAS to central Abeta', 'Reactants': '[Antibody_SAS]', 'Products': '[Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - sigma_SAS_centralAntibody_Antibody)*Q_CSF'}
+{'Reaction_name': 'Flow BrainPlasma to central Abeta', 'Reactants': '[Antibody_BrainPlasma]', 'Products': '[Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Qbrain_plasma - Q_CSF - Qbrain_ISF)'}
+{'Reaction_name': 'Flow central to BrainPlasma Abeta', 'Reactants': '[Antibody_centralAntibody]', 'Products': '[Antibody_BrainPlasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Qbrain_plasma'}
 {'Reaction_name': 'Flow ISF to PVS ', 'Reactants': '[AB40_O1_ISF]', 'Products': '[AB40_O1_PVS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_PVS_O1) * Q_PVS'}
 {'Reaction_name': 'Flow ISF to PVS ', 'Reactants': '[AB42_O1_ISF]', 'Products': '[AB42_O1_PVS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_PVS_O1) * Q_PVS'}
 {'Reaction_name': 'Flow ISF to PVS ', 'Reactants': '[Antibody_ISF]', 'Products': '[Antibody_PVS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1.0 - sigma_ISF_PVS_Antibody) * Q_PVS'}
@@ -582,16 +580,18 @@
 {'Reaction_name': 'BCSFB Binding to FCRn', 'Reactants': '[Antibody_BCSFB,FCRn_BCSFB]', 'Products': '[Antibody__FCRn_BCSFB]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[kon_FCRn,koff_FCRn]'}
 {'Reaction_name': 'central clearance 1', 'Reactants': '[AB40_O1_central]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'AB_O1_CL'}
 {'Reaction_name': 'central clearance 1', 'Reactants': '[AB42_O1_central]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'AB_O1_CL'}
-{'Reaction_name': 'central clearance 1', 'Reactants': '[AB40_O1__Antibody_central]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CL'}
-{'Reaction_name': 'central clearance 1', 'Reactants': '[AB42_O1__Antibody_central]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CL'}
-{'Reaction_name': 'central clearance 1', 'Reactants': '[Antibody_central]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CL'}
+{'Reaction_name': 'centralAntibody clearance 1', 'Reactants': '[AB40_O1__Antibody_centralAntibody]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CL'}
+{'Reaction_name': 'centralAntibody clearance 1', 'Reactants': '[AB42_O1__Antibody_centralAntibody]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CL'}
+{'Reaction_name': 'centralAntibody clearance 1', 'Reactants': '[Antibody_centralAntibody]', 'Products': '[0]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CL'}
 {'Reaction_name': 'central clearance 2', 'Reactants': '[AB40_O1_central]', 'Products': '[AB40_O1_peripheral]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'AB_O1_CLd2'}
 {'Reaction_name': 'central clearance 2', 'Reactants': '[AB40_O1_peripheral]', 'Products': '[AB40_O1_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'AB_O1_CLd2'}
 {'Reaction_name': 'central clearance 2', 'Reactants': '[AB42_O1_central]', 'Products': '[AB42_O1_peripheral]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'AB_O1_CLd2'}
 {'Reaction_name': 'central clearance 2', 'Reactants': '[AB42_O1_peripheral]', 'Products': '[AB42_O1_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'AB_O1_CLd2'}
-{'Reaction_name': 'central clearance 2', 'Reactants': '[AB40_O1__Antibody_central]', 'Products': '[AB40_O1__Antibody_peripheral]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
-{'Reaction_name': 'central clearance 2', 'Reactants': '[AB40_O1__Antibody_peripheral]', 'Products': '[AB40_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
-{'Reaction_name': 'central clearance 2', 'Reactants': '[AB42_O1__Antibody_central]', 'Products': '[AB42_O1__Antibody_peripheral]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
-{'Reaction_name': 'central clearance 2', 'Reactants': '[AB42_O1__Antibody_peripheral]', 'Products': '[AB42_O1__Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
-{'Reaction_name': 'central clearance 2', 'Reactants': '[Antibody_central]', 'Products': '[Antibody_peripheral]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
-{'Reaction_name': 'central clearance 2', 'Reactants': '[Antibody_peripheral]', 'Products': '[Antibody_central]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
+{'Reaction_name': 'central clearance 2', 'Reactants': '[AB40_O1__Antibody_centralAntibody]', 'Products': '[AB40_O1__Antibody_peripheralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
+{'Reaction_name': 'central clearance 2', 'Reactants': '[AB40_O1__Antibody_peripheralAntibody]', 'Products': '[AB40_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
+{'Reaction_name': 'central clearance 2', 'Reactants': '[AB42_O1__Antibody_centralAntibody]', 'Products': '[AB42_O1__Antibody_peripheralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
+{'Reaction_name': 'central clearance 2', 'Reactants': '[AB42_O1__Antibody_peripheralAntibody]', 'Products': '[AB42_O1__Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
+{'Reaction_name': 'central clearance 2', 'Reactants': '[Antibody_centralAntibody]', 'Products': '[Antibody_peripheralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
+{'Reaction_name': 'central clearance 2', 'Reactants': '[Antibody_peripheralAntibody]', 'Products': '[Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Antibody_CLd2'}
+{'Reaction_name': 'Subcutaneous compartment transport', 'Reactants': '[Antibody_SubCutComp]', 'Products': '[Antibody_centralAntibody]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'SubCut_ka*V_SubCutComp*SubCut_bioavailability'}
+{'Reaction_name': 'Subcutaneous clearance', 'Reactants': '[Antibody_SubCutComp]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'SubCut_ka*(1.0 - SubCut_bioavailability)'}

@@ -37,6 +37,8 @@ Q_PVS
 Qbrain_ISF
 Qbrain_plasma
 Qglymph
+SubCut_bioavailability
+SubCut_ka
 V_BBB
 V_BCSFB
 V_BrainPlasma
@@ -45,9 +47,12 @@ V_ISF
 V_LV
 V_PVS
 V_SAS
+V_SubCutComp
 V_TFV
 V_central
+V_centralAntibody
 V_peripheral
+V_peripheralAntibody
 Vol_brain_ES
 fBBB
 f_LV
@@ -163,10 +168,10 @@ sigma_ISF_PVS_O1
 sigma_ISF_PVS_oligomer1
 sigma_ISF_PVS_oligomer2
 sigma_ISF_PVS_proto
+sigma_ISF_centralAntibody_Antibody
 sigma_ISF_central_Abeta
-sigma_ISF_central_Antibody
+sigma_PVS_centralAntibody_Antibody
 sigma_PVS_central_Abeta
-sigma_PVS_central_Antibody
+sigma_SAS_centralAntibody_Antibody
 sigma_SAS_central_Abeta
-sigma_SAS_central_Antibody
 v_C99

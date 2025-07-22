@@ -58,8 +58,8 @@ AB40_O1__Antibody_SAS
 AB40_O1__Antibody_TFV
 AB40_O1__Antibody__FCRn_BBB
 AB40_O1__Antibody__FCRn_BCSFB
-AB40_O1__Antibody_central
-AB40_O1__Antibody_peripheral
+AB40_O1__Antibody_centralAntibody
+AB40_O1__Antibody_peripheralAntibody
 AB40_O1_central
 AB40_O1_peripheral
 AB40_O20_ISF
@@ -178,8 +178,8 @@ AB42_O1__Antibody_SAS
 AB42_O1__Antibody_TFV
 AB42_O1__Antibody__FCRn_BBB
 AB42_O1__Antibody__FCRn_BCSFB
-AB42_O1__Antibody_central
-AB42_O1__Antibody_peripheral
+AB42_O1__Antibody_centralAntibody
+AB42_O1__Antibody_peripheralAntibody
 AB42_O1_central
 AB42_O1_peripheral
 AB42_O20_ISF
@@ -247,11 +247,12 @@ Antibody_ISF
 Antibody_LV
 Antibody_PVS
 Antibody_SAS
+Antibody_SubCutComp
 Antibody_TFV
 Antibody__FCRn_BBB
 Antibody__FCRn_BCSFB
-Antibody_central
-Antibody_peripheral
+Antibody_centralAntibody
+Antibody_peripheralAntibody
 C99_ISF
 FCRn_BBB
 FCRn_BCSFB
