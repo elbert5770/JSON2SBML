@@ -186,7 +186,7 @@ def build_reactions():
             Reactants = f"[0]"
             Products = f"[{Species}_O1_{Comp}]"
             Rate_type = "MA"
-            Rate_eqtn_prototype = f"{Species}_systemic_synthesis_rate" 
+            Rate_eqtn_prototype = f"{Species}_systemic_synthesis_rate/V_central" 
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
 
