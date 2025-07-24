@@ -153,7 +153,7 @@ def calculate_k_rates(
     # BackHill42=3.0   # Hill coefficient for AB42 backward rates
     
     # Rate cutoff
-    rate_cutoff=0.00001
+    rate_cutoff=1e-8
     # Convert rates to appropriate units
     # kf0_forty = convert_forward_rate(original_kf0_forty)  
     # kb0_forty = convert_backward_rate(original_kb0_forty)
