@@ -85,6 +85,48 @@ def calculate_suvr_at_year(result, suvr_func, year):
         'closest_times': [t1, t2]
     }
 
+def calculate_suvr_at_times(result, suvr_func, target_times):
+    """
+    Interpolate model results to calculate SUVR at specific timepoints.
+    
+    Parameters:
+    result: Simulation result containing time series data
+    suvr_func: SUVR calculation function
+    target_times: Array of target times (in hours) to calculate SUVR for.
+    
+    Returns:
+    np.array: Array of SUVR values.
+    """
+    model_times = result['time']
+    
+    # Interpolate all required species at the target times
+    interpolated_species = {}
+    for i in range(2, 26): # O2 to O25
+        species_name = f'[AB42_O{i}_ISF]'
+        if species_name in result.colnames:
+            interpolated_species[species_name] = np.interp(target_times, model_times, result[species_name])
+        else:
+            interpolated_species[species_name] = np.zeros_like(target_times)
+            print(f"{species_name}: Not available in simulation result")
+
+    # Calculate oligomer weighted sum (O2-O17)
+    oligomer_weighted_sum = interpolated_species['[AB42_O2_ISF]'] * 1
+    for i in range(3, 18):
+        oligomer_weighted_sum += interpolated_species[f'[AB42_O{i}_ISF]'] * (i-1)
+    
+    # Calculate proto weighted sum (O18-O24)
+    proto_weighted_sum = interpolated_species['[AB42_O18_ISF]'] * 17
+    for i in range(19, 25):
+        proto_weighted_sum += interpolated_species[f'[AB42_O{i}_ISF]'] * (i-1)
+    
+    # Get plaque value (O25)
+    plaque_sum = interpolated_species['[AB42_O25_ISF]']
+    
+    # Calculate SUVR at specified times
+    suvr_values = suvr_func(oligomer_weighted_sum, proto_weighted_sum, plaque_sum)
+    
+    return suvr_values
+
 def setup_and_run_simulation(r, param_values, microglia_params, ab42_params, ab40_params, for_mse=False):
     """
     Helper function to set up model parameters and run a two-stage simulation.
@@ -209,18 +251,18 @@ def run_optimization_and_simulation():
             ISF_measurements_ApoE = csv_data_3C_ApoE['measurement'].values
             ISF_model_ApoE_at_data_times = interpolate_model_to_data_times(model_times, model_values_isf, ISF_times_ApoE)
             mse1 = np.sum((ISF_model_ApoE_at_data_times - ISF_measurements_ApoE) ** 2)
-
+            
             suvr_times_apoe = csv_data_3A_ApoE['time'].values
             suvr_measurements_apoe = csv_data_3A_ApoE['measurement'].values
-            suvr_model_ApoE_at_data_times = interpolate_model_to_data_times(model_times, model_values_isf, suvr_times_apoe) # This seems incorrect, should be based on SUVR
-            mse1 += np.sum((suvr_model_ApoE_at_data_times - suvr_measurements_apoe) ** 2)
+            model_suvr_apoe = calculate_suvr_at_times(result1, suvr, suvr_times_apoe)
+            mse1 += np.sum((model_suvr_apoe - suvr_measurements_apoe) ** 2)
 
-            time = 70
-            suvr_results = calculate_suvr_at_year(result1, suvr, time)
-            mse1 = mse1 + (suvr_results['suvr_at_year']-1.394)**2 / 1.394
-            mse1 = mse1 + (suvr_results['plaque_sum']-5102)**2 / 5102 /10
-            mse1 = mse1 + (suvr_results['oligomer_weighted_sum']-12211)**2 / 12211 / 10
-            mse1 = mse1 + (suvr_results['proto_weighted_sum']-70000)**2 / 70000 / 10
+            # time = 70
+            # suvr_results = calculate_suvr_at_year(result1, suvr, time)
+            # mse1 = mse1 + (suvr_results['suvr_at_year']-1.394)**2 / 1.394
+            # mse1 = mse1 + (suvr_results['plaque_sum']-5102)**2 / 5102 /10
+            # mse1 = mse1 + (suvr_results['oligomer_weighted_sum']-12211)**2 / 12211 / 10
+            # mse1 = mse1 + (suvr_results['proto_weighted_sum']-70000)**2 / 70000 / 10
 
             # Run for non-APOE4
             result2 = setup_and_run_simulation(r, param_values, nonapoe4_microglia_params, ab42_params, ab40_params, for_mse=True)
@@ -237,15 +279,15 @@ def run_optimization_and_simulation():
             
             suvr_times_nonapoe = csv_data_3A_nonApoE['time'].values
             suvr_measurements_nonapoe = csv_data_3A_nonApoE['measurement'].values
-            suvr_model_nonApoE_at_data_times = interpolate_model_to_data_times(model_times_non, model_values_isf_non, suvr_times_nonapoe) # This seems incorrect
-            mse2 += np.sum((suvr_model_nonApoE_at_data_times - suvr_measurements_nonapoe) ** 2)
+            model_suvr_nonapoe = calculate_suvr_at_times(result2, suvr, suvr_times_nonapoe)
+            mse2 += np.sum((model_suvr_nonapoe - suvr_measurements_nonapoe) ** 2)
 
-            time = 74
-            suvr_results = calculate_suvr_at_year(result2, suvr, time)
-            mse2 = mse2 + (suvr_results['suvr_at_year']-1.623)**2 / 1.623
-            mse2 = mse2 + (suvr_results['plaque_sum']-6028)**2 / 6028 /10
-            mse2 = mse2 + (suvr_results['oligomer_weighted_sum']-12307)**2 / 12307 /10
-            mse2 = mse2 + (suvr_results['proto_weighted_sum']-70168)**2 / 70168 / 10
+            # time = 74
+            # suvr_results = calculate_suvr_at_year(result2, suvr, time)
+            # mse2 = mse2 + (suvr_results['suvr_at_year']-1.623)**2 / 1.623
+            # mse2 = mse2 + (suvr_results['plaque_sum']-6028)**2 / 6028 /10
+            # mse2 = mse2 + (suvr_results['oligomer_weighted_sum']-12307)**2 / 12307 /10
+            # mse2 = mse2 + (suvr_results['proto_weighted_sum']-70168)**2 / 70168 / 10
             
             mse = mse1 + mse2
             print(f"mse: {mse}, params: {param_values}")
@@ -313,85 +355,17 @@ def run_optimization_and_simulation():
     csv_data_4A_model = csv_data_4A[csv_data_4A['series'].str.lower() == 'model'].copy()
     csv_data_4A_data = csv_data_4A[csv_data_4A['series'].str.lower() == 'data'].copy()
     # Define parameters to be optimized, with their bounds
-    # params_to_optimize = {
-    #     'k_APP_production': (1e-3, 1000),
-    #     'k_O1_O2_AB42_ISF': (1e-6, 1),
-    #     'k_O2_O3_AB42_ISF': (1e-6, 1),
-    #     'k_O2_O1_AB42_ISF': (1e-3, 200),
-    #     'k_O3_O2_AB42_ISF': (1e-15, 1),
-    #     'IDE_conc_ISF': (1e-3, 100),
-    #     'k_O24_O12_AB42_ISF': (1, 1000),
-    #     'Baseline_AB42_O_P': (1e-8, 1)
-    # }
-    #     k_APP_production: 125.10049970483409
-    #   k_O1_O2_AB42_ISF: 0.0005820512011157351
-    #   k_O2_O3_AB42_ISF: 0.002118868608085168
-    #   k_O2_O1_AB42_ISF: 199.8688403233312
-    #   k_O3_O2_AB42_ISF: 7.483910060463423e-06
-    #   IDE_conc_ISF: 3.75275623096658
-    #   k_O24_O12_AB42_ISF: 5.324997581404023
-    #   Baseline_AB42_O_P: 0.0422077048633233
-    # Optimized params
-    # optimized_params = {
-    #     'k_APP_production': 125.10049970483409,
-    #     'k_O1_O2_AB42_ISF': 0.0005820512011157351,
-    #     'k_O2_O3_AB42_ISF': 0.002118868608085168,
-    #     'k_O2_O1_AB42_ISF': 199.8688403233312,
-    #     'k_O3_O2_AB42_ISF': 7.483910060463423e-06,
-    #     'IDE_conc_ISF': 3.75275623096658,
-    #     'k_O24_O12_AB42_ISF': 5.324997581404023,
-    #     'Baseline_AB42_O_P': 0.0422077048633233
-    # }
-    # Original params
-    # optimized_params = {
-    #     'k_APP_production': 293,
-    #     'k_O1_O2_AB42_ISF': 0.0003564,
-    #     'k_O2_O3_AB42_ISF': 0.0001368,
-    #     'k_O2_O1_AB42_ISF': 45.72,
-    #     'k_O3_O2_AB42_ISF': 1e-08,
-    #     'IDE_conc_ISF': 0.005,
-    #     'k_O24_O12_AB42_ISF': 1,
-    #     'Baseline_AB42_O_P': 5e-5
-    # }
-    # Mixed params
-    # optimized_params = {
-    #     'k_APP_production': 293,
-    #     'k_O1_O2_AB42_ISF': 0.003,
-    #     'k_O2_O3_AB42_ISF': 0.005,
-    #     'k_O2_O1_AB42_ISF': 45.72,
-    #     'k_O3_O2_AB42_ISF': 1e-7,
-    #     'IDE_conc_ISF': 1,
-    #     'k_O24_O12_AB42_ISF': 5,
-    #     'Baseline_AB42_O_P': 0.05
-    # }
-    # # Mixed params
-    # optimized_params = {
-    #     'k_APP_production': 293,
-    #     'k_O1_O2_AB42_ISF': 0.0005820,
-    #     'k_O2_O3_AB42_ISF': 0.002119,
-    #     'k_O2_O1_AB42_ISF': 199.8688403233312,
-    #     'k_O3_O2_AB42_ISF': 7.484e-06,
-    #     'IDE_conc_ISF': 1,
-    #     'k_O24_O12_AB42_ISF': 5.23,
-    #     'Baseline_AB42_O_P': 0.06,
-    #     'AB42_PDMA_Vmax_ISF': 0.5,
-    #     'AB42_PDMA_EC50_ISF': 0.5
-    # }
     optimized_params = {
-        'k_APP_production': 293,
-        'k_O1_O2_AB42_ISF': 0.0005820,
-        'k_O2_O3_AB42_ISF': 0.002119,
-        'k_O2_O1_AB42_ISF': 199.8688403233312,
-        'k_O3_O2_AB42_ISF': 7.484e-06,
-        'IDE_conc_ISF': 1,
-        'k_O24_O12_AB42_ISF': 5.23,
-        'Baseline_AB42_O_P': 0.06,
-        'AB42_PDMA_Vmax_ISF': 0.07,
-        'AB42_PDMA_EC50_ISF': 50
+        'k_O1_O2_AB42_ISF': (1e-6, 0.0005820, 1),
+        'k_O2_O3_AB42_ISF': (1e-6, 0.002119, 1),
+        'k_O2_O1_AB42_ISF': (1e-3, 45, 1000),
+        'k_O3_O2_AB42_ISF': (1e-15, 7.484e-06, 1),
+        'k_O24_O12_AB42_ISF': (1, 5.23, 1000),
+        'Baseline_AB42_O_P': (1e-8, 0.06, 1)
     }
     param_names = list(optimized_params.keys())
-    param_values = [optimized_params[name] for name in param_names]
-    bounds = list(optimized_params.values())
+    param_values = [optimized_params[name][1] for name in param_names]  # Extract initial values
+    bounds = [(optimized_params[name][0], optimized_params[name][2]) for name in param_names]  # Extract (lower, upper) bounds
     # Read 'Geerts 2023 Figure 7.csv'
     # csv_data_7 = pd.read_csv('Geerts 2023 Figure 7.csv')
 
@@ -436,11 +410,11 @@ def run_optimization_and_simulation():
     objective = create_objective(csv_data_3C_ApoE, csv_data_3C_nonApoE, csv_data_3A_ApoE, csv_data_3A_nonApoE, r, param_names, apoe4_microglia_params, nonapoe4_microglia_params, ab42_params, ab40_params)
 
     # # Initial guess (use current values from model)
-    initial_guess = [r[name] for name in param_names]
+    initial_guess = param_values  # Use the initial values from bounds
     print(f"Initial guess: {initial_guess}")
     
     # # Run optimization
-    opt_result = minimize(objective, initial_guess, method='Nelder-Mead')
+    opt_result = minimize(objective, initial_guess, bounds=bounds, method='L-BFGS-B')
     
     optimized_param_values = dict(zip(param_names, opt_result.x))
     print("\nOptimized Parameters:")

@@ -987,7 +987,7 @@ Baseline_AB42_O_P				=	0.06#5.0E-5	;	Baseline_AB42_O_P	has	L	/	(nanomol	*	h)
 CL_up_brain				=	0.03047	;	CL_up_brain	has	1	/	h					
 FR				=	0.715	;	FR has dimensionless									
 Hi_lo_ratio				=	10.0;		Hi_lo_ratio has dimensionless									
-IDE_conc_ISF				=	0.005;	IDE_conc_ISF	has	nanomol	/	L						
+IDE_conc_ISF				=	1;	IDE_conc_ISF	has	nanomol	/	L						
 var Microglia				= 1	; Microglia	has	dimensionless							
 Microglia_EC50_AB40				=	8	;	Microglia_EC50_AB40	has	nanomol	/	L					
 Microglia_EC50_AB42				=	120	#Not	APOE4;	Microglia_EC50_AB42	has	nanomol	/	L				
@@ -1036,7 +1036,7 @@ k3_Antibody				=	0.504	;	k0_Antibody has (nanomol/L)^-1*h^-1
 */
 k_AB40				=	0.238	;	k_AB40	has	1	/	h					
 k_AB42				=	0.015	;	k_AB42	has	1	/	h					
-k_APP_production	=	75#1173;	k_APP_production	has	nanomol	/	(L	*	h)				
+k_APP_production	=	293#1173;	k_APP_production	has	nanomol	/	(L	*	h)				
 k_C99				=	0.666	;	k_C99	has	1	/	h					
 k_O10_O11_AB40_ISF				=	2.22E-05	;	k_O10_O11_AB40_ISF	has	L	/	(nano	*	mol	*	h)	
 k_O10_O11_AB42_ISF				=	0.000273561	;	k_O10_O11_AB42_ISF	has	L	/	(nano	*	mol	*	h)	
