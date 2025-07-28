@@ -1,0 +1,8 @@
+BBB
+BCSFB
+BrainISF
+BrainVascular
+CSF
+TissueEndosomal
+TissueInterstitial
+TissueVascular

@@ -1,0 +1,306 @@
+compartment AdiposeEndosomal = V_AdiposeEndosomal
+compartment AdiposeInterstitial = V_AdiposeInterstitial
+compartment AdiposeVascular = V_AdiposeVascular
+compartment BBB = V_BBB
+compartment BCSFB = V_BCSFB
+compartment BoneEndosomal = V_BoneEndosomal
+compartment BoneInterstitial = V_BoneInterstitial
+compartment BoneVascular = V_BoneVascular
+compartment BrainISF = V_BrainISF
+compartment BrainInterstitial = V_BrainInterstitial
+compartment BrainVascular = V_BrainVascular
+compartment CSF = V_CSF
+compartment HeartEndosomal = V_HeartEndosomal
+compartment HeartInterstitial = V_HeartInterstitial
+compartment HeartVascular = V_HeartVascular
+compartment KidneyEndosomal = V_KidneyEndosomal
+compartment KidneyInterstitial = V_KidneyInterstitial
+compartment KidneyVascular = V_KidneyVascular
+compartment LIEndosomal = V_LIEndosomal
+compartment LIInterstitial = V_LIInterstitial
+compartment LIVascular = V_LIVascular
+compartment LiverEndosomal = V_LiverEndosomal
+compartment LiverInterstitial = V_LiverInterstitial
+compartment LiverVascular = V_LiverVascular
+compartment LungEndosomal = V_LungEndosomal
+compartment LungInterstitial = V_LungInterstitial
+compartment LungVascular = V_LungVascular
+compartment LymphNode = V_LymphNode
+compartment MuscleEndosomal = V_MuscleEndosomal
+compartment MuscleInterstitial = V_MuscleInterstitial
+compartment MuscleVascular = V_MuscleVascular
+compartment OtherEndosomal = V_OtherEndosomal
+compartment OtherInterstitial = V_OtherInterstitial
+compartment OtherVascular = V_OtherVascular
+compartment PancreasEndosomal = V_PancreasEndosomal
+compartment PancreasInterstitial = V_PancreasInterstitial
+compartment PancreasVascular = V_PancreasVascular
+compartment Plasma = V_Plasma
+compartment SIEndosomal = V_SIEndosomal
+compartment SIInterstitial = V_SIInterstitial
+compartment SIVascular = V_SIVascular
+compartment SkinEndosomal = V_SkinEndosomal
+compartment SkinInterstitial = V_SkinInterstitial
+compartment SkinVascular = V_SkinVascular
+compartment SpleenEndosomal = V_SpleenEndosomal
+compartment SpleenInterstitial = V_SpleenInterstitial
+compartment SpleenVascular = V_SpleenVascular
+compartment ThymusEndosomal = V_ThymusEndosomal
+compartment ThymusInterstitial = V_ThymusInterstitial
+compartment ThymusVascular = V_ThymusVascular
+
+substanceOnly species Antibody_AdiposeEndosomal in AdiposeEndosomal
+substanceOnly species Antibody_AdiposeInterstitial in AdiposeInterstitial
+substanceOnly species Antibody_AdiposeVascular in AdiposeVascular
+substanceOnly species Antibody_BBB in BBB
+substanceOnly species Antibody_BCSFB in BCSFB
+substanceOnly species Antibody_BoneEndosomal in BoneEndosomal
+substanceOnly species Antibody_BoneInterstitial in BoneInterstitial
+substanceOnly species Antibody_BoneVascular in BoneVascular
+substanceOnly species Antibody_BrainISF in BrainISF
+substanceOnly species Antibody_BrainInterstitial in BrainInterstitial
+substanceOnly species Antibody_BrainVascular in BrainVascular
+substanceOnly species Antibody_CSF in CSF
+substanceOnly species Antibody_HeartEndosomal in HeartEndosomal
+substanceOnly species Antibody_HeartInterstitial in HeartInterstitial
+substanceOnly species Antibody_HeartVascular in HeartVascular
+substanceOnly species Antibody_KidneyEndosomal in KidneyEndosomal
+substanceOnly species Antibody_KidneyInterstitial in KidneyInterstitial
+substanceOnly species Antibody_KidneyVascular in KidneyVascular
+substanceOnly species Antibody_LIEndosomal in LIEndosomal
+substanceOnly species Antibody_LIInterstitial in LIInterstitial
+substanceOnly species Antibody_LIVascular in LIVascular
+substanceOnly species Antibody_LiverEndosomal in LiverEndosomal
+substanceOnly species Antibody_LiverInterstitial in LiverInterstitial
+substanceOnly species Antibody_LiverVascular in LiverVascular
+substanceOnly species Antibody_LungEndosomal in LungEndosomal
+substanceOnly species Antibody_LungInterstitial in LungInterstitial
+substanceOnly species Antibody_LungVascular in LungVascular
+substanceOnly species Antibody_LymphNode in LymphNode
+substanceOnly species Antibody_MuscleEndosomal in MuscleEndosomal
+substanceOnly species Antibody_MuscleInterstitial in MuscleInterstitial
+substanceOnly species Antibody_MuscleVascular in MuscleVascular
+substanceOnly species Antibody_OtherEndosomal in OtherEndosomal
+substanceOnly species Antibody_OtherInterstitial in OtherInterstitial
+substanceOnly species Antibody_OtherVascular in OtherVascular
+substanceOnly species Antibody_PancreasEndosomal in PancreasEndosomal
+substanceOnly species Antibody_PancreasInterstitial in PancreasInterstitial
+substanceOnly species Antibody_PancreasVascular in PancreasVascular
+substanceOnly species Antibody_Plasma in Plasma
+substanceOnly species Antibody_SIEndosomal in SIEndosomal
+substanceOnly species Antibody_SIInterstitial in SIInterstitial
+substanceOnly species Antibody_SIVascular in SIVascular
+substanceOnly species Antibody_SkinEndosomal in SkinEndosomal
+substanceOnly species Antibody_SkinInterstitial in SkinInterstitial
+substanceOnly species Antibody_SkinVascular in SkinVascular
+substanceOnly species Antibody_SpleenEndosomal in SpleenEndosomal
+substanceOnly species Antibody_SpleenInterstitial in SpleenInterstitial
+substanceOnly species Antibody_SpleenVascular in SpleenVascular
+substanceOnly species Antibody_ThymusEndosomal in ThymusEndosomal
+substanceOnly species Antibody_ThymusInterstitial in ThymusInterstitial
+substanceOnly species Antibody_ThymusVascular in ThymusVascular
+substanceOnly species Antibody__FCRn_AdiposeEndosomal in AdiposeEndosomal
+substanceOnly species Antibody__FCRn_BBB in BBB
+substanceOnly species Antibody__FCRn_BCSFB in BCSFB
+substanceOnly species Antibody__FCRn_BoneEndosomal in BoneEndosomal
+substanceOnly species Antibody__FCRn_HeartEndosomal in HeartEndosomal
+substanceOnly species Antibody__FCRn_KidneyEndosomal in KidneyEndosomal
+substanceOnly species Antibody__FCRn_LIEndosomal in LIEndosomal
+substanceOnly species Antibody__FCRn_LiverEndosomal in LiverEndosomal
+substanceOnly species Antibody__FCRn_LungEndosomal in LungEndosomal
+substanceOnly species Antibody__FCRn_MuscleEndosomal in MuscleEndosomal
+substanceOnly species Antibody__FCRn_OtherEndosomal in OtherEndosomal
+substanceOnly species Antibody__FCRn_PancreasEndosomal in PancreasEndosomal
+substanceOnly species Antibody__FCRn_SIEndosomal in SIEndosomal
+substanceOnly species Antibody__FCRn_SkinEndosomal in SkinEndosomal
+substanceOnly species Antibody__FCRn_SpleenEndosomal in SpleenEndosomal
+substanceOnly species Antibody__FCRn_ThymusEndosomal in ThymusEndosomal
+substanceOnly species FCRn_AdiposeEndosomal in AdiposeEndosomal
+substanceOnly species FCRn_BBB in BBB
+substanceOnly species FCRn_BCSFB in BCSFB
+substanceOnly species FCRn_BoneEndosomal in BoneEndosomal
+substanceOnly species FCRn_HeartEndosomal in HeartEndosomal
+substanceOnly species FCRn_KidneyEndosomal in KidneyEndosomal
+substanceOnly species FCRn_LIEndosomal in LIEndosomal
+substanceOnly species FCRn_LiverEndosomal in LiverEndosomal
+substanceOnly species FCRn_LungEndosomal in LungEndosomal
+substanceOnly species FCRn_MuscleEndosomal in MuscleEndosomal
+substanceOnly species FCRn_OtherEndosomal in OtherEndosomal
+substanceOnly species FCRn_PancreasEndosomal in PancreasEndosomal
+substanceOnly species FCRn_SIEndosomal in SIEndosomal
+substanceOnly species FCRn_SkinEndosomal in SkinEndosomal
+substanceOnly species FCRn_SpleenEndosomal in SpleenEndosomal
+substanceOnly species FCRn_ThymusEndosomal in ThymusEndosomal
+
+Antibody_LungVascular -> Antibody_LungInterstitial; (1-RC_Lung_Vascular) * L_Lung * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_LungEndosomal; CLup_Lung * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungInterstitial -> Antibody_LungEndosomal; CLup_Lung * (Antibody_LungInterstitial/V_LungInterstitial)
+Antibody_LungEndosomal + FCRn_LungEndosomal -> Antibody__FCRn_LungEndosomal; 'Kon_FcRn' * (Antibody_LungEndosomal/V_LungEndosomal) * (FCRn_LungEndosomal/V_LungEndosomal) * V_LungEndosomal
+Antibody__FCRn_LungEndosomal -> Antibody_LungEndosomal + FCRn_LungEndosomal; 'Koff_FcRn' * (Antibody__FCRn_LungEndosomal/V_LungEndosomal) * V_LungEndosomal
+Antibody_LungEndosomal ->; 'Kdeg' * (Antibody_LungEndosomal/V_LungEndosomal) * V_LungEndosomal
+Antibody__FCRn_LungEndosomal -> Antibody_LungVascular + FCRn_LungEndosomal; CLup_Lung * FR * (Antibody__FCRn_LungEndosomal/V_LungEndosomal)
+Antibody__FCRn_LungEndosomal -> Antibody_LungInterstitial + FCRn_LungEndosomal; CLup_Lung * (1 - FR) * (Antibody__FCRn_LungEndosomal/V_LungEndosomal)
+Antibody_HeartVascular -> Antibody_HeartInterstitial; (1-RC_Heart_Vascular) * L_Heart * (Antibody_HeartVascular/V_HeartVascular)
+Antibody_HeartVascular -> Antibody_HeartEndosomal; CLup_Heart * (Antibody_HeartVascular/V_HeartVascular)
+Antibody_HeartInterstitial -> Antibody_HeartEndosomal; CLup_Heart * (Antibody_HeartInterstitial/V_HeartInterstitial)
+Antibody_HeartEndosomal + FCRn_HeartEndosomal -> Antibody__FCRn_HeartEndosomal; 'Kon_FcRn' * (Antibody_HeartEndosomal/V_HeartEndosomal) * (FCRn_HeartEndosomal/V_HeartEndosomal) * V_HeartEndosomal
+Antibody__FCRn_HeartEndosomal -> Antibody_HeartEndosomal + FCRn_HeartEndosomal; 'Koff_FcRn' * (Antibody__FCRn_HeartEndosomal/V_HeartEndosomal) * V_HeartEndosomal
+Antibody_HeartEndosomal ->; 'Kdeg' * (Antibody_HeartEndosomal/V_HeartEndosomal) * V_HeartEndosomal
+Antibody__FCRn_HeartEndosomal -> Antibody_HeartVascular + FCRn_HeartEndosomal; CLup_Heart * FR * (Antibody__FCRn_HeartEndosomal/V_HeartEndosomal)
+Antibody__FCRn_HeartEndosomal -> Antibody_HeartInterstitial + FCRn_HeartEndosomal; CLup_Heart * (1 - FR) * (Antibody__FCRn_HeartEndosomal/V_HeartEndosomal)
+Antibody_KidneyVascular -> Antibody_KidneyInterstitial; (1-RC_Kidney_Vascular) * L_Kidney * (Antibody_KidneyVascular/V_KidneyVascular)
+Antibody_KidneyVascular -> Antibody_KidneyEndosomal; CLup_Kidney * (Antibody_KidneyVascular/V_KidneyVascular)
+Antibody_KidneyInterstitial -> Antibody_KidneyEndosomal; CLup_Kidney * (Antibody_KidneyInterstitial/V_KidneyInterstitial)
+Antibody_KidneyEndosomal + FCRn_KidneyEndosomal -> Antibody__FCRn_KidneyEndosomal; 'Kon_FcRn' * (Antibody_KidneyEndosomal/V_KidneyEndosomal) * (FCRn_KidneyEndosomal/V_KidneyEndosomal) * V_KidneyEndosomal
+Antibody__FCRn_KidneyEndosomal -> Antibody_KidneyEndosomal + FCRn_KidneyEndosomal; 'Koff_FcRn' * (Antibody__FCRn_KidneyEndosomal/V_KidneyEndosomal) * V_KidneyEndosomal
+Antibody_KidneyEndosomal ->; 'Kdeg' * (Antibody_KidneyEndosomal/V_KidneyEndosomal) * V_KidneyEndosomal
+Antibody__FCRn_KidneyEndosomal -> Antibody_KidneyVascular + FCRn_KidneyEndosomal; CLup_Kidney * FR * (Antibody__FCRn_KidneyEndosomal/V_KidneyEndosomal)
+Antibody__FCRn_KidneyEndosomal -> Antibody_KidneyInterstitial + FCRn_KidneyEndosomal; CLup_Kidney * (1 - FR) * (Antibody__FCRn_KidneyEndosomal/V_KidneyEndosomal)
+Antibody_MuscleVascular -> Antibody_MuscleInterstitial; (1-RC_Muscle_Vascular) * L_Muscle * (Antibody_MuscleVascular/V_MuscleVascular)
+Antibody_MuscleVascular -> Antibody_MuscleEndosomal; CLup_Muscle * (Antibody_MuscleVascular/V_MuscleVascular)
+Antibody_MuscleInterstitial -> Antibody_MuscleEndosomal; CLup_Muscle * (Antibody_MuscleInterstitial/V_MuscleInterstitial)
+Antibody_MuscleEndosomal + FCRn_MuscleEndosomal -> Antibody__FCRn_MuscleEndosomal; 'Kon_FcRn' * (Antibody_MuscleEndosomal/V_MuscleEndosomal) * (FCRn_MuscleEndosomal/V_MuscleEndosomal) * V_MuscleEndosomal
+Antibody__FCRn_MuscleEndosomal -> Antibody_MuscleEndosomal + FCRn_MuscleEndosomal; 'Koff_FcRn' * (Antibody__FCRn_MuscleEndosomal/V_MuscleEndosomal) * V_MuscleEndosomal
+Antibody_MuscleEndosomal ->; 'Kdeg' * (Antibody_MuscleEndosomal/V_MuscleEndosomal) * V_MuscleEndosomal
+Antibody__FCRn_MuscleEndosomal -> Antibody_MuscleVascular + FCRn_MuscleEndosomal; CLup_Muscle * FR * (Antibody__FCRn_MuscleEndosomal/V_MuscleEndosomal)
+Antibody__FCRn_MuscleEndosomal -> Antibody_MuscleInterstitial + FCRn_MuscleEndosomal; CLup_Muscle * (1 - FR) * (Antibody__FCRn_MuscleEndosomal/V_MuscleEndosomal)
+Antibody_SkinVascular -> Antibody_SkinInterstitial; (1-RC_Skin_Vascular) * L_Skin * (Antibody_SkinVascular/V_SkinVascular)
+Antibody_SkinVascular -> Antibody_SkinEndosomal; CLup_Skin * (Antibody_SkinVascular/V_SkinVascular)
+Antibody_SkinInterstitial -> Antibody_SkinEndosomal; CLup_Skin * (Antibody_SkinInterstitial/V_SkinInterstitial)
+Antibody_SkinEndosomal + FCRn_SkinEndosomal -> Antibody__FCRn_SkinEndosomal; 'Kon_FcRn' * (Antibody_SkinEndosomal/V_SkinEndosomal) * (FCRn_SkinEndosomal/V_SkinEndosomal) * V_SkinEndosomal
+Antibody__FCRn_SkinEndosomal -> Antibody_SkinEndosomal + FCRn_SkinEndosomal; 'Koff_FcRn' * (Antibody__FCRn_SkinEndosomal/V_SkinEndosomal) * V_SkinEndosomal
+Antibody_SkinEndosomal ->; 'Kdeg' * (Antibody_SkinEndosomal/V_SkinEndosomal) * V_SkinEndosomal
+Antibody__FCRn_SkinEndosomal -> Antibody_SkinVascular + FCRn_SkinEndosomal; CLup_Skin * FR * (Antibody__FCRn_SkinEndosomal/V_SkinEndosomal)
+Antibody__FCRn_SkinEndosomal -> Antibody_SkinInterstitial + FCRn_SkinEndosomal; CLup_Skin * (1 - FR) * (Antibody__FCRn_SkinEndosomal/V_SkinEndosomal)
+Antibody_AdiposeVascular -> Antibody_AdiposeInterstitial; (1-RC_Adipose_Vascular) * L_Adipose * (Antibody_AdiposeVascular/V_AdiposeVascular)
+Antibody_AdiposeVascular -> Antibody_AdiposeEndosomal; CLup_Adipose * (Antibody_AdiposeVascular/V_AdiposeVascular)
+Antibody_AdiposeInterstitial -> Antibody_AdiposeEndosomal; CLup_Adipose * (Antibody_AdiposeInterstitial/V_AdiposeInterstitial)
+Antibody_AdiposeEndosomal + FCRn_AdiposeEndosomal -> Antibody__FCRn_AdiposeEndosomal; 'Kon_FcRn' * (Antibody_AdiposeEndosomal/V_AdiposeEndosomal) * (FCRn_AdiposeEndosomal/V_AdiposeEndosomal) * V_AdiposeEndosomal
+Antibody__FCRn_AdiposeEndosomal -> Antibody_AdiposeEndosomal + FCRn_AdiposeEndosomal; 'Koff_FcRn' * (Antibody__FCRn_AdiposeEndosomal/V_AdiposeEndosomal) * V_AdiposeEndosomal
+Antibody_AdiposeEndosomal ->; 'Kdeg' * (Antibody_AdiposeEndosomal/V_AdiposeEndosomal) * V_AdiposeEndosomal
+Antibody__FCRn_AdiposeEndosomal -> Antibody_AdiposeVascular + FCRn_AdiposeEndosomal; CLup_Adipose * FR * (Antibody__FCRn_AdiposeEndosomal/V_AdiposeEndosomal)
+Antibody__FCRn_AdiposeEndosomal -> Antibody_AdiposeInterstitial + FCRn_AdiposeEndosomal; CLup_Adipose * (1 - FR) * (Antibody__FCRn_AdiposeEndosomal/V_AdiposeEndosomal)
+Antibody_ThymusVascular -> Antibody_ThymusInterstitial; (1-RC_Thymus_Vascular) * L_Thymus * (Antibody_ThymusVascular/V_ThymusVascular)
+Antibody_ThymusVascular -> Antibody_ThymusEndosomal; CLup_Thymus * (Antibody_ThymusVascular/V_ThymusVascular)
+Antibody_ThymusInterstitial -> Antibody_ThymusEndosomal; CLup_Thymus * (Antibody_ThymusInterstitial/V_ThymusInterstitial)
+Antibody_ThymusEndosomal + FCRn_ThymusEndosomal -> Antibody__FCRn_ThymusEndosomal; 'Kon_FcRn' * (Antibody_ThymusEndosomal/V_ThymusEndosomal) * (FCRn_ThymusEndosomal/V_ThymusEndosomal) * V_ThymusEndosomal
+Antibody__FCRn_ThymusEndosomal -> Antibody_ThymusEndosomal + FCRn_ThymusEndosomal; 'Koff_FcRn' * (Antibody__FCRn_ThymusEndosomal/V_ThymusEndosomal) * V_ThymusEndosomal
+Antibody_ThymusEndosomal ->; 'Kdeg' * (Antibody_ThymusEndosomal/V_ThymusEndosomal) * V_ThymusEndosomal
+Antibody__FCRn_ThymusEndosomal -> Antibody_ThymusVascular + FCRn_ThymusEndosomal; CLup_Thymus * FR * (Antibody__FCRn_ThymusEndosomal/V_ThymusEndosomal)
+Antibody__FCRn_ThymusEndosomal -> Antibody_ThymusInterstitial + FCRn_ThymusEndosomal; CLup_Thymus * (1 - FR) * (Antibody__FCRn_ThymusEndosomal/V_ThymusEndosomal)
+Antibody_BoneVascular -> Antibody_BoneInterstitial; (1-RC_Bone_Vascular) * L_Bone * (Antibody_BoneVascular/V_BoneVascular)
+Antibody_BoneVascular -> Antibody_BoneEndosomal; CLup_Bone * (Antibody_BoneVascular/V_BoneVascular)
+Antibody_BoneInterstitial -> Antibody_BoneEndosomal; CLup_Bone * (Antibody_BoneInterstitial/V_BoneInterstitial)
+Antibody_BoneEndosomal + FCRn_BoneEndosomal -> Antibody__FCRn_BoneEndosomal; 'Kon_FcRn' * (Antibody_BoneEndosomal/V_BoneEndosomal) * (FCRn_BoneEndosomal/V_BoneEndosomal) * V_BoneEndosomal
+Antibody__FCRn_BoneEndosomal -> Antibody_BoneEndosomal + FCRn_BoneEndosomal; 'Koff_FcRn' * (Antibody__FCRn_BoneEndosomal/V_BoneEndosomal) * V_BoneEndosomal
+Antibody_BoneEndosomal ->; 'Kdeg' * (Antibody_BoneEndosomal/V_BoneEndosomal) * V_BoneEndosomal
+Antibody__FCRn_BoneEndosomal -> Antibody_BoneVascular + FCRn_BoneEndosomal; CLup_Bone * FR * (Antibody__FCRn_BoneEndosomal/V_BoneEndosomal)
+Antibody__FCRn_BoneEndosomal -> Antibody_BoneInterstitial + FCRn_BoneEndosomal; CLup_Bone * (1 - FR) * (Antibody__FCRn_BoneEndosomal/V_BoneEndosomal)
+Antibody_OtherVascular -> Antibody_OtherInterstitial; (1-RC_Other_Vascular) * L_Other * (Antibody_OtherVascular/V_OtherVascular)
+Antibody_OtherVascular -> Antibody_OtherEndosomal; CLup_Other * (Antibody_OtherVascular/V_OtherVascular)
+Antibody_OtherInterstitial -> Antibody_OtherEndosomal; CLup_Other * (Antibody_OtherInterstitial/V_OtherInterstitial)
+Antibody_OtherEndosomal + FCRn_OtherEndosomal -> Antibody__FCRn_OtherEndosomal; 'Kon_FcRn' * (Antibody_OtherEndosomal/V_OtherEndosomal) * (FCRn_OtherEndosomal/V_OtherEndosomal) * V_OtherEndosomal
+Antibody__FCRn_OtherEndosomal -> Antibody_OtherEndosomal + FCRn_OtherEndosomal; 'Koff_FcRn' * (Antibody__FCRn_OtherEndosomal/V_OtherEndosomal) * V_OtherEndosomal
+Antibody_OtherEndosomal ->; 'Kdeg' * (Antibody_OtherEndosomal/V_OtherEndosomal) * V_OtherEndosomal
+Antibody__FCRn_OtherEndosomal -> Antibody_OtherVascular + FCRn_OtherEndosomal; CLup_Other * FR * (Antibody__FCRn_OtherEndosomal/V_OtherEndosomal)
+Antibody__FCRn_OtherEndosomal -> Antibody_OtherInterstitial + FCRn_OtherEndosomal; CLup_Other * (1 - FR) * (Antibody__FCRn_OtherEndosomal/V_OtherEndosomal)
+Antibody_LiverVascular -> Antibody_LiverInterstitial; (1-RC_Liver_Vascular) * L_Liver * (Antibody_LiverVascular/V_LiverVascular)
+Antibody_LiverVascular -> Antibody_LiverEndosomal; CLup_Liver * (Antibody_LiverVascular/V_LiverVascular)
+Antibody_LiverInterstitial -> Antibody_LiverEndosomal; CLup_Liver * (Antibody_LiverInterstitial/V_LiverInterstitial)
+Antibody_LiverEndosomal + FCRn_LiverEndosomal -> Antibody__FCRn_LiverEndosomal; 'Kon_FcRn' * (Antibody_LiverEndosomal/V_LiverEndosomal) * (FCRn_LiverEndosomal/V_LiverEndosomal) * V_LiverEndosomal
+Antibody__FCRn_LiverEndosomal -> Antibody_LiverEndosomal + FCRn_LiverEndosomal; 'Koff_FcRn' * (Antibody__FCRn_LiverEndosomal/V_LiverEndosomal) * V_LiverEndosomal
+Antibody_LiverEndosomal ->; 'Kdeg' * (Antibody_LiverEndosomal/V_LiverEndosomal) * V_LiverEndosomal
+Antibody__FCRn_LiverEndosomal -> Antibody_LiverVascular + FCRn_LiverEndosomal; CLup_Liver * FR * (Antibody__FCRn_LiverEndosomal/V_LiverEndosomal)
+Antibody__FCRn_LiverEndosomal -> Antibody_LiverInterstitial + FCRn_LiverEndosomal; CLup_Liver * (1 - FR) * (Antibody__FCRn_LiverEndosomal/V_LiverEndosomal)
+Antibody_SpleenVascular -> Antibody_SpleenInterstitial; (1-RC_Spleen_Vascular) * L_Spleen * (Antibody_SpleenVascular/V_SpleenVascular)
+Antibody_SpleenVascular -> Antibody_SpleenEndosomal; CLup_Spleen * (Antibody_SpleenVascular/V_SpleenVascular)
+Antibody_SpleenInterstitial -> Antibody_SpleenEndosomal; CLup_Spleen * (Antibody_SpleenInterstitial/V_SpleenInterstitial)
+Antibody_SpleenEndosomal + FCRn_SpleenEndosomal -> Antibody__FCRn_SpleenEndosomal; 'Kon_FcRn' * (Antibody_SpleenEndosomal/V_SpleenEndosomal) * (FCRn_SpleenEndosomal/V_SpleenEndosomal) * V_SpleenEndosomal
+Antibody__FCRn_SpleenEndosomal -> Antibody_SpleenEndosomal + FCRn_SpleenEndosomal; 'Koff_FcRn' * (Antibody__FCRn_SpleenEndosomal/V_SpleenEndosomal) * V_SpleenEndosomal
+Antibody_SpleenEndosomal ->; 'Kdeg' * (Antibody_SpleenEndosomal/V_SpleenEndosomal) * V_SpleenEndosomal
+Antibody__FCRn_SpleenEndosomal -> Antibody_SpleenVascular + FCRn_SpleenEndosomal; CLup_Spleen * FR * (Antibody__FCRn_SpleenEndosomal/V_SpleenEndosomal)
+Antibody__FCRn_SpleenEndosomal -> Antibody_SpleenInterstitial + FCRn_SpleenEndosomal; CLup_Spleen * (1 - FR) * (Antibody__FCRn_SpleenEndosomal/V_SpleenEndosomal)
+Antibody_PancreasVascular -> Antibody_PancreasInterstitial; (1-RC_Pancreas_Vascular) * L_Pancreas * (Antibody_PancreasVascular/V_PancreasVascular)
+Antibody_PancreasVascular -> Antibody_PancreasEndosomal; CLup_Pancreas * (Antibody_PancreasVascular/V_PancreasVascular)
+Antibody_PancreasInterstitial -> Antibody_PancreasEndosomal; CLup_Pancreas * (Antibody_PancreasInterstitial/V_PancreasInterstitial)
+Antibody_PancreasEndosomal + FCRn_PancreasEndosomal -> Antibody__FCRn_PancreasEndosomal; 'Kon_FcRn' * (Antibody_PancreasEndosomal/V_PancreasEndosomal) * (FCRn_PancreasEndosomal/V_PancreasEndosomal) * V_PancreasEndosomal
+Antibody__FCRn_PancreasEndosomal -> Antibody_PancreasEndosomal + FCRn_PancreasEndosomal; 'Koff_FcRn' * (Antibody__FCRn_PancreasEndosomal/V_PancreasEndosomal) * V_PancreasEndosomal
+Antibody_PancreasEndosomal ->; 'Kdeg' * (Antibody_PancreasEndosomal/V_PancreasEndosomal) * V_PancreasEndosomal
+Antibody__FCRn_PancreasEndosomal -> Antibody_PancreasVascular + FCRn_PancreasEndosomal; CLup_Pancreas * FR * (Antibody__FCRn_PancreasEndosomal/V_PancreasEndosomal)
+Antibody__FCRn_PancreasEndosomal -> Antibody_PancreasInterstitial + FCRn_PancreasEndosomal; CLup_Pancreas * (1 - FR) * (Antibody__FCRn_PancreasEndosomal/V_PancreasEndosomal)
+Antibody_SIVascular -> Antibody_SIInterstitial; (1-RC_SI_Vascular) * L_SI * (Antibody_SIVascular/V_SIVascular)
+Antibody_SIVascular -> Antibody_SIEndosomal; CLup_SI * (Antibody_SIVascular/V_SIVascular)
+Antibody_SIInterstitial -> Antibody_SIEndosomal; CLup_SI * (Antibody_SIInterstitial/V_SIInterstitial)
+Antibody_SIEndosomal + FCRn_SIEndosomal -> Antibody__FCRn_SIEndosomal; 'Kon_FcRn' * (Antibody_SIEndosomal/V_SIEndosomal) * (FCRn_SIEndosomal/V_SIEndosomal) * V_SIEndosomal
+Antibody__FCRn_SIEndosomal -> Antibody_SIEndosomal + FCRn_SIEndosomal; 'Koff_FcRn' * (Antibody__FCRn_SIEndosomal/V_SIEndosomal) * V_SIEndosomal
+Antibody_SIEndosomal ->; 'Kdeg' * (Antibody_SIEndosomal/V_SIEndosomal) * V_SIEndosomal
+Antibody__FCRn_SIEndosomal -> Antibody_SIVascular + FCRn_SIEndosomal; CLup_SI * FR * (Antibody__FCRn_SIEndosomal/V_SIEndosomal)
+Antibody__FCRn_SIEndosomal -> Antibody_SIInterstitial + FCRn_SIEndosomal; CLup_SI * (1 - FR) * (Antibody__FCRn_SIEndosomal/V_SIEndosomal)
+Antibody_LIVascular -> Antibody_LIInterstitial; (1-RC_LI_Vascular) * L_LI * (Antibody_LIVascular/V_LIVascular)
+Antibody_LIVascular -> Antibody_LIEndosomal; CLup_LI * (Antibody_LIVascular/V_LIVascular)
+Antibody_LIInterstitial -> Antibody_LIEndosomal; CLup_LI * (Antibody_LIInterstitial/V_LIInterstitial)
+Antibody_LIEndosomal + FCRn_LIEndosomal -> Antibody__FCRn_LIEndosomal; 'Kon_FcRn' * (Antibody_LIEndosomal/V_LIEndosomal) * (FCRn_LIEndosomal/V_LIEndosomal) * V_LIEndosomal
+Antibody__FCRn_LIEndosomal -> Antibody_LIEndosomal + FCRn_LIEndosomal; 'Koff_FcRn' * (Antibody__FCRn_LIEndosomal/V_LIEndosomal) * V_LIEndosomal
+Antibody_LIEndosomal ->; 'Kdeg' * (Antibody_LIEndosomal/V_LIEndosomal) * V_LIEndosomal
+Antibody__FCRn_LIEndosomal -> Antibody_LIVascular + FCRn_LIEndosomal; CLup_LI * FR * (Antibody__FCRn_LIEndosomal/V_LIEndosomal)
+Antibody__FCRn_LIEndosomal -> Antibody_LIInterstitial + FCRn_LIEndosomal; CLup_LI * (1 - FR) * (Antibody__FCRn_LIEndosomal/V_LIEndosomal)
+Antibody_LungVascular -> Antibody_HeartVascular; Q_Heart * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_KidneyVascular; Q_Kidney * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_MuscleVascular; Q_Muscle * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_SkinVascular; Q_Skin * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_LiverVascular; Q_Liver * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_AdiposeVascular; Q_Adipose * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_ThymusVascular; Q_Thymus * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_BoneVascular; Q_Bone * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_OtherVascular; Q_Other * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_SIVascular; Q_SI * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_LIVascular; Q_LI * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_SpleenVascular; Q_Spleen * (Antibody_LungVascular/V_LungVascular)
+Antibody_LungVascular -> Antibody_PancreasVascular; Q_Pancreas * (Antibody_LungVascular/V_LungVascular)
+Antibody_HeartVascular -> Antibody_Plasma; (Q_Heart - L_Heart) * (Antibody_HeartVascular/V_HeartVascular)
+Antibody_KidneyVascular -> Antibody_Plasma; (Q_Kidney - L_Kidney) * (Antibody_KidneyVascular/V_KidneyVascular)
+Antibody_MuscleVascular -> Antibody_Plasma; (Q_Muscle - L_Muscle) * (Antibody_MuscleVascular/V_MuscleVascular)
+Antibody_SkinVascular -> Antibody_Plasma; (Q_Skin - L_Skin) * (Antibody_SkinVascular/V_SkinVascular)
+Antibody_AdiposeVascular -> Antibody_Plasma; (Q_Adipose - L_Adipose) * (Antibody_AdiposeVascular/V_AdiposeVascular)
+Antibody_ThymusVascular -> Antibody_Plasma; (Q_Thymus - L_Thymus) * (Antibody_ThymusVascular/V_ThymusVascular)
+Antibody_BoneVascular -> Antibody_Plasma; (Q_Bone - L_Bone) * (Antibody_BoneVascular/V_BoneVascular)
+Antibody_OtherVascular -> Antibody_Plasma; (Q_Other - L_Other) * (Antibody_OtherVascular/V_OtherVascular)
+Antibody_LungInterstitial -> Antibody_LymphNode; (1 - RC_Lung_Lymph) * L_Lung * (Antibody_LungInterstitial/V_LungInterstitial)
+Antibody_HeartInterstitial -> Antibody_LymphNode; (1 - RC_Heart_Lymph) * L_Heart * (Antibody_HeartInterstitial/V_HeartInterstitial)
+Antibody_KidneyInterstitial -> Antibody_LymphNode; (1 - RC_Kidney_Lymph) * L_Kidney * (Antibody_KidneyInterstitial/V_KidneyInterstitial)
+Antibody_MuscleInterstitial -> Antibody_LymphNode; (1 - RC_Muscle_Lymph) * L_Muscle * (Antibody_MuscleInterstitial/V_MuscleInterstitial)
+Antibody_SkinInterstitial -> Antibody_LymphNode; (1 - RC_Skin_Lymph) * L_Skin * (Antibody_SkinInterstitial/V_SkinInterstitial)
+Antibody_AdiposeInterstitial -> Antibody_LymphNode; (1 - RC_Adipose_Lymph) * L_Adipose * (Antibody_AdiposeInterstitial/V_AdiposeInterstitial)
+Antibody_ThymusInterstitial -> Antibody_LymphNode; (1 - RC_Thymus_Lymph) * L_Thymus * (Antibody_ThymusInterstitial/V_ThymusInterstitial)
+Antibody_BoneInterstitial -> Antibody_LymphNode; (1 - RC_Bone_Lymph) * L_Bone * (Antibody_BoneInterstitial/V_BoneInterstitial)
+Antibody_OtherInterstitial -> Antibody_LymphNode; (1 - RC_Other_Lymph) * L_Other * (Antibody_OtherInterstitial/V_OtherInterstitial)
+Antibody_SIInterstitial -> Antibody_LymphNode; (1 - RC_SI_Lymph) * L_SI * (Antibody_SIInterstitial/V_SIInterstitial)
+Antibody_LIInterstitial -> Antibody_LymphNode; (1 - RC_LI_Lymph) * L_LI * (Antibody_LIInterstitial/V_LIInterstitial)
+Antibody_SpleenInterstitial -> Antibody_LymphNode; (1 - RC_Spleen_Lymph) * L_Spleen * (Antibody_SpleenInterstitial/V_SpleenInterstitial)
+Antibody_PancreasInterstitial -> Antibody_LymphNode; (1 - RC_Pancreas_Lymph) * L_Pancreas * (Antibody_PancreasInterstitial/V_PancreasInterstitial)
+Antibody_LiverInterstitial -> Antibody_LymphNode; (1 - RC_Liver_Lymph) * L_Liver * (Antibody_LiverInterstitial/V_LiverInterstitial)
+Antibody_LymphNode -> Antibody_Plasma; L_LymphNode * (Antibody_LymphNode/V_LymphNode)
+Antibody_SIVascular -> Antibody_LiverVascular; (Q_SI - L_SI) * (Antibody_SIVascular/V_SIVascular)
+Antibody_LIVascular -> Antibody_LiverVascular; (Q_LI - L_LI) * (Antibody_LIVascular/V_LIVascular)
+Antibody_SpleenVascular -> Antibody_LiverVascular; (Q_Spleen - L_Spleen) * (Antibody_SpleenVascular/V_SpleenVascular)
+Antibody_PancreasVascular -> Antibody_LiverVascular; (Q_Pancreas - L_Pancreas) * (Antibody_PancreasVascular/V_PancreasVascular)
+Antibody_LiverVascular -> Antibody_Plasma; (Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI) * (Antibody_LiverVascular/V_LiverVascular)
+Antibody_LungVascular -> Antibody_BrainVascular; Q_Brain * (Antibody_LungVascular/V_LungVascular)
+Antibody_BrainVascular -> Antibody_Plasma; (Q_Brain - L_Brain) * (Antibody_BrainVascular/V_BrainVascular)
+Antibody_BrainInterstitial -> Antibody_LymphNode; (1 - RC_Brain_Lymph) * L_Brain * (Antibody_BrainInterstitial/V_BrainInterstitial)
+Antibody_BrainVascular -> Antibody_BrainISF; (1-RC_BBB) * Q_BrainECF * (Antibody_BrainVascular/V_BrainVascular)
+Antibody_BrainVascular -> Antibody_BBB; CLup_BBB * (Antibody_BrainVascular/V_BrainVascular)
+Antibody_BrainVascular -> Antibody_BCSFB; CLup_BCSFB * (Antibody_BrainVascular/V_BrainVascular)
+Antibody_BrainVascular -> Antibody_CSF; (1-RC_BCSFB) * Q_CSF * (Antibody_BrainVascular/V_BrainVascular)
+Antibody_BrainISF -> Antibody_CSF; Q_BrainECF * (Antibody_BrainISF/V_BrainISF)
+Antibody_CSF -> Antibody_BrainISF; Q_BrainECF * (Antibody_CSF/V_CSF)
+Antibody_BBB + FCRn_BBB -> Antibody__FCRn_BBB; 'Kon_FcRn' * (Antibody_BBB/V_BBB) * (FCRn_BBB/V_BBB) * V_BBB
+Antibody__FCRn_BBB -> Antibody_BBB + FCRn_BBB; 'Koff_FcRn' * (Antibody__FCRn_BBB/V_BBB) * V_BBB
+Antibody_BBB ->; 'Kdeg' * (Antibody_BBB/V_BBB) * V_BBB
+Antibody_BCSFB + FCRn_BCSFB -> Antibody__FCRn_BCSFB; 'Kon_FcRn' * (Antibody_BCSFB/V_BCSFB) * (FCRn_BCSFB/V_BCSFB) * V_BCSFB
+Antibody__FCRn_BCSFB -> Antibody_BCSFB + FCRn_BCSFB; 'Koff_FcRn' * (Antibody__FCRn_BCSFB/V_BCSFB) * V_BCSFB
+Antibody_BCSFB ->; 'Kdeg' * (Antibody_BCSFB/V_BCSFB) * V_BCSFB
+Antibody__FCRn_BBB -> Antibody_BrainVascular + FCRn_BBB; CLup_BBB * FR * (Antibody__FCRn_BBB/V_BBB)
+Antibody__FCRn_BBB -> Antibody_BrainISF + FCRn_BBB; CLup_BBB * (1 - FR) * (Antibody__FCRn_BBB/V_BBB)
+Antibody__FCRn_BCSFB -> Antibody_BrainVascular + FCRn_BCSFB; CLup_BCSFB * FR * (Antibody__FCRn_BCSFB/V_BCSFB)
+Antibody__FCRn_BCSFB -> Antibody_CSF + FCRn_BCSFB; CLup_BCSFB * (1 - FR) * (Antibody__FCRn_BCSFB/V_BCSFB)

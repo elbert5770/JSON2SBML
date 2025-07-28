@@ -43,7 +43,7 @@ def mPBPKv2(DoseIV: float, Frequency: float, NumDoses: int, Stepsize: float, p: 
     V_TissueInterstitial = p['tissue_volume_interstitial']     # Tissue Interstitial Volume (L)
     V_BrainVascular = p['brain_volume_vascular']          # Brain Vascular Volume (L)
     V_EBBB = p['brain_volume_BBB']           # Brain Endosomal Volume of BBB (L)
-    V_EBCSFB = p['brain_volume_BCSFB']       # Brain Endosomal Volume of BCSFB (L)
+    V_BCSFB = p['brain_volume_BCSFB']       # Brain Endosomal Volume of BCSFB (L)
     V_BrainISF = p['brain_volume_interstitial']      # Brain Interstitial Volume (L)
     V_CSF = p['CSF_volume_total']             # Brain CSF Volume (L)
     V_Lymph = p['lymph_volume']                    # Lymph Volume
@@ -63,7 +63,7 @@ def mPBPKv2(DoseIV: float, Frequency: float, NumDoses: int, Stepsize: float, p: 
     RC_BBB = p['BR_BBB_RC']           # BBB Reflection Coefficient (-)
     RC_BCSFB = p['BR_BCSFB_RC']       # BBB Reflection Coefficient (-)
     RC_B_ISF = p['BR_ISF_RC']         # ISF Glymphatic Reflection Coefficient (-)
-    RAntibody_BCSF = p['BR_SAS_RC']         # CSF Glymphatic Reflection Coefficient (-)
+    RC_CSF = p['BR_SAS_RC']         # CSF Glymphatic Reflection Coefficient (-)
 
     CLUP_T = p['kCLUP'] * p['tissue_volume_endosomal']                                     # Tissue clearance uptake by the vascular endothelial cells (L/h)
     CLUP_BCSFB = p['BR_kCLUP'] * p['brain_volume_endosomal'] * (1 - p['BR_BBB_BCSFB_FR'])   # BCSFB clearance uptake by epithelial cells (L/h)
@@ -123,7 +123,7 @@ def mPBPKv2(DoseIV: float, Frequency: float, NumDoses: int, Stepsize: float, p: 
         BrainISF=y[:, 8] * 1e9,
         BrainCSF=y[:, 11] * 1e9,
         BrainHomo=(y[:, 6] * V_EBBB + y[:, 7] * V_EBBB + y[:, 8] * V_BrainISF + 
-                   y[:, 9] * V_EBCSFB + y[:, 10] * V_EBCSFB +
+                   y[:, 9] * V_BCSFB + y[:, 10] * V_BCSFB +
                    (y[:, 11] * (V_CSF_LV + V_CSF_TFV))) / (VB_total + V_CSF_LV + V_CSF_TFV) * 1e9,
         time=t
     )
@@ -159,7 +159,7 @@ def modelODE(t: float, y: np.ndarray, p: Dict) -> np.ndarray:
     V_TissueInterstitial = p['tissue_volume_interstitial']
     V_BrainVascular = p['brain_volume_vascular']
     V_EBBB = p['brain_volume_BBB']
-    V_EBCSFB = p['brain_volume_BCSFB']
+    V_BCSFB = p['brain_volume_BCSFB']
     V_BrainISF = p['brain_volume_interstitial']
     V_CSF = p['CSF_volume_total']
     V_Lymph = p['lymph_volume']
@@ -176,7 +176,7 @@ def modelODE(t: float, y: np.ndarray, p: Dict) -> np.ndarray:
     RC_BBB = p['BR_BBB_RC']
     RC_BCSFB = p['BR_BCSFB_RC']
     RC_B_ISF = p['BR_ISF_RC']
-    RAntibody_BCSF = p['BR_SAS_RC']
+    RC_CSF = p['BR_SAS_RC']
 
     CLUP_T = p['kCLUP'] * p['tissue_volume_endosomal']
     CLUP_BCSFB = p['BR_kCLUP'] * p['brain_volume_endosomal'] * (1 - p['BR_BBB_BCSFB_FR'])
@@ -193,13 +193,13 @@ def modelODE(t: float, y: np.ndarray, p: Dict) -> np.ndarray:
     Antibody_EBBB = y[6]
     Antibody__FCRn_EBBB = y[7]
     Antibody_BrainISF = y[8]
-    Antibody_EBCSFB = y[9]
-    Antibody__FCRn_EBCSFB = y[10]
-    Antibody_BCSF = y[11]
+    Antibody_BCSFB = y[9]
+    Antibody__FCRn_BCSFB = y[10]
+    Antibody_CSF = y[11]
     Antibody_Lymph = y[12]
     FCRn_TissueEndosomal = y[13]
     FCRn_EBBB = y[14]
-    FCRn_EBCSFB = y[15]
+    FCRn_BCSFB = y[15]
 
     # Differential Equations
     # 1. Plasma
@@ -233,7 +233,7 @@ def modelODE(t: float, y: np.ndarray, p: Dict) -> np.ndarray:
                                  ((1-RC_BCSFB) * QB_CSF * Antibody_BrainVascular) -
                                  (CLUP_B * Antibody_BrainVascular) + 
                                  (CLUP_BBB * FR_B * Antibody__FCRn_EBBB) + 
-                                 (CLUP_BCSFB * FR_B * Antibody__FCRn_EBCSFB)) / V_BrainVascular
+                                 (CLUP_BCSFB * FR_B * Antibody__FCRn_BCSFB)) / V_BrainVascular
 
     # 7. Endosomal BBB (Unbound)
     dAntibody_EBBBdt = ((CLUP_BBB * (Antibody_BrainVascular + Antibody_BrainISF)) / V_EBBB) - Kon_FcRn * Antibody_EBBB * FCRn_EBBB + Koff_FcRn * Antibody__FCRn_EBBB - Kdeg * Antibody_EBBB
@@ -242,19 +242,19 @@ def modelODE(t: float, y: np.ndarray, p: Dict) -> np.ndarray:
     dAntibody__FCRn_EBBBdt = (Kon_FcRn * Antibody_EBBB * FCRn_EBBB - Koff_FcRn * Antibody__FCRn_EBBB - (CLUP_BBB * Antibody__FCRn_EBBB) / V_EBBB)
 
     # 9. Brain Interstitial (ISF)
-    dAntibody_BrainISFdt = (((1-RC_BBB) * QB_ECF * Antibody_BrainVascular) - ((1-RC_B_ISF) * QB_ECF * Antibody_BrainISF) + (CLUP_BBB * (1-FR_B) * Antibody__FCRn_EBBB) - (CLUP_BBB * Antibody_BrainISF) - (QB_ECF * Antibody_BrainISF) + (QB_ECF * Antibody_BCSF)) / V_BrainISF
+    dAntibody_BrainISFdt = (((1-RC_BBB) * QB_ECF * Antibody_BrainVascular) - ((1-RC_B_ISF) * QB_ECF * Antibody_BrainISF) + (CLUP_BBB * (1-FR_B) * Antibody__FCRn_EBBB) - (CLUP_BBB * Antibody_BrainISF) - (QB_ECF * Antibody_BrainISF) + (QB_ECF * Antibody_CSF)) / V_BrainISF
 
     # 10. Endosomal BCSFB (Unbound)
-    dAntibody_EBCSFBdt = ((CLUP_BCSFB * Antibody_BrainVascular + CLUP_BCSFB * Antibody_BCSF) / V_EBCSFB - Kon_FcRn * Antibody_EBCSFB * FCRn_EBCSFB + Koff_FcRn * Antibody__FCRn_EBCSFB - Kdeg * Antibody_EBCSFB)
+    dAntibody_BCSFBdt = ((CLUP_BCSFB * Antibody_BrainVascular + CLUP_BCSFB * Antibody_CSF) / V_BCSFB - Kon_FcRn * Antibody_BCSFB * FCRn_BCSFB + Koff_FcRn * Antibody__FCRn_BCSFB - Kdeg * Antibody_BCSFB)
 
     # 11. Endosomal BCSFB (Bound)
-    dAntibody__FCRn_EBCSFBdt = (Kon_FcRn * Antibody_EBCSFB * FCRn_EBCSFB - (Koff_FcRn * Antibody__FCRn_EBCSFB) - ((CLUP_BCSFB * Antibody__FCRn_EBCSFB) / V_EBCSFB))
+    dAntibody__FCRn_BCSFBdt = (Kon_FcRn * Antibody_BCSFB * FCRn_BCSFB - (Koff_FcRn * Antibody__FCRn_BCSFB) - ((CLUP_BCSFB * Antibody__FCRn_BCSFB) / V_BCSFB))
 
     # 12. Cerebrospinal Fluid (CSF)
-    dAntibody_BCSFdt = ((1-RC_BCSFB) * QB_CSF * Antibody_BrainVascular - (CLUP_BCSFB) * Antibody_BCSF + (CLUP_BCSFB) * (1 - FR_B) * Antibody__FCRn_EBCSFB + QB_ECF * Antibody_BrainISF - (1-RAntibody_BCSF) * QB_CSF * Antibody_BCSF - QB_ECF * Antibody_BCSF) / V_CSF
+    dAntibody_CSFdt = ((1-RC_BCSFB) * QB_CSF * Antibody_BrainVascular - (CLUP_BCSFB) * Antibody_CSF + (CLUP_BCSFB) * (1 - FR_B) * Antibody__FCRn_BCSFB + QB_ECF * Antibody_BrainISF - (1-RC_CSF) * QB_CSF * Antibody_CSF - QB_ECF * Antibody_CSF) / V_CSF
 
     # 13. Lymph Node
-    dAntibody_Lymphdt = ((1-RC_TL) * LT * Antibody_TissueInterstitial + (1-RAntibody_BCSF) * (QB_CSF) * Antibody_BCSF + (1-RC_B_ISF) * QB_ECF * Antibody_BrainISF - (LT+LB) * Antibody_Lymph) / V_Lymph
+    dAntibody_Lymphdt = ((1-RC_TL) * LT * Antibody_TissueInterstitial + (1-RC_CSF) * (QB_CSF) * Antibody_CSF + (1-RC_B_ISF) * QB_ECF * Antibody_BrainISF - (LT+LB) * Antibody_Lymph) / V_Lymph
 
     # 14. FcRn Tissue (Unbound)
     dFCRn_TissueEndosomaldt = (- Kon_FcRn * Antibody_TissueEndosomal * FCRn_TissueEndosomal + Koff_FcRn * Antibody__FCRn_TissueEndosomal + CLUP_T * Antibody__FCRn_TissueEndosomal / V_TissueEndosomal)
@@ -263,7 +263,7 @@ def modelODE(t: float, y: np.ndarray, p: Dict) -> np.ndarray:
     dFCRn_EBBBdt = (- Kon_FcRn * Antibody_EBBB * FCRn_EBBB + Koff_FcRn * Antibody__FCRn_EBBB + (CLUP_BBB * Antibody__FCRn_EBBB) / V_EBBB)
 
     # 16. FcRn BCSFB (Unbound)
-    dFCRn_EBCSFBdt = (- Kon_FcRn * Antibody_EBCSFB * FCRn_EBCSFB + Koff_FcRn * Antibody__FCRn_EBCSFB + CLUP_BCSFB * Antibody__FCRn_EBCSFB / V_EBCSFB)
+    dFCRn_BCSFBdt = (- Kon_FcRn * Antibody_BCSFB * FCRn_BCSFB + Koff_FcRn * Antibody__FCRn_BCSFB + CLUP_BCSFB * Antibody__FCRn_BCSFB / V_BCSFB)
 
     # Return derivatives
     return np.array([
@@ -276,13 +276,13 @@ def modelODE(t: float, y: np.ndarray, p: Dict) -> np.ndarray:
         dAntibody_EBBBdt,
         dAntibody__FCRn_EBBBdt,
         dAntibody_BrainISFdt,
-        dAntibody_EBCSFBdt,
-        dAntibody__FCRn_EBCSFBdt,
-        dAntibody_BCSFdt,
+        dAntibody_BCSFBdt,
+        dAntibody__FCRn_BCSFBdt,
+        dAntibody_CSFdt,
         dAntibody_Lymphdt,
         dFCRn_TissueEndosomaldt,
         dFCRn_EBBBdt,
-        dFCRn_EBCSFBdt
+        dFCRn_BCSFBdt
     ])
 
 

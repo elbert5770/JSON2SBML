@@ -1,5 +1,6 @@
 import json
 import re
+import sys
 
 def extract_species_and_parameters_from_reactions(reaction_string):
     """
@@ -401,12 +402,13 @@ def read_reactions_from_txt(txt_file_path):
     
     return reactions
 
-def generate_antimony_from_txt(txt_file_path):
+def generate_antimony_from_txt(txt_file_path, name):
     """
     Generate Antimony script from a text file containing individual reactions.
     
     Args:
         txt_file_path (str): Path to the text file
+        name (str): Name to use in place of 'Geerts' in filenames
         
     Returns:
         str: Generated Antimony script
@@ -457,24 +459,37 @@ def generate_antimony_from_txt(txt_file_path):
     return complete_script, species, parameters, unique_compartments, all_errors
 
 if __name__ == "__main__":
-    # Generate Antimony script from text file
-    complete_script, species, parameters, unique_compartments, errors = generate_antimony_from_txt("Geerts_all_reactions.txt")
+    # Check if name argument is provided
+    if len(sys.argv) < 2:
+        print("Usage: python txt_to_antimony.py <name>")
+        print("Example: python txt_to_antimony.py Smith")
+        name = "Chang2019"
+    else:
+        name = sys.argv[1]
     
-    # Write complete script to file
-    with open("Antimony_Geerts_all_reactions.txt", "w") as f:
+    # Generate Antimony script from text file
+    complete_script, species, parameters, unique_compartments, errors = generate_antimony_from_txt(f"{name}_all_reactions.txt", name)
+    
+    # Write complete script to file with name
+    antimony_filename = f"Antimony_{name}_all_reactions.txt"
+    with open(antimony_filename, "w") as f:
         f.write(complete_script)
     
-    # Write unique compartments to file
-    with open("unique_compartments.txt", "w") as f:
+    # Write unique compartments to file with name
+    compartments_filename = f"unique_compartments_{name}.txt"
+    with open(compartments_filename, "w") as f:
         for compartment in sorted(unique_compartments):
             f.write(f"{compartment}\n")
     
-    # Write species and parameters to files
-    write_list_to_file(species, 'unique_species.txt')
-    write_list_to_file(parameters, 'unique_parameters.txt')
+    # Write species and parameters to files with name
+    species_filename = f'unique_species_{name}.txt'
+    parameters_filename = f'unique_parameters_{name}.txt'
+    write_list_to_file(species, species_filename)
+    write_list_to_file(parameters, parameters_filename)
     
-    # Write errors to file
-    with open("conversion_errors.log", "w") as f:
+    # Write errors to file with name
+    errors_filename = f"conversion_errors_{name}.log"
+    with open(errors_filename, "w") as f:
         for error in errors:
             f.write(f"{error}\n")
     
@@ -482,15 +497,15 @@ if __name__ == "__main__":
     print(f"Found {len(unique_compartments)} unique compartments:")
     for compartment in sorted(unique_compartments):
         print(f"  - {compartment}")
-    print(f"Unique compartments written to 'unique_compartments.txt'")
+    print(f"Unique compartments written to '{compartments_filename}'")
     print()
     
     print(f"Found {len(species)} unique species and {len(parameters)} unique parameters")
-    print(f"Species written to 'unique_species.txt'")
-    print(f"Parameters written to 'unique_parameters.txt'")
+    print(f"Species written to '{species_filename}'")
+    print(f"Parameters written to '{parameters_filename}'")
     print()
     
-    print("Antimony script written to 'Antimony_Geerts_all_reactions.txt'")
+    print(f"Antimony script written to '{antimony_filename}'")
     print()
     
     # Print errors
@@ -500,7 +515,7 @@ if __name__ == "__main__":
         for error in errors:
             print(error)
         print("=" * 50)
-        print("Errors also written to 'conversion_errors.log'")
+        print(f"Errors also written to '{errors_filename}'")
         print()
     else:
         print("No errors found during conversion.")
