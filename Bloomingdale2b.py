@@ -18,7 +18,7 @@ def build_reactions():
             Rate_type = "UDF"
             match Comp:
                 case ['TissueVascular','TissueInterstitial']: 
-                    Rate_eqtn_prototype = f"(1-RC_{Comp1}) * L_T"
+                    Rate_eqtn_prototype = f"(1-RC_{Comp1}) * LT"
                 case ['TissueVascular','TissueEndosomal']: 
                     Rate_eqtn_prototype = f"CLup_Tissue"
                 case ['TissueInterstitial','TissueEndosomal']: 
@@ -34,7 +34,7 @@ def build_reactions():
             Reactants = f"[{Species}_{Comp},FCRn_{Comp}]"
             Products = f"[{Species}__FCRn_{Comp}]"
             Rate_type = "RMA"
-            Rate_eqtn_prototype = f"['Kon_FcRn','Koff_FcRn']"
+            Rate_eqtn_prototype = f"[Kon_FcRn,Koff_FcRn]"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
 
@@ -43,7 +43,7 @@ def build_reactions():
             Reactants = f"[{Species}_{Comp}]"
             Products = f"[0]"
             Rate_type = "MA"
-            Rate_eqtn_prototype = f"['Kdeg']"
+            Rate_eqtn_prototype = f"[Kdeg]"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
 
@@ -92,12 +92,13 @@ def build_reactions():
                 case   ['Lymph','Plasma']: 
                     Rate_eqtn_prototype = f"(LT + LB)"  
                 case   ['TissueInterstitial','Lymph']: 
-                    Rate_eqtn_prototype = f"(1 - RC_Tv) * LT" 
+                    Rate_eqtn_prototype = f"(1 - RC_TissueVascular) * LT" 
                 case   ['CSF','Lymph']: 
                     Rate_eqtn_prototype = f"(1-RC_CSF) * (QB_CSF)" 
                 case   ['BrainISF','Lymph']: 
                     Rate_eqtn_prototype = f"(1-RC_B_ISF) * QB_ECF" 
-
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
 
     # Module CNS
 
@@ -117,13 +118,13 @@ def build_reactions():
             Rate_type = "UDF"
             match Comp:
                 case ['BrainVascular','BrainISF']: 
-                    Rate_eqtn_prototype = f"(1-RC_BBB) * Q_BECF"
+                    Rate_eqtn_prototype = f"(1-RC_BBB) * QB_ECF"
                 case ['BrainVascular','BBB']: 
                     Rate_eqtn_prototype = f"CLup_BBB"
                 case ['BrainVascular','BCSFB']: 
                     Rate_eqtn_prototype = f"CLup_BCSFB"
                 case ['BrainVascular','CSF']: 
-                    Rate_eqtn_prototype = f"(1-RC_BCSFB) * Q_BCSF"
+                    Rate_eqtn_prototype = f"(1-RC_BCSFB) * QB_CSF"
                 case ['BrainISF','CSF']: 
                     Rate_eqtn_prototype = f"QB_ECF"
                 case ['CSF','BrainISF']: 
@@ -138,7 +139,7 @@ def build_reactions():
             Reactants = f"[{Species}_{Comp},FCRn_{Comp}]"
             Products = f"[{Species}__FCRn_{Comp}]"
             Rate_type = "RMA"
-            Rate_eqtn_prototype = f"['Kon_FcRn','Koff_FcRn']"
+            Rate_eqtn_prototype = f"[Kon_FcRn,Koff_FcRn]"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
 
@@ -147,7 +148,7 @@ def build_reactions():
             Reactants = f"[{Species}_{Comp}]"
             Products = f"[0]"
             Rate_type = "MA"
-            Rate_eqtn_prototype = f"['Kdeg']"
+            Rate_eqtn_prototype = f"[Kdeg]"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
 

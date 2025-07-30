@@ -3,6 +3,8 @@ BCSFB
 BrainISF
 BrainVascular
 CSF
+Lymph
+Plasma
 TissueEndosomal
 TissueInterstitial
 TissueVascular

@@ -51,6 +51,60 @@ compartment ThymusEndosomal = V_ThymusEndosomal
 compartment ThymusInterstitial = V_ThymusInterstitial
 compartment ThymusVascular = V_ThymusVascular
 
+substanceOnly species AB42_AdiposeEndosomal in AdiposeEndosomal
+substanceOnly species AB42_AdiposeInterstitial in AdiposeInterstitial
+substanceOnly species AB42_AdiposeVascular in AdiposeVascular
+substanceOnly species AB42_BBB in BBB
+substanceOnly species AB42_BCSFB in BCSFB
+substanceOnly species AB42_BoneEndosomal in BoneEndosomal
+substanceOnly species AB42_BoneInterstitial in BoneInterstitial
+substanceOnly species AB42_BoneVascular in BoneVascular
+substanceOnly species AB42_BrainISF in BrainISF
+substanceOnly species AB42_BrainVascular in BrainVascular
+substanceOnly species AB42_CM in CM
+substanceOnly species AB42_HeartEndosomal in HeartEndosomal
+substanceOnly species AB42_HeartInterstitial in HeartInterstitial
+substanceOnly species AB42_HeartVascular in HeartVascular
+substanceOnly species AB42_KidneyEndosomal in KidneyEndosomal
+substanceOnly species AB42_KidneyInterstitial in KidneyInterstitial
+substanceOnly species AB42_KidneyVascular in KidneyVascular
+substanceOnly species AB42_LIEndosomal in LIEndosomal
+substanceOnly species AB42_LIInterstitial in LIInterstitial
+substanceOnly species AB42_LIVascular in LIVascular
+substanceOnly species AB42_LV in LV
+substanceOnly species AB42_LiverEndosomal in LiverEndosomal
+substanceOnly species AB42_LiverInterstitial in LiverInterstitial
+substanceOnly species AB42_LiverVascular in LiverVascular
+substanceOnly species AB42_LungEndosomal in LungEndosomal
+substanceOnly species AB42_LungInterstitial in LungInterstitial
+substanceOnly species AB42_LungVascular in LungVascular
+substanceOnly species AB42_LymphNode in LymphNode
+substanceOnly species AB42_MuscleEndosomal in MuscleEndosomal
+substanceOnly species AB42_MuscleInterstitial in MuscleInterstitial
+substanceOnly species AB42_MuscleVascular in MuscleVascular
+substanceOnly species AB42_Oligomer_BrainISF in BrainISF
+substanceOnly species AB42_OtherEndosomal in OtherEndosomal
+substanceOnly species AB42_OtherInterstitial in OtherInterstitial
+substanceOnly species AB42_OtherVascular in OtherVascular
+substanceOnly species AB42_PancreasEndosomal in PancreasEndosomal
+substanceOnly species AB42_PancreasInterstitial in PancreasInterstitial
+substanceOnly species AB42_PancreasVascular in PancreasVascular
+substanceOnly species AB42_Plasma in Plasma
+substanceOnly species AB42_SAS in SAS
+substanceOnly species AB42_SIEndosomal in SIEndosomal
+substanceOnly species AB42_SIInterstitial in SIInterstitial
+substanceOnly species AB42_SIVascular in SIVascular
+substanceOnly species AB42_SkinEndosomal in SkinEndosomal
+substanceOnly species AB42_SkinInterstitial in SkinInterstitial
+substanceOnly species AB42_SkinVascular in SkinVascular
+substanceOnly species AB42_SpleenEndosomal in SpleenEndosomal
+substanceOnly species AB42_SpleenInterstitial in SpleenInterstitial
+substanceOnly species AB42_SpleenVascular in SpleenVascular
+substanceOnly species AB42_TFV in TFV
+substanceOnly species AB42_ThymusEndosomal in ThymusEndosomal
+substanceOnly species AB42_ThymusInterstitial in ThymusInterstitial
+substanceOnly species AB42_ThymusVascular in ThymusVascular
+substanceOnly species APP_BrainISF in BrainISF
 substanceOnly species Antibody_AdiposeEndosomal in AdiposeEndosomal
 substanceOnly species Antibody_AdiposeInterstitial in AdiposeInterstitial
 substanceOnly species Antibody_AdiposeVascular in AdiposeVascular
@@ -119,6 +173,7 @@ substanceOnly species Antibody__FCRn_SIEndosomal in SIEndosomal
 substanceOnly species Antibody__FCRn_SkinEndosomal in SkinEndosomal
 substanceOnly species Antibody__FCRn_SpleenEndosomal in SpleenEndosomal
 substanceOnly species Antibody__FCRn_ThymusEndosomal in ThymusEndosomal
+substanceOnly species C99_BrainISF in BrainISF
 substanceOnly species FCRn_AdiposeEndosomal in AdiposeEndosomal
 substanceOnly species FCRn_BBB in BBB
 substanceOnly species FCRn_BCSFB in BCSFB
@@ -289,7 +344,7 @@ Antibody_LIVascular -> Antibody_LiverVascular; (Q_LI - L_LI) * (Antibody_LIVascu
 Antibody_SpleenVascular -> Antibody_LiverVascular; (Q_Spleen - L_Spleen) * (Antibody_SpleenVascular/V_SpleenVascular)
 Antibody_PancreasVascular -> Antibody_LiverVascular; (Q_Pancreas - L_Pancreas) * (Antibody_PancreasVascular/V_PancreasVascular)
 Antibody_LiverVascular -> Antibody_Plasma; ((Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI)) * (Antibody_LiverVascular/V_LiverVascular)
-Antibody_LymphNode -> Antibody_Plasma; (L_LN) * (Antibody_LymphNode/V_LymphNode)
+Antibody_LymphNode -> Antibody_Plasma; L_LN * (Antibody_LymphNode/V_LymphNode)
 Antibody_Plasma -> Antibody_LungVascular; (Q_Lung + L_Lung) * (Antibody_Plasma/V_Plasma)
 Antibody_LungVascular -> Antibody_BrainVascular; Q_Brain * (Antibody_LungVascular/V_LungVascular)
 Antibody_BrainVascular -> Antibody_Plasma; (Q_Brain - L_Brain) * (Antibody_BrainVascular/V_BrainVascular)
@@ -317,3 +372,109 @@ Antibody__FCRn_BBB -> Antibody_BrainISF + FCRn_BBB; CLup_BBB * f_BBB * (1 - FR) 
 Antibody__FCRn_BCSFB -> Antibody_BrainVascular + FCRn_BCSFB; CLup_BCSFB * (1 - f_BBB) * FR * (Antibody__FCRn_BCSFB/V_BCSFB)
 Antibody__FCRn_BCSFB -> Antibody_LV + FCRn_BCSFB; f_LV * CLup_BCSFB * (1 - f_BBB) * (1 - FR) * (Antibody__FCRn_BCSFB/V_BCSFB)
 Antibody__FCRn_BCSFB -> Antibody_TFV + FCRn_BCSFB; (1 - f_LV) * CLup_BCSFB * (1 - f_BBB) * (1 - FR) * (Antibody__FCRn_BCSFB/V_BCSFB)
+AB42_LungVascular -> AB42_LungInterstitial; (1-RC_Lung_Vascular) * L_Lung * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_LungEndosomal; (1-RC_Lung_Vascular) * L_Lung * (AB42_LungVascular/V_LungVascular)
+AB42_LungInterstitial -> AB42_LungEndosomal; (1-RC_Lung_Vascular) * L_Lung * (AB42_LungInterstitial/V_LungInterstitial)
+AB42_HeartVascular -> AB42_HeartInterstitial; (1-RC_Heart_Vascular) * L_Heart * (AB42_HeartVascular/V_HeartVascular)
+AB42_HeartVascular -> AB42_HeartEndosomal; (1-RC_Heart_Vascular) * L_Heart * (AB42_HeartVascular/V_HeartVascular)
+AB42_HeartInterstitial -> AB42_HeartEndosomal; (1-RC_Heart_Vascular) * L_Heart * (AB42_HeartInterstitial/V_HeartInterstitial)
+AB42_KidneyVascular -> AB42_KidneyInterstitial; (1-RC_Kidney_Vascular) * L_Kidney * (AB42_KidneyVascular/V_KidneyVascular)
+AB42_KidneyVascular -> AB42_KidneyEndosomal; (1-RC_Kidney_Vascular) * L_Kidney * (AB42_KidneyVascular/V_KidneyVascular)
+AB42_KidneyInterstitial -> AB42_KidneyEndosomal; (1-RC_Kidney_Vascular) * L_Kidney * (AB42_KidneyInterstitial/V_KidneyInterstitial)
+AB42_MuscleVascular -> AB42_MuscleInterstitial; (1-RC_Muscle_Vascular) * L_Muscle * (AB42_MuscleVascular/V_MuscleVascular)
+AB42_MuscleVascular -> AB42_MuscleEndosomal; (1-RC_Muscle_Vascular) * L_Muscle * (AB42_MuscleVascular/V_MuscleVascular)
+AB42_MuscleInterstitial -> AB42_MuscleEndosomal; (1-RC_Muscle_Vascular) * L_Muscle * (AB42_MuscleInterstitial/V_MuscleInterstitial)
+AB42_SkinVascular -> AB42_SkinInterstitial; (1-RC_Skin_Vascular) * L_Skin * (AB42_SkinVascular/V_SkinVascular)
+AB42_SkinVascular -> AB42_SkinEndosomal; (1-RC_Skin_Vascular) * L_Skin * (AB42_SkinVascular/V_SkinVascular)
+AB42_SkinInterstitial -> AB42_SkinEndosomal; (1-RC_Skin_Vascular) * L_Skin * (AB42_SkinInterstitial/V_SkinInterstitial)
+AB42_AdiposeVascular -> AB42_AdiposeInterstitial; (1-RC_Adipose_Vascular) * L_Adipose * (AB42_AdiposeVascular/V_AdiposeVascular)
+AB42_AdiposeVascular -> AB42_AdiposeEndosomal; (1-RC_Adipose_Vascular) * L_Adipose * (AB42_AdiposeVascular/V_AdiposeVascular)
+AB42_AdiposeInterstitial -> AB42_AdiposeEndosomal; (1-RC_Adipose_Vascular) * L_Adipose * (AB42_AdiposeInterstitial/V_AdiposeInterstitial)
+AB42_ThymusVascular -> AB42_ThymusInterstitial; (1-RC_Thymus_Vascular) * L_Thymus * (AB42_ThymusVascular/V_ThymusVascular)
+AB42_ThymusVascular -> AB42_ThymusEndosomal; (1-RC_Thymus_Vascular) * L_Thymus * (AB42_ThymusVascular/V_ThymusVascular)
+AB42_ThymusInterstitial -> AB42_ThymusEndosomal; (1-RC_Thymus_Vascular) * L_Thymus * (AB42_ThymusInterstitial/V_ThymusInterstitial)
+AB42_BoneVascular -> AB42_BoneInterstitial; (1-RC_Bone_Vascular) * L_Bone * (AB42_BoneVascular/V_BoneVascular)
+AB42_BoneVascular -> AB42_BoneEndosomal; (1-RC_Bone_Vascular) * L_Bone * (AB42_BoneVascular/V_BoneVascular)
+AB42_BoneInterstitial -> AB42_BoneEndosomal; (1-RC_Bone_Vascular) * L_Bone * (AB42_BoneInterstitial/V_BoneInterstitial)
+AB42_OtherVascular -> AB42_OtherInterstitial; (1-RC_Other_Vascular) * L_Other * (AB42_OtherVascular/V_OtherVascular)
+AB42_OtherVascular -> AB42_OtherEndosomal; (1-RC_Other_Vascular) * L_Other * (AB42_OtherVascular/V_OtherVascular)
+AB42_OtherInterstitial -> AB42_OtherEndosomal; (1-RC_Other_Vascular) * L_Other * (AB42_OtherInterstitial/V_OtherInterstitial)
+AB42_LiverVascular -> AB42_LiverInterstitial; (1-RC_Liver_Vascular) * L_Liver * (AB42_LiverVascular/V_LiverVascular)
+AB42_LiverVascular -> AB42_LiverEndosomal; (1-RC_Liver_Vascular) * L_Liver * (AB42_LiverVascular/V_LiverVascular)
+AB42_LiverInterstitial -> AB42_LiverEndosomal; (1-RC_Liver_Vascular) * L_Liver * (AB42_LiverInterstitial/V_LiverInterstitial)
+AB42_SpleenVascular -> AB42_SpleenInterstitial; (1-RC_Spleen_Vascular) * L_Spleen * (AB42_SpleenVascular/V_SpleenVascular)
+AB42_SpleenVascular -> AB42_SpleenEndosomal; (1-RC_Spleen_Vascular) * L_Spleen * (AB42_SpleenVascular/V_SpleenVascular)
+AB42_SpleenInterstitial -> AB42_SpleenEndosomal; (1-RC_Spleen_Vascular) * L_Spleen * (AB42_SpleenInterstitial/V_SpleenInterstitial)
+AB42_PancreasVascular -> AB42_PancreasInterstitial; (1-RC_Pancreas_Vascular) * L_Pancreas * (AB42_PancreasVascular/V_PancreasVascular)
+AB42_PancreasVascular -> AB42_PancreasEndosomal; (1-RC_Pancreas_Vascular) * L_Pancreas * (AB42_PancreasVascular/V_PancreasVascular)
+AB42_PancreasInterstitial -> AB42_PancreasEndosomal; (1-RC_Pancreas_Vascular) * L_Pancreas * (AB42_PancreasInterstitial/V_PancreasInterstitial)
+AB42_SIVascular -> AB42_SIInterstitial; (1-RC_SI_Vascular) * L_SI * (AB42_SIVascular/V_SIVascular)
+AB42_SIVascular -> AB42_SIEndosomal; (1-RC_SI_Vascular) * L_SI * (AB42_SIVascular/V_SIVascular)
+AB42_SIInterstitial -> AB42_SIEndosomal; (1-RC_SI_Vascular) * L_SI * (AB42_SIInterstitial/V_SIInterstitial)
+AB42_LIVascular -> AB42_LIInterstitial; (1-RC_LI_Vascular) * L_LI * (AB42_LIVascular/V_LIVascular)
+AB42_LIVascular -> AB42_LIEndosomal; (1-RC_LI_Vascular) * L_LI * (AB42_LIVascular/V_LIVascular)
+AB42_LIInterstitial -> AB42_LIEndosomal; (1-RC_LI_Vascular) * L_LI * (AB42_LIInterstitial/V_LIInterstitial)
+AB42_LungVascular -> AB42_HeartVascular; Q_Heart * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_KidneyVascular; Q_Kidney * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_MuscleVascular; Q_Muscle * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_SkinVascular; Q_Skin * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_LiverVascular; Q_Liver * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_AdiposeVascular; Q_Adipose * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_ThymusVascular; Q_Thymus * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_BoneVascular; Q_Bone * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_OtherVascular; Q_Other * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_SIVascular; Q_SI * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_LIVascular; Q_LI * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_SpleenVascular; Q_Spleen * (AB42_LungVascular/V_LungVascular)
+AB42_LungVascular -> AB42_PancreasVascular; Q_Pancreas * (AB42_LungVascular/V_LungVascular)
+AB42_HeartVascular -> AB42_Plasma; (Q_Heart - L_Heart) * (AB42_HeartVascular/V_HeartVascular)
+AB42_KidneyVascular -> AB42_Plasma; (Q_Kidney - L_Kidney) * (AB42_KidneyVascular/V_KidneyVascular)
+AB42_MuscleVascular -> AB42_Plasma; (Q_Muscle - L_Muscle) * (AB42_MuscleVascular/V_MuscleVascular)
+AB42_SkinVascular -> AB42_Plasma; (Q_Skin - L_Skin) * (AB42_SkinVascular/V_SkinVascular)
+AB42_AdiposeVascular -> AB42_Plasma; (Q_Adipose - L_Adipose) * (AB42_AdiposeVascular/V_AdiposeVascular)
+AB42_ThymusVascular -> AB42_Plasma; (Q_Thymus - L_Thymus) * (AB42_ThymusVascular/V_ThymusVascular)
+AB42_BoneVascular -> AB42_Plasma; (Q_Bone - L_Bone) * (AB42_BoneVascular/V_BoneVascular)
+AB42_OtherVascular -> AB42_Plasma; (Q_Other - L_Other) * (AB42_OtherVascular/V_OtherVascular)
+AB42_LungInterstitial -> AB42_LymphNode; (1 - RC_Lung_Lymph) * L_Lung * (AB42_LungInterstitial/V_LungInterstitial)
+AB42_HeartInterstitial -> AB42_LymphNode; (1 - RC_Heart_Lymph) * L_Heart * (AB42_HeartInterstitial/V_HeartInterstitial)
+AB42_KidneyInterstitial -> AB42_LymphNode; (1 - RC_Kidney_Lymph) * L_Kidney * (AB42_KidneyInterstitial/V_KidneyInterstitial)
+AB42_MuscleInterstitial -> AB42_LymphNode; (1 - RC_Muscle_Lymph) * L_Muscle * (AB42_MuscleInterstitial/V_MuscleInterstitial)
+AB42_SkinInterstitial -> AB42_LymphNode; (1 - RC_Skin_Lymph) * L_Skin * (AB42_SkinInterstitial/V_SkinInterstitial)
+AB42_AdiposeInterstitial -> AB42_LymphNode; (1 - RC_Adipose_Lymph) * L_Adipose * (AB42_AdiposeInterstitial/V_AdiposeInterstitial)
+AB42_ThymusInterstitial -> AB42_LymphNode; (1 - RC_Thymus_Lymph) * L_Thymus * (AB42_ThymusInterstitial/V_ThymusInterstitial)
+AB42_BoneInterstitial -> AB42_LymphNode; (1 - RC_Bone_Lymph) * L_Bone * (AB42_BoneInterstitial/V_BoneInterstitial)
+AB42_OtherInterstitial -> AB42_LymphNode; (1 - RC_Other_Lymph) * L_Other * (AB42_OtherInterstitial/V_OtherInterstitial)
+AB42_SIInterstitial -> AB42_LymphNode; (1 - RC_SI_Lymph) * L_SI * (AB42_SIInterstitial/V_SIInterstitial)
+AB42_LIInterstitial -> AB42_LymphNode; (1 - RC_LI_Lymph) * L_LI * (AB42_LIInterstitial/V_LIInterstitial)
+AB42_SpleenInterstitial -> AB42_LymphNode; (1 - RC_Spleen_Lymph) * L_Spleen * (AB42_SpleenInterstitial/V_SpleenInterstitial)
+AB42_PancreasInterstitial -> AB42_LymphNode; (1 - RC_Pancreas_Lymph) * L_Pancreas * (AB42_PancreasInterstitial/V_PancreasInterstitial)
+AB42_LiverInterstitial -> AB42_LymphNode; (1 - RC_Liver_Lymph) * L_Liver * (AB42_LiverInterstitial/V_LiverInterstitial)
+AB42_LymphNode -> AB42_Plasma; L_LymphNode * (AB42_LymphNode/V_LymphNode)
+AB42_SIVascular -> AB42_LiverVascular; (Q_SI - L_SI) * (AB42_SIVascular/V_SIVascular)
+AB42_LIVascular -> AB42_LiverVascular; (Q_LI - L_LI) * (AB42_LIVascular/V_LIVascular)
+AB42_SpleenVascular -> AB42_LiverVascular; (Q_Spleen - L_Spleen) * (AB42_SpleenVascular/V_SpleenVascular)
+AB42_PancreasVascular -> AB42_LiverVascular; (Q_Pancreas - L_Pancreas) * (AB42_PancreasVascular/V_PancreasVascular)
+AB42_LiverVascular -> AB42_Plasma; ((Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI)) * (AB42_LiverVascular/V_LiverVascular)
+AB42_LymphNode -> AB42_Plasma; L_LN * (AB42_LymphNode/V_LymphNode)
+AB42_Plasma -> AB42_LungVascular; (Q_Lung + L_Lung) * (AB42_Plasma/V_Plasma)
+AB42_LungVascular -> AB42_BrainVascular; Q_Brain * (AB42_LungVascular/V_LungVascular)
+AB42_BrainVascular -> AB42_Plasma; (Q_Brain - L_Brain) * (AB42_BrainVascular/V_BrainVascular)
+AB42_BrainISF -> AB42_LymphNode; (1 - RC_BrainISF_Lymph) * Q_BrainISF * (AB42_BrainISF/V_BrainISF)
+AB42_SAS -> AB42_LymphNode; (1 - RC_SAS_Lymph) * Q_CSF * (AB42_SAS/V_SAS)
+AB42_BrainVascular -> AB42_BrainISF; (1-RC_BBB) * Q_BrainISF * (AB42_BrainVascular/V_BrainVascular)
+AB42_BrainVascular -> AB42_BBB; (1-RC_BBB) * Q_BrainISF * (AB42_BrainVascular/V_BrainVascular)
+AB42_BrainVascular -> AB42_BCSFB; (1-RC_BBB) * Q_BrainISF * (AB42_BrainVascular/V_BrainVascular)
+AB42_BrainVascular -> AB42_LV; (1-RC_BCSFB) * f_LV * Q_CSF * (AB42_BrainVascular/V_BrainVascular)
+AB42_BrainVascular -> AB42_TFV; (1-RC_BCSFB) * (1 - f_LV) * Q_CSF * (AB42_BrainVascular/V_BrainVascular)
+AB42_BrainISF -> AB42_LV; f_LV * Q_glymph * (AB42_BrainISF/V_BrainISF)
+AB42_BrainISF -> AB42_TFV; (1 - f_LV) * Q_glymph * (AB42_BrainISF/V_BrainISF)
+AB42_SAS -> AB42_BrainISF; Q_glymph * (AB42_SAS/V_SAS)
+AB42_LV -> AB42_TFV; f_LV * (Q_CSF + Q_glymph) * (AB42_LV/V_LV)
+AB42_TFV -> AB42_CM; (Q_CSF + Q_glymph) * (AB42_TFV/V_TFV)
+AB42_CM -> AB42_SAS; (Q_CSF + Q_glymph) * (AB42_CM/V_CM)
+APP_BrainISF -> C99_BrainISF; k_C99 * (APP_BrainISF/V_BrainISF) * V_BrainISF
+-> APP_BrainISF; k_APP * V_BrainISF
+C99_BrainISF -> AB42_BrainISF; k_Ab42 * (C99_BrainISF/V_BrainISF) * V_BrainISF
+AB42_BrainISF ->; IDE_conc * (AB42_BrainISF/V_BrainISF) * V_BrainISF
+AB42_BrainISF -> AB42_Oligomer_BrainISF; k_oligo1_AB42 * ((AB42_BrainISF/V_BrainISF)/V_BrainISF)**n_oligo1_AB42
+AB42_Oligomer_BrainISF -> AB42_BrainISF; k_d_Oligomer_AB42 * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF

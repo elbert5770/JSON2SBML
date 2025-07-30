@@ -15,6 +15,7 @@ CLup_Skin
 CLup_Spleen
 CLup_Thymus
 FR
+IDE_conc
 Kdeg
 Koff_FcRn
 Kon_FcRn
@@ -139,3 +140,9 @@ V_ThymusInterstitial
 V_ThymusVascular
 f_BBB
 f_LV
+k_APP
+k_Ab42
+k_C99
+k_d_Oligomer_AB42
+k_oligo1_AB42
+n_oligo1_AB42

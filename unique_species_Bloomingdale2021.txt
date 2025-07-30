@@ -3,6 +3,8 @@ Antibody_BCSFB
 Antibody_BrainISF
 Antibody_BrainVascular
 Antibody_CSF
+Antibody_Lymph
+Antibody_Plasma
 Antibody_TissueEndosomal
 Antibody_TissueInterstitial
 Antibody_TissueVascular
