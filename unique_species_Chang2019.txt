@@ -7,9 +7,8 @@ Antibody_BoneEndosomal
 Antibody_BoneInterstitial
 Antibody_BoneVascular
 Antibody_BrainISF
-Antibody_BrainInterstitial
 Antibody_BrainVascular
-Antibody_CSF
+Antibody_CM
 Antibody_HeartEndosomal
 Antibody_HeartInterstitial
 Antibody_HeartVascular
@@ -19,6 +18,7 @@ Antibody_KidneyVascular
 Antibody_LIEndosomal
 Antibody_LIInterstitial
 Antibody_LIVascular
+Antibody_LV
 Antibody_LiverEndosomal
 Antibody_LiverInterstitial
 Antibody_LiverVascular
@@ -36,6 +36,7 @@ Antibody_PancreasEndosomal
 Antibody_PancreasInterstitial
 Antibody_PancreasVascular
 Antibody_Plasma
+Antibody_SAS
 Antibody_SIEndosomal
 Antibody_SIInterstitial
 Antibody_SIVascular
@@ -45,6 +46,7 @@ Antibody_SkinVascular
 Antibody_SpleenEndosomal
 Antibody_SpleenInterstitial
 Antibody_SpleenVascular
+Antibody_TFV
 Antibody_ThymusEndosomal
 Antibody_ThymusInterstitial
 Antibody_ThymusVascular
