@@ -9,6 +9,8 @@ AB42_BoneVascular
 AB42_BrainISF
 AB42_BrainVascular
 AB42_CM
+AB42_FibrilMass_BrainISF
+AB42_FibrilNumber_BrainISF
 AB42_HeartEndosomal
 AB42_HeartInterstitial
 AB42_HeartVascular

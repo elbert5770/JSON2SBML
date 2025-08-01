@@ -371,11 +371,20 @@ def build_reactions():
             all_reactions.append(Reaction_dict)
 
             counter += 1
-            Reaction_name = f"AB42 Oligomerization"
+            Reaction_name = f"AB42 Primary Oligomerization"
             Reactants = f"[{Species}_{Comp}]"
             Products = f"[{Species}_Oligomer_{Comp}]"
             Rate_type = "custom"
-            Rate_eqtn_prototype = f"k_oligo1_{Species} * ({Species}_{Comp}/V_{Comp})**n_oligo1_{Species}"
+            Rate_eqtn_prototype = f"k_oligo1_{Species} * ({Species}_{Comp}/V_{Comp})^n_oligo1_{Species} * V_{Comp}"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
+            all_reactions.append(Reaction_dict)
+
+            counter += 1
+            Reaction_name = f"AB42 Secondary Oligomerization"
+            Reactants = f"[{Species}_{Comp},{Species}_FibrilMass_{Comp}]"
+            Products = f"[{Species}_Oligomer_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_oligo2_{Species} * ({Species}_{Comp}/V_{Comp})^n_oligo2_{Species} * {Species}_FibrilMass_{Comp}/V_{Comp} * V_{Comp}"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
             all_reactions.append(Reaction_dict)
 
@@ -388,8 +397,32 @@ def build_reactions():
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
             all_reactions.append(Reaction_dict)
 
+            counter += 1
+            Reaction_name = f"AB42 FibrilNumber formation"
+            Reactants = f"[{Species}_Oligomer_{Comp},{Species}_{Comp}]"
+            Products = f"[{Species}_FibrilNumber_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_c_AB42 * ({Species}_Oligomer_{Comp}/V_{Comp}) * ({Species}_{Comp}/V_{Comp})^n_c_AB42 * V_{Comp}"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
+            all_reactions.append(Reaction_dict)
 
-
+            counter += 1
+            Reaction_name = f"AB42 FibrilMass increase"
+            Reactants = f"[{Species}_{Comp}]"
+            Products = f"[{Species}_FibrilMass_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_plus_{Species} * ({Species}_FibrilNumber_{Comp}/V_{Comp}) * ({Species}_{Comp}/V_{Comp}) * V_{Comp}"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
+            all_reactions.append(Reaction_dict)
+        
+            counter += 1
+            Reaction_name = f"AB42 FibrilMass depolymerization"
+            Reactants = f"[{Species}_FibrilMass_{Comp}]"
+            Products = f"[{Species}_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_off_{Species} * ({Species}_FibrilNumber_{Comp}/V_{Comp}) * V_{Comp}"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
+            all_reactions.append(Reaction_dict)
     
     print(counter)
     return all_reactions

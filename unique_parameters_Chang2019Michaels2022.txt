@@ -1,3 +1,4 @@
+AB42_IDE_Kcat_ISF
 CLup_Adipose
 CLup_BBB
 CLup_BCSFB
@@ -15,6 +16,7 @@ CLup_Skin
 CLup_Spleen
 CLup_Thymus
 FR
+Hi_lo_ratio
 IDE_conc
 Kdeg
 Koff_FcRn
@@ -25,7 +27,6 @@ L_Brain
 L_Heart
 L_Kidney
 L_LI
-L_LN
 L_Liver
 L_Lung
 L_LymphNode
@@ -36,6 +37,10 @@ L_SI
 L_Skin
 L_Spleen
 L_Thymus
+Microglia
+Microglia_EC50_AB42
+Microglia_Vmax_AB42
+Microglia_high_frac
 Q_Adipose
 Q_Bone
 Q_Brain
@@ -143,6 +148,13 @@ f_LV
 k_APP
 k_Ab42
 k_C99
+k_c_AB42
 k_d_Oligomer_AB42
+k_off_AB42
 k_oligo1_AB42
+k_oligo2_AB42
+k_plus_AB42
+n_c_AB42
 n_oligo1_AB42
+n_oligo2_AB42
+v_C99

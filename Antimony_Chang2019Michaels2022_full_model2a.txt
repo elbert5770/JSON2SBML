@@ -51,7 +51,6 @@ compartment ThymusEndosomal = V_ThymusEndosomal
 compartment ThymusInterstitial = V_ThymusInterstitial
 compartment ThymusVascular = V_ThymusVascular
 
-
 substanceOnly species AB42_AdiposeEndosomal in AdiposeEndosomal
 substanceOnly species AB42_AdiposeInterstitial in AdiposeInterstitial
 substanceOnly species AB42_AdiposeVascular in AdiposeVascular
@@ -347,7 +346,7 @@ Antibody_LIVascular -> Antibody_LiverVascular; (Q_LI - L_LI) * (Antibody_LIVascu
 Antibody_SpleenVascular -> Antibody_LiverVascular; (Q_Spleen - L_Spleen) * (Antibody_SpleenVascular/V_SpleenVascular)
 Antibody_PancreasVascular -> Antibody_LiverVascular; (Q_Pancreas - L_Pancreas) * (Antibody_PancreasVascular/V_PancreasVascular)
 Antibody_LiverVascular -> Antibody_Plasma; ((Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI)) * (Antibody_LiverVascular/V_LiverVascular)
-Antibody_LymphNode -> Antibody_Plasma; L_LN * (Antibody_LymphNode/V_LymphNode)
+Antibody_LymphNode -> Antibody_Plasma; L_LymphNode * (Antibody_LymphNode/V_LymphNode)
 Antibody_Plasma -> Antibody_LungVascular; (Q_Lung + L_Lung) * (Antibody_Plasma/V_Plasma)
 Antibody_LungVascular -> Antibody_BrainVascular; Q_Brain * (Antibody_LungVascular/V_LungVascular)
 Antibody_BrainVascular -> Antibody_Plasma; (Q_Brain - L_Brain) * (Antibody_BrainVascular/V_BrainVascular)
@@ -458,7 +457,7 @@ AB42_LIVascular -> AB42_LiverVascular; (Q_LI - L_LI) * (AB42_LIVascular/V_LIVasc
 AB42_SpleenVascular -> AB42_LiverVascular; (Q_Spleen - L_Spleen) * (AB42_SpleenVascular/V_SpleenVascular)
 AB42_PancreasVascular -> AB42_LiverVascular; (Q_Pancreas - L_Pancreas) * (AB42_PancreasVascular/V_PancreasVascular)
 AB42_LiverVascular -> AB42_Plasma; ((Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI)) * (AB42_LiverVascular/V_LiverVascular)
-AB42_LymphNode -> AB42_Plasma; L_LN * (AB42_LymphNode/V_LymphNode)
+AB42_LymphNode -> AB42_Plasma; L_LymphNode * (AB42_LymphNode/V_LymphNode)
 AB42_Plasma -> AB42_LungVascular; (Q_Lung + L_Lung) * (AB42_Plasma/V_Plasma)
 AB42_LungVascular -> AB42_BrainVascular; Q_Brain * (AB42_LungVascular/V_LungVascular)
 AB42_BrainVascular -> AB42_Plasma; (Q_Brain - L_Brain) * (AB42_BrainVascular/V_BrainVascular)
@@ -486,6 +485,7 @@ AB42_Oligomer_BrainISF -> AB42_BrainISF; k_d_Oligomer_AB42 * (AB42_Oligomer_Brai
 AB42_Oligomer_BrainISF + n_c_AB42 AB42_BrainISF -> AB42_FibrilNumber_BrainISF; k_c_AB42 * AB42_Oligomer_BrainISF/V_BrainISF * (AB42_BrainISF/V_BrainISF)^n_c_AB42 * V_BrainISF
 AB42_BrainISF -> AB42_FibrilMass_BrainISF; k_plus_AB42 * (AB42_FibrilNumber_BrainISF/V_BrainISF) * AB42_BrainISF/V_BrainISF * V_BrainISF
 AB42_FibrilMass_BrainISF -> AB42_BrainISF; k_off_AB42 * (AB42_FibrilNumber_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilMass_BrainISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
 
 
 FcRn = 49820
@@ -508,7 +508,8 @@ CLup_Skin = CLup*V_SkinEndosomal
 CLup_Spleen = CLup*V_SpleenEndosomal
 CLup_Thymus = CLup*V_ThymusEndosomal
 FR = 0.715
-IDE_conc = 200
+Hi_lo_ratio = 10.0
+IDE_conc = 230
 Kdeg = 26.6
 Koff_FcRn = 23.9
 Kon_FcRn = 5.59e8
@@ -518,10 +519,9 @@ L_Brain = 0.0315
 L_Heart = 0.015504
 L_Kidney = 0.072804
 L_LI = 0.025734
-L_LN = L_Adipose + L_Bone + L_Brain + L_Heart + L_Kidney + L_LI + L_Liver + L_Lung + L_Muscle + L_Other + L_Pancreas + L_SI + L_Skin + L_Spleen + L_Thymus
 L_Liver = 0.02642
 L_Lung = Q_sum/(1/0.002-1)
-L_LymphNode = 0.702285
+L_LymphNode = L_Adipose + L_Bone + L_Brain + L_Heart + L_Kidney + L_LI + L_Liver + L_Lung + L_Muscle + L_Other + L_Pancreas + L_SI + L_Skin + L_Spleen + L_Thymus
 L_Muscle = 0.066938
 L_Other = 0.011042
 L_Pancreas = 0.006112
@@ -529,6 +529,10 @@ L_SI = 0.024736
 L_Skin = 0.023252
 L_Spleen = 0.012686
 L_Thymus = 0.000706
+Microglia = 1
+Microglia_EC50_AB42 = 120
+Microglia_Vmax_AB42 = 0.04
+Microglia_high_frac = 0
 Q_Adipose = 11.233
 Q_Bone = 2.591
 Q_Brain = 21.4533
@@ -655,4 +659,4 @@ v_C99 = 0.333
 
 Antibody_IV_Dose = 50000; Antibody_IV_Dose has nanomole
 
-E1: at (time >= 700000): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+#E1: at (time >= 700000): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose

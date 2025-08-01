@@ -137,7 +137,7 @@
 {'Reaction_name': 'Flow between Digestive system and Liver', 'Reactants': '[Antibody_SpleenVascular]', 'Products': '[Antibody_LiverVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_Spleen - L_Spleen)'}
 {'Reaction_name': 'Flow between Digestive system and Liver', 'Reactants': '[Antibody_PancreasVascular]', 'Products': '[Antibody_LiverVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_Pancreas - L_Pancreas)'}
 {'Reaction_name': 'Flow between Liver and plasma', 'Reactants': '[Antibody_LiverVascular]', 'Products': '[Antibody_Plasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '((Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI))'}
-{'Reaction_name': 'Flow between LymphNode and plasma', 'Reactants': '[Antibody_LymphNode]', 'Products': '[Antibody_Plasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'L_LN'}
+{'Reaction_name': 'Flow between LymphNode and plasma', 'Reactants': '[Antibody_LymphNode]', 'Products': '[Antibody_Plasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'L_LymphNode'}
 {'Reaction_name': 'Flow between LymphNode and plasma', 'Reactants': '[Antibody_Plasma]', 'Products': '[Antibody_LungVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_Lung + L_Lung)'}
 {'Reaction_name': 'Flow between lung and Brain', 'Reactants': '[Antibody_LungVascular]', 'Products': '[Antibody_BrainVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Q_Brain'}
 {'Reaction_name': 'Flow between Brain and plasma', 'Reactants': '[Antibody_BrainVascular]', 'Products': '[Antibody_Plasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_Brain - L_Brain)'}
@@ -246,7 +246,7 @@
 {'Reaction_name': 'Flow between Digestive system and Liver', 'Reactants': '[AB42_SpleenVascular]', 'Products': '[AB42_LiverVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_Spleen - L_Spleen)'}
 {'Reaction_name': 'Flow between Digestive system and Liver', 'Reactants': '[AB42_PancreasVascular]', 'Products': '[AB42_LiverVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_Pancreas - L_Pancreas)'}
 {'Reaction_name': 'Flow between Liver and plasma', 'Reactants': '[AB42_LiverVascular]', 'Products': '[AB42_Plasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '((Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI))'}
-{'Reaction_name': 'Flow between LymphNode and plasma', 'Reactants': '[AB42_LymphNode]', 'Products': '[AB42_Plasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'L_LN'}
+{'Reaction_name': 'Flow between LymphNode and plasma', 'Reactants': '[AB42_LymphNode]', 'Products': '[AB42_Plasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'L_LymphNode'}
 {'Reaction_name': 'Flow between LymphNode and plasma', 'Reactants': '[AB42_Plasma]', 'Products': '[AB42_LungVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_Lung + L_Lung)'}
 {'Reaction_name': 'Flow between lung and Brain', 'Reactants': '[AB42_LungVascular]', 'Products': '[AB42_BrainVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Q_Brain'}
 {'Reaction_name': 'Flow between Brain and plasma', 'Reactants': '[AB42_BrainVascular]', 'Products': '[AB42_Plasma]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_Brain - L_Brain)'}
@@ -264,8 +264,15 @@
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_TFV]', 'Products': '[AB42_CM]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Q_glymph)'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_CM]', 'Products': '[AB42_SAS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Q_glymph)'}
 {'Reaction_name': 'AB42 Synthesis', 'Reactants': '[APP_BrainISF]', 'Products': '[C99_BrainISF]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k_C99'}
+{'Reaction_name': 'AB42 Synthesis', 'Reactants': '[C99_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'v_C99'}
 {'Reaction_name': 'APP Synthesis', 'Reactants': '[0]', 'Products': '[APP_BrainISF]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k_APP'}
 {'Reaction_name': 'AB42 Synthesis', 'Reactants': '[C99_BrainISF]', 'Products': '[AB42_BrainISF]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k_Ab42'}
-{'Reaction_name': 'AB42 Degradation', 'Reactants': '[AB42_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'IDE_conc'}
-{'Reaction_name': 'AB42 Oligomerization', 'Reactants': '[AB42_BrainISF]', 'Products': '[AB42_Oligomer_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_oligo1_AB42 * (AB42_BrainISF/V_BrainISF)**n_oligo1_AB42'}
+{'Reaction_name': 'AB42 Degradation', 'Reactants': '[AB42_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'AB42_IDE_Kcat_ISF'}
+{'Reaction_name': 'AB42 Oligomer Degradation', 'Reactants': '[AB42_Oligomer_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'IDE_conc'}
+{'Reaction_name': 'AB42 Primary Oligomerization', 'Reactants': '[n_oligo1_AB42 AB42_BrainISF]', 'Products': '[AB42_Oligomer_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_oligo1_AB42 * (AB42_BrainISF)^n_oligo1_AB42 * V_BrainISF'}
+{'Reaction_name': 'AB42 Secondary Oligomerization', 'Reactants': '[n_oligo2_AB42 AB42_BrainISF,AB42_FibrilMass_BrainISF]', 'Products': '[AB42_Oligomer_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_oligo2_AB42 * (AB42_BrainISF)^n_oligo2_AB42 * AB42_FibrilMass_BrainISF * V_BrainISF'}
 {'Reaction_name': 'AB42 De-Oligomerization', 'Reactants': '[AB42_Oligomer_BrainISF]', 'Products': '[AB42_BrainISF]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k_d_Oligomer_AB42'}
+{'Reaction_name': 'AB42 FibrilNumber formation', 'Reactants': '[AB42_Oligomer_BrainISF,n_c_AB42 AB42_BrainISF]', 'Products': '[AB42_FibrilNumber_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_c_AB42 * (AB42_Oligomer_BrainISF) * (AB42_BrainISF)^n_c_AB42 * V_BrainISF'}
+{'Reaction_name': 'AB42 FibrilMass increase', 'Reactants': '[AB42_BrainISF]', 'Products': '[AB42_FibrilMass_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_plus_AB42 * (AB42_FibrilNumber_BrainISF) * (AB42_BrainISF) * V_BrainISF'}
+{'Reaction_name': 'AB42 FibrilMass depolymerization', 'Reactants': '[AB42_FibrilMass_BrainISF]', 'Products': '[AB42_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_off_AB42 * (AB42_FibrilNumber_BrainISF) * V_BrainISF'}
+{'Reaction_name': 'Microglia Degradation Plaque', 'Reactants': '[AB42_FibrilMass_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF))'}

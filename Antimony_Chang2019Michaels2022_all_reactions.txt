@@ -62,6 +62,8 @@ substanceOnly species AB42_BoneVascular in BoneVascular
 substanceOnly species AB42_BrainISF in BrainISF
 substanceOnly species AB42_BrainVascular in BrainVascular
 substanceOnly species AB42_CM in CM
+substanceOnly species AB42_FibrilMass_BrainISF in BrainISF
+substanceOnly species AB42_FibrilNumber_BrainISF in BrainISF
 substanceOnly species AB42_HeartEndosomal in HeartEndosomal
 substanceOnly species AB42_HeartInterstitial in HeartInterstitial
 substanceOnly species AB42_HeartVascular in HeartVascular
@@ -344,7 +346,7 @@ Antibody_LIVascular -> Antibody_LiverVascular; (Q_LI - L_LI) * (Antibody_LIVascu
 Antibody_SpleenVascular -> Antibody_LiverVascular; (Q_Spleen - L_Spleen) * (Antibody_SpleenVascular/V_SpleenVascular)
 Antibody_PancreasVascular -> Antibody_LiverVascular; (Q_Pancreas - L_Pancreas) * (Antibody_PancreasVascular/V_PancreasVascular)
 Antibody_LiverVascular -> Antibody_Plasma; ((Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI)) * (Antibody_LiverVascular/V_LiverVascular)
-Antibody_LymphNode -> Antibody_Plasma; L_LN * (Antibody_LymphNode/V_LymphNode)
+Antibody_LymphNode -> Antibody_Plasma; L_LymphNode * (Antibody_LymphNode/V_LymphNode)
 Antibody_Plasma -> Antibody_LungVascular; (Q_Lung + L_Lung) * (Antibody_Plasma/V_Plasma)
 Antibody_LungVascular -> Antibody_BrainVascular; Q_Brain * (Antibody_LungVascular/V_LungVascular)
 Antibody_BrainVascular -> Antibody_Plasma; (Q_Brain - L_Brain) * (Antibody_BrainVascular/V_BrainVascular)
@@ -455,7 +457,7 @@ AB42_LIVascular -> AB42_LiverVascular; (Q_LI - L_LI) * (AB42_LIVascular/V_LIVasc
 AB42_SpleenVascular -> AB42_LiverVascular; (Q_Spleen - L_Spleen) * (AB42_SpleenVascular/V_SpleenVascular)
 AB42_PancreasVascular -> AB42_LiverVascular; (Q_Pancreas - L_Pancreas) * (AB42_PancreasVascular/V_PancreasVascular)
 AB42_LiverVascular -> AB42_Plasma; ((Q_Liver - L_Liver) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI)) * (AB42_LiverVascular/V_LiverVascular)
-AB42_LymphNode -> AB42_Plasma; L_LN * (AB42_LymphNode/V_LymphNode)
+AB42_LymphNode -> AB42_Plasma; L_LymphNode * (AB42_LymphNode/V_LymphNode)
 AB42_Plasma -> AB42_LungVascular; (Q_Lung + L_Lung) * (AB42_Plasma/V_Plasma)
 AB42_LungVascular -> AB42_BrainVascular; Q_Brain * (AB42_LungVascular/V_LungVascular)
 AB42_BrainVascular -> AB42_Plasma; (Q_Brain - L_Brain) * (AB42_BrainVascular/V_BrainVascular)
@@ -473,8 +475,15 @@ AB42_LV -> AB42_TFV; f_LV * (Q_CSF + Q_glymph) * (AB42_LV/V_LV)
 AB42_TFV -> AB42_CM; (Q_CSF + Q_glymph) * (AB42_TFV/V_TFV)
 AB42_CM -> AB42_SAS; (Q_CSF + Q_glymph) * (AB42_CM/V_CM)
 APP_BrainISF -> C99_BrainISF; k_C99 * (APP_BrainISF/V_BrainISF) * V_BrainISF
+C99_BrainISF ->; v_C99 * (C99_BrainISF/V_BrainISF) * V_BrainISF
 -> APP_BrainISF; k_APP * V_BrainISF
 C99_BrainISF -> AB42_BrainISF; k_Ab42 * (C99_BrainISF/V_BrainISF) * V_BrainISF
-AB42_BrainISF ->; IDE_conc * (AB42_BrainISF/V_BrainISF) * V_BrainISF
-AB42_BrainISF -> AB42_Oligomer_BrainISF; k_oligo1_AB42 * ((AB42_BrainISF/V_BrainISF)/V_BrainISF)**n_oligo1_AB42
+AB42_BrainISF ->; AB42_IDE_Kcat_ISF * (AB42_BrainISF/V_BrainISF) * V_BrainISF
+AB42_Oligomer_BrainISF ->; IDE_conc * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF
+n_oligo1_AB42 AB42_BrainISF -> AB42_Oligomer_BrainISF; k_oligo1_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo1_AB42 * V_BrainISF
+n_oligo2_AB42 AB42_BrainISF + AB42_FibrilMass_BrainISF -> AB42_Oligomer_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42 * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF -> AB42_BrainISF; k_d_Oligomer_AB42 * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF
+AB42_Oligomer_BrainISF + n_c_AB42 AB42_BrainISF -> AB42_FibrilNumber_BrainISF; k_c_AB42 * ((AB42_Oligomer_BrainISF/V_BrainISF)) * ((AB42_BrainISF/V_BrainISF))^n_c_AB42 * V_BrainISF
+AB42_BrainISF -> AB42_FibrilMass_BrainISF; k_plus_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * ((AB42_BrainISF/V_BrainISF)) * V_BrainISF
+AB42_FibrilMass_BrainISF -> AB42_BrainISF; k_off_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * V_BrainISF
+AB42_FibrilMass_BrainISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
