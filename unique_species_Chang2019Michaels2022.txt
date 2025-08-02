@@ -38,6 +38,8 @@ AB42_OtherVascular
 AB42_PancreasEndosomal
 AB42_PancreasInterstitial
 AB42_PancreasVascular
+AB42_PlaqueMass_BrainISF
+AB42_PlaqueNumber_BrainISF
 AB42_Plasma
 AB42_SAS
 AB42_SIEndosomal

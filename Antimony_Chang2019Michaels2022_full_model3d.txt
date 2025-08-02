@@ -490,10 +490,10 @@ AB42_BrainISF -> AB42_FibrilMass_BrainISF; k_plus_AB42 * ((AB42_FibrilNumber_Bra
 AB42_FibrilMass_BrainISF -> AB42_BrainISF; k_off_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * V_BrainISF
 AB42_FibrilMass_BrainISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
 AB42_FibrilNumber_BrainISF ->; Microglia/Fibril_degree_polymerization*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque*(AB42_FibrilMass_BrainISF/V_BrainISF)*(Fibril_degree_polymerization/(Fibril_degree_polymerization+Plaque_EC50))
-AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque/Fibril_degree_polymerization*(AB42_FibrilMass_BrainISF/V_BrainISF)*(Fibril_degree_polymerization/(Fibril_degree_polymerization+Plaque_EC50))
-AB42_PlaqueMass_BrainISF ->; Microglia*(Hi_lo_ratio*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_PlaqueNumber_BrainISF ->; Microglia/Plaque_degree_polymerization*(Hi_lo_ratio*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_PlaqueMass_BrainISF/V_BrainISF)) ) * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque * (Fibril_degree_polymerization/(Fibril_degree_polymerization+Plaque_EC50)) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque/Fibril_degree_polymerization * (Fibril_degree_polymerization/(Fibril_degree_polymerization+Plaque_EC50)) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
+AB42_PlaqueMass_BrainISF ->; Microglia*Hi_lo_ratio*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
+AB42_PlaqueNumber_BrainISF ->; Microglia/Plaque_degree_polymerization*Hi_lo_ratio*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_PlaqueMass_BrainISF/V_BrainISF)) * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
 
 Fibril_degree_polymerization :=  piecewise(AB42_FibrilMass_BrainISF/AB42_FibrilNumber_BrainISF,time > 1000,1)
 Plaque_degree_polymerization :=  piecewise(AB42_PlaqueMass_BrainISF/AB42_PlaqueNumber_BrainISF,time > 1000,1)
@@ -507,7 +507,7 @@ Plaque_degree_polymerization :=  piecewise(AB42_PlaqueMass_BrainISF/AB42_PlaqueN
     k_exp_decline_IDE_42 = 1.15e-6
     var AB42_IDE_Kcat_ISF = 3.5
 
-k_plaque = 1e-5
+k_plaque = 1e-5/V_BrainISF
 Plaque_EC50 = 50000
 SmaxUp = 100;
 EC50_Up = 1;
@@ -687,7 +687,7 @@ k_oligo1_AB42 = 9.564024872160149e-7
 k_oligo2_AB42 = 3.993704406499264e-5
 k_plus_AB42 = 3.0
 n_c_AB42 = 3.0
-n_oligo1_AB42 = 12
+n_oligo1_AB42 =  12
 n_oligo2_AB42 = 0.9
 v_C99 = 0.333
 

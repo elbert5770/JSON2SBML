@@ -483,14 +483,221 @@ C99_BrainISF -> AB42_BrainISF; k_Ab42 * (C99_BrainISF/V_BrainISF) * V_BrainISF
 AB42_BrainISF ->; AB42_IDE_Kcat_ISF * (AB42_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF ->; IDE_conc * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF
 n_oligo1_AB42 AB42_BrainISF -> AB42_Oligomer_BrainISF; k_oligo1_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo1_AB42 * V_BrainISF
-n_oligo2_AB42 AB42_BrainISF + AB42_FibrilMass_BrainISF -> AB42_Oligomer_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42 * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
+0.9 AB42_BrainISF + AB42_FibrilMass_BrainISF -> AB42_Oligomer_BrainISF + AB42_FibrilMass_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42 * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
+0.9 AB42_BrainISF + AB42_PlaqueMass_BrainISF -> AB42_Oligomer_BrainISF + AB42_PlaqueMass_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42 * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF -> AB42_BrainISF; k_d_Oligomer_AB42 * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF + n_c_AB42 AB42_BrainISF -> AB42_FibrilNumber_BrainISF; k_c_AB42 * ((AB42_Oligomer_BrainISF/V_BrainISF)) * ((AB42_BrainISF/V_BrainISF))^n_c_AB42 * V_BrainISF
 AB42_BrainISF -> AB42_FibrilMass_BrainISF; k_plus_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * ((AB42_BrainISF/V_BrainISF)) * V_BrainISF
 AB42_FibrilMass_BrainISF -> AB42_BrainISF; k_off_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * V_BrainISF
 AB42_FibrilMass_BrainISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
 AB42_FibrilNumber_BrainISF ->; Microglia/Fibril_degree_polymerization*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_PlaqueMass_BrainISF ->; Microglia*Hi_lo_ratio*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_PlaqueMass_BrainISF/V_BrainISF)) * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_PlaqueNumber_BrainISF ->; Microglia/Plaque_degree_polymerization*Hi_lo_ratio*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_PlaqueMass_BrainISF/V_BrainISF)) * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque * (Fibril_degree_polymerization/(Fibril_degree_polymerization+Plaque_EC50)) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque/Fibril_degree_polymerization * (Fibril_degree_polymerization/(Fibril_degree_polymerization+Plaque_EC50)) * (AB42_FibrilMass_BrainISF/V_BrainISF)  * V_BrainISF
+AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque2 * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * Fibril_degree_polymerization * V_BrainISF
+#AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * V_BrainISF
+2 AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque1 *  (AB42_FibrilNumber_BrainISF/V_BrainISF)^2 * Fibril_degree_polymerization * V_BrainISF
+2 AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque1 * (AB42_FibrilNumber_BrainISF/V_BrainISF)^2 * V_BrainISF
+AB42_PlaqueMass_BrainISF ->; Microglia * Hi_lo_ratio * Microglia_Vmax_AB42 * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
+AB42_PlaqueNumber_BrainISF ->; Microglia * Hi_lo_ratio * Microglia_Vmax_AB42 * (AB42_PlaqueNumber_BrainISF/V_BrainISF)  * V_BrainISF
+
+Fibril_degree_polymerization :=  piecewise(AB42_FibrilMass_BrainISF/AB42_FibrilNumber_BrainISF,time > 1000,1)
+Plaque_degree_polymerization :=  piecewise(AB42_PlaqueMass_BrainISF/AB42_PlaqueNumber_BrainISF,time > 1000,1)
+// Rate Rules:
+ # Microglia_high_frac' = (1 + SmaxUp*Anti_ABeta_ISF_sum/(EC50_Up + Anti_ABeta_ISF_sum))*gamma_fr*Microglia_high_frac*(Microglia_Hi_fract_max - Microglia_high_frac)/(Microglia_Hi_fract_max - Microglia_Hi_fract_base) - gamma_fr*Microglia_high_frac;
+  #Microglia' = ((1 + SmaxPro*Anti_ABeta_ISF_sum/(EC50_pro + Anti_ABeta_ISF_sum))*gamma_MG*Microglia_cells_max/(Microglia_cells_max - Microglia_baseline))*Microglia*(Microglia_cells_max - Microglia)/Microglia_cells_max - gamma_MG*Microglia;
+    #AB40_IDE_Kcat_ISF' = -k_exp_decline_IDE_40*AB40_IDE_Kcat_ISF
+    #AB40_IDE_Kcat_ISF := 26.0 - 1.5E-5*time
+    AB42_IDE_Kcat_ISF' = -k_exp_decline_IDE_42*AB42_IDE_Kcat_ISF
+    #AB42_IDE_Kcat_ISF := 0.53 - 3E-7*time
+    k_exp_decline_IDE_42 = 1.4e-6
+    var AB42_IDE_Kcat_ISF = 3.5
+
+Microglia_Plaque_EC50_AB42 = 1.0
+k_plaque1 = 1e-5
+k_plaque2 = 1e-5*10000
+Plaque_EC50 = 50000
+SmaxUp = 100;
+EC50_Up = 1;
+gamma_fr = 0.0416667;
+Microglia_Hi_fract_max = 1; Microglia_Hi_fract_max has dimensionless;
+Microglia_Hi_fract_base = 0;  Microglia_Hi_fract_base has dimensionless;
+SmaxPro = 100;  SmaxPro has dimensionless;
+EC50_pro = 1;  EC50_pro has nanomole_per_litre;
+gamma_MG = 0.002851928;  gamma_MG has per_hour;
+Microglia_cells_max = 4;  Microglia_cells_max has dimensionless;
+Microglia_baseline = 1;  Microglia_baseline has dimensionless;
+#var Anti_ABeta_ISF_sum
+var Fibril_degree_polymerization
+var Plaque_degree_polymerization
+FcRn = 49820
+CLup = 0.55
+CLup_Brain = 0.03
+CLup_Adipose = CLup*V_AdiposeEndosomal
+CLup_BBB = CLup_Brain*V_BBB
+CLup_BCSFB = CLup_Brain*V_BCSFB
+CLup_Bone = CLup*V_BoneEndosomal
+CLup_Heart = CLup*V_HeartEndosomal
+CLup_Kidney = CLup*V_KidneyEndosomal
+CLup_LI = CLup*V_LIEndosomal
+CLup_Liver = CLup*V_LiverEndosomal
+CLup_Lung = CLup*V_LungEndosomal
+CLup_Muscle = CLup*V_MuscleEndosomal
+CLup_Other = CLup*V_OtherEndosomal
+CLup_Pancreas = CLup*V_PancreasEndosomal
+CLup_SI = CLup*V_SIEndosomal
+CLup_Skin = CLup*V_SkinEndosomal
+CLup_Spleen = CLup*V_SpleenEndosomal
+CLup_Thymus = CLup*V_ThymusEndosomal
+FR = 0.715
+Hi_lo_ratio = 0.03*0.125
+IDE_conc = 0
+Kdeg = 26.6
+Koff_FcRn = 23.9
+Kon_FcRn = 5.59e8
+L_Adipose = 0.022466
+L_Bone = 0.005182
+L_Brain = 0.0315
+L_Heart = 0.015504
+L_Kidney = 0.072804
+L_LI = 0.025734
+L_Liver = 0.02642
+L_Lung = Q_sum/(1/0.002-1)
+L_LymphNode = L_Adipose + L_Bone + L_Brain + L_Heart + L_Kidney + L_LI + L_Liver + L_Lung + L_Muscle + L_Other + L_Pancreas + L_SI + L_Skin + L_Spleen + L_Thymus
+L_Muscle = 0.066938
+L_Other = 0.011042
+L_Pancreas = 0.006112
+L_SI = 0.024736
+L_Skin = 0.023252
+L_Spleen = 0.012686
+L_Thymus = 0.000706
+Microglia = 1
+Microglia_EC50_AB42 = 12
+Microglia_Vmax_AB42 = 0.01
+Microglia_high_frac = 0
+Q_Adipose = 11.233
+Q_Bone = 2.591
+Q_Brain = 21.4533
+Q_BrainISF = 0.0105
+Q_CSF = 0.023
+Q_Heart = 7.752
+Q_Kidney = 36.402
+Q_LI = 12.867
+Q_Liver = 13.21
+Q_sum = Q_Adipose + Q_Bone + Q_Brain + Q_Heart + Q_Kidney + Q_LI + Q_Liver + Q_Muscle + Q_Other + Q_Pancreas + Q_SI + Q_Skin + Q_Spleen + Q_Thymus
+Q_Lung = Q_sum + L_Lung
+Q_Muscle = 33.469
+Q_Other = 5.521
+Q_Pancreas = 3.056
+Q_SI = 12.368
+Q_Skin = 11.626
+Q_Spleen = 6.343
+Q_Thymus = 0.353
+Q_glymph = Q_BrainISF
+RChigh = 0.95
+RCmedium = 0.9
+RClow = 0.85
+RClymph = 0.2
+RC_Adipose_Lymph = RClymph
+RC_Adipose_Vascular = RChigh
+RC_BBB = 1
+RC_BCSFB = 0.9974
+RC_Bone_Lymph  = RClymph
+RC_Bone_Vascular= RClow
+RC_BrainISF_Lymph = RClymph
+RC_Heart_Lymph = RClymph
+RC_Heart_Vascular= RChigh
+RC_Kidney_Lymph = RClymph
+RC_Kidney_Vascular= RCmedium
+RC_LI_Lymph = RClymph
+RC_LI_Vascular = RChigh
+RC_Liver_Lymph = RClymph
+RC_Liver_Vascular = RClow
+RC_Lung_Lymph = RClymph
+RC_Lung_Vascular = RChigh
+RC_Muscle_Lymph = RClymph
+RC_Muscle_Vascular = RChigh
+RC_Other_Lymph = RClymph
+RC_Other_Vascular = RClow
+RC_Pancreas_Lymph = RClymph
+RC_Pancreas_Vascular = RCmedium
+RC_SAS_Lymph = RClymph
+RC_SI_Lymph = RClymph
+RC_SI_Vascular = RCmedium
+RC_Skin_Lymph = RClymph
+RC_Skin_Vascular = RChigh
+RC_Spleen_Lymph = RClymph
+RC_Spleen_Vascular = RClow
+RC_Thymus_Lymph = RClymph
+RC_Thymus_Vascular = RCmedium
+V_AdiposeEndosomal = 0.0673
+V_AdiposeInterstitial = 2.289
+V_AdiposeVascular = 0.148
+V_BrainEndosomal = 0.00725
+V_BBB = V_BrainEndosomal*f_BBB
+V_BCSFB = V_BrainEndosomal*(1 - f_BBB)
+V_BoneEndosomal = 0.0508
+V_BoneInterstitial = 1.891
+V_BoneVascular = 0.224
+V_BrainISF = 0.05
+V_BrainVascular = 0.0319
+V_CM = 0.0075
+V_HeartEndosomal = 0.00171
+V_HeartInterstitial = 0.0488
+V_HeartVascular = 0.0131
+V_KidneyEndosomal = 0.00166
+V_KidneyInterstitial = 0.0498
+V_KidneyVascular = 0.0182
+V_LIEndosomal = 0.00274
+V_LIInterstitial = 0.0953
+V_LIVascular = 0.00874
+V_LV = 0.0225
+V_LiverEndosomal = 0.0107
+V_LiverInterstitial = 0.429
+V_LiverVascular = 0.183
+V_LungEndosomal = 0.00500
+V_LungInterstitial = 0.3
+V_LungVascular = 0.055
+V_LymphNode = 0.274
+V_MuscleEndosomal = 0.150
+V_MuscleInterstitial = 3.910
+V_MuscleVascular = 0.662
+V_OtherEndosomal = 0.0243
+V_OtherInterstitial = 0.831
+V_OtherVascular = 0.204
+V_PancreasEndosomal = 0.000518
+V_PancreasInterstitial = 0.018
+V_PancreasVascular = 0.00570
+V_Plasma = 3.126
+V_SAS = 0.09
+V_SIEndosomal = 0.00193
+V_SIInterstitial = 0.0671
+V_SIVascular = 0.00615
+V_SkinEndosomal = 0.0170
+V_SkinInterstitial = 1.125
+V_SkinVascular = 0.127
+V_SpleenEndosomal = 0.00111
+V_SpleenInterstitial = 0.0443
+V_SpleenVascular = 0.0268
+V_TFV = 0.0225
+V_ThymusEndosomal = 0.0000321
+V_ThymusInterstitial = 0.00109
+V_ThymusVascular = 0.000353
+f_BBB = 0.9090
+f_LV = V_LV/(V_LV + V_TFV)
+k_APP = 2.97
+k_Ab42 = 0.238
+k_C99 = 0.666
+k_c_AB42 = 4e-7*3
+k_d_Oligomer_AB42 = 0.0001
+k_off_AB42 = 0.01/10
+k_oligo1_AB42 = 9.56e-7*10
+k_oligo2_AB42 = 5.5e-5
+k_plus_AB42 = 10.8
+n_c_AB42 = 2.7
+n_oligo1_AB42 =  0.8
+n_oligo2_AB42 = 0.9
+v_C99 = 0.333
+
+Antibody_IV_Dose = 2500; Antibody_IV_Dose has nanomole
+
+E1: at (time >= 70*24*365): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E2: at (time >= 70*24*365+1*24*365): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E3: at (time >= 70*24*365+2*24*365): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
