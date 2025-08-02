@@ -10,7 +10,9 @@ AB42_BrainISF
 AB42_BrainVascular
 AB42_CM
 AB42_FibrilMass_BrainISF
+AB42_FibrilMass__Antibody_BrainISF
 AB42_FibrilNumber_BrainISF
+AB42_FibrilNumber__Antibody_BrainISF
 AB42_HeartEndosomal
 AB42_HeartInterstitial
 AB42_HeartVascular
@@ -32,6 +34,7 @@ AB42_MuscleEndosomal
 AB42_MuscleInterstitial
 AB42_MuscleVascular
 AB42_Oligomer_BrainISF
+AB42_Oligomer__Antibody_BrainISF
 AB42_OtherEndosomal
 AB42_OtherInterstitial
 AB42_OtherVascular
@@ -39,7 +42,9 @@ AB42_PancreasEndosomal
 AB42_PancreasInterstitial
 AB42_PancreasVascular
 AB42_PlaqueMass_BrainISF
+AB42_PlaqueMass__Antibody_BrainISF
 AB42_PlaqueNumber_BrainISF
+AB42_PlaqueNumber__Antibody_BrainISF
 AB42_Plasma
 AB42_SAS
 AB42_SIEndosomal
@@ -55,6 +60,7 @@ AB42_TFV
 AB42_ThymusEndosomal
 AB42_ThymusInterstitial
 AB42_ThymusVascular
+AB42__Antibody_BrainISF
 APP_BrainISF
 Antibody_AdiposeEndosomal
 Antibody_AdiposeInterstitial

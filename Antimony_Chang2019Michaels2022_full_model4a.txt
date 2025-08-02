@@ -63,7 +63,9 @@ substanceOnly species AB42_BrainISF in BrainISF
 substanceOnly species AB42_BrainVascular in BrainVascular
 substanceOnly species AB42_CM in CM
 substanceOnly species AB42_FibrilMass_BrainISF in BrainISF
+substanceOnly species AB42_FibrilMass__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_FibrilNumber_BrainISF in BrainISF
+substanceOnly species AB42_FibrilNumber__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_HeartEndosomal in HeartEndosomal
 substanceOnly species AB42_HeartInterstitial in HeartInterstitial
 substanceOnly species AB42_HeartVascular in HeartVascular
@@ -85,6 +87,7 @@ substanceOnly species AB42_MuscleEndosomal in MuscleEndosomal
 substanceOnly species AB42_MuscleInterstitial in MuscleInterstitial
 substanceOnly species AB42_MuscleVascular in MuscleVascular
 substanceOnly species AB42_Oligomer_BrainISF in BrainISF
+substanceOnly species AB42_Oligomer__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_OtherEndosomal in OtherEndosomal
 substanceOnly species AB42_OtherInterstitial in OtherInterstitial
 substanceOnly species AB42_OtherVascular in OtherVascular
@@ -92,7 +95,9 @@ substanceOnly species AB42_PancreasEndosomal in PancreasEndosomal
 substanceOnly species AB42_PancreasInterstitial in PancreasInterstitial
 substanceOnly species AB42_PancreasVascular in PancreasVascular
 substanceOnly species AB42_PlaqueMass_BrainISF in BrainISF
+substanceOnly species AB42_PlaqueMass__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_PlaqueNumber_BrainISF in BrainISF
+substanceOnly species AB42_PlaqueNumber__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_Plasma in Plasma
 substanceOnly species AB42_SAS in SAS
 substanceOnly species AB42_SIEndosomal in SIEndosomal
@@ -108,6 +113,7 @@ substanceOnly species AB42_TFV in TFV
 substanceOnly species AB42_ThymusEndosomal in ThymusEndosomal
 substanceOnly species AB42_ThymusInterstitial in ThymusInterstitial
 substanceOnly species AB42_ThymusVascular in ThymusVascular
+substanceOnly species AB42__Antibody_BrainISF in BrainISF
 substanceOnly species APP_BrainISF in BrainISF
 substanceOnly species Antibody_AdiposeEndosomal in AdiposeEndosomal
 substanceOnly species Antibody_AdiposeInterstitial in AdiposeInterstitial
@@ -483,31 +489,44 @@ C99_BrainISF -> AB42_BrainISF; k_Ab42 * (C99_BrainISF/V_BrainISF) * V_BrainISF
 AB42_BrainISF ->; AB42_IDE_Kcat_ISF * (AB42_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF ->; IDE_conc * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF
 n_oligo1_AB42 AB42_BrainISF -> AB42_Oligomer_BrainISF; k_oligo1_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo1_AB42 * V_BrainISF
-0.9 AB42_BrainISF + AB42_FibrilMass_BrainISF -> AB42_Oligomer_BrainISF + AB42_FibrilMass_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42 * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
-0.9 AB42_BrainISF + AB42_PlaqueMass_BrainISF -> AB42_Oligomer_BrainISF + AB42_PlaqueMass_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42 * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
+n_oligo2_AB42_FibrilMass AB42_BrainISF + AB42_FibrilMass_BrainISF -> AB42_Oligomer_BrainISF + AB42_FibrilMass_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42_FibrilMass * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
+n_oligo2_AB42_PlaqueMass AB42_BrainISF + AB42_PlaqueMass_BrainISF -> AB42_Oligomer_BrainISF + AB42_PlaqueMass_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42_PlaqueMass * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF -> AB42_BrainISF; k_d_Oligomer_AB42 * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF + n_c_AB42 AB42_BrainISF -> AB42_FibrilNumber_BrainISF; k_c_AB42 * ((AB42_Oligomer_BrainISF/V_BrainISF)) * ((AB42_BrainISF/V_BrainISF))^n_c_AB42 * V_BrainISF
 AB42_BrainISF -> AB42_FibrilMass_BrainISF; k_plus_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * ((AB42_BrainISF/V_BrainISF)) * V_BrainISF
 AB42_FibrilMass_BrainISF -> AB42_BrainISF; k_off_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * V_BrainISF
 AB42_FibrilMass_BrainISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
 AB42_FibrilNumber_BrainISF ->; Microglia/Fibril_degree_polymerization*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque2 * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * Fibril_degree_polymerization * V_BrainISF
-2 AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque1 *  (AB42_FibrilNumber_BrainISF/V_BrainISF)^2 * Fibril_degree_polymerization * V_BrainISF
-2 AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque1 * (AB42_FibrilNumber_BrainISF/V_BrainISF)^2 * V_BrainISF
 AB42_PlaqueMass_BrainISF ->; Microglia * Plaque_fibril_microglia_ratio * Microglia_Vmax_AB42 * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
-AB42_PlaqueNumber_BrainISF ->; Microglia * Plaque_fibril_microglia_ratio * Microglia_Vmax_AB42 * (AB42_PlaqueNumber_BrainISF/V_BrainISF)  * V_BrainISF
+AB42_PlaqueNumber_BrainISF ->; Microglia * Plaque_fibril_microglia_ratio * Microglia_Vmax_AB42 * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque2 * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * Fibril_degree_polymerization * V_BrainISF
+2 AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque1 * (AB42_FibrilNumber_BrainISF/V_BrainISF)^2 * Fibril_degree_polymerization * V_BrainISF
+2 AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque1 * (AB42_FibrilNumber_BrainISF/V_BrainISF)^2 * V_BrainISF
+AB42_BrainISF + Antibody_BrainISF -> AB42__Antibody_BrainISF; k_f_Monomer_Antibody * (AB42_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42__Antibody_BrainISF -> AB42_BrainISF + Antibody_BrainISF; k_r_Monomer_Antibody * (AB42__Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_Oligomer_BrainISF + Antibody_BrainISF -> AB42_Oligomer__Antibody_BrainISF; k_f_Oligomer_Antibody * (AB42_Oligomer_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_Oligomer__Antibody_BrainISF -> AB42_Oligomer_BrainISF + Antibody_BrainISF; k_r_Oligomer_Antibody * (AB42_Oligomer__Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilNumber_BrainISF + Antibody_BrainISF -> AB42_FibrilNumber__Antibody_BrainISF; k_f_Fibril_Antibody * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilNumber__Antibody_BrainISF -> AB42_FibrilNumber_BrainISF + Antibody_BrainISF; k_r_Fibril_Antibody * (AB42_FibrilNumber__Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilMass_BrainISF -> AB42_FibrilMass__Antibody_BrainISF; k_f_Fibril_Antibody * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * Fibril_degree_polymerization * V_BrainISF
+AB42_FibrilMass__Antibody_BrainISF -> AB42_FibrilMass_BrainISF; k_r_Fibril_Antibody * (AB42_FibrilNumber__Antibody_BrainISF/V_BrainISF) * Fibril_degree_polymerization * V_BrainISF
+AB42_PlaqueNumber_BrainISF + Antibody_BrainISF -> AB42_PlaqueNumber__Antibody_BrainISF; k_f_Plaque_Antibody * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_PlaqueNumber__Antibody_BrainISF -> AB42_PlaqueNumber_BrainISF + Antibody_BrainISF; k_r_Plaque_Antibody * (AB42_PlaqueNumber__Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_PlaqueMass_BrainISF -> AB42_PlaqueMass__Antibody_BrainISF; k_f_Plaque_Antibody * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
+AB42_PlaqueMass__Antibody_BrainISF -> AB42_PlaqueMass_BrainISF; k_r_Plaque_Antibody * (AB42_PlaqueNumber__Antibody_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
 
+Anti_ABeta_ISF_sum := AB42_PlaqueNumber__Antibody_BrainISF + AB42__Antibody_BrainISF + AB42_Oligomer__Antibody_BrainISF + AB42_FibrilNumber__Antibody_BrainISF
 Fibril_degree_polymerization :=  piecewise(AB42_FibrilMass_BrainISF/AB42_FibrilNumber_BrainISF,time > 1000,1)
 Plaque_degree_polymerization :=  piecewise(AB42_PlaqueMass_BrainISF/AB42_PlaqueNumber_BrainISF,time > 1000,1)
 // Rate Rules:
- # Microglia_high_frac' = (1 + SmaxUp*Anti_ABeta_ISF_sum/(EC50_Up + Anti_ABeta_ISF_sum))*gamma_fr*Microglia_high_frac*(Microglia_Hi_fract_max - Microglia_high_frac)/(Microglia_Hi_fract_max - Microglia_Hi_fract_base) - gamma_fr*Microglia_high_frac;
-  #Microglia' = ((1 + SmaxPro*Anti_ABeta_ISF_sum/(EC50_pro + Anti_ABeta_ISF_sum))*gamma_MG*Microglia_cells_max/(Microglia_cells_max - Microglia_baseline))*Microglia*(Microglia_cells_max - Microglia)/Microglia_cells_max - gamma_MG*Microglia;
+ Microglia_high_frac' = (1 + SmaxUp*Anti_ABeta_ISF_sum/(EC50_Up + Anti_ABeta_ISF_sum))*gamma_fr*Microglia_high_frac*(Microglia_Hi_fract_max - Microglia_high_frac)/(Microglia_Hi_fract_max - Microglia_Hi_fract_base) - gamma_fr*Microglia_high_frac;
+ Microglia' = ((1 + SmaxPro*Anti_ABeta_ISF_sum/(EC50_pro + Anti_ABeta_ISF_sum))*gamma_MG*Microglia_cells_max/(Microglia_cells_max - Microglia_baseline))*Microglia*(Microglia_cells_max - Microglia)/Microglia_cells_max - gamma_MG*Microglia;
     #AB40_IDE_Kcat_ISF' = -k_exp_decline_IDE_40*AB40_IDE_Kcat_ISF
     #AB40_IDE_Kcat_ISF := 26.0 - 1.5E-5*time
     AB42_IDE_Kcat_ISF' = -k_exp_decline_IDE_42*AB42_IDE_Kcat_ISF
     #AB42_IDE_Kcat_ISF := 0.53 - 3E-7*time
-    k_exp_decline_IDE_42 = 1.4e-6
-    var AB42_IDE_Kcat_ISF = 3.5
+k_exp_decline_IDE_42 = 1.4e-6
+var AB42_IDE_Kcat_ISF = 3.5
 
 Microglia_Plaque_EC50_AB42 = 1.0
 k_plaque1 = 1e-5
@@ -526,6 +545,7 @@ Microglia_baseline = 1;  Microglia_baseline has dimensionless;
 #var Anti_ABeta_ISF_sum
 var Fibril_degree_polymerization
 var Plaque_degree_polymerization
+var Anti_ABeta_ISF_sum
 FcRn = 49820
 CLup = 0.55
 CLup_Brain = 0.03
@@ -694,10 +714,57 @@ k_plus_AB42 = 10.8
 n_c_AB42 = 2.7
 n_oligo1_AB42 =  0.8
 n_oligo2_AB42 = 0.9
+n_oligo2_AB42_FibrilMass = n_oligo2_AB42
+n_oligo2_AB42_PlaqueMass = n_oligo2_AB42
 v_C99 = 0.333
+k_f_Monomer_Antibody = 0.2916
+k_r_Monomer_Antibody = 576
+k_f_Oligomer_Antibody = 1.908
+k_r_Oligomer_Antibody = 1.62
+k_f_Fibril_Antibody = 2.736 
+k_r_Fibril_Antibody = 0.396
+k_f_Plaque_Antibody = 0.54
+k_r_Plaque_Antibody = 0.9
 
-Antibody_IV_Dose = 2500; Antibody_IV_Dose has nanomole
+Antibody_IV_Dose = 5208.333333; Antibody_IV_Dose has nanomole
 
-E1: at (time >= 70*24*365): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
-E2: at (time >= 70*24*365+1*24*365): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
-E3: at (time >= 70*24*365+2*24*365): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E1: at (time >= 70*365*24 + 2*7*24*0): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E2: at (time >= 70*365*24 + 2*7*24*1): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E3: at (time >= 70*365*24 + 2*7*24*2): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E4: at (time >= 70*365*24 + 2*7*24*3): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E5: at (time >= 70*365*24 + 2*7*24*4): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E6: at (time >= 70*365*24 + 2*7*24*5): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E7: at (time >= 70*365*24 + 2*7*24*6): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E8: at (time >= 70*365*24 + 2*7*24*7): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E9: at (time >= 70*365*24 + 2*7*24*8): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E10: at (time >= 70*365*24 + 2*7*24*9): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E11: at (time >= 70*365*24 + 2*7*24*10): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E12: at (time >= 70*365*24 + 2*7*24*11): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E13: at (time >= 70*365*24 + 2*7*24*12): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E14: at (time >= 70*365*24 + 2*7*24*13): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E15: at (time >= 70*365*24 + 2*7*24*14): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E16: at (time >= 70*365*24 + 2*7*24*15): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E17: at (time >= 70*365*24 + 2*7*24*16): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E18: at (time >= 70*365*24 + 2*7*24*17): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E19: at (time >= 70*365*24 + 2*7*24*18): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E20: at (time >= 70*365*24 + 2*7*24*19): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E21: at (time >= 70*365*24 + 2*7*24*20): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E22: at (time >= 70*365*24 + 2*7*24*21): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E23: at (time >= 70*365*24 + 2*7*24*22): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E24: at (time >= 70*365*24 + 2*7*24*23): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E25: at (time >= 70*365*24 + 2*7*24*24): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E26: at (time >= 70*365*24 + 2*7*24*25): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E27: at (time >= 70*365*24 + 2*7*24*26): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E28: at (time >= 70*365*24 + 2*7*24*27): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E29: at (time >= 70*365*24 + 2*7*24*28): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E30: at (time >= 70*365*24 + 2*7*24*29): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E31: at (time >= 70*365*24 + 2*7*24*30): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E32: at (time >= 70*365*24 + 2*7*24*31): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E33: at (time >= 70*365*24 + 2*7*24*32): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E34: at (time >= 70*365*24 + 2*7*24*33): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E35: at (time >= 70*365*24 + 2*7*24*34): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E36: at (time >= 70*365*24 + 2*7*24*35): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E37: at (time >= 70*365*24 + 2*7*24*36): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E38: at (time >= 70*365*24 + 2*7*24*37): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+E39: at (time >= 70*365*24 + 2*7*24*38): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
+

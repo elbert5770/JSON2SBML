@@ -480,6 +480,15 @@ def build_reactions():
             all_reactions.append(Reaction_dict)
 
             counter += 1
+            Reaction_name = f"FibrilMass to PlaqueMass Seed"
+            Reactants = f"[2 {Species}_FibrilMass_{Comp}]"
+            Products = f"[{Species}_PlaqueMass_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_plaque1 * AB42_FibrilNumber_BrainISF^2 * Fibril_degree_polymerization * V_BrainISF"            
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+
+            counter += 1
             Reaction_name = f"FibrilNumber to PlaqueNumber Seed"
             Reactants = f"[2 {Species}_FibrilNumber_{Comp}]"
             Products = f"[{Species}_PlaqueNumber_{Comp}]"
@@ -489,14 +498,76 @@ def build_reactions():
             all_reactions.append(Reaction_dict)
 
             counter += 1
-            Reaction_name = f"FibrilMass to PlaqueMass Seed"
-            Reactants = f"[2 {Species}_FibrilMass_{Comp}]"
-            Products = f"[{Species}_PlaqueMass_{Comp}]"
-            Rate_type = "custom"
-            Rate_eqtn_prototype = f"k_plaque1 * AB42_FibrilNumber_BrainISF^2 * Fibril_degree_polymerization * V_BrainISF"            
+            Reaction_name = f"Monomer bind to Antibody"
+            Reactants = f"[{Species}_{Comp},Antibody_{Comp}]"
+            Products = f"[{Species}__Antibody_{Comp}]"
+            Rate_type = "RMA"
+            Rate_eqtn_prototype = f"[k_f_Monomer_Antibody,k_r_Monomer_Antibody]"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
             
+            counter += 1
+            Reaction_name = f"Oligomer bind to Antibody"
+            Reactants = f"[{Species}_Oligomer_{Comp},Antibody_{Comp}]"
+            Products = f"[{Species}_Oligomer__Antibody_{Comp}]"
+            Rate_type = "RMA"
+            Rate_eqtn_prototype = f"[k_f_Oligomer_Antibody,k_r_Oligomer_Antibody]"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+
+            counter += 1
+            Reaction_name = f"FibrilNumber bind to Antibody"
+            Reactants = f"[{Species}_FibrilNumber_{Comp},Antibody_{Comp}]"
+            Products = f"[{Species}_FibrilNumber__Antibody_{Comp}]"
+            Rate_type = "RMA"
+            Rate_eqtn_prototype = f"[k_f_Fibril_Antibody,k_r_Fibril_Antibody]"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+
+            counter += 1
+            Reaction_name = f"FibrilMass bind to Antibody"
+            Reactants = f"[{Species}_FibrilMass_{Comp}]"
+            Products = f"[{Species}_FibrilMass__Antibody_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_f_Fibril_Antibody * {Species}_FibrilNumber_{Comp} * Antibody_{Comp} * Fibril_degree_polymerization * V_{Comp}"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+
+            counter += 1
+            Reaction_name = f"FibrilMass unbind from Antibody"
+            Reactants = f"[{Species}_FibrilMass__Antibody_{Comp}]"
+            Products = f"[{Species}_FibrilMass_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_r_Fibril_Antibody * {Species}_FibrilNumber__Antibody_{Comp} * Fibril_degree_polymerization * V_{Comp}"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+
+            counter += 1
+            Reaction_name = f"PlaqueNumber bind to Antibody"
+            Reactants = f"[{Species}_PlaqueNumber_{Comp},Antibody_{Comp}]"
+            Products = f"[{Species}_PlaqueNumber__Antibody_{Comp}]"
+            Rate_type = "RMA"
+            Rate_eqtn_prototype = f"[k_f_Plaque_Antibody,k_r_Plaque_Antibody]"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+
+            counter += 1
+            Reaction_name = f"PlaqueMass bind to Antibody"
+            Reactants = f"[{Species}_PlaqueMass_{Comp}]"
+            Products = f"[{Species}_PlaqueMass__Antibody_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_f_Plaque_Antibody * {Species}_PlaqueNumber_{Comp} * Antibody_{Comp} * Plaque_degree_polymerization * V_{Comp}"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+
+            counter += 1
+            Reaction_name = f"PlaqueMass unbind from Antibody"
+            Reactants = f"[{Species}_PlaqueMass__Antibody_{Comp}]"
+            Products = f"[{Species}_PlaqueMass_{Comp}]"
+            Rate_type = "custom"
+            Rate_eqtn_prototype = f"k_r_Plaque_Antibody * {Species}_PlaqueNumber__Antibody_{Comp} * Plaque_degree_polymerization * V_{Comp}"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
     print(counter)
     return all_reactions
 

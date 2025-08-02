@@ -63,7 +63,9 @@ substanceOnly species AB42_BrainISF in BrainISF
 substanceOnly species AB42_BrainVascular in BrainVascular
 substanceOnly species AB42_CM in CM
 substanceOnly species AB42_FibrilMass_BrainISF in BrainISF
+substanceOnly species AB42_FibrilMass__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_FibrilNumber_BrainISF in BrainISF
+substanceOnly species AB42_FibrilNumber__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_HeartEndosomal in HeartEndosomal
 substanceOnly species AB42_HeartInterstitial in HeartInterstitial
 substanceOnly species AB42_HeartVascular in HeartVascular
@@ -85,6 +87,7 @@ substanceOnly species AB42_MuscleEndosomal in MuscleEndosomal
 substanceOnly species AB42_MuscleInterstitial in MuscleInterstitial
 substanceOnly species AB42_MuscleVascular in MuscleVascular
 substanceOnly species AB42_Oligomer_BrainISF in BrainISF
+substanceOnly species AB42_Oligomer__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_OtherEndosomal in OtherEndosomal
 substanceOnly species AB42_OtherInterstitial in OtherInterstitial
 substanceOnly species AB42_OtherVascular in OtherVascular
@@ -92,7 +95,9 @@ substanceOnly species AB42_PancreasEndosomal in PancreasEndosomal
 substanceOnly species AB42_PancreasInterstitial in PancreasInterstitial
 substanceOnly species AB42_PancreasVascular in PancreasVascular
 substanceOnly species AB42_PlaqueMass_BrainISF in BrainISF
+substanceOnly species AB42_PlaqueMass__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_PlaqueNumber_BrainISF in BrainISF
+substanceOnly species AB42_PlaqueNumber__Antibody_BrainISF in BrainISF
 substanceOnly species AB42_Plasma in Plasma
 substanceOnly species AB42_SAS in SAS
 substanceOnly species AB42_SIEndosomal in SIEndosomal
@@ -108,6 +113,7 @@ substanceOnly species AB42_TFV in TFV
 substanceOnly species AB42_ThymusEndosomal in ThymusEndosomal
 substanceOnly species AB42_ThymusInterstitial in ThymusInterstitial
 substanceOnly species AB42_ThymusVascular in ThymusVascular
+substanceOnly species AB42__Antibody_BrainISF in BrainISF
 substanceOnly species APP_BrainISF in BrainISF
 substanceOnly species Antibody_AdiposeEndosomal in AdiposeEndosomal
 substanceOnly species Antibody_AdiposeInterstitial in AdiposeInterstitial
@@ -483,14 +489,28 @@ C99_BrainISF -> AB42_BrainISF; k_Ab42 * (C99_BrainISF/V_BrainISF) * V_BrainISF
 AB42_BrainISF ->; AB42_IDE_Kcat_ISF * (AB42_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF ->; IDE_conc * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF
 n_oligo1_AB42 AB42_BrainISF -> AB42_Oligomer_BrainISF; k_oligo1_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo1_AB42 * V_BrainISF
-n_oligo2_AB42 AB42_BrainISF + AB42_FibrilMass_BrainISF -> AB42_Oligomer_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42 * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
+n_oligo2_AB42_FibrilMass AB42_BrainISF + AB42_FibrilMass_BrainISF -> AB42_Oligomer_BrainISF + AB42_FibrilMass_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42_FibrilMass * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
+n_oligo2_AB42_PlaqueMass AB42_BrainISF + AB42_PlaqueMass_BrainISF -> AB42_Oligomer_BrainISF + AB42_PlaqueMass_BrainISF; k_oligo2_AB42 * ((AB42_BrainISF/V_BrainISF))^n_oligo2_AB42_PlaqueMass * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF -> AB42_BrainISF; k_d_Oligomer_AB42 * (AB42_Oligomer_BrainISF/V_BrainISF) * V_BrainISF
 AB42_Oligomer_BrainISF + n_c_AB42 AB42_BrainISF -> AB42_FibrilNumber_BrainISF; k_c_AB42 * ((AB42_Oligomer_BrainISF/V_BrainISF)) * ((AB42_BrainISF/V_BrainISF))^n_c_AB42 * V_BrainISF
 AB42_BrainISF -> AB42_FibrilMass_BrainISF; k_plus_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * ((AB42_BrainISF/V_BrainISF)) * V_BrainISF
 AB42_FibrilMass_BrainISF -> AB42_BrainISF; k_off_AB42 * ((AB42_FibrilNumber_BrainISF/V_BrainISF)) * V_BrainISF
 AB42_FibrilMass_BrainISF ->; Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
 AB42_FibrilNumber_BrainISF ->; Microglia/Fibril_degree_polymerization*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF)) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_FibrilMass_BrainISF/V_BrainISF))) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_PlaqueMass_BrainISF ->; Microglia*Hi_lo_ratio*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_PlaqueMass_BrainISF/V_BrainISF)) * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_PlaqueNumber_BrainISF ->; Microglia/Plaque_degree_polymerization*Hi_lo_ratio*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + (AB42_PlaqueMass_BrainISF/V_BrainISF)) * (AB42_PlaqueMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque * (Fibril_degree_polymerization/(Fibril_degree_polymerization+Plaque_EC50)) * (AB42_FibrilMass_BrainISF/V_BrainISF) * V_BrainISF
-AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque/Fibril_degree_polymerization * (Fibril_degree_polymerization/(Fibril_degree_polymerization+Plaque_EC50)) * (AB42_FibrilMass_BrainISF/V_BrainISF)  * V_BrainISF
+AB42_PlaqueMass_BrainISF ->; Microglia * Plaque_fibril_microglia_ratio * Microglia_Vmax_AB42 * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
+AB42_PlaqueNumber_BrainISF ->; Microglia * Plaque_fibril_microglia_ratio * Microglia_Vmax_AB42 * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque2 * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * Fibril_degree_polymerization * V_BrainISF
+2 AB42_FibrilMass_BrainISF -> AB42_PlaqueMass_BrainISF; k_plaque1 * (AB42_FibrilNumber_BrainISF/V_BrainISF)^2 * Fibril_degree_polymerization * V_BrainISF
+2 AB42_FibrilNumber_BrainISF -> AB42_PlaqueNumber_BrainISF; k_plaque1 * (AB42_FibrilNumber_BrainISF/V_BrainISF)^2 * V_BrainISF
+AB42_BrainISF + Antibody_BrainISF -> AB42__Antibody_BrainISF; k_f_Monomer_Antibody * (AB42_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42__Antibody_BrainISF -> AB42_BrainISF + Antibody_BrainISF; k_r_Monomer_Antibody * (AB42__Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_Oligomer_BrainISF + Antibody_BrainISF -> AB42_Oligomer__Antibody_BrainISF; k_f_Oligomer_Antibody * (AB42_Oligomer_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_Oligomer__Antibody_BrainISF -> AB42_Oligomer_BrainISF + Antibody_BrainISF; k_r_Oligomer_Antibody * (AB42_Oligomer__Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilNumber_BrainISF + Antibody_BrainISF -> AB42_FibrilNumber__Antibody_BrainISF; k_f_Fibril_Antibody * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilNumber__Antibody_BrainISF -> AB42_FibrilNumber_BrainISF + Antibody_BrainISF; k_r_Fibril_Antibody * (AB42_FibrilNumber__Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_FibrilMass_BrainISF -> AB42_FibrilMass__Antibody_BrainISF; k_f_Fibril_Antibody * (AB42_FibrilNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * Fibril_degree_polymerization * V_BrainISF
+AB42_FibrilMass__Antibody_BrainISF -> AB42_FibrilMass_BrainISF; k_r_Fibril_Antibody * (AB42_FibrilNumber__Antibody_BrainISF/V_BrainISF) * Fibril_degree_polymerization * V_BrainISF
+AB42_PlaqueNumber_BrainISF + Antibody_BrainISF -> AB42_PlaqueNumber__Antibody_BrainISF; k_f_Plaque_Antibody * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_PlaqueNumber__Antibody_BrainISF -> AB42_PlaqueNumber_BrainISF + Antibody_BrainISF; k_r_Plaque_Antibody * (AB42_PlaqueNumber__Antibody_BrainISF/V_BrainISF) * V_BrainISF
+AB42_PlaqueMass_BrainISF -> AB42_PlaqueMass__Antibody_BrainISF; k_f_Plaque_Antibody * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
+AB42_PlaqueMass__Antibody_BrainISF -> AB42_PlaqueMass_BrainISF; k_r_Plaque_Antibody * (AB42_PlaqueNumber__Antibody_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
