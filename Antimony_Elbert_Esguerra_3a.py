@@ -10,9 +10,9 @@ def run_simulation():
     r.integrator.absolute_tolerance = 1e-8
     r.integrator.relative_tolerance = 1e-8
     r.integrator.setValue('stiff', True)
-    #result = r.simulate(0, 1000, 10000)
-    #result = r.simulate(0, 200000, 200000)
-    result = r.simulate(0, 1000000, 3000000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
+    result = r.simulate(0, 69*365*24, 100000)
+    # result = r.simulate(1000, 200000, 200000)
+    result = r.simulate(69*365*24, 74*365*24, 10000000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
     '[Antibody_LungVascular]','[Antibody_LymphNode]','[Antibody_BrainVascular]','[Antibody_BBB]','[Antibody_SAS]',
     '[Antibody_LV]','[APP_BrainISF]','[AB42_BrainISF]','[C99_BrainISF]','[AB42_Oligomer_BrainISF]','[AB42_FibrilNumber_BrainISF]','[AB42_FibrilMass_BrainISF]',
     '[AB42_Plasma]','[AB42_SAS]','Fibril_degree_polymerization','[AB42_PlaqueMass_BrainISF]','[AB42_PlaqueNumber_BrainISF]','Plaque_degree_polymerization'])

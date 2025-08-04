@@ -1,0 +1,63 @@
+V_J* DEFINITIONS:
+================================================================================
+v_J0 = (1-RC_TissueVascular)*LT*(Antibody_TissueVascular/V_TissueVascular)
+v_J1 = CLup_Tissue*(Antibody_TissueVascular/V_TissueVascular)
+v_J2 = CLup_Tissue*(Antibody_TissueInterstitial/V_TissueInterstitial)
+v_J3 = Kon_FcRn*(Antibody_TissueEndosomal/V_TissueEndosomal)*(FCRn_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal
+v_J4 = Koff_FcRn*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal
+v_J5 = Kdeg*(Antibody_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal
+v_J6 = CLup_Tissue*FR*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)
+v_J7 = CLup_Tissue*(1-FR)*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)
+v_J8 = QT*(Antibody_Plasma/V_Plasma)
+v_J9 = (QT-LT)*(Antibody_TissueVascular/V_TissueVascular)
+v_J10 = QB*(Antibody_Plasma/V_Plasma)
+v_J11 = (QB-LB)*(Antibody_BrainVascular/V_BrainVascular)
+v_J12 = (LT+LB)*(Antibody_Lymph/V_Lymph)
+v_J13 = (1-RC_TissueLymph)*LT*(Antibody_TissueInterstitial/V_TissueInterstitial)
+v_J14 = (1-RC_CSF)*QB_CSF*(Antibody_CSF/V_CSF)
+v_J15 = (1-RC_BrainISF)*QB_ECF*(Antibody_BrainISF/V_BrainISF)
+v_J16 = (1-RC_BBB)*QB_ECF*(Antibody_BrainVascular/V_BrainVascular)
+v_J17 = CLup_BBB*(Antibody_BrainVascular/V_BrainVascular)
+v_J18 = CLup_BCSFB*(Antibody_BrainVascular/V_BrainVascular)
+v_J19 = (1-RC_BCSFB)*QB_CSF*(Antibody_BrainVascular/V_BrainVascular)
+v_J20 = QB_ECF*(Antibody_BrainISF/V_BrainISF)
+v_J21 = QB_ECF*(Antibody_CSF/V_CSF)
+v_J22 = Kon_FcRn*(Antibody_BBB/V_BBB)*(FCRn_BBB/V_BBB)*V_BBB
+v_J23 = Koff_FcRn*(Antibody__FCRn_BBB/V_BBB)*V_BBB
+v_J24 = Kdeg*(Antibody_BBB/V_BBB)*V_BBB
+v_J25 = Kon_FcRn*(Antibody_BCSFB/V_BCSFB)*(FCRn_BCSFB/V_BCSFB)*V_BCSFB
+v_J26 = Koff_FcRn*(Antibody__FCRn_BCSFB/V_BCSFB)*V_BCSFB
+v_J27 = Kdeg*(Antibody_BCSFB/V_BCSFB)*V_BCSFB
+v_J28 = CLup_BBB*FR*(Antibody__FCRn_BBB/V_BBB)
+v_J29 = CLup_BBB*(1-FR)*(Antibody__FCRn_BBB/V_BBB)
+v_J30 = CLup_BCSFB*FR*(Antibody__FCRn_BCSFB/V_BCSFB)
+v_J31 = CLup_BCSFB*(1-FR)*(Antibody__FCRn_BCSFB/V_BCSFB)
+v_J32 = CLup_BBB*(Antibody__FCRn_BrainISF/V_BrainISF)
+v_J33 = CLup_BCSFB*(Antibody__FCRn_CSF/V_CSF)
+
+Found 34 v_J* definitions
+Found 20 differential equations
+
+================================================================================
+SUBSTITUTED DIFFERENTIAL EQUATIONS:
+================================================================================
+ 1. dAntibody_BBB/dt = (CLup_BBB*(Antibody_BrainVascular/V_BrainVascular)) - (Kon_FcRn*(Antibody_BBB/V_BBB)*(FCRn_BBB/V_BBB)*V_BBB) + (Koff_FcRn*(Antibody__FCRn_BBB/V_BBB)*V_BBB) - (Kdeg*(Antibody_BBB/V_BBB)*V_BBB) + (CLup_BBB*(Antibody__FCRn_BrainISF/V_BrainISF))
+ 2. dAntibody_BCSFB/dt = (CLup_BCSFB*(Antibody_BrainVascular/V_BrainVascular)) - (Kon_FcRn*(Antibody_BCSFB/V_BCSFB)*(FCRn_BCSFB/V_BCSFB)*V_BCSFB) + (Koff_FcRn*(Antibody__FCRn_BCSFB/V_BCSFB)*V_BCSFB) - (Kdeg*(Antibody_BCSFB/V_BCSFB)*V_BCSFB) + (CLup_BCSFB*(Antibody__FCRn_CSF/V_CSF))
+ 3. dAntibody_BrainISF/dt = -((1-RC_BrainISF)*QB_ECF*(Antibody_BrainISF/V_BrainISF)) + ((1-RC_BBB)*QB_ECF*(Antibody_BrainVascular/V_BrainVascular)) - (QB_ECF*(Antibody_BrainISF/V_BrainISF)) + (QB_ECF*(Antibody_CSF/V_CSF)) + (CLup_BBB*(1-FR)*(Antibody__FCRn_BBB/V_BBB))
+ 4. dAntibody_BrainVascular/dt = (QB*(Antibody_Plasma/V_Plasma)) - ((QB-LB)*(Antibody_BrainVascular/V_BrainVascular)) - ((1-RC_BBB)*QB_ECF*(Antibody_BrainVascular/V_BrainVascular)) - (CLup_BBB*(Antibody_BrainVascular/V_BrainVascular)) - (CLup_BCSFB*(Antibody_BrainVascular/V_BrainVascular)) - ((1-RC_BCSFB)*QB_CSF*(Antibody_BrainVascular/V_BrainVascular)) + (CLup_BBB*FR*(Antibody__FCRn_BBB/V_BBB)) + (CLup_BCSFB*FR*(Antibody__FCRn_BCSFB/V_BCSFB))
+ 5. dAntibody_CSF/dt = -((1-RC_CSF)*QB_CSF*(Antibody_CSF/V_CSF)) + ((1-RC_BCSFB)*QB_CSF*(Antibody_BrainVascular/V_BrainVascular)) + (QB_ECF*(Antibody_BrainISF/V_BrainISF)) - (QB_ECF*(Antibody_CSF/V_CSF)) + (CLup_BCSFB*(1-FR)*(Antibody__FCRn_BCSFB/V_BCSFB))
+ 6. dAntibody_Lymph/dt = -((LT+LB)*(Antibody_Lymph/V_Lymph)) + ((1-RC_TissueLymph)*LT*(Antibody_TissueInterstitial/V_TissueInterstitial)) + ((1-RC_CSF)*QB_CSF*(Antibody_CSF/V_CSF)) + ((1-RC_BrainISF)*QB_ECF*(Antibody_BrainISF/V_BrainISF))
+ 7. dAntibody_Plasma/dt = -(QT*(Antibody_Plasma/V_Plasma)) + ((QT-LT)*(Antibody_TissueVascular/V_TissueVascular)) - (QB*(Antibody_Plasma/V_Plasma)) + ((QB-LB)*(Antibody_BrainVascular/V_BrainVascular)) + ((LT+LB)*(Antibody_Lymph/V_Lymph))
+ 8. dAntibody_TissueEndosomal/dt = (CLup_Tissue*(Antibody_TissueVascular/V_TissueVascular)) + (CLup_Tissue*(Antibody_TissueInterstitial/V_TissueInterstitial)) - (Kon_FcRn*(Antibody_TissueEndosomal/V_TissueEndosomal)*(FCRn_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal) + (Koff_FcRn*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal) - (Kdeg*(Antibody_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal)
+ 9. dAntibody_TissueInterstitial/dt = ((1-RC_TissueVascular)*LT*(Antibody_TissueVascular/V_TissueVascular)) - (CLup_Tissue*(Antibody_TissueInterstitial/V_TissueInterstitial)) + (CLup_Tissue*(1-FR)*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)) - ((1-RC_TissueLymph)*LT*(Antibody_TissueInterstitial/V_TissueInterstitial))
+10. dAntibody_TissueVascular/dt = -((1-RC_TissueVascular)*LT*(Antibody_TissueVascular/V_TissueVascular)) - (CLup_Tissue*(Antibody_TissueVascular/V_TissueVascular)) + (CLup_Tissue*FR*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)) + (QT*(Antibody_Plasma/V_Plasma)) - ((QT-LT)*(Antibody_TissueVascular/V_TissueVascular))
+11. dAntibody__FCRn_BBB/dt = (Kon_FcRn*(Antibody_BBB/V_BBB)*(FCRn_BBB/V_BBB)*V_BBB) - (Koff_FcRn*(Antibody__FCRn_BBB/V_BBB)*V_BBB) - (CLup_BBB*FR*(Antibody__FCRn_BBB/V_BBB)) - (CLup_BBB*(1-FR)*(Antibody__FCRn_BBB/V_BBB))
+12. dAntibody__FCRn_BCSFB/dt = (Kon_FcRn*(Antibody_BCSFB/V_BCSFB)*(FCRn_BCSFB/V_BCSFB)*V_BCSFB) - (Koff_FcRn*(Antibody__FCRn_BCSFB/V_BCSFB)*V_BCSFB) - (CLup_BCSFB*FR*(Antibody__FCRn_BCSFB/V_BCSFB)) - (CLup_BCSFB*(1-FR)*(Antibody__FCRn_BCSFB/V_BCSFB))
+13. dAntibody__FCRn_BrainISF/dt = -(CLup_BBB*(Antibody__FCRn_BrainISF/V_BrainISF))
+14. dAntibody__FCRn_CSF/dt = -(CLup_BCSFB*(Antibody__FCRn_CSF/V_CSF))
+15. dAntibody__FCRn_TissueEndosomal/dt = (Kon_FcRn*(Antibody_TissueEndosomal/V_TissueEndosomal)*(FCRn_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal) - (Koff_FcRn*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal) - (CLup_Tissue*FR*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)) - (CLup_Tissue*(1-FR)*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal))
+16. dFCRn_BBB/dt = -(Kon_FcRn*(Antibody_BBB/V_BBB)*(FCRn_BBB/V_BBB)*V_BBB) + (Koff_FcRn*(Antibody__FCRn_BBB/V_BBB)*V_BBB) + (CLup_BBB*FR*(Antibody__FCRn_BBB/V_BBB)) + (CLup_BBB*(1-FR)*(Antibody__FCRn_BBB/V_BBB))
+17. dFCRn_BCSFB/dt = -(Kon_FcRn*(Antibody_BCSFB/V_BCSFB)*(FCRn_BCSFB/V_BCSFB)*V_BCSFB) + (Koff_FcRn*(Antibody__FCRn_BCSFB/V_BCSFB)*V_BCSFB) + (CLup_BCSFB*FR*(Antibody__FCRn_BCSFB/V_BCSFB)) + (CLup_BCSFB*(1-FR)*(Antibody__FCRn_BCSFB/V_BCSFB))
+18. dFCRn_BrainISF/dt = (CLup_BBB*(Antibody__FCRn_BrainISF/V_BrainISF))
+19. dFCRn_CSF/dt = (CLup_BCSFB*(Antibody__FCRn_CSF/V_CSF))
+20. dFCRn_TissueEndosomal/dt = -(Kon_FcRn*(Antibody_TissueEndosomal/V_TissueEndosomal)*(FCRn_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal) + (Koff_FcRn*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)*V_TissueEndosomal) + (CLup_Tissue*FR*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal)) + (CLup_Tissue*(1-FR)*(Antibody__FCRn_TissueEndosomal/V_TissueEndosomal))

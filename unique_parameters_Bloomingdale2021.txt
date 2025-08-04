@@ -13,8 +13,9 @@ QB_ECF
 QT
 RC_BBB
 RC_BCSFB
-RC_B_ISF
+RC_BrainISF
 RC_CSF
+RC_TissueLymph
 RC_TissueVascular
 V_BBB
 V_BCSFB

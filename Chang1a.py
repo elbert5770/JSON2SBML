@@ -32,8 +32,8 @@ def build_reactions():
                 counter += 2
                 Comp1 = f"{Tissue}Endosomal"
                 Reaction_name = f"{Tissue} Endosomal reactions"
-                Reactants = f"[{Species}_{Comp1},FCRn_{Comp1}]"
-                Products = f"[{Species}__FCRn_{Comp1}]"
+                Reactants = f"[{Species}_{Comp1},FcRn_{Comp1}]"
+                Products = f"[{Species}__FcRn_{Comp1}]"
                 Rate_type = "RMA"
                 Rate_eqtn_prototype = f"[Kon_FcRn,Koff_FcRn]"
                 Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
@@ -54,8 +54,8 @@ def build_reactions():
                 Comp1 = f"{Tissue}{Comp[0]}"
                 Comp2 = f"{Tissue}{Comp[1]}"
                 Reaction_name = f"Flow out of endosomal"
-                Reactants = f"[{Species}__FCRn_{Comp1}]"
-                Products = f"[{Species}_{Comp2},FCRn_{Comp1}]"
+                Reactants = f"[{Species}__FcRn_{Comp1}]"
+                Products = f"[{Species}_{Comp2},FcRn_{Comp1}]"
                 Rate_type = "UDF"
                 match Comp:
                     case  ['Endosomal','Vascular']: 
@@ -150,7 +150,7 @@ def build_reactions():
                 Reactants = f"[{Species}_{Comp1}]"
                 Products = f"[{Species}_{Comp2}]"
                 Rate_type = "UDF"
-                Rate_eqtn_prototype = f"(L_LN)"  
+                Rate_eqtn_prototype = f"(L_LymphNode)"  
                 Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
                 all_reactions.append(Reaction_dict)
 
@@ -228,6 +228,9 @@ def build_reactions():
         ['LV','TFV'],
         ['TFV','CM'],
         ['CM','SAS'],
+        ['BrainISF','BBB'],
+        ['LV','BCSFB'],
+        ['TFV','BCSFB'],
          ]:      
             counter += 1
             Comp1 = Comp[0]
@@ -240,9 +243,9 @@ def build_reactions():
                 case ['BrainVascular','BrainISF']: 
                     Rate_eqtn_prototype = f"(1-RC_BBB) * Q_BrainISF"
                 case ['BrainVascular','BBB']: 
-                    Rate_eqtn_prototype = f"CLup_BBB"
+                    Rate_eqtn_prototype = f"CLup_BBB * f_BBB"
                 case ['BrainVascular','BCSFB']: 
-                    Rate_eqtn_prototype = f"CLup_BCSFB"
+                    Rate_eqtn_prototype = f"CLup_BCSFB * (1 - f_BBB)"
                 case ['BrainVascular','LV']: 
                     Rate_eqtn_prototype = f"(1-RC_BCSFB) * f_LV * Q_CSF"
                 case ['BrainVascular','TFV']: 
@@ -259,6 +262,12 @@ def build_reactions():
                     Rate_eqtn_prototype = f"(Q_CSF + Q_glymph)"
                 case ['CM', 'SAS']: 
                     Rate_eqtn_prototype = f"(Q_CSF + Q_glymph)"
+                case ['BrainISF','BBB']: 
+                    Rate_eqtn_prototype = f"CLup_BBB * f_BBB"
+                case ['LV','BCSFB']: 
+                    Rate_eqtn_prototype = f"CLup_BCSFB * f_LV * (1 - f_BBB)"
+                case ['TFV','BCSFB']: 
+                    Rate_eqtn_prototype = f"CLup_BCSFB * (1 - f_LV) * (1 - f_BBB)"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
     
@@ -266,8 +275,8 @@ def build_reactions():
         for Comp in  ['BBB','BCSFB']:      
             counter += 2
             Reaction_name = f"BrainEndosomal reactions"
-            Reactants = f"[{Species}_{Comp},FCRn_{Comp}]"
-            Products = f"[{Species}__FCRn_{Comp}]"
+            Reactants = f"[{Species}_{Comp},FcRn_{Comp}]"
+            Products = f"[{Species}__FcRn_{Comp}]"
             Rate_type = "RMA"
             Rate_eqtn_prototype = f"[Kon_FcRn,Koff_FcRn]"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
@@ -291,8 +300,8 @@ def build_reactions():
             Comp1 = Comp[0]
             Comp2 = Comp[1]
             Reaction_name = f"Flow out of endosomal"
-            Reactants = f"[{Species}__FCRn_{Comp1}]"
-            Products = f"[{Species}_{Comp2},FCRn_{Comp1}]"
+            Reactants = f"[{Species}__FcRn_{Comp1}]"
+            Products = f"[{Species}_{Comp2},FcRn_{Comp1}]"
             Rate_type = "UDF"
             match Comp:
                 case  ['BBB','BrainVascular']: 

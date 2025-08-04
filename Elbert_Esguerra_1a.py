@@ -6,30 +6,19 @@ def build_reactions():
     
     for Species in ['Antibody','AB42']:
         for Tissue in ['Lung','Heart','Kidney','Muscle','Skin','Adipose','Thymus','Bone','Other','Liver','Spleen','Pancreas','SI','LI']:
-            for Comp in [ ['Vascular','Interstitial'],
-                ['Vascular','Endosomal'],
-                ['Interstitial','Endosomal']
-                ]:      
+            for Comp in [ ['Vascular','Interstitial']]:      
                 counter += 1
                 Comp1 = f"{Tissue}{Comp[0]}"
                 Comp2 = f"{Tissue}{Comp[1]}"
                 Reaction_name = f"Flow within {Tissue}"
                 Reactants = f"[{Species}_{Comp1}]"
                 Products = f"[{Species}_{Comp2}]"
-                Rate_type = "UDF"
-                match Comp:
-                    case ['Vascular','Interstitial']: 
-                        Rate_eqtn_prototype = f"(1-RC_{Tissue}_Vascular) * L_{Tissue}"
-                    case ['Vascular','Endosomal']: 
-                        if Species == 'Antibody':
-                            Rate_eqtn_prototype = f"CLup_{Tissue}"
-                    case ['Interstitial','Endosomal']: 
-                        if Species == 'Antibody':
-                            Rate_eqtn_prototype = f"CLup_{Tissue}"
+                Rate_type = "UDF"   
+                Rate_eqtn_prototype = f"(1-RC_{Tissue}_Vascular) * L_{Tissue}"    
                 Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
                 all_reactions.append(Reaction_dict)
         
-        
+            
             for Comp in  ['Endosomal']:
                 if Species == 'Antibody':
                     counter += 2
@@ -51,9 +40,27 @@ def build_reactions():
                     Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
                     all_reactions.append(Reaction_dict)
 
-            for Comp in [ ['Endosomal','Vascular'],
-                ['Endosomal','Interstitial']]:
-                if Species == 'Antibody':
+            for Comp in [ ['Vascular','Endosomal'],
+                ['Interstitial','Endosomal']
+                ]:      
+                counter += 1
+                Comp1 = f"{Tissue}{Comp[0]}"
+                Comp2 = f"{Tissue}{Comp[1]}"
+                Reaction_name = f"Flow within {Tissue}"
+                Reactants = f"[{Species}_{Comp1}]"
+                Products = f"[{Species}_{Comp2}]"
+                Rate_type = "UDF"
+                match Comp:
+                    case ['Vascular','Endosomal']: 
+                            Rate_eqtn_prototype = f"CLup_{Tissue}"
+                    case ['Interstitial','Endosomal']: 
+                            Rate_eqtn_prototype = f"CLup_{Tissue}"
+                Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+                all_reactions.append(Reaction_dict)
+            
+            if Species == 'Antibody':
+                for Comp in [ ['Endosomal','Vascular'],
+                    ['Endosomal','Interstitial']]:
                     counter += 1
                     Comp1 = f"{Tissue}{Comp[0]}"
                     Comp2 = f"{Tissue}{Comp[1]}"
@@ -222,8 +229,6 @@ def build_reactions():
             all_reactions.append(Reaction_dict)
 
         for Comp in [ ['BrainVascular','BrainISF'],
-        ['BrainVascular','BBB'],
-        ['BrainVascular','BCSFB'],
         ['BrainVascular','LV'],
         ['BrainVascular','TFV'],
         ['BrainISF','LV'],
@@ -231,7 +236,7 @@ def build_reactions():
         ['SAS','BrainISF'],
         ['LV','TFV'],
         ['TFV','CM'],
-        ['CM','SAS'],
+        ['CM','SAS']
          ]:      
             counter += 1
             Comp1 = Comp[0]
@@ -243,13 +248,6 @@ def build_reactions():
             match Comp:
                 case ['BrainVascular','BrainISF']: 
                     Rate_eqtn_prototype = f"(1-RC_BBB) * Q_BrainISF"
-                
-                case ['BrainVascular','BBB']: 
-                    if Species == 'Antibody':
-                        Rate_eqtn_prototype = f"CLup_BBB"
-                case ['BrainVascular','BCSFB']: 
-                    if Species == 'Antibody':
-                        Rate_eqtn_prototype = f"CLup_BCSFB"
                 case ['BrainVascular','LV']: 
                     Rate_eqtn_prototype = f"(1-RC_BCSFB) * f_LV * Q_CSF"
                 case ['BrainVascular','TFV']: 
@@ -268,9 +266,35 @@ def build_reactions():
                     Rate_eqtn_prototype = f"(Q_CSF + Q_glymph)"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
-    
-    
-        for Comp in  ['BBB','BCSFB']:    
+        
+        
+        for Comp in [ ['BrainVascular','BBB'],
+                        ['BrainVascular','BCSFB'],
+                        ['BrainISF','BBB'],
+                    ['LV','BCSFB'],
+                    ['TFV','BCSFB']]:
+            counter += 1
+            Comp1 = Comp[0]
+            Comp2 = Comp[1]
+            Reaction_name = f"Flow into endosomal"
+            Reactants = f"[{Species}_{Comp1}]"
+            Products = f"[{Species}_{Comp2}]"
+            Rate_type = "UDF"
+            match Comp:
+                case ['BrainVascular','BBB']:
+                        Rate_eqtn_prototype = f"CLup_BBB * f_BBB"
+                case ['BrainVascular','BCSFB']: 
+                        Rate_eqtn_prototype = f"CLup_BCSFB * (1 - f_BBB)"
+                case ['BrainISF','BBB']: 
+                    Rate_eqtn_prototype = f"CLup_BBB * f_BBB"
+                case ['LV','BCSFB']: 
+                    Rate_eqtn_prototype = f"CLup_BCSFB * f_LV * (1 - f_BBB)"    
+                case ['TFV','BCSFB']: 
+                    Rate_eqtn_prototype = f"CLup_BCSFB * (1 - f_LV) * (1 - f_BBB)"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+
+        for Comp in  ['BBB','BCSFB']:  
             if Species == 'Antibody':  
                 counter += 2
                 Reaction_name = f"BrainEndosomal reactions"
@@ -290,12 +314,12 @@ def build_reactions():
                 Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
                 all_reactions.append(Reaction_dict)
 
-        for Comp in [ ['BBB','BrainVascular'],
-            ['BBB','BrainISF'],
-            ['BCSFB','BrainVascular'],
-            ['BCSFB','LV'],
-            ['BCSFB','TFV']]:
-            if Species == 'Antibody':
+        if Species == 'Antibody':
+            for Comp in [ ['BBB','BrainVascular'],
+                ['BBB','BrainISF'],
+                ['BCSFB','BrainVascular'],
+                ['BCSFB','LV'],
+                ['BCSFB','TFV']]:
                 counter += 1
                 Comp1 = Comp[0]
                 Comp2 = Comp[1]
@@ -457,7 +481,7 @@ def build_reactions():
             Reactants = f"[{Species}_PlaqueMass_{Comp}]"
             Products = f"[0]"
             Rate_type = "custom"
-            Rate_eqtn_prototype = f"Microglia * Plaque_fibril_microglia_ratio * Microglia_Vmax_{Species} * AB42_PlaqueNumber_BrainISF * Plaque_degree_polymerization * V_BrainISF"            
+            Rate_eqtn_prototype = f"Microglia * Plaque_fibril_microglia_ratio *(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42 + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42) * AB42_PlaqueNumber_BrainISF * Plaque_degree_polymerization * V_BrainISF"            
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
 
@@ -466,7 +490,7 @@ def build_reactions():
             Reactants = f"[{Species}_PlaqueNumber_{Comp}]"
             Products = f"[0]"
             Rate_type = "MA"
-            Rate_eqtn_prototype = f"Microglia * Plaque_fibril_microglia_ratio * Microglia_Vmax_{Species} "            
+            Rate_eqtn_prototype = f"Microglia * Plaque_fibril_microglia_ratio * (Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42 + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42) "            
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
         
@@ -568,6 +592,17 @@ def build_reactions():
             Rate_eqtn_prototype = f"k_r_Plaque_Antibody * {Species}_PlaqueNumber__Antibody_{Comp} * Plaque_degree_polymerization * V_{Comp}"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
+    
+        for Comp in ['Plasma']:
+            counter += 1
+            Reaction_name = f"AB degradation in Plasma"
+            Reactants = f"[{Species}_{Comp}]"
+            Products = f"[0]"
+            Rate_type = "MA"
+            Rate_eqtn_prototype = f"k_deg_{Species}_{Comp} * ({Species}_{Comp})"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
+    
     print(counter)
     return all_reactions
 
@@ -575,7 +610,7 @@ def build_reactions():
 
 all_reactions = build_reactions()
 
-with open("Chang2019Michaels2022_all_reactions.txt", "w", encoding="utf-8") as f:
+with open("Elbert_Esguerra_all_reactions.txt", "w", encoding="utf-8") as f:
     for reaction in all_reactions:
         f.write(str(reaction) + "\n")
 

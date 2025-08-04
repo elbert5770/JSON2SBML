@@ -31,8 +31,8 @@ def build_reactions():
          
             counter += 2
             Reaction_name = f"TissueEndosomal reactions"
-            Reactants = f"[{Species}_{Comp},FCRn_{Comp}]"
-            Products = f"[{Species}__FCRn_{Comp}]"
+            Reactants = f"[{Species}_{Comp},FcRn_{Comp}]"
+            Products = f"[{Species}__FcRn_{Comp}]"
             Rate_type = "RMA"
             Rate_eqtn_prototype = f"[Kon_FcRn,Koff_FcRn]"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
@@ -53,8 +53,8 @@ def build_reactions():
             Comp1 = Comp[0]
             Comp2 = Comp[1]
             Reaction_name = f"Flow out of endosomal"
-            Reactants = f"[{Species}__FCRn_{Comp1}]"
-            Products = f"[{Species}_{Comp2},FCRn_{Comp1}]"
+            Reactants = f"[{Species}__FcRn_{Comp1}]"
+            Products = f"[{Species}_{Comp2},FcRn_{Comp1}]"
             Rate_type = "UDF"
             match Comp:
                 case  ['TissueEndosomal','TissueVascular']: 
@@ -92,11 +92,11 @@ def build_reactions():
                 case   ['Lymph','Plasma']: 
                     Rate_eqtn_prototype = f"(LT + LB)"  
                 case   ['TissueInterstitial','Lymph']: 
-                    Rate_eqtn_prototype = f"(1 - RC_TissueVascular) * LT" 
+                    Rate_eqtn_prototype = f"(1 - RC_TissueLymph) * LT" 
                 case   ['CSF','Lymph']: 
                     Rate_eqtn_prototype = f"(1-RC_CSF) * (QB_CSF)" 
                 case   ['BrainISF','Lymph']: 
-                    Rate_eqtn_prototype = f"(1-RC_B_ISF) * QB_ECF" 
+                    Rate_eqtn_prototype = f"(1-RC_BrainISF) * QB_ECF" 
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
 
@@ -108,6 +108,8 @@ def build_reactions():
         ['BrainVascular','CSF'],
         ['BrainISF','CSF'],
         ['CSF','BrainISF'],
+            ['BrainISF','BBB'],
+            ['CSF','BCSFB']
          ]:      
             counter += 1
             Comp1 = Comp[0]
@@ -129,6 +131,10 @@ def build_reactions():
                     Rate_eqtn_prototype = f"QB_ECF"
                 case ['CSF','BrainISF']: 
                     Rate_eqtn_prototype = f"QB_ECF"
+                case  ['BrainISF','BBB']: 
+                    Rate_eqtn_prototype = f"CLup_BBB"
+                case  ['CSF','BCSFB']: 
+                    Rate_eqtn_prototype = f"CLup_BCSFB"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
     
@@ -136,8 +142,8 @@ def build_reactions():
         for Comp in  ['BBB','BCSFB']:      
             counter += 2
             Reaction_name = f"BrainEndosomal reactions"
-            Reactants = f"[{Species}_{Comp},FCRn_{Comp}]"
-            Products = f"[{Species}__FCRn_{Comp}]"
+            Reactants = f"[{Species}_{Comp},FcRn_{Comp}]"
+            Products = f"[{Species}__FcRn_{Comp}]"
             Rate_type = "RMA"
             Rate_eqtn_prototype = f"[Kon_FcRn,Koff_FcRn]"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
@@ -160,8 +166,8 @@ def build_reactions():
             Comp1 = Comp[0]
             Comp2 = Comp[1]
             Reaction_name = f"Flow out of endosomal"
-            Reactants = f"[{Species}__FCRn_{Comp1}]"
-            Products = f"[{Species}_{Comp2},FCRn_{Comp1}]"
+            Reactants = f"[{Species}__FcRn_{Comp1}]"
+            Products = f"[{Species}_{Comp2},FcRn_{Comp1}]"
             Rate_type = "UDF"
             match Comp:
                 case  ['BBB','BrainVascular']: 
@@ -172,6 +178,7 @@ def build_reactions():
                     Rate_eqtn_prototype = f"CLup_BCSFB * FR"
                 case  ['BCSFB','CSF']: 
                     Rate_eqtn_prototype = f"CLup_BCSFB * (1 - FR)"
+                
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
             all_reactions.append(Reaction_dict)
 
@@ -197,22 +204,22 @@ with open("Bloomingdale2021_all_reactions.txt", "w", encoding="utf-8") as f:
     # # 2. Tissue Vascular
     # dAntibody_TissueVasculardt = (QT * Antibody_Plasma - (QT - LT) * Antibody_TissueVascular - 
     #                               ((1-RC_Tv) * LT * Antibody_TissueVascular) - CLUP_T * Antibody_TissueVascular + 
-    #                               CLUP_T * FR * Antibody__FCRn_TissueEndosomal) / V_TissueVascular
+    #                               CLUP_T * FR * Antibody__FcRn_TissueEndosomal) / V_TissueVascular
 
     # # 3. Tissue Endosomal (Unbound)
     # dAntibody_TissueEndosomaldt = (CLUP_T * (Antibody_TissueVascular + Antibody_TissueInterstitial) / V_TissueEndosomal - 
-    #                                Kon_FcRn * Antibody_TissueEndosomal * FCRn_TissueEndosomal + 
-    #                                Koff_FcRn * Antibody__FCRn_TissueEndosomal - Kdeg * Antibody_TissueEndosomal)
+    #                                Kon_FcRn * Antibody_TissueEndosomal * FcRn_TissueEndosomal + 
+    #                                Koff_FcRn * Antibody__FcRn_TissueEndosomal - Kdeg * Antibody_TissueEndosomal)
 
     # # 4. Tissue Endosomal (Bound)
-    # dAntibody__FCRn_TissueEndosomaldt = (Kon_FcRn * Antibody_TissueEndosomal * FCRn_TissueEndosomal - 
-    #                                      Koff_FcRn * Antibody__FCRn_TissueEndosomal - 
-    #                                      CLUP_T * Antibody__FCRn_TissueEndosomal / V_TissueEndosomal)
+    # dAntibody__FcRn_TissueEndosomaldt = (Kon_FcRn * Antibody_TissueEndosomal * FcRn_TissueEndosomal - 
+    #                                      Koff_FcRn * Antibody__FcRn_TissueEndosomal - 
+    #                                      CLUP_T * Antibody__FcRn_TissueEndosomal / V_TissueEndosomal)
 
     # # 5. Tissue Interstitial
     # dAntibody_TissueInterstitialdt = (((1-RC_Tv) * LT * Antibody_TissueVascular) - 
     #                                   ((1-RC_TL) * LT * Antibody_TissueInterstitial) + 
-    #                                   (CLUP_T * (1-FR) * Antibody__FCRn_TissueEndosomal) - 
+    #                                   (CLUP_T * (1-FR) * Antibody__FcRn_TissueEndosomal) - 
     #                                   CLUP_T * Antibody_TissueInterstitial) / V_TissueInterstitial
 
     # # 6. Brain Vascular
@@ -220,37 +227,37 @@ with open("Bloomingdale2021_all_reactions.txt", "w", encoding="utf-8") as f:
     #                              ((1-RC_BBB) * QB_ECF * Antibody_BrainVascular) - 
     #                              ((1-RC_BCSFB) * QB_CSF * Antibody_BrainVascular) -
     #                              (CLUP_B * Antibody_BrainVascular) + 
-    #                              (CLUP_BBB * FR_B * Antibody__FCRn_EBBB) + 
-    #                              (CLUP_BCSFB * FR_B * Antibody__FCRn_EBCSFB)) / V_BrainVascular
+    #                              (CLUP_BBB * FR_B * Antibody__FcRn_EBBB) + 
+    #                              (CLUP_BCSFB * FR_B * Antibody__FcRn_EBCSFB)) / V_BrainVascular
 
     # # 7. Endosomal BBB (Unbound)
-    # dAntibody_EBBBdt = ((CLUP_BBB * (Antibody_BrainVascular + Antibody_BrainISF)) / V_EBBB) - Kon_FcRn * Antibody_EBBB * FCRn_EBBB + Koff_FcRn * Antibody__FCRn_EBBB - Kdeg * Antibody_EBBB
+    # dAntibody_EBBBdt = ((CLUP_BBB * (Antibody_BrainVascular + Antibody_BrainISF)) / V_EBBB) - Kon_FcRn * Antibody_EBBB * FcRn_EBBB + Koff_FcRn * Antibody__FcRn_EBBB - Kdeg * Antibody_EBBB
 
     # # 8. Endosomal BBB (Bound)
-    # dAntibody__FCRn_EBBBdt = (Kon_FcRn * Antibody_EBBB * FCRn_EBBB - Koff_FcRn * Antibody__FCRn_EBBB - (CLUP_BBB * Antibody__FCRn_EBBB) / V_EBBB)
+    # dAntibody__FcRn_EBBBdt = (Kon_FcRn * Antibody_EBBB * FcRn_EBBB - Koff_FcRn * Antibody__FcRn_EBBB - (CLUP_BBB * Antibody__FcRn_EBBB) / V_EBBB)
 
     # # 9. Brain Interstitial (ISF)
-    # dAntibody_BrainISFdt = (((1-RC_BBB) * QB_ECF * Antibody_BrainVascular) - ((1-RC_B_ISF) * QB_ECF * Antibody_BrainISF) + (CLUP_BBB * (1-FR_B) * Antibody__FCRn_EBBB) - (CLUP_BBB * Antibody_BrainISF) - (QB_ECF * Antibody_BrainISF) + (QB_ECF * Antibody_CSF)) / V_BrainISF
+    # dAntibody_BrainISFdt = (((1-RC_BBB) * QB_ECF * Antibody_BrainVascular) - ((1-RC_B_ISF) * QB_ECF * Antibody_BrainISF) + (CLUP_BBB * (1-FR_B) * Antibody__FcRn_EBBB) - (CLUP_BBB * Antibody_BrainISF) - (QB_ECF * Antibody_BrainISF) + (QB_ECF * Antibody_CSF)) / V_BrainISF
 
     # # 10. Endosomal BCSFB (Unbound)
-    # dAntibody_EBCSFBdt = ((CLUP_BCSFB * Antibody_BrainVascular + CLUP_BCSFB * Antibody_CSF) / V_EBCSFB - Kon_FcRn * Antibody_EBCSFB * FCRn_EBCSFB + Koff_FcRn * Antibody__FCRn_EBCSFB - Kdeg * Antibody_EBCSFB)
+    # dAntibody_EBCSFBdt = ((CLUP_BCSFB * Antibody_BrainVascular + CLUP_BCSFB * Antibody_CSF) / V_EBCSFB - Kon_FcRn * Antibody_EBCSFB * FcRn_EBCSFB + Koff_FcRn * Antibody__FcRn_EBCSFB - Kdeg * Antibody_EBCSFB)
 
     # # 11. Endosomal BCSFB (Bound)
-    # dAntibody__FCRn_EBCSFBdt = (Kon_FcRn * Antibody_EBCSFB * FCRn_EBCSFB - (Koff_FcRn * Antibody__FCRn_EBCSFB) - ((CLUP_BCSFB * Antibody__FCRn_EBCSFB) / V_EBCSFB))
+    # dAntibody__FcRn_EBCSFBdt = (Kon_FcRn * Antibody_EBCSFB * FcRn_EBCSFB - (Koff_FcRn * Antibody__FcRn_EBCSFB) - ((CLUP_BCSFB * Antibody__FcRn_EBCSFB) / V_EBCSFB))
 
     # # 12. Cerebrospinal Fluid (CSF)
-    # dAntibody_CSFdt = ((1-RC_BCSFB) * QB_CSF * Antibody_BrainVascular - (CLUP_BCSFB) * Antibody_CSF + (CLUP_BCSFB) * (1 - FR_B) * Antibody__FCRn_EBCSFB + QB_ECF * Antibody_BrainISF - (1-RAntibody_CSF) * QB_CSF * Antibody_CSF - QB_ECF * Antibody_CSF) / V_CSF
+    # dAntibody_CSFdt = ((1-RC_BCSFB) * QB_CSF * Antibody_BrainVascular - (CLUP_BCSFB) * Antibody_CSF + (CLUP_BCSFB) * (1 - FR_B) * Antibody__FcRn_EBCSFB + QB_ECF * Antibody_BrainISF - (1-RAntibody_CSF) * QB_CSF * Antibody_CSF - QB_ECF * Antibody_CSF) / V_CSF
 
     # # 13. Lymph Node
     # dAntibody_Lymphdt = ((1-RC_TL) * LT * Antibody_TissueInterstitial + (1-RAntibody_CSF) * (QB_CSF) * Antibody_CSF + (1-RC_B_ISF) * QB_ECF * Antibody_BrainISF - (LT+LB) * Antibody_Lymph) / V_Lymph
 
     # # 14. FcRn Tissue (Unbound)
-    # dFCRn_TissueEndosomaldt = (- Kon_FcRn * Antibody_TissueEndosomal * FCRn_TissueEndosomal + Koff_FcRn * Antibody__FCRn_TissueEndosomal + CLUP_T * Antibody__FCRn_TissueEndosomal / V_TissueEndosomal)
+    # dFcRn_TissueEndosomaldt = (- Kon_FcRn * Antibody_TissueEndosomal * FcRn_TissueEndosomal + Koff_FcRn * Antibody__FcRn_TissueEndosomal + CLUP_T * Antibody__FcRn_TissueEndosomal / V_TissueEndosomal)
 
     # # 15. FcRn BBB (Unbound)
-    # dFCRn_EBBBdt = (- Kon_FcRn * Antibody_EBBB * FCRn_EBBB + Koff_FcRn * Antibody__FCRn_EBBB + (CLUP_BBB * Antibody__FCRn_EBBB) / V_EBBB)
+    # dFcRn_EBBBdt = (- Kon_FcRn * Antibody_EBBB * FcRn_EBBB + Koff_FcRn * Antibody__FcRn_EBBB + (CLUP_BBB * Antibody__FcRn_EBBB) / V_EBBB)
 
     # # 16. FcRn BCSFB (Unbound)
-    # dFCRn_EBCSFBdt = (- Kon_FcRn * Antibody_EBCSFB * FCRn_EBCSFB + Koff_FcRn * Antibody__FCRn_EBCSFB + CLUP_BCSFB * Antibody__FCRn_EBCSFB / V_EBCSFB)
+    # dFcRn_EBCSFBdt = (- Kon_FcRn * Antibody_EBCSFB * FcRn_EBCSFB + Koff_FcRn * Antibody__FcRn_EBCSFB + CLUP_BCSFB * Antibody__FcRn_EBCSFB / V_EBCSFB)
 
     

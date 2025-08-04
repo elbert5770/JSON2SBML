@@ -24,7 +24,7 @@ def run_simulation():
     
     # Left panel - first two variables
     ax1.plot(result['time']/24/365, result['[AB42_BrainISF]'], label='AB42_BrainISF',color='red')
-    ax1.plot(result['time']/24/365, result['[Antibody_BrainISF]'], label='Antibody_BrainISF',color='cyan')
+    # ax1.plot(result['time']/24/365, result['[Antibody_BrainISF]'], label='Antibody_BrainISF',color='cyan')
     ax1.plot(result['time']/24/365, result['[AB42_SAS]'], label='AB42_CSF',color='blue')
     ax1.plot(result['time']/24/365, result['[AB42_Plasma]'], label='AB42_Plasma',color='green')
     # ax1.plot(result['time'], result['[Antibody_Plasma]'], label='Antibody_Plasma')
@@ -36,7 +36,7 @@ def run_simulation():
 
     ax1.set_xlabel('Time (years)')
     ax1.set_ylabel('Concentration (nM)')
-    ax1.set_title('Panel 1: AB42 and Oligomer')
+    ax1.set_title('AB42 and Antibody in the CNS and plasma')
     ax1.legend()
     ax1.grid(True, alpha=0.3)
     
@@ -47,7 +47,7 @@ def run_simulation():
     ax2.plot(result['time']/24/365, result['[AB42_PlaqueMass_BrainISF]'], label='AB42_PlaqueMass_BrainISF',color='green')
     ax2.set_xlabel('Time (years)')
     ax2.set_ylabel('Concentration (nM)')
-    ax2.set_title('Panel 2: Fibril Mass and Oligomer')
+    ax2.set_title('Fibril and Plaque Mass and Oligomers')
     ax2.legend()
     ax2.grid(True, alpha=0.3)
 
@@ -55,7 +55,7 @@ def run_simulation():
     ax3.plot(result['time']/24/365, result['Plaque_degree_polymerization'], label='Plaque degree of polymerization',color='green')
     ax3.set_xlabel('Time (years)')
     ax3.set_ylabel('Dimensionless')
-    ax3.set_title('Panel 3: Fibril Degree of Polymerization')
+    ax3.set_title('Fibril and Plaque Degree of Polymerization')
     ax3.legend()
     ax3.grid(True, alpha=0.3)
     
@@ -63,7 +63,7 @@ def run_simulation():
     ax4.plot(result['time']/24/365, result['[AB42_PlaqueNumber_BrainISF]'], label='AB42_PlaqueNumber_BrainISF',color='green')
     ax4.set_xlabel('Time (years)')
     ax4.set_ylabel('Concentration (nM)')
-    ax4.set_title('Panel 4: Fibril Number')
+    ax4.set_title('Fibril and Plaque Number')
     ax4.legend()
     ax4.grid(True, alpha=0.3)
     

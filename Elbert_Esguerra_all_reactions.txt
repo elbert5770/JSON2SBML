@@ -1,101 +1,101 @@
 {'Reaction_name': 'Flow within Lung', 'Reactants': '[Antibody_LungVascular]', 'Products': '[Antibody_LungInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Lung_Vascular) * L_Lung'}
+{'Reaction_name': 'Lung Endosomal reactions', 'Reactants': '[Antibody_LungEndosomal,FcRn_LungEndosomal]', 'Products': '[Antibody__FcRn_LungEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Lung Endosomal reactions', 'Reactants': '[Antibody_LungEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Lung', 'Reactants': '[Antibody_LungVascular]', 'Products': '[Antibody_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Lung'}
 {'Reaction_name': 'Flow within Lung', 'Reactants': '[Antibody_LungInterstitial]', 'Products': '[Antibody_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Lung'}
-{'Reaction_name': 'Lung Endosomal reactions', 'Reactants': '[Antibody_LungEndosomal,FCRn_LungEndosomal]', 'Products': '[Antibody__FCRn_LungEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Lung Endosomal reactions', 'Reactants': '[Antibody_LungEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_LungEndosomal]', 'Products': '[Antibody_LungVascular,FCRn_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Lung * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_LungEndosomal]', 'Products': '[Antibody_LungInterstitial,FCRn_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Lung * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_LungEndosomal]', 'Products': '[Antibody_LungVascular,FcRn_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Lung * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_LungEndosomal]', 'Products': '[Antibody_LungInterstitial,FcRn_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Lung * (1 - FR)'}
 {'Reaction_name': 'Flow within Heart', 'Reactants': '[Antibody_HeartVascular]', 'Products': '[Antibody_HeartInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Heart_Vascular) * L_Heart'}
+{'Reaction_name': 'Heart Endosomal reactions', 'Reactants': '[Antibody_HeartEndosomal,FcRn_HeartEndosomal]', 'Products': '[Antibody__FcRn_HeartEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Heart Endosomal reactions', 'Reactants': '[Antibody_HeartEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Heart', 'Reactants': '[Antibody_HeartVascular]', 'Products': '[Antibody_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Heart'}
 {'Reaction_name': 'Flow within Heart', 'Reactants': '[Antibody_HeartInterstitial]', 'Products': '[Antibody_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Heart'}
-{'Reaction_name': 'Heart Endosomal reactions', 'Reactants': '[Antibody_HeartEndosomal,FCRn_HeartEndosomal]', 'Products': '[Antibody__FCRn_HeartEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Heart Endosomal reactions', 'Reactants': '[Antibody_HeartEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_HeartEndosomal]', 'Products': '[Antibody_HeartVascular,FCRn_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Heart * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_HeartEndosomal]', 'Products': '[Antibody_HeartInterstitial,FCRn_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Heart * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_HeartEndosomal]', 'Products': '[Antibody_HeartVascular,FcRn_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Heart * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_HeartEndosomal]', 'Products': '[Antibody_HeartInterstitial,FcRn_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Heart * (1 - FR)'}
 {'Reaction_name': 'Flow within Kidney', 'Reactants': '[Antibody_KidneyVascular]', 'Products': '[Antibody_KidneyInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Kidney_Vascular) * L_Kidney'}
+{'Reaction_name': 'Kidney Endosomal reactions', 'Reactants': '[Antibody_KidneyEndosomal,FcRn_KidneyEndosomal]', 'Products': '[Antibody__FcRn_KidneyEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Kidney Endosomal reactions', 'Reactants': '[Antibody_KidneyEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Kidney', 'Reactants': '[Antibody_KidneyVascular]', 'Products': '[Antibody_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Kidney'}
 {'Reaction_name': 'Flow within Kidney', 'Reactants': '[Antibody_KidneyInterstitial]', 'Products': '[Antibody_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Kidney'}
-{'Reaction_name': 'Kidney Endosomal reactions', 'Reactants': '[Antibody_KidneyEndosomal,FCRn_KidneyEndosomal]', 'Products': '[Antibody__FCRn_KidneyEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Kidney Endosomal reactions', 'Reactants': '[Antibody_KidneyEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_KidneyEndosomal]', 'Products': '[Antibody_KidneyVascular,FCRn_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Kidney * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_KidneyEndosomal]', 'Products': '[Antibody_KidneyInterstitial,FCRn_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Kidney * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_KidneyEndosomal]', 'Products': '[Antibody_KidneyVascular,FcRn_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Kidney * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_KidneyEndosomal]', 'Products': '[Antibody_KidneyInterstitial,FcRn_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Kidney * (1 - FR)'}
 {'Reaction_name': 'Flow within Muscle', 'Reactants': '[Antibody_MuscleVascular]', 'Products': '[Antibody_MuscleInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Muscle_Vascular) * L_Muscle'}
+{'Reaction_name': 'Muscle Endosomal reactions', 'Reactants': '[Antibody_MuscleEndosomal,FcRn_MuscleEndosomal]', 'Products': '[Antibody__FcRn_MuscleEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Muscle Endosomal reactions', 'Reactants': '[Antibody_MuscleEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Muscle', 'Reactants': '[Antibody_MuscleVascular]', 'Products': '[Antibody_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Muscle'}
 {'Reaction_name': 'Flow within Muscle', 'Reactants': '[Antibody_MuscleInterstitial]', 'Products': '[Antibody_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Muscle'}
-{'Reaction_name': 'Muscle Endosomal reactions', 'Reactants': '[Antibody_MuscleEndosomal,FCRn_MuscleEndosomal]', 'Products': '[Antibody__FCRn_MuscleEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Muscle Endosomal reactions', 'Reactants': '[Antibody_MuscleEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_MuscleEndosomal]', 'Products': '[Antibody_MuscleVascular,FCRn_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Muscle * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_MuscleEndosomal]', 'Products': '[Antibody_MuscleInterstitial,FCRn_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Muscle * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_MuscleEndosomal]', 'Products': '[Antibody_MuscleVascular,FcRn_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Muscle * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_MuscleEndosomal]', 'Products': '[Antibody_MuscleInterstitial,FcRn_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Muscle * (1 - FR)'}
 {'Reaction_name': 'Flow within Skin', 'Reactants': '[Antibody_SkinVascular]', 'Products': '[Antibody_SkinInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Skin_Vascular) * L_Skin'}
+{'Reaction_name': 'Skin Endosomal reactions', 'Reactants': '[Antibody_SkinEndosomal,FcRn_SkinEndosomal]', 'Products': '[Antibody__FcRn_SkinEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Skin Endosomal reactions', 'Reactants': '[Antibody_SkinEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Skin', 'Reactants': '[Antibody_SkinVascular]', 'Products': '[Antibody_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Skin'}
 {'Reaction_name': 'Flow within Skin', 'Reactants': '[Antibody_SkinInterstitial]', 'Products': '[Antibody_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Skin'}
-{'Reaction_name': 'Skin Endosomal reactions', 'Reactants': '[Antibody_SkinEndosomal,FCRn_SkinEndosomal]', 'Products': '[Antibody__FCRn_SkinEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Skin Endosomal reactions', 'Reactants': '[Antibody_SkinEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_SkinEndosomal]', 'Products': '[Antibody_SkinVascular,FCRn_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Skin * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_SkinEndosomal]', 'Products': '[Antibody_SkinInterstitial,FCRn_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Skin * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_SkinEndosomal]', 'Products': '[Antibody_SkinVascular,FcRn_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Skin * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_SkinEndosomal]', 'Products': '[Antibody_SkinInterstitial,FcRn_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Skin * (1 - FR)'}
 {'Reaction_name': 'Flow within Adipose', 'Reactants': '[Antibody_AdiposeVascular]', 'Products': '[Antibody_AdiposeInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Adipose_Vascular) * L_Adipose'}
+{'Reaction_name': 'Adipose Endosomal reactions', 'Reactants': '[Antibody_AdiposeEndosomal,FcRn_AdiposeEndosomal]', 'Products': '[Antibody__FcRn_AdiposeEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Adipose Endosomal reactions', 'Reactants': '[Antibody_AdiposeEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Adipose', 'Reactants': '[Antibody_AdiposeVascular]', 'Products': '[Antibody_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Adipose'}
 {'Reaction_name': 'Flow within Adipose', 'Reactants': '[Antibody_AdiposeInterstitial]', 'Products': '[Antibody_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Adipose'}
-{'Reaction_name': 'Adipose Endosomal reactions', 'Reactants': '[Antibody_AdiposeEndosomal,FCRn_AdiposeEndosomal]', 'Products': '[Antibody__FCRn_AdiposeEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Adipose Endosomal reactions', 'Reactants': '[Antibody_AdiposeEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_AdiposeEndosomal]', 'Products': '[Antibody_AdiposeVascular,FCRn_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Adipose * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_AdiposeEndosomal]', 'Products': '[Antibody_AdiposeInterstitial,FCRn_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Adipose * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_AdiposeEndosomal]', 'Products': '[Antibody_AdiposeVascular,FcRn_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Adipose * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_AdiposeEndosomal]', 'Products': '[Antibody_AdiposeInterstitial,FcRn_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Adipose * (1 - FR)'}
 {'Reaction_name': 'Flow within Thymus', 'Reactants': '[Antibody_ThymusVascular]', 'Products': '[Antibody_ThymusInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Thymus_Vascular) * L_Thymus'}
+{'Reaction_name': 'Thymus Endosomal reactions', 'Reactants': '[Antibody_ThymusEndosomal,FcRn_ThymusEndosomal]', 'Products': '[Antibody__FcRn_ThymusEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Thymus Endosomal reactions', 'Reactants': '[Antibody_ThymusEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Thymus', 'Reactants': '[Antibody_ThymusVascular]', 'Products': '[Antibody_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Thymus'}
 {'Reaction_name': 'Flow within Thymus', 'Reactants': '[Antibody_ThymusInterstitial]', 'Products': '[Antibody_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Thymus'}
-{'Reaction_name': 'Thymus Endosomal reactions', 'Reactants': '[Antibody_ThymusEndosomal,FCRn_ThymusEndosomal]', 'Products': '[Antibody__FCRn_ThymusEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Thymus Endosomal reactions', 'Reactants': '[Antibody_ThymusEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_ThymusEndosomal]', 'Products': '[Antibody_ThymusVascular,FCRn_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Thymus * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_ThymusEndosomal]', 'Products': '[Antibody_ThymusInterstitial,FCRn_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Thymus * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_ThymusEndosomal]', 'Products': '[Antibody_ThymusVascular,FcRn_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Thymus * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_ThymusEndosomal]', 'Products': '[Antibody_ThymusInterstitial,FcRn_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Thymus * (1 - FR)'}
 {'Reaction_name': 'Flow within Bone', 'Reactants': '[Antibody_BoneVascular]', 'Products': '[Antibody_BoneInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Bone_Vascular) * L_Bone'}
+{'Reaction_name': 'Bone Endosomal reactions', 'Reactants': '[Antibody_BoneEndosomal,FcRn_BoneEndosomal]', 'Products': '[Antibody__FcRn_BoneEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Bone Endosomal reactions', 'Reactants': '[Antibody_BoneEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Bone', 'Reactants': '[Antibody_BoneVascular]', 'Products': '[Antibody_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Bone'}
 {'Reaction_name': 'Flow within Bone', 'Reactants': '[Antibody_BoneInterstitial]', 'Products': '[Antibody_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Bone'}
-{'Reaction_name': 'Bone Endosomal reactions', 'Reactants': '[Antibody_BoneEndosomal,FCRn_BoneEndosomal]', 'Products': '[Antibody__FCRn_BoneEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Bone Endosomal reactions', 'Reactants': '[Antibody_BoneEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_BoneEndosomal]', 'Products': '[Antibody_BoneVascular,FCRn_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Bone * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_BoneEndosomal]', 'Products': '[Antibody_BoneInterstitial,FCRn_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Bone * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_BoneEndosomal]', 'Products': '[Antibody_BoneVascular,FcRn_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Bone * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_BoneEndosomal]', 'Products': '[Antibody_BoneInterstitial,FcRn_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Bone * (1 - FR)'}
 {'Reaction_name': 'Flow within Other', 'Reactants': '[Antibody_OtherVascular]', 'Products': '[Antibody_OtherInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Other_Vascular) * L_Other'}
+{'Reaction_name': 'Other Endosomal reactions', 'Reactants': '[Antibody_OtherEndosomal,FcRn_OtherEndosomal]', 'Products': '[Antibody__FcRn_OtherEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Other Endosomal reactions', 'Reactants': '[Antibody_OtherEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Other', 'Reactants': '[Antibody_OtherVascular]', 'Products': '[Antibody_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Other'}
 {'Reaction_name': 'Flow within Other', 'Reactants': '[Antibody_OtherInterstitial]', 'Products': '[Antibody_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Other'}
-{'Reaction_name': 'Other Endosomal reactions', 'Reactants': '[Antibody_OtherEndosomal,FCRn_OtherEndosomal]', 'Products': '[Antibody__FCRn_OtherEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Other Endosomal reactions', 'Reactants': '[Antibody_OtherEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_OtherEndosomal]', 'Products': '[Antibody_OtherVascular,FCRn_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Other * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_OtherEndosomal]', 'Products': '[Antibody_OtherInterstitial,FCRn_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Other * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_OtherEndosomal]', 'Products': '[Antibody_OtherVascular,FcRn_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Other * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_OtherEndosomal]', 'Products': '[Antibody_OtherInterstitial,FcRn_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Other * (1 - FR)'}
 {'Reaction_name': 'Flow within Liver', 'Reactants': '[Antibody_LiverVascular]', 'Products': '[Antibody_LiverInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Liver_Vascular) * L_Liver'}
+{'Reaction_name': 'Liver Endosomal reactions', 'Reactants': '[Antibody_LiverEndosomal,FcRn_LiverEndosomal]', 'Products': '[Antibody__FcRn_LiverEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Liver Endosomal reactions', 'Reactants': '[Antibody_LiverEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Liver', 'Reactants': '[Antibody_LiverVascular]', 'Products': '[Antibody_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Liver'}
 {'Reaction_name': 'Flow within Liver', 'Reactants': '[Antibody_LiverInterstitial]', 'Products': '[Antibody_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Liver'}
-{'Reaction_name': 'Liver Endosomal reactions', 'Reactants': '[Antibody_LiverEndosomal,FCRn_LiverEndosomal]', 'Products': '[Antibody__FCRn_LiverEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Liver Endosomal reactions', 'Reactants': '[Antibody_LiverEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_LiverEndosomal]', 'Products': '[Antibody_LiverVascular,FCRn_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Liver * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_LiverEndosomal]', 'Products': '[Antibody_LiverInterstitial,FCRn_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Liver * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_LiverEndosomal]', 'Products': '[Antibody_LiverVascular,FcRn_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Liver * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_LiverEndosomal]', 'Products': '[Antibody_LiverInterstitial,FcRn_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Liver * (1 - FR)'}
 {'Reaction_name': 'Flow within Spleen', 'Reactants': '[Antibody_SpleenVascular]', 'Products': '[Antibody_SpleenInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Spleen_Vascular) * L_Spleen'}
+{'Reaction_name': 'Spleen Endosomal reactions', 'Reactants': '[Antibody_SpleenEndosomal,FcRn_SpleenEndosomal]', 'Products': '[Antibody__FcRn_SpleenEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Spleen Endosomal reactions', 'Reactants': '[Antibody_SpleenEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Spleen', 'Reactants': '[Antibody_SpleenVascular]', 'Products': '[Antibody_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Spleen'}
 {'Reaction_name': 'Flow within Spleen', 'Reactants': '[Antibody_SpleenInterstitial]', 'Products': '[Antibody_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Spleen'}
-{'Reaction_name': 'Spleen Endosomal reactions', 'Reactants': '[Antibody_SpleenEndosomal,FCRn_SpleenEndosomal]', 'Products': '[Antibody__FCRn_SpleenEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Spleen Endosomal reactions', 'Reactants': '[Antibody_SpleenEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_SpleenEndosomal]', 'Products': '[Antibody_SpleenVascular,FCRn_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Spleen * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_SpleenEndosomal]', 'Products': '[Antibody_SpleenInterstitial,FCRn_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Spleen * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_SpleenEndosomal]', 'Products': '[Antibody_SpleenVascular,FcRn_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Spleen * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_SpleenEndosomal]', 'Products': '[Antibody_SpleenInterstitial,FcRn_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Spleen * (1 - FR)'}
 {'Reaction_name': 'Flow within Pancreas', 'Reactants': '[Antibody_PancreasVascular]', 'Products': '[Antibody_PancreasInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Pancreas_Vascular) * L_Pancreas'}
+{'Reaction_name': 'Pancreas Endosomal reactions', 'Reactants': '[Antibody_PancreasEndosomal,FcRn_PancreasEndosomal]', 'Products': '[Antibody__FcRn_PancreasEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Pancreas Endosomal reactions', 'Reactants': '[Antibody_PancreasEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within Pancreas', 'Reactants': '[Antibody_PancreasVascular]', 'Products': '[Antibody_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Pancreas'}
 {'Reaction_name': 'Flow within Pancreas', 'Reactants': '[Antibody_PancreasInterstitial]', 'Products': '[Antibody_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Pancreas'}
-{'Reaction_name': 'Pancreas Endosomal reactions', 'Reactants': '[Antibody_PancreasEndosomal,FCRn_PancreasEndosomal]', 'Products': '[Antibody__FCRn_PancreasEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'Pancreas Endosomal reactions', 'Reactants': '[Antibody_PancreasEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_PancreasEndosomal]', 'Products': '[Antibody_PancreasVascular,FCRn_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Pancreas * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_PancreasEndosomal]', 'Products': '[Antibody_PancreasInterstitial,FCRn_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Pancreas * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_PancreasEndosomal]', 'Products': '[Antibody_PancreasVascular,FcRn_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Pancreas * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_PancreasEndosomal]', 'Products': '[Antibody_PancreasInterstitial,FcRn_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Pancreas * (1 - FR)'}
 {'Reaction_name': 'Flow within SI', 'Reactants': '[Antibody_SIVascular]', 'Products': '[Antibody_SIInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_SI_Vascular) * L_SI'}
+{'Reaction_name': 'SI Endosomal reactions', 'Reactants': '[Antibody_SIEndosomal,FcRn_SIEndosomal]', 'Products': '[Antibody__FcRn_SIEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'SI Endosomal reactions', 'Reactants': '[Antibody_SIEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within SI', 'Reactants': '[Antibody_SIVascular]', 'Products': '[Antibody_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_SI'}
 {'Reaction_name': 'Flow within SI', 'Reactants': '[Antibody_SIInterstitial]', 'Products': '[Antibody_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_SI'}
-{'Reaction_name': 'SI Endosomal reactions', 'Reactants': '[Antibody_SIEndosomal,FCRn_SIEndosomal]', 'Products': '[Antibody__FCRn_SIEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'SI Endosomal reactions', 'Reactants': '[Antibody_SIEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_SIEndosomal]', 'Products': '[Antibody_SIVascular,FCRn_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_SI * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_SIEndosomal]', 'Products': '[Antibody_SIInterstitial,FCRn_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_SI * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_SIEndosomal]', 'Products': '[Antibody_SIVascular,FcRn_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_SI * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_SIEndosomal]', 'Products': '[Antibody_SIInterstitial,FcRn_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_SI * (1 - FR)'}
 {'Reaction_name': 'Flow within LI', 'Reactants': '[Antibody_LIVascular]', 'Products': '[Antibody_LIInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_LI_Vascular) * L_LI'}
+{'Reaction_name': 'LI Endosomal reactions', 'Reactants': '[Antibody_LIEndosomal,FcRn_LIEndosomal]', 'Products': '[Antibody__FcRn_LIEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'LI Endosomal reactions', 'Reactants': '[Antibody_LIEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
 {'Reaction_name': 'Flow within LI', 'Reactants': '[Antibody_LIVascular]', 'Products': '[Antibody_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_LI'}
 {'Reaction_name': 'Flow within LI', 'Reactants': '[Antibody_LIInterstitial]', 'Products': '[Antibody_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_LI'}
-{'Reaction_name': 'LI Endosomal reactions', 'Reactants': '[Antibody_LIEndosomal,FCRn_LIEndosomal]', 'Products': '[Antibody__FCRn_LIEndosomal]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
-{'Reaction_name': 'LI Endosomal reactions', 'Reactants': '[Antibody_LIEndosomal]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_LIEndosomal]', 'Products': '[Antibody_LIVascular,FCRn_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_LI * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_LIEndosomal]', 'Products': '[Antibody_LIInterstitial,FCRn_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_LI * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_LIEndosomal]', 'Products': '[Antibody_LIVascular,FcRn_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_LI * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_LIEndosomal]', 'Products': '[Antibody_LIInterstitial,FcRn_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_LI * (1 - FR)'}
 {'Reaction_name': 'Flow between lung and Heart', 'Reactants': '[Antibody_LungVascular]', 'Products': '[Antibody_HeartVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Q_Heart'}
 {'Reaction_name': 'Flow between lung and Kidney', 'Reactants': '[Antibody_LungVascular]', 'Products': '[Antibody_KidneyVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Q_Kidney'}
 {'Reaction_name': 'Flow between lung and Muscle', 'Reactants': '[Antibody_LungVascular]', 'Products': '[Antibody_MuscleVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Q_Muscle'}
@@ -144,8 +144,6 @@
 {'Reaction_name': 'Flow between BrainISF and LymphNode', 'Reactants': '[Antibody_BrainISF]', 'Products': '[Antibody_LymphNode]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - RC_BrainISF_Lymph) * Q_BrainISF'}
 {'Reaction_name': 'Flow between SAS and LymphNode', 'Reactants': '[Antibody_SAS]', 'Products': '[Antibody_LymphNode]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - RC_SAS_Lymph) * Q_CSF'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_BrainVascular]', 'Products': '[Antibody_BrainISF]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_BBB) * Q_BrainISF'}
-{'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_BrainVascular]', 'Products': '[Antibody_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB'}
-{'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_BrainVascular]', 'Products': '[Antibody_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_BrainVascular]', 'Products': '[Antibody_LV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_BCSFB) * f_LV * Q_CSF'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_BrainVascular]', 'Products': '[Antibody_TFV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_BCSFB) * (1 - f_LV) * Q_CSF'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_BrainISF]', 'Products': '[Antibody_LV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV * Q_glymph'}
@@ -154,57 +152,62 @@
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_LV]', 'Products': '[Antibody_TFV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV * (Q_CSF + Q_glymph)'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_TFV]', 'Products': '[Antibody_CM]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Q_glymph)'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[Antibody_CM]', 'Products': '[Antibody_SAS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Q_glymph)'}
-{'Reaction_name': 'BrainEndosomal reactions', 'Reactants': '[Antibody_BBB,FCRn_BBB]', 'Products': '[Antibody__FCRn_BBB]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[Antibody_BrainVascular]', 'Products': '[Antibody_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB * f_BBB'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[Antibody_BrainVascular]', 'Products': '[Antibody_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB * (1 - f_BBB)'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[Antibody_BrainISF]', 'Products': '[Antibody_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB * f_BBB'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[Antibody_LV]', 'Products': '[Antibody_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB * f_LV * (1 - f_BBB)'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[Antibody_TFV]', 'Products': '[Antibody_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB * (1 - f_LV) * (1 - f_BBB)'}
+{'Reaction_name': 'BrainEndosomal reactions', 'Reactants': '[Antibody_BBB,FcRn_BBB]', 'Products': '[Antibody__FcRn_BBB]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
 {'Reaction_name': 'BrainEndosomal degradation', 'Reactants': '[Antibody_BBB]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'BrainEndosomal reactions', 'Reactants': '[Antibody_BCSFB,FCRn_BCSFB]', 'Products': '[Antibody__FCRn_BCSFB]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
+{'Reaction_name': 'BrainEndosomal reactions', 'Reactants': '[Antibody_BCSFB,FcRn_BCSFB]', 'Products': '[Antibody__FcRn_BCSFB]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[Kon_FcRn,Koff_FcRn]'}
 {'Reaction_name': 'BrainEndosomal degradation', 'Reactants': '[Antibody_BCSFB]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Kdeg'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_BBB]', 'Products': '[Antibody_BrainVascular,FCRn_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB * f_BBB * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_BBB]', 'Products': '[Antibody_BrainISF,FCRn_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB * f_BBB * (1 - FR)'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_BCSFB]', 'Products': '[Antibody_BrainVascular,FCRn_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB * (1 - f_BBB) * FR'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_BCSFB]', 'Products': '[Antibody_LV,FCRn_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV * CLup_BCSFB * (1 - f_BBB) * (1 - FR)'}
-{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FCRn_BCSFB]', 'Products': '[Antibody_TFV,FCRn_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - f_LV) * CLup_BCSFB * (1 - f_BBB) * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_BBB]', 'Products': '[Antibody_BrainVascular,FcRn_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB * f_BBB * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_BBB]', 'Products': '[Antibody_BrainISF,FcRn_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB * f_BBB * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_BCSFB]', 'Products': '[Antibody_BrainVascular,FcRn_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB * (1 - f_BBB) * FR'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_BCSFB]', 'Products': '[Antibody_LV,FcRn_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV * CLup_BCSFB * (1 - f_BBB) * (1 - FR)'}
+{'Reaction_name': 'Flow out of endosomal', 'Reactants': '[Antibody__FcRn_BCSFB]', 'Products': '[Antibody_TFV,FcRn_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - f_LV) * CLup_BCSFB * (1 - f_BBB) * (1 - FR)'}
 {'Reaction_name': 'Flow within Lung', 'Reactants': '[AB42_LungVascular]', 'Products': '[AB42_LungInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Lung_Vascular) * L_Lung'}
-{'Reaction_name': 'Flow within Lung', 'Reactants': '[AB42_LungVascular]', 'Products': '[AB42_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Lung_Vascular) * L_Lung'}
-{'Reaction_name': 'Flow within Lung', 'Reactants': '[AB42_LungInterstitial]', 'Products': '[AB42_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Lung_Vascular) * L_Lung'}
+{'Reaction_name': 'Flow within Lung', 'Reactants': '[AB42_LungVascular]', 'Products': '[AB42_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Lung'}
+{'Reaction_name': 'Flow within Lung', 'Reactants': '[AB42_LungInterstitial]', 'Products': '[AB42_LungEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Lung'}
 {'Reaction_name': 'Flow within Heart', 'Reactants': '[AB42_HeartVascular]', 'Products': '[AB42_HeartInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Heart_Vascular) * L_Heart'}
-{'Reaction_name': 'Flow within Heart', 'Reactants': '[AB42_HeartVascular]', 'Products': '[AB42_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Heart_Vascular) * L_Heart'}
-{'Reaction_name': 'Flow within Heart', 'Reactants': '[AB42_HeartInterstitial]', 'Products': '[AB42_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Heart_Vascular) * L_Heart'}
+{'Reaction_name': 'Flow within Heart', 'Reactants': '[AB42_HeartVascular]', 'Products': '[AB42_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Heart'}
+{'Reaction_name': 'Flow within Heart', 'Reactants': '[AB42_HeartInterstitial]', 'Products': '[AB42_HeartEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Heart'}
 {'Reaction_name': 'Flow within Kidney', 'Reactants': '[AB42_KidneyVascular]', 'Products': '[AB42_KidneyInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Kidney_Vascular) * L_Kidney'}
-{'Reaction_name': 'Flow within Kidney', 'Reactants': '[AB42_KidneyVascular]', 'Products': '[AB42_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Kidney_Vascular) * L_Kidney'}
-{'Reaction_name': 'Flow within Kidney', 'Reactants': '[AB42_KidneyInterstitial]', 'Products': '[AB42_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Kidney_Vascular) * L_Kidney'}
+{'Reaction_name': 'Flow within Kidney', 'Reactants': '[AB42_KidneyVascular]', 'Products': '[AB42_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Kidney'}
+{'Reaction_name': 'Flow within Kidney', 'Reactants': '[AB42_KidneyInterstitial]', 'Products': '[AB42_KidneyEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Kidney'}
 {'Reaction_name': 'Flow within Muscle', 'Reactants': '[AB42_MuscleVascular]', 'Products': '[AB42_MuscleInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Muscle_Vascular) * L_Muscle'}
-{'Reaction_name': 'Flow within Muscle', 'Reactants': '[AB42_MuscleVascular]', 'Products': '[AB42_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Muscle_Vascular) * L_Muscle'}
-{'Reaction_name': 'Flow within Muscle', 'Reactants': '[AB42_MuscleInterstitial]', 'Products': '[AB42_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Muscle_Vascular) * L_Muscle'}
+{'Reaction_name': 'Flow within Muscle', 'Reactants': '[AB42_MuscleVascular]', 'Products': '[AB42_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Muscle'}
+{'Reaction_name': 'Flow within Muscle', 'Reactants': '[AB42_MuscleInterstitial]', 'Products': '[AB42_MuscleEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Muscle'}
 {'Reaction_name': 'Flow within Skin', 'Reactants': '[AB42_SkinVascular]', 'Products': '[AB42_SkinInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Skin_Vascular) * L_Skin'}
-{'Reaction_name': 'Flow within Skin', 'Reactants': '[AB42_SkinVascular]', 'Products': '[AB42_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Skin_Vascular) * L_Skin'}
-{'Reaction_name': 'Flow within Skin', 'Reactants': '[AB42_SkinInterstitial]', 'Products': '[AB42_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Skin_Vascular) * L_Skin'}
+{'Reaction_name': 'Flow within Skin', 'Reactants': '[AB42_SkinVascular]', 'Products': '[AB42_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Skin'}
+{'Reaction_name': 'Flow within Skin', 'Reactants': '[AB42_SkinInterstitial]', 'Products': '[AB42_SkinEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Skin'}
 {'Reaction_name': 'Flow within Adipose', 'Reactants': '[AB42_AdiposeVascular]', 'Products': '[AB42_AdiposeInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Adipose_Vascular) * L_Adipose'}
-{'Reaction_name': 'Flow within Adipose', 'Reactants': '[AB42_AdiposeVascular]', 'Products': '[AB42_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Adipose_Vascular) * L_Adipose'}
-{'Reaction_name': 'Flow within Adipose', 'Reactants': '[AB42_AdiposeInterstitial]', 'Products': '[AB42_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Adipose_Vascular) * L_Adipose'}
+{'Reaction_name': 'Flow within Adipose', 'Reactants': '[AB42_AdiposeVascular]', 'Products': '[AB42_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Adipose'}
+{'Reaction_name': 'Flow within Adipose', 'Reactants': '[AB42_AdiposeInterstitial]', 'Products': '[AB42_AdiposeEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Adipose'}
 {'Reaction_name': 'Flow within Thymus', 'Reactants': '[AB42_ThymusVascular]', 'Products': '[AB42_ThymusInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Thymus_Vascular) * L_Thymus'}
-{'Reaction_name': 'Flow within Thymus', 'Reactants': '[AB42_ThymusVascular]', 'Products': '[AB42_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Thymus_Vascular) * L_Thymus'}
-{'Reaction_name': 'Flow within Thymus', 'Reactants': '[AB42_ThymusInterstitial]', 'Products': '[AB42_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Thymus_Vascular) * L_Thymus'}
+{'Reaction_name': 'Flow within Thymus', 'Reactants': '[AB42_ThymusVascular]', 'Products': '[AB42_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Thymus'}
+{'Reaction_name': 'Flow within Thymus', 'Reactants': '[AB42_ThymusInterstitial]', 'Products': '[AB42_ThymusEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Thymus'}
 {'Reaction_name': 'Flow within Bone', 'Reactants': '[AB42_BoneVascular]', 'Products': '[AB42_BoneInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Bone_Vascular) * L_Bone'}
-{'Reaction_name': 'Flow within Bone', 'Reactants': '[AB42_BoneVascular]', 'Products': '[AB42_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Bone_Vascular) * L_Bone'}
-{'Reaction_name': 'Flow within Bone', 'Reactants': '[AB42_BoneInterstitial]', 'Products': '[AB42_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Bone_Vascular) * L_Bone'}
+{'Reaction_name': 'Flow within Bone', 'Reactants': '[AB42_BoneVascular]', 'Products': '[AB42_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Bone'}
+{'Reaction_name': 'Flow within Bone', 'Reactants': '[AB42_BoneInterstitial]', 'Products': '[AB42_BoneEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Bone'}
 {'Reaction_name': 'Flow within Other', 'Reactants': '[AB42_OtherVascular]', 'Products': '[AB42_OtherInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Other_Vascular) * L_Other'}
-{'Reaction_name': 'Flow within Other', 'Reactants': '[AB42_OtherVascular]', 'Products': '[AB42_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Other_Vascular) * L_Other'}
-{'Reaction_name': 'Flow within Other', 'Reactants': '[AB42_OtherInterstitial]', 'Products': '[AB42_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Other_Vascular) * L_Other'}
+{'Reaction_name': 'Flow within Other', 'Reactants': '[AB42_OtherVascular]', 'Products': '[AB42_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Other'}
+{'Reaction_name': 'Flow within Other', 'Reactants': '[AB42_OtherInterstitial]', 'Products': '[AB42_OtherEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Other'}
 {'Reaction_name': 'Flow within Liver', 'Reactants': '[AB42_LiverVascular]', 'Products': '[AB42_LiverInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Liver_Vascular) * L_Liver'}
-{'Reaction_name': 'Flow within Liver', 'Reactants': '[AB42_LiverVascular]', 'Products': '[AB42_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Liver_Vascular) * L_Liver'}
-{'Reaction_name': 'Flow within Liver', 'Reactants': '[AB42_LiverInterstitial]', 'Products': '[AB42_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Liver_Vascular) * L_Liver'}
+{'Reaction_name': 'Flow within Liver', 'Reactants': '[AB42_LiverVascular]', 'Products': '[AB42_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Liver'}
+{'Reaction_name': 'Flow within Liver', 'Reactants': '[AB42_LiverInterstitial]', 'Products': '[AB42_LiverEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Liver'}
 {'Reaction_name': 'Flow within Spleen', 'Reactants': '[AB42_SpleenVascular]', 'Products': '[AB42_SpleenInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Spleen_Vascular) * L_Spleen'}
-{'Reaction_name': 'Flow within Spleen', 'Reactants': '[AB42_SpleenVascular]', 'Products': '[AB42_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Spleen_Vascular) * L_Spleen'}
-{'Reaction_name': 'Flow within Spleen', 'Reactants': '[AB42_SpleenInterstitial]', 'Products': '[AB42_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Spleen_Vascular) * L_Spleen'}
+{'Reaction_name': 'Flow within Spleen', 'Reactants': '[AB42_SpleenVascular]', 'Products': '[AB42_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Spleen'}
+{'Reaction_name': 'Flow within Spleen', 'Reactants': '[AB42_SpleenInterstitial]', 'Products': '[AB42_SpleenEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Spleen'}
 {'Reaction_name': 'Flow within Pancreas', 'Reactants': '[AB42_PancreasVascular]', 'Products': '[AB42_PancreasInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Pancreas_Vascular) * L_Pancreas'}
-{'Reaction_name': 'Flow within Pancreas', 'Reactants': '[AB42_PancreasVascular]', 'Products': '[AB42_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Pancreas_Vascular) * L_Pancreas'}
-{'Reaction_name': 'Flow within Pancreas', 'Reactants': '[AB42_PancreasInterstitial]', 'Products': '[AB42_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_Pancreas_Vascular) * L_Pancreas'}
+{'Reaction_name': 'Flow within Pancreas', 'Reactants': '[AB42_PancreasVascular]', 'Products': '[AB42_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Pancreas'}
+{'Reaction_name': 'Flow within Pancreas', 'Reactants': '[AB42_PancreasInterstitial]', 'Products': '[AB42_PancreasEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_Pancreas'}
 {'Reaction_name': 'Flow within SI', 'Reactants': '[AB42_SIVascular]', 'Products': '[AB42_SIInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_SI_Vascular) * L_SI'}
-{'Reaction_name': 'Flow within SI', 'Reactants': '[AB42_SIVascular]', 'Products': '[AB42_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_SI_Vascular) * L_SI'}
-{'Reaction_name': 'Flow within SI', 'Reactants': '[AB42_SIInterstitial]', 'Products': '[AB42_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_SI_Vascular) * L_SI'}
+{'Reaction_name': 'Flow within SI', 'Reactants': '[AB42_SIVascular]', 'Products': '[AB42_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_SI'}
+{'Reaction_name': 'Flow within SI', 'Reactants': '[AB42_SIInterstitial]', 'Products': '[AB42_SIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_SI'}
 {'Reaction_name': 'Flow within LI', 'Reactants': '[AB42_LIVascular]', 'Products': '[AB42_LIInterstitial]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_LI_Vascular) * L_LI'}
-{'Reaction_name': 'Flow within LI', 'Reactants': '[AB42_LIVascular]', 'Products': '[AB42_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_LI_Vascular) * L_LI'}
-{'Reaction_name': 'Flow within LI', 'Reactants': '[AB42_LIInterstitial]', 'Products': '[AB42_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_LI_Vascular) * L_LI'}
+{'Reaction_name': 'Flow within LI', 'Reactants': '[AB42_LIVascular]', 'Products': '[AB42_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_LI'}
+{'Reaction_name': 'Flow within LI', 'Reactants': '[AB42_LIInterstitial]', 'Products': '[AB42_LIEndosomal]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_LI'}
 {'Reaction_name': 'Flow between lung and Heart', 'Reactants': '[AB42_LungVascular]', 'Products': '[AB42_HeartVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Q_Heart'}
 {'Reaction_name': 'Flow between lung and Kidney', 'Reactants': '[AB42_LungVascular]', 'Products': '[AB42_KidneyVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Q_Kidney'}
 {'Reaction_name': 'Flow between lung and Muscle', 'Reactants': '[AB42_LungVascular]', 'Products': '[AB42_MuscleVascular]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'Q_Muscle'}
@@ -253,8 +256,6 @@
 {'Reaction_name': 'Flow between BrainISF and LymphNode', 'Reactants': '[AB42_BrainISF]', 'Products': '[AB42_LymphNode]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - RC_BrainISF_Lymph) * Q_BrainISF'}
 {'Reaction_name': 'Flow between SAS and LymphNode', 'Reactants': '[AB42_SAS]', 'Products': '[AB42_LymphNode]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1 - RC_SAS_Lymph) * Q_CSF'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_BrainVascular]', 'Products': '[AB42_BrainISF]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_BBB) * Q_BrainISF'}
-{'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_BrainVascular]', 'Products': '[AB42_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_BBB) * Q_BrainISF'}
-{'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_BrainVascular]', 'Products': '[AB42_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_BBB) * Q_BrainISF'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_BrainVascular]', 'Products': '[AB42_LV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_BCSFB) * f_LV * Q_CSF'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_BrainVascular]', 'Products': '[AB42_TFV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(1-RC_BCSFB) * (1 - f_LV) * Q_CSF'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_BrainISF]', 'Products': '[AB42_LV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV * Q_glymph'}
@@ -263,6 +264,11 @@
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_LV]', 'Products': '[AB42_TFV]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'f_LV * (Q_CSF + Q_glymph)'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_TFV]', 'Products': '[AB42_CM]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Q_glymph)'}
 {'Reaction_name': 'Flow within tissue', 'Reactants': '[AB42_CM]', 'Products': '[AB42_SAS]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': '(Q_CSF + Q_glymph)'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[AB42_BrainVascular]', 'Products': '[AB42_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB * f_BBB'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[AB42_BrainVascular]', 'Products': '[AB42_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB * (1 - f_BBB)'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[AB42_BrainISF]', 'Products': '[AB42_BBB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BBB * f_BBB'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[AB42_LV]', 'Products': '[AB42_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB * f_LV * (1 - f_BBB)'}
+{'Reaction_name': 'Flow into endosomal', 'Reactants': '[AB42_TFV]', 'Products': '[AB42_BCSFB]', 'Rate_type': 'UDF', 'Rate_eqtn_prototype': 'CLup_BCSFB * (1 - f_LV) * (1 - f_BBB)'}
 {'Reaction_name': 'AB42 Synthesis', 'Reactants': '[APP_BrainISF]', 'Products': '[C99_BrainISF]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k_C99'}
 {'Reaction_name': 'AB42 Synthesis', 'Reactants': '[C99_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'v_C99'}
 {'Reaction_name': 'APP Synthesis', 'Reactants': '[0]', 'Products': '[APP_BrainISF]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k_APP'}
@@ -278,16 +284,17 @@
 {'Reaction_name': 'AB42 FibrilMass depolymerization', 'Reactants': '[AB42_FibrilMass_BrainISF]', 'Products': '[AB42_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_off_AB42 * (AB42_FibrilNumber_BrainISF) * V_BrainISF'}
 {'Reaction_name': 'Microglia Degradation Protofibril Mass', 'Reactants': '[AB42_FibrilMass_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Microglia*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF))'}
 {'Reaction_name': 'Microglia Degradation Protofibril Number', 'Reactants': '[AB42_FibrilNumber_BrainISF]', 'Products': '[0]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'Microglia/Fibril_degree_polymerization*(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF)) * AB42_FibrilMass_BrainISF * V_BrainISF'}
-{'Reaction_name': 'Microglia Degradation Plaque Mass', 'Reactants': '[AB42_PlaqueMass_BrainISF]', 'Products': '[0]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'Microglia * Plaque_fibril_microglia_ratio *(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF)) * AB42_PlaqueNumber_BrainISF * Plaque_degree_polymerization * V_BrainISF'}
-{'Reaction_name': 'Microglia Degradation Plaque Number', 'Reactants': '[AB42_PlaqueNumber_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Microglia * Plaque_fibril_microglia_ratio * (Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF) + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42/(Microglia_EC50_AB42 + AB42_FibrilMass_BrainISF)) '}
+{'Reaction_name': 'Microglia Degradation Plaque Mass', 'Reactants': '[AB42_PlaqueMass_BrainISF]', 'Products': '[0]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'Microglia * Plaque_fibril_microglia_ratio *(Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42 + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42) * AB42_PlaqueNumber_BrainISF * Plaque_degree_polymerization * V_BrainISF'}
+{'Reaction_name': 'Microglia Degradation Plaque Number', 'Reactants': '[AB42_PlaqueNumber_BrainISF]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'Microglia * Plaque_fibril_microglia_ratio * (Hi_lo_ratio*Microglia_high_frac*Microglia_Vmax_AB42 + (1.0 - Microglia_high_frac)*Microglia_Vmax_AB42) '}
 {'Reaction_name': 'FibrilMass to PlaqueMass', 'Reactants': '[AB42_FibrilMass_BrainISF]', 'Products': '[AB42_PlaqueMass_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_plaque2 * AB42_FibrilNumber_BrainISF * AB42_PlaqueNumber_BrainISF * Fibril_degree_polymerization * V_BrainISF'}
 {'Reaction_name': 'FibrilMass to PlaqueMass Seed', 'Reactants': '[2 AB42_FibrilMass_BrainISF]', 'Products': '[AB42_PlaqueMass_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_plaque1 * AB42_FibrilNumber_BrainISF^2 * Fibril_degree_polymerization * V_BrainISF'}
 {'Reaction_name': 'FibrilNumber to PlaqueNumber Seed', 'Reactants': '[2 AB42_FibrilNumber_BrainISF]', 'Products': '[AB42_PlaqueNumber_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_plaque1 * AB42_FibrilNumber_BrainISF^2 * V_BrainISF '}
 {'Reaction_name': 'Monomer bind to Antibody', 'Reactants': '[AB42_BrainISF,Antibody_BrainISF]', 'Products': '[AB42__Antibody_BrainISF]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[k_f_Monomer_Antibody,k_r_Monomer_Antibody]'}
 {'Reaction_name': 'Oligomer bind to Antibody', 'Reactants': '[AB42_Oligomer_BrainISF,Antibody_BrainISF]', 'Products': '[AB42_Oligomer__Antibody_BrainISF]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[k_f_Oligomer_Antibody,k_r_Oligomer_Antibody]'}
-{'Reaction_name': 'FibrilNumber bind to Antibody', 'Reactants': '[AB42_FibrilNumber_BrainISF,Antibody_BrainISF]', 'Products': '[AB42_FibrilNumber__Antibody_BrainISF]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[k_f_AB42_Fibril_Antibody,k_r_Fibril_Antibody]'}
-{'Reaction_name': 'FibrilMass bind to Antibody', 'Reactants': '[AB42_FibrilMass_BrainISF]', 'Products': '[AB42_FibrilMass__Antibody_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_f_AB42_Fibril_Antibody * AB42_FibrilNumber_BrainISF * Antibody_BrainISF * Fibril_degree_polymerization * V_BrainISF'}
-{'Reaction_name': 'FibrilMass unbind from Antibody', 'Reactants': '[AB42_FibrilMass__Antibody_BrainISF]', 'Products': '[AB42_FibrilMass_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_r_AB42_Fibril_Antibody * AB42_FibrilNumber__Antibody_BrainISF * Fibril_degree_polymerization * V_BrainISF'}
-{'Reaction_name': 'PlaqueNumber bind to Antibody', 'Reactants': '[AB42_PlaqueNumber_BrainISF,Antibody_BrainISF]', 'Products': '[AB42_PlaqueNumber__Antibody_BrainISF]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[k_f_AB42_Plaque_Antibody,k_r_Plaque_Antibody]'}
-{'Reaction_name': 'PlaqueMass bind to Antibody', 'Reactants': '[AB42_PlaqueMass_BrainISF]', 'Products': '[AB42_PlaqueMass__Antibody_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_f_AB42_Plaque_Antibody * AB42_PlaqueNumber_BrainISF * Antibody_BrainISF * Plaque_degree_polymerization * V_BrainISF'}
-{'Reaction_name': 'PlaqueMass unbind from Antibody', 'Reactants': '[AB42_PlaqueMass__Antibody_BrainISF]', 'Products': '[AB42_PlaqueMass_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_r_AB42Plaque_Antibody * AB42_PlaqueNumber__Antibody_BrainISF * Plaque_degree_polymerization * V_BrainISF'}
+{'Reaction_name': 'FibrilNumber bind to Antibody', 'Reactants': '[AB42_FibrilNumber_BrainISF,Antibody_BrainISF]', 'Products': '[AB42_FibrilNumber__Antibody_BrainISF]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[k_f_Fibril_Antibody,k_r_Fibril_Antibody]'}
+{'Reaction_name': 'FibrilMass bind to Antibody', 'Reactants': '[AB42_FibrilMass_BrainISF]', 'Products': '[AB42_FibrilMass__Antibody_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_f_Fibril_Antibody * AB42_FibrilNumber_BrainISF * Antibody_BrainISF * Fibril_degree_polymerization * V_BrainISF'}
+{'Reaction_name': 'FibrilMass unbind from Antibody', 'Reactants': '[AB42_FibrilMass__Antibody_BrainISF]', 'Products': '[AB42_FibrilMass_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_r_Fibril_Antibody * AB42_FibrilNumber__Antibody_BrainISF * Fibril_degree_polymerization * V_BrainISF'}
+{'Reaction_name': 'PlaqueNumber bind to Antibody', 'Reactants': '[AB42_PlaqueNumber_BrainISF,Antibody_BrainISF]', 'Products': '[AB42_PlaqueNumber__Antibody_BrainISF]', 'Rate_type': 'RMA', 'Rate_eqtn_prototype': '[k_f_Plaque_Antibody,k_r_Plaque_Antibody]'}
+{'Reaction_name': 'PlaqueMass bind to Antibody', 'Reactants': '[AB42_PlaqueMass_BrainISF]', 'Products': '[AB42_PlaqueMass__Antibody_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_f_Plaque_Antibody * AB42_PlaqueNumber_BrainISF * Antibody_BrainISF * Plaque_degree_polymerization * V_BrainISF'}
+{'Reaction_name': 'PlaqueMass unbind from Antibody', 'Reactants': '[AB42_PlaqueMass__Antibody_BrainISF]', 'Products': '[AB42_PlaqueMass_BrainISF]', 'Rate_type': 'custom', 'Rate_eqtn_prototype': 'k_r_Plaque_Antibody * AB42_PlaqueNumber__Antibody_BrainISF * Plaque_degree_polymerization * V_BrainISF'}
+{'Reaction_name': 'AB degradation in Plasma', 'Reactants': '[AB42_Plasma]', 'Products': '[0]', 'Rate_type': 'MA', 'Rate_eqtn_prototype': 'k_deg_AB42_Plasma * (AB42_Plasma)'}

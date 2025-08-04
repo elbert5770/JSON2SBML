@@ -25,8 +25,8 @@ def generate_events(n, start_time_years=70, interval_weeks=2):
 def main():
     # Example usage
     start_time_years = 70
-    n_events = 39  # Change this to generate more or fewer events
-    interval_weeks = 2 # dose interval in weeks
+    n_events = 12  # Change this to generate more or fewer events
+    interval_weeks = 4 # dose interval in weeks
     print("Generated Events:")
     print("=" * 50)
     
