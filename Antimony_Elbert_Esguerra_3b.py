@@ -50,7 +50,7 @@ def run_simulation():
     r = te.loada(__file__.replace('.py', '.txt'))
     r.setIntegrator('cvode')
     r.integrator.absolute_tolerance = 1e-10
-    r.integrator.relative_tolerance = 1e-10
+    r.integrator.relative_tolerance = 1e-8
     r.integrator.setValue('stiff', True)
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
     ax1, ax2 = axes[0]
@@ -68,17 +68,17 @@ def run_simulation():
 
     r.integrator.variable_step_size = True
     # result2 = r.simulate(1000, 200000, 200000)
-    result2 = r.simulate(69*365*24, 71*365*24, 3000000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
+    result2 = r.simulate(69*365*24, 71.25*365*24, 10000000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
     '[Antibody_LungVascular]','[Antibody_LymphNode]','[Antibody_BrainVascular]','[Antibody_BBB]','[Antibody_SAS]',
     '[Antibody_LV]','[APP_BrainISF]','[AB42_BrainISF]','[C99_BrainISF]','[AB42_Oligomer_BrainISF]','[AB42_FibrilNumber_BrainISF]','[AB42_FibrilMass_BrainISF]',
     '[AB42_Plasma]','[AB42_SAS]','Fibril_degree_polymerization','[AB42_PlaqueMass_BrainISF]','[AB42_PlaqueNumber_BrainISF]','Plaque_degree_polymerization'])
     
-    result3 = r.simulate(71*365*24, 71.6*365*24, 3000000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
+    result3 = r.simulate(71.25*365*24, 71.6*365*24, 1000000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
     '[Antibody_LungVascular]','[Antibody_LymphNode]','[Antibody_BrainVascular]','[Antibody_BBB]','[Antibody_SAS]',
     '[Antibody_LV]','[APP_BrainISF]','[AB42_BrainISF]','[C99_BrainISF]','[AB42_Oligomer_BrainISF]','[AB42_FibrilNumber_BrainISF]','[AB42_FibrilMass_BrainISF]',
     '[AB42_Plasma]','[AB42_SAS]','Fibril_degree_polymerization','[AB42_PlaqueMass_BrainISF]','[AB42_PlaqueNumber_BrainISF]','Plaque_degree_polymerization'])
     
-    result4 = r.simulate(71.6*365*24, 100*365*24, 100000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
+    result4 = r.simulate(72*365*24, 100*365*24, 1000000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
     '[Antibody_LungVascular]','[Antibody_LymphNode]','[Antibody_BrainVascular]','[Antibody_BBB]','[Antibody_SAS]',
     '[Antibody_LV]','[APP_BrainISF]','[AB42_BrainISF]','[C99_BrainISF]','[AB42_Oligomer_BrainISF]','[AB42_FibrilNumber_BrainISF]','[AB42_FibrilMass_BrainISF]',
     '[AB42_Plasma]','[AB42_SAS]','Fibril_degree_polymerization','[AB42_PlaqueMass_BrainISF]','[AB42_PlaqueNumber_BrainISF]','Plaque_degree_polymerization'])

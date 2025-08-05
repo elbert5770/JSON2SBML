@@ -46,6 +46,7 @@ compartment SkinVascular = V_SkinVascular
 compartment SpleenEndosomal = V_SpleenEndosomal
 compartment SpleenInterstitial = V_SpleenInterstitial
 compartment SpleenVascular = V_SpleenVascular
+compartment SubCutComp = V_SubCutComp
 compartment TFV = V_TFV
 compartment ThymusEndosomal = V_ThymusEndosomal
 compartment ThymusInterstitial = V_ThymusInterstitial
@@ -163,6 +164,7 @@ substanceOnly species Antibody_SkinVascular in SkinVascular
 substanceOnly species Antibody_SpleenEndosomal in SpleenEndosomal
 substanceOnly species Antibody_SpleenInterstitial in SpleenInterstitial
 substanceOnly species Antibody_SpleenVascular in SpleenVascular
+substanceOnly species Antibody_SubCutComp in SubCutComp
 substanceOnly species Antibody_TFV in TFV
 substanceOnly species Antibody_ThymusEndosomal in ThymusEndosomal
 substanceOnly species Antibody_ThymusInterstitial in ThymusInterstitial
@@ -521,3 +523,5 @@ AB42_PlaqueNumber__Antibody_BrainISF -> AB42_PlaqueNumber_BrainISF + Antibody_Br
 AB42_PlaqueMass_BrainISF -> AB42_PlaqueMass__Antibody_BrainISF; k_f_Plaque_Antibody * (AB42_PlaqueNumber_BrainISF/V_BrainISF) * (Antibody_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
 AB42_PlaqueMass__Antibody_BrainISF -> AB42_PlaqueMass_BrainISF; k_r_Plaque_Antibody * (AB42_PlaqueNumber__Antibody_BrainISF/V_BrainISF) * Plaque_degree_polymerization * V_BrainISF
 AB42_Plasma ->; k_deg_AB42_Plasma * ((AB42_Plasma/V_Plasma)) * (AB42_Plasma/V_Plasma) * V_Plasma
+Antibody_SubCutComp -> Antibody_Plasma; SubCut_ka*V_SubCutComp*SubCut_bioavailability * (Antibody_SubCutComp/V_SubCutComp)
+Antibody_SubCutComp ->; SubCut_ka*(1.0 - SubCut_bioavailability) * (Antibody_SubCutComp/V_SubCutComp) * V_SubCutComp

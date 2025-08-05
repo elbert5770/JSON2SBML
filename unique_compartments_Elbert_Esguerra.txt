@@ -46,6 +46,7 @@ SkinVascular
 SpleenEndosomal
 SpleenInterstitial
 SpleenVascular
+SubCutComp
 TFV
 ThymusEndosomal
 ThymusInterstitial

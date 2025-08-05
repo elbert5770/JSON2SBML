@@ -601,7 +601,7 @@ IDE_conc = 0
 Kdeg = 26.6
 k_deg_AB42_Plasma = 0*12.6
 Koff_FcRn = 23.9
-Kon_FcRn = 0.559
+Kon_FcRn = 5.59e8
 L_Adipose = 0.022466
 L_Bone = 0.005182
 L_Brain = 0.0315
@@ -747,7 +747,7 @@ n_oligo2_AB42 = 0.9
 n_oligo2_AB42_FibrilMass = n_oligo2_AB42
 n_oligo2_AB42_PlaqueMass = n_oligo2_AB42
 v_C99 = 0.333
-
+/*
 //  Lecanemab
 k_f_Monomer_Antibody = 0.2916
 k_r_Monomer_Antibody = 576
@@ -757,7 +757,7 @@ k_f_Fibril_Antibody = 2.736
 k_r_Fibril_Antibody = 0.396
 k_f_Plaque_Antibody = 0.54
 k_r_Plaque_Antibody = 0.9
-/*
+
 
 // Crenezumab
 
@@ -779,7 +779,7 @@ k_f_Fibril_Antibody = 136.8
 k_r_Fibril_Antibody = 108
 k_f_Plaque_Antibody = 7.56
 k_r_Plaque_Antibody = 22.3
-
+*/
 // Gantenerumab
 k_f_Monomer_Antibody = 0.1332
 k_r_Monomer_Antibody = 173
@@ -789,9 +789,9 @@ k_f_Fibril_Antibody = 1.44
 k_r_Fibril_Antibody = 3.38
 k_f_Plaque_Antibody = 0.504
 k_r_Plaque_Antibody = 0.338
-*/
-Antibody_IV_Dose = 4861; Antibody_IV_Dose has nanomole
 
+Antibody_IV_Dose = 4861; Antibody_IV_Dose has nanomole
+/*
 E1: at (time >= 70*365*24 + 2*7*24*0): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
 E2: at (time >= 70*365*24 + 2*7*24*1): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
 E3: at (time >= 70*365*24 + 2*7*24*2): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
@@ -832,12 +832,12 @@ E37: at (time >= 70*365*24 + 2*7*24*36): Antibody_Plasma = Antibody_Plasma + Ant
 E38: at (time >= 70*365*24 + 2*7*24*37): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
 E39: at (time >= 70*365*24 + 2*7*24*38): Antibody_Plasma = Antibody_Plasma + Antibody_IV_Dose
 
-
+*/
 Antibody_SubCutComp_Dose = 2050.6*4; Antibody_SubCutComp_Dose has nanomole // Subcutaneous dose amount (300 mg in nanomole)
 SubCut_ka = 0.0134807; SubCut_ka has per_hour;
 SubCut_bioavailability = 1;  SubCut_bioavailability has per_hour;
 V_SubCutComp    = 1; 
-/*
+
 E1: at (time >= (70) * 365*24): Antibody_SubCutComp = Antibody_SubCutComp + Antibody_SubCutComp_Dose 
 E2: at (time >= (70) * 365*24 + 1*28*24): Antibody_SubCutComp = Antibody_SubCutComp + Antibody_SubCutComp_Dose
 E3: at (time >= (70) * 365*24 + 2*28*24): Antibody_SubCutComp = Antibody_SubCutComp + Antibody_SubCutComp_Dose
@@ -857,4 +857,5 @@ E16: at (time >= (70) * 365*24 + 15*28*24): Antibody_SubCutComp = Antibody_SubCu
 E17: at (time >= (70) * 365*24 + 16*28*24): Antibody_SubCutComp = Antibody_SubCutComp + Antibody_SubCutComp_Dose
 E18: at (time >= (70) * 365*24 + 17*28*24): Antibody_SubCutComp = Antibody_SubCutComp + Antibody_SubCutComp_Dose
 E19: at (time >= (70) * 365*24 + 18*28*24): Antibody_SubCutComp = Antibody_SubCutComp + Antibody_SubCutComp_Dose
-*/
+
+

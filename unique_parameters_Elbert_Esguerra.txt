@@ -94,6 +94,8 @@ RC_Spleen_Lymph
 RC_Spleen_Vascular
 RC_Thymus_Lymph
 RC_Thymus_Vascular
+SubCut_bioavailability
+SubCut_ka
 V_AdiposeEndosomal
 V_AdiposeInterstitial
 V_AdiposeVascular
@@ -142,6 +144,7 @@ V_SkinVascular
 V_SpleenEndosomal
 V_SpleenInterstitial
 V_SpleenVascular
+V_SubCutComp
 V_TFV
 V_ThymusEndosomal
 V_ThymusInterstitial

@@ -355,7 +355,7 @@ def build_reactions():
     for Species in ['C99']:
             for Comp in ['BrainISF']:
                 counter += 1
-                Reaction_name = f"AB42 Synthesis"
+                Reaction_name = f"AB42 Degradation"
                 Reactants = f"[{Species}_{Comp}]"
                 Products = f"[0]"
                 Rate_type = "MA"
@@ -602,7 +602,30 @@ def build_reactions():
             Rate_eqtn_prototype = f"k_deg_{Species}_{Comp} * ({Species}_{Comp})"
             Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
             all_reactions.append(Reaction_dict)
+
+    for Species in ['Antibody']:
+        for Comp in [['SubCutComp','Plasma']]:
+            counter += 1
+            Comp1 = Comp[0]
+            Comp2 = Comp[1]
+            Reaction_name = f"Subcutaneous compartment transport"
+            Reactants = f"[{Species}_{Comp1}]"
+            Products = f"[{Species}_{Comp2}]"
+            Rate_type = "UDF"
+            Rate_eqtn_prototype = f"SubCut_ka*V_SubCutComp*SubCut_bioavailability"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
     
+    for Species in ['Antibody']:
+        for Comp in ['SubCutComp']:
+            counter += 1
+            Reaction_name = f"Subcutaneous clearance"
+            Reactants = f"[{Species}_{Comp}]"
+            Products = f"[0]"
+            Rate_type = "MA"
+            Rate_eqtn_prototype = f"SubCut_ka*(1.0 - SubCut_bioavailability)"
+            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,}
+            all_reactions.append(Reaction_dict)
     print(counter)
     return all_reactions
 

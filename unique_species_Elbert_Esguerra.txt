@@ -110,6 +110,7 @@ Antibody_SkinVascular
 Antibody_SpleenEndosomal
 Antibody_SpleenInterstitial
 Antibody_SpleenVascular
+Antibody_SubCutComp
 Antibody_TFV
 Antibody_ThymusEndosomal
 Antibody_ThymusInterstitial
