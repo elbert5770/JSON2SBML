@@ -49,7 +49,7 @@ def add_to_plot4(ax, result,legend=False):
 def run_simulation():
     r = te.loada(__file__.replace('.py', '.txt'))
     r.setIntegrator('cvode')
-    r.integrator.absolute_tolerance = 1e-10
+    r.integrator.absolute_tolerance = 1e-9
     r.integrator.relative_tolerance = 1e-10
     r.integrator.setValue('stiff', True)
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
@@ -66,7 +66,7 @@ def run_simulation():
     # ax1.plot(result1['time']/24/365, result1['[AB42_SAS]'], label='AB42_CSF',color='blue')
     # ax1.plot(result1['time']/24/365, result1['[AB42_Plasma]'], label='AB42_Plasma',color='green')
 
-    r.integrator.variable_step_size = True
+    # r.integrator.variable_step_size = True
     # result2 = r.simulate(1000, 200000, 200000)
     result2 = r.simulate(69*365*24, 71*365*24, 3000000, ['time','[Antibody_Plasma]','[Antibody_BrainISF]','[Antibody_LiverVascular]',
     '[Antibody_LungVascular]','[Antibody_LymphNode]','[Antibody_BrainVascular]','[Antibody_BBB]','[Antibody_SAS]',

@@ -116,17 +116,7 @@ def build_reactions():
                 Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
                 all_reactions.append(Reaction_dict)
                          
-        for Comp in [ ['LymphNode','Plasma']]: 
-            counter += 1
-            Comp1 = Comp[0]
-            Comp2 = Comp[1]
-            Reaction_name = f"Flow between LymphNode and Plasma"
-            Reactants = f"[{Species}_{Comp1}]"
-            Products = f"[{Species}_{Comp2}]"
-            Rate_type = "UDF"
-            Rate_eqtn_prototype = f"L_{Comp1}" 
-            Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
-            all_reactions.append(Reaction_dict)           
+       
 
         for Comp in [ 'SI','LI','Spleen','Pancreas']: 
             counter += 1
@@ -151,7 +141,7 @@ def build_reactions():
                 Rate_eqtn_prototype = f"((Q_{Tissue} - L_{Tissue}) + (Q_Spleen - L_Spleen) + (Q_Pancreas - L_Pancreas) + (Q_SI - L_SI) + (Q_LI - L_LI))"
                 Reaction_dict = {"Reaction_name": Reaction_name,"Reactants": Reactants,"Products": Products,"Rate_type": Rate_type,"Rate_eqtn_prototype": Rate_eqtn_prototype,} 
                 all_reactions.append(Reaction_dict)
-
+ 
 
         for Comp in [ ['LymphNode','Plasma']]:
                 counter += 1
